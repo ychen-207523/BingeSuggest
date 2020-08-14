@@ -4,3 +4,7 @@ language: python
 branches: 
   only:
     - master
+
+- task: "Get the latest python version."
+  cmd: python -m pip install –upgrade pip 
+  ignore_when: false
