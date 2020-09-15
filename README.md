@@ -1,7 +1,8 @@
 # SE21-Project</br>
+Movie Recommendation System (Moviebuddy)
 
 # Project Video</br>
-[Here](https://www.youtube.com/watch?v=VSHciMDTlO8)
+[Access the Moviebuddy video Here](https://www.youtube.com/watch?v=VSHciMDTlO8)
 
 # Group Members</br>
 Ashish Sadanand Rajpurohit</br>
