@@ -20,7 +20,7 @@
 ||Docs: what: point descriptions of each class/function (in isolation) ||
 ||Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z||
 ||Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing||
-||Docs: 3 minute video, posted to YouTube. That convinces people why they want to work on your code.||
+||Docs: 3 minute video, posted to YouTube. That convinces people why they want to work on your code.|4|
 || (hard) code conforms to some known patterns |
 |Tools Matter| Use of version control tools|4|
 || Extensive use of version control tools |4|
