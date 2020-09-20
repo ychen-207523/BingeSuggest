@@ -26,8 +26,8 @@
 || Extensive use of version control tools |4|
 || Repo has an up-to-date requirements.txt file||
 || Repo does not have "ignore" files.||
-||Use of  style checkers ||
-||Extensive Use of  style checkers ||
+||Use of  style checkers |4|
+||Extensive Use of  style checkers |4|
 || Use of code  formatters. ||
 || Extensive Use of code  formatters. ||
 || Use of syntax checkers. ||
