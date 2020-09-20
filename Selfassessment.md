@@ -28,10 +28,10 @@
 || Repo does not have "ignore" files.||
 ||Use of  style checkers |4|
 ||Extensive Use of  style checkers |4|
-|| Use of code  formatters. ||
-|| Extensive Use of code  formatters. ||
-|| Use of syntax checkers. ||
-|| Extensive use of syntax checkers. ||
+|| Use of code  formatters. |4|
+|| Extensive Use of code  formatters. |4|
+|| Use of syntax checkers. |4|
+|| Extensive use of syntax checkers. |4|
 || Use of code coverage ||
 || Extensive use of code coverage ||
 || other automated analysis tools||
