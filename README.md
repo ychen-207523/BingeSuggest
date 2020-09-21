@@ -1,4 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![codecov](https://codecov.io/gh/jayeshjakkani/SE21-project/branch/master/graph/badge.svg)](https://codecov.io/gh/jayeshjakkani/SE21-project)
 
 # SE21-Project</br>
 Movie Recommendation System (Moviebuddy)
