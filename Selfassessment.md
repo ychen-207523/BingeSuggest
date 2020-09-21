@@ -32,11 +32,11 @@
 || Extensive Use of code  formatters. |4|
 || Use of syntax checkers. |4|
 || Extensive use of syntax checkers. |4|
-|| Use of code coverage ||
-|| Extensive use of code coverage ||
+|| Use of code coverage |4|
+|| Extensive use of code coverage |4|
 || other automated analysis tools||
 || Extensive use of  other automated analysis tools||
-|| test cases exist||
+|| test cases exist|4|
 || test cases are routinely executed||
 | consensus-oriented model| the files CONTRIBUTING.md and CODEOFCONDUCT.md has have multiple edits by multiple people||
 | | the files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up||
