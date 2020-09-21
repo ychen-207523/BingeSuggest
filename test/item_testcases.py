@@ -4,7 +4,7 @@ import filecmp
 def check_diff(file1,file2):
     check = {}
     for file in [file1,file2]:
-        with open(file,'r') as f:
+        with open(file,'r', encoding="utf-8") as f:
             check[file] = []
             for line in f:
                 check[file].append(line)
