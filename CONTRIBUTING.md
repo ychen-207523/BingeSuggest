@@ -10,6 +10,11 @@
 * To resolve critical bugs encountered.
 * Helping the community by delivering a better product.
 
+## Code of Conduct:<\br>
+
+* Please go through the [link](https://github.com/jayeshjakkani/SE21-project/blob/master/CODE_OF_CONDUCT.md) before you begin contributing.
+
+
 
 
 
