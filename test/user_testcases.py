@@ -17,9 +17,9 @@ def check_diff(file1,file2):
     return(1)
 
 for i in range(len(input_arr)):
-    os.system("python3 Usus.py %s > user_test_output%s.txt" %(input_arr[i],i))
-    file1="C:\\Users\\jayes\\draft1\\user_original_output"+str(i)+".txt"
-    file2="C:\\Users\\jayes\\draft1\\user_test_output"+str(i)+".txt"
+    os.system("python3 Code/user_based.py %s > user_test_output%s.txt" %(input_arr[i],i))
+    file1="user_original_output"+str(i)+".txt"
+    file2="user_test_output"+str(i)+".txt"
     comp=check_diff(file1,file2)
     
     if comp:
