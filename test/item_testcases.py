@@ -24,8 +24,6 @@ flag = 0
 for i in range(len(input_arr)):
     os.system("python3 Code/item_based.py %s > item_original_output%s.txt" %(input_arr[i],i))
     os.system("python3 Code/item_based_test.py %s > item_test_output%s.txt" %(input_arr[i],i))
-    os.system("cat item_original_output%s.txt" %(i))
-    os.system("cat item_test_output%s.txt" %(i))
     file1="item_original_output"+str(i)+".txt"
     file2="item_test_output"+str(i)+".txt"
     comp=check_diff(file1,file2)
