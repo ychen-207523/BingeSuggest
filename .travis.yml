@@ -9,3 +9,5 @@ script:
   #- python3 Code/user_based.py 547
   - python3 test/item_testcases.py
   #- python3 test/user_testcases.py
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
