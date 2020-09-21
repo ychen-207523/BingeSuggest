@@ -21,6 +21,13 @@
 * Create a new branch to develop the project 
 * Write code to contribute and commit to create a pull request and merge it with the repository after it passes the CI build check
 
+## Code Style Guide 
+
+* Python language(Version 3.7) has been used to build this project repository
+* Make sure to add the functionalities in the form of modules
+* Variable Names should be self-explanatory
+* Comment the code so that a new contributor can understand the functionality of the modules easily
+* PEP8 is used as linter
 
 
 
