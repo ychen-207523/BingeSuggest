@@ -9,8 +9,8 @@ import warnings
 
 warnings.filterwarnings("ignore")
 col_name = ['user_id', 'item_id', 'ratings', 'timestamp']
-df = pd.read_csv('SE21-project/Data/ratings.csv')
-movies = pd.read_csv('SE21-project/Data/movies.csv')
+df = pd.read_csv('SE21-project/data/ratings.csv')
+movies = pd.read_csv('SE21-project/data/movies.csv')
 df = pd.merge(df, movies, on='movieId')
 avg_rating_df = pd.DataFrame(df.groupby('title')['rating'].mean())
 avg_rating_df['no_of_ratings'] = df.groupby('title')['rating'].count()
