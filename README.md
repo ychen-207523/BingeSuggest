@@ -1,3 +1,4 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # SE21-Project</br>
 Movie Recommendation System (Moviebuddy)
 
