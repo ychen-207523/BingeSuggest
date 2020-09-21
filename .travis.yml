@@ -4,10 +4,16 @@ python:
 cache: pip
 install:
   - pip install -r requirements.txt
+  - pip install coverage
+  - pip install codecov
 script:
-  - python3 Code/item_based.py 547
-  - python3 Code/user_based.py 547
-  - python3 test/item_testcases.py
-  - python3 test/user_testcases.py
+  #- python3 Code/item_based.py 547
+  #- python3 Code/user_based.py 547
+  #- python3 test/item_testcases.py
+  #- python3 test/user_testcases.py
+  - coverage run python3 Code/item_based.py 547
+  - coverage run python3 Code/user_based.py 547
+  - coverage run python3 test/item_testcases.py
+  - coverage run python3 test/user_testcases.py
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -t 6edf9b1f-936a-4239-a179-0d0154d693f3
