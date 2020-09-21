@@ -15,7 +15,7 @@
 || Issues reports: there are many||
 ||  issues are being  closed||
 || License: exists|4|
-|| DOI badge: exists ||
+|| DOI badge: exists |4|
 ||Docs: doco generated , format not ugly ||
 ||Docs: what: point descriptions of each class/function (in isolation) ||
 ||Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z||
@@ -24,8 +24,8 @@
 || (hard) code conforms to some known patterns |
 |Tools Matter| Use of version control tools|4|
 || Extensive use of version control tools |4|
-|| Repo has an up-to-date requirements.txt file||
-|| Repo does not have "ignore" files.||
+|| Repo has an up-to-date requirements.txt file|4|
+|| Repo does not have "ignore" files.|4|
 ||Use of  style checkers |4|
 ||Extensive Use of  style checkers |4|
 || Use of code  formatters. |4|
@@ -34,20 +34,20 @@
 || Extensive use of syntax checkers. |4|
 || Use of code coverage |4|
 || Extensive use of code coverage |4|
-|| other automated analysis tools||
-|| Extensive use of  other automated analysis tools||
+|| other automated analysis tools|4|
+|| Extensive use of  other automated analysis tools|4|
 || test cases exist|4|
-|| test cases are routinely executed||
+|| test cases are routinely executed|4|
 | consensus-oriented model| the files CONTRIBUTING.md and CODEOFCONDUCT.md has have multiple edits by multiple people||
 | | the files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up||
 | | multiple people contribute to discussions|4|
 || issues are discussed before they are closed|4|
 || Chat channel: exists|4|
 || Chat channel: is active |4|
-|| test cases:.a large proportion of the issues related to handling failing cases.||
+|| test cases:.a large proportion of the issues related to handling failing cases.|2|
 | zero internal boundaries | evidence that the whole team is using the same tools: everyone can get to all tools and files|4|
 | | evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)|4|
 | | evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)|4|
 | | evidence that the members of the team are working across multiple places in the code base|4|
-| low-regressions rule | (hard to judge) features released are not subsequently removed||
+| low-regressions rule | (hard to judge) features released are not subsequently removed|2|
 |short release cycles | (hard to see in short projects) project members are committing often enough so that everyone can get your work|4|
