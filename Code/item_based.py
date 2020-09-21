@@ -10,6 +10,7 @@ import warnings
 
 # To make sure warnings are filtered out
 warnings.filterwarnings("ignore")
+
 col_name = ['user_id', 'item_id', 'ratings', 'timestamp']
 # Reading from input csv files and storing in data frames
 df = pd.read_csv('../SE21-project/data/ratings.csv')
