@@ -12,7 +12,7 @@
 | |workload is spread over the whole team (one team member is often Xtimes more productive than the others... but nevertheless, here is a track record that everyone is contributing a lot)|4|
 || Number of commits||
 || Number of commits: by different people||
-|| Issues reports: there are many||
+|| Issues reports: there are many|4|
 ||  issues are being  closed||
 || License: exists|4|
 || DOI badge: exists |4|
@@ -38,8 +38,8 @@
 || Extensive use of  other automated analysis tools|4|
 || test cases exist|4|
 || test cases are routinely executed|4|
-| consensus-oriented model| the files CONTRIBUTING.md and CODEOFCONDUCT.md has have multiple edits by multiple people||
-| | the files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up||
+| consensus-oriented model| the files CONTRIBUTING.md and CODEOFCONDUCT.md has have multiple edits by multiple people|4|
+| | the files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up|4|
 | | multiple people contribute to discussions|4|
 || issues are discussed before they are closed|4|
 || Chat channel: exists|4|
