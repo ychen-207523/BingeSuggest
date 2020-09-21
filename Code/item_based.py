@@ -1,13 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+# Importing the required modules
 import pandas as pd
 import numpy as np
 import time
 import sys
 import warnings
 
+# To make sure warnings are filtered out
 warnings.filterwarnings("ignore")
 col_name = ['user_id', 'item_id', 'ratings', 'timestamp']
+# Reading from input csv files and storing in data frames
 df = pd.read_csv('../SE21-project/data/ratings.csv')
 movies = pd.read_csv('../SE21-project/data/movies.csv')
 df = pd.merge(df, movies, on='movieId')
@@ -18,12 +21,13 @@ um_rating = df.pivot_table(index='userId', columns='title',
                            values='rating')
 rec_mov = pd.DataFrame()
 
-
+# Recommend function to output movies according to correlation 
+# to the movies present in database
 def recommend(userID):
     global rec_mov
     user_rating = []
     for i in um_rating.columns:
-        if um_rating[i][userID] >= 4:
+        if um_rating[i][userID] >= 4:# Picking rating >4 movies
             user_rating.extend([i])
 
     user_rating_final = []
@@ -39,6 +43,7 @@ def recommend(userID):
         corr = pd.DataFrame(similar, columns=['correlation'])
         corr.dropna(inplace=True)
         for j in corr.index:
+            # Correlation is taken as 0.95 and not watched
             if corr.loc[j]['correlation'] >= 0.95 and j not in rec and j \
                not in user_rating:
                 rec.extend([j])
