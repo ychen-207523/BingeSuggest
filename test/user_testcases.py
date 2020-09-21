@@ -7,7 +7,7 @@ flag = 0
 def check_diff(file1,file2):
     check = {}
     for file in [file1,file2]:
-        with open(file,'r') as f:
+        with open(file,'r',  encoding = "ISO-8859-1") as f:
             check[file] = []
             for line in f:
                 check[file].append(line)
@@ -17,7 +17,8 @@ def check_diff(file1,file2):
     return(1)
 
 for i in range(len(input_arr)):
-    os.system("python3 Code/user_based.py %s > user_test_output%s.txt" %(input_arr[i],i))
+    os.system("python3 Code/user_based.py %s > user_original_output%s.txt" %(input_arr[i],i))
+    os.system("python3 Code/user_based_test.py %s > user_test_output%s.txt" %(input_arr[i],i))
     file1="user_original_output"+str(i)+".txt"
     file2="user_test_output"+str(i)+".txt"
     comp=check_diff(file1,file2)
