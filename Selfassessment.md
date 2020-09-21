@@ -14,7 +14,7 @@
 || Number of commits: by different people||
 || Issues reports: there are many||
 ||  issues are being  closed||
-|| License: exists||
+|| License: exists|4|
 || DOI badge: exists ||
 ||Docs: doco generated , format not ugly ||
 ||Docs: what: point descriptions of each class/function (in isolation) ||
