@@ -1,1 +1,0 @@
-Error: Provide one user ID at a time as input on the command line!
