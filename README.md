@@ -1,5 +1,4 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)</br>
-[![codecov](https://codecov.io/gh/jayeshjakkani/SE21-project/branch/master/graph/badge.svg)](https://codecov.io/gh/jayeshjakkani/SE21-project)</br>
 [![DOI](https://zenodo.org/badge/295570872.svg)](https://zenodo.org/badge/latestdoi/295570872)</br>
 [![Build Status](https://travis-ci.org/jayeshjakkani/SE21-project.svg?branch=master)](https://travis-ci.org/jayeshjakkani/SE21-project)
 
