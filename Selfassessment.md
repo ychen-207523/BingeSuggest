@@ -32,7 +32,7 @@
 || Extensive Use of code  formatters. |4|
 || Use of syntax checkers. |4|
 || Extensive use of syntax checkers. |4|
-|| Use of code coverage |4|
+|| Use of code coverage |2|
 || Extensive use of code coverage |0|
 || other automated analysis tools|4|
 || Extensive use of  other automated analysis tools|4|
