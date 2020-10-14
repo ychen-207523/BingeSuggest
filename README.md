@@ -53,9 +53,3 @@ Now, according to the movie recommendation system, it uses Collaborative Filteri
 </br>
 Join Us In Phase -2 to build Moviebuddy that would in-turn help us during this Pandemic. Cheers!</br>
 
-# Group Members</br>
-Ashish Sadanand Rajpurohit</br>
-Jayesh Chandrashekhar Jakkani</br>
-Katta Rishabh</br>
-Keertikumar Malagund</br>
-Sathwik Kalvakuntla</br>

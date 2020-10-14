@@ -1,6 +1,6 @@
 ## Contributing:
 
-* If you would like to contribute and collaborate for this repository, then please intimate us through email at jayeshjakkani07@gmail.com
+* If you would like to contribute and collaborate for this repository, then please intimate us through email at atiwari4@ncsu.edu
 
 ## Purpose of Contributing:
 
@@ -10,9 +10,13 @@
 * To resolve critical bugs encountered.
 * Helping the community by delivering a better product.
 
+## Style checkers standards:
+
+
+
 ## Code of Conduct:
 
-* Please go through the [link](https://github.com/jayeshjakkani/SE21-project/blob/master/CODE_OF_CONDUCT.md) before you begin contributing.
+* Please go through the [Code of Conduct](https://github.com/jayeshjakkani/SE21-project/blob/master/CODE_OF_CONDUCT.md) before you begin contributing.
 
 ## Pull Request Submission Guidelines
 
