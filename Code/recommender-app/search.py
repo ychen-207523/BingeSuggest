@@ -1,5 +1,5 @@
 import pandas as pd
-from app import app
+# from app import app
 from flask import jsonify, request, render_template
 
 
@@ -41,25 +41,6 @@ class Search:
 
     def resultsTop10(self, word):
         return self.results(word)[:10]
-
-
-@app.route("/")
-def upload_form():
-    return render_template("search.html")
-
-
-@app.route("/search", methods=["POST"])
-def search():
-    term = request.form["q"]
-    # print("term: ", term)
-
-    search = Search()
-    filtered_dict = search.resultsTop10(term)
-
-    resp = jsonify(filtered_dict)
-    resp.status_code = 200
-    return resp
-
 
 if __name__ == "__main__":
     app.run()
