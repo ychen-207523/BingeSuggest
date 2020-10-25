@@ -44,6 +44,9 @@ Examples of unacceptable behavior by participants include:
 ## Be Respectful
 In particular, respect differences of opinion.
 
+## Be charitable
+Interpret the arguments of others in good faith, do not seek to disagree.
+When we do disagree, try to understand why.
 
 ## Our Responsibilities
 
