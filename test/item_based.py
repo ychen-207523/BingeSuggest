@@ -28,4 +28,4 @@ def recommendForNewUser(user_rating):
     joinMoviesAndRecommendations = movies.copy(deep=True)
     joinMoviesAndRecommendations["recommended"] = recommendations
     joinMoviesAndRecommendations.sort_values(by="recommended", ascending=False, inplace=True)
-    return [x for x in joinMoviesAndRecommendations["title"]][:100]
+    return [x for x in joinMoviesAndRecommendations["title"]][:201]
