@@ -7,7 +7,5 @@ install:
   - pip install coverage
   - pip install codecov
 script:
-  - python3 Code/item_based.py 547
-  - python3 Code/user_based.py 547
-  - python3 test/item_testcases.py
-  - python3 test/user_testcases.py
+  - python3 test/tests.py
+  - python3 test/test_search.py
