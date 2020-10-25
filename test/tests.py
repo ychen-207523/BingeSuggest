@@ -1,6 +1,8 @@
-from item_based import recommendForNewUser
 import unittest
 import warnings
+import sys
+sys.path.append('../')
+from Code.prediction_scripts.item_based import recommendForNewUser
 warnings.filterwarnings("ignore")
 class Tests(unittest.TestCase):
     def testToyStory(self):
