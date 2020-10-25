@@ -3,14 +3,18 @@ import pandas as pd
 from flask import jsonify, request, render_template
 import sys
 import os
-# sys.path.append('/Users/amitghetiya/Desktop/Courses/SE/project/SE21-PROJECT')
 
-pathToData = os.path.abspath(
-    "/Users/amitghetiya/Desktop/Courses/SE/project/SE21-PROJECT"
-)
+# pathToData = os.path.abspath(
+#     "/Users/amitghetiya/Desktop/Courses/SE/project/SE21-PROJECT"
+# )
+
+app_dir =  os.path.dirname(os.path.abspath(__file__))
+code_dir = os.path.dirname(app_dir)
+project_dir = os.path.dirname(code_dir)
+
 class Search:
 
-    df = pd.read_csv(pathToData+'/data/movies.csv')
+    df = pd.read_csv(project_dir+'/data/movies.csv')
 
     def __init__(self):
         pass
