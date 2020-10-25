@@ -24,6 +24,7 @@ def search():
     search = Search()
     filtered_dict = search.resultsTop10(term)
 
+    print(filtered_dict)
     resp = jsonify(filtered_dict)
     resp.status_code = 200
     return resp

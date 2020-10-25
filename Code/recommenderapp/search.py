@@ -1,11 +1,16 @@
 import pandas as pd
 # from app import app
 from flask import jsonify, request, render_template
+import sys
+import os
+# sys.path.append('/Users/amitghetiya/Desktop/Courses/SE/project/SE21-PROJECT')
 
-
+pathToData = os.path.abspath(
+    "/Users/amitghetiya/Desktop/Courses/SE/project/SE21-PROJECT"
+)
 class Search:
 
-    df = pd.read_csv("data/movies.csv")
+    df = pd.read_csv(pathToData+'/data/movies.csv')
 
     def __init__(self):
         pass
