@@ -7,5 +7,5 @@ install:
   - pip install coverage
   - pip install codecov
 script:
-  - cd test && python3 tests.py
+  - cd test && python3 tests.py && cd ..
   - cd test && python3 test_search.py
