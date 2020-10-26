@@ -1,16 +1,20 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)</br>
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4127507.svg)](https://doi.org/10.5281/zenodo.4127507)</br>
-[![Build Status](https://travis-ci.com/git-ankit/MovieRecommender.svg?branch=master)](https://travis-ci.com/git-ankit/MovieRecommender)
-[![codecov](https://codecov.io/gh/git-ankit/MovieRecommender/branch/master/graph/badge.svg?token=8K0VL8106C)](undefined)
+# Movie Recommendation
+        A collaborative filtering engine based recommnedation!
 
-# SE21-Project</br>
-Movie Recommendation System (Moviebuddy)
 
-# Project Video</br>
-[Access the MovieRecommender video Here](https://youtu.be/OSjpryqI1RQ)
+[![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://GitHub.com/ssp4all/)
 
-The video is also available in the video folder of the repository.
-# Documentation</br>
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4127507.svg)](https://doi.org/10.5281/zenodo.4127507) [![Build Status](https://travis-ci.com/git-ankit/MovieRecommender.svg?branch=master)](https://travis-ci.com/git-ankit/MovieRecommender) [![codecov](https://codecov.io/gh/git-ankit/MovieRecommender/branch/master/graph/badge.svg?token=8K0VL8106C)](undefined)
+
+### Setup
+
+### Video
+
+<a  href="https://youtu.be/OSjpryqI1RQ"><img height=150 width=500 alt="logo here" src="https://raw.githubusercontent.com/git-ankit/MovieRecommender/master/asset/video.png"/></a>
+
+
+### Documentation</br>
 Recommend a user with a set of movies that they might like by considering the movies they have liked in the past and also considering the movies liked by other users that have a similar taste like them.</br>
 </br>
 Approaches:</br>
