@@ -9,6 +9,8 @@
 * To make the product more efficient.
 * To resolve critical bugs encountered.
 * Helping the community by delivering a better product.
+* Help us find solutions to computationally/memory intensive processes
+* Help us to scale the system to a larger database
 
 ## Style checkers standards:
 * to be added
@@ -24,6 +26,7 @@
 * To start contributing to the repository make sure you fork the repository first
 * Create a new branch to develop the project 
 * Write code to contribute and commit to create a pull request and merge it with the repository after it passes the CI build check
+* One of the repository administrators will review the Pull request anmd merge the changes
 
 ## Code Style Guide 
 
