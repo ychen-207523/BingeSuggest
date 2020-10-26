@@ -19,7 +19,7 @@ def landing_page():
 
 
 @app.route("/predict", methods=["POST"])
-def predictt():
+def predict():
     data = json.loads(request.data)#contains movies
     data1 = data['movie_list']
     training_data = []
@@ -30,9 +30,10 @@ def predictt():
         }
         training_data.append(movie_with_rating)
     recommendations = recommendForNewUser(training_data)
-
-    print(recommendations)
-    return data
+    resp = {
+        'recommendations':recommendations
+    }
+    return resp
 
 @app.route("/search", methods=["POST"])
 def search():
