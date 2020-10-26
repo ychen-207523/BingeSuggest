@@ -21,7 +21,7 @@
 ||Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z|4|
 ||Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing|4|
 ||Docs: 3 minute video, posted to YouTube. That convinces people why they want to work on your code.|4|
-|| (hard) code conforms to some known patterns |2|
+|| (hard) code conforms to some known patterns |4|
 |Tools Matter| Use of version control tools|4|
 || Extensive use of version control tools |4|
 || Repo has an up-to-date requirements.txt file|4|
@@ -32,8 +32,8 @@
 || Extensive Use of code  formatters. |4|
 || Use of syntax checkers. |4|
 || Extensive use of syntax checkers. |4|
-|| Use of code coverage |0|
-|| Extensive use of code coverage |0|
+|| Use of code coverage |4|
+|| Extensive use of code coverage |4|
 || other automated analysis tools|4|
 || Extensive use of  other automated analysis tools|4|
 || test cases exist|4|
@@ -49,5 +49,5 @@
 | | evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)|4|
 | | evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)|4|
 | | evidence that the members of the team are working across multiple places in the code base|4|
-| low-regressions rule | (hard to judge) features released are not subsequently removed|2|
+| low-regressions rule | (hard to judge) features released are not subsequently removed|4|
 |short release cycles | (hard to see in short projects) project members are committing often enough so that everyone can get your work|4|
