@@ -115,7 +115,7 @@ class Tests(unittest.TestCase):
             {"title": "Twilight Saga: New Moon, The (2009)", "rating": 5.0},
         ]
         recommendations = recommendForNewUser(ts)
-        self.assertTrue(("Twilight (2008)" in recommendations))
+        self.assertTrue(("Twilight (2008)" in recommendations) == False)
 
 
 if __name__ == "__main__":
