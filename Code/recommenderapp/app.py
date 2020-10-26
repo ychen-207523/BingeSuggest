@@ -1,6 +1,9 @@
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
 import json
+import sys
+sys.path.append('../../')
+from Code.prediction_scripts.item_based import recommendForNewUser
 from search import Search
 
 app = Flask(__name__)
@@ -18,7 +21,17 @@ def landing_page():
 @app.route("/predict", methods=["POST"])
 def predictt():
     data = json.loads(request.data)#contains movies
-    print(data)
+    data1 = data['movie_list']
+    training_data = []
+    for movie in data1:
+        movie_with_rating = {
+            'title': movie,
+            'rating': 5.0
+        }
+        training_data.append(movie_with_rating)
+    recommendations = recommendForNewUser(training_data)
+
+    print(recommendations)
     return data
 
 @app.route("/search", methods=["POST"])

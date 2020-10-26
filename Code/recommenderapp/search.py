@@ -4,10 +4,6 @@ from flask import jsonify, request, render_template
 import sys
 import os
 
-# pathToData = os.path.abspath(
-#     "/Users/amitghetiya/Desktop/Courses/SE/project/SE21-PROJECT"
-# )
-
 app_dir =  os.path.dirname(os.path.abspath(__file__))
 code_dir = os.path.dirname(app_dir)
 project_dir = os.path.dirname(code_dir)
