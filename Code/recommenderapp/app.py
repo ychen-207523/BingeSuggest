@@ -1,20 +1,25 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
+import json
 from search import Search
-
 
 app = Flask(__name__)
 app.secret_key = "secret key"
 
-# app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
-# app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-# CORS(app)
 
 
 @app.route("/")
 def landing_page():
     return render_template("landing_page.html")
+
+
+@app.route("/predictt", methods=["POST"])
+def predictt():
+    data = json.loads(request.data)#contains movies
+    print(data)
+    return data
 
 @app.route("/search", methods=["POST"])
 def search():
@@ -24,17 +29,9 @@ def search():
     search = Search()
     filtered_dict = search.resultsTop10(term)
 
-    print(filtered_dict)
     resp = jsonify(filtered_dict)
     resp.status_code = 200
     return resp
-
-@app.route("/predict", methods=["POST"])
-def predict():
-    movie_list = request.form["movie_list"]
-    print(movie_list)
-
-    return movie_list
 
 if __name__=='__main__':
     app.run(port = 5000, debug = True)
