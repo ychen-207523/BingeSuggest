@@ -104,5 +104,12 @@ class Tests(unittest.TestCase):
         recommendations = recommendForNewUser(ts)
         self.assertTrue(("Monsters, Inc. (2001)" in recommendations))
 
+    def testMultipleMovies(self):
+        ts = [
+            {'title':'Harry Potter and the Goblet of Fire (2005)', 'rating':5.0},
+            {'title':'Twilight Saga: New Moon, The (2009)', 'rating':5.0},
+        ]
+        recommendations = recommendForNewUser(ts)
+        self.assertTrue(("Twilight (2008)" in recommendations))
 if __name__ == "__main__":
     unittest.main()
