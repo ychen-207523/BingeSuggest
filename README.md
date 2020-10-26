@@ -1,20 +1,22 @@
-# Movie Recommendation
-        A collaborative filtering engine based recommnedation!
+# <i>Movie Recommendation</i>
+        A collaborative filtering based recommnedation enginer!
 
 
 [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://GitHub.com/ssp4all/)
 
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4127507.svg)](https://doi.org/10.5281/zenodo.4127507) [![Build Status](https://travis-ci.com/git-ankit/MovieRecommender.svg?branch=master)](https://travis-ci.com/git-ankit/MovieRecommender) [![codecov](https://codecov.io/gh/git-ankit/MovieRecommender/branch/master/graph/badge.svg?token=8K0VL8106C)](undefined)
 
-### Setup
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/jayjagtap/Autofill-Buddy/graphs/commit-activity) [![Contributors Activity](https://img.shields.io/github/commit-activity/m/jayjagtap/Autofill-Buddy)](https://github.com/git-ankit/MovieRecommender/pulse) [![GitHub issues](https://img.shields.io/github/issues/jayjagtap/Autofill-Buddy.svg)](https://github.com/git-ankit/MovieRecommender/issues/) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/jayjagtap/Autofill-Buddy.svg)](https://github.com/git-ankit/MovieRecommender/issues?q=is%3Aissue+is%3Aclosed) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4127507.svg)](https://doi.org/10.5281/zenodo.4127507) [![Build Status](https://travis-ci.com/git-ankit/MovieRecommender.svg?branch=master)](https://travis-ci.com/git-ankit/MovieRecommender) [![codecov](https://codecov.io/gh/git-ankit/MovieRecommender/branch/master/graph/badge.svg?token=8K0VL8106C)](undefined)
 
-### Video
+#### Setup ⚙️
+
+#### Video ▶️ 
 
 <a  href="https://youtu.be/OSjpryqI1RQ"><img height=150 width=500 alt="logo here" src="https://raw.githubusercontent.com/git-ankit/MovieRecommender/master/asset/video.png"/></a>
 
+#### Working 👨‍💻
 
-### Documentation</br>
+#### Documentation 📱
 Recommend a user with a set of movies that they might like by considering the movies they have liked in the past and also considering the movies liked by other users that have a similar taste like them.</br>
 </br>
 Approaches:</br>
