@@ -61,8 +61,7 @@ Project maintainers who do not follow or enforce the Code of Conduct in good
 faith may face temporary or permanent repercussions as determined by other
 members of the project's leadership.
 
-## Examples of behavior that contribute to creating a positive environment
-include:
+## Examples of behavior that contribute to creating a positive environment include:
 
 * Using welcoming and inclusive language
 * Being respectful to different people for differing viewpoints and experiences
