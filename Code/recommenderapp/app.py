@@ -15,7 +15,7 @@ def landing_page():
     return render_template("landing_page.html")
 
 
-@app.route("/predictt", methods=["POST"])
+@app.route("/predict", methods=["POST"])
 def predictt():
     data = json.loads(request.data)#contains movies
     print(data)
