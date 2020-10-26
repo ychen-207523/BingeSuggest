@@ -12,7 +12,7 @@
 
 ### Video ▶️ 
 
-<a  href="https://youtu.be/OSjpryqI1RQ"><img height=150 width=500 alt="logo here" src="https://raw.githubusercontent.com/git-ankit/MovieRecommender/master/asset/video.png"/></a>
+<a  href="https://youtu.be/OSjpryqI1RQ"><img height=150 width=500 alt="logo here" src="https://raw.githubusercontent.com/git-ankit/MovieRecommender/master/asset/group12.png"/></a>
 
 ### Working 👨‍💻
 
