@@ -2,7 +2,8 @@ from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
 import json
 import sys
-sys.path.append('../../')
+
+sys.path.append("../../")
 from Code.prediction_scripts.item_based import recommendForNewUser
 from search import Search
 
@@ -12,7 +13,6 @@ app.secret_key = "secret key"
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-
 @app.route("/")
 def landing_page():
     return render_template("landing_page.html")
@@ -20,20 +20,16 @@ def landing_page():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    data = json.loads(request.data)#contains movies
-    data1 = data['movie_list']
+    data = json.loads(request.data)  # contains movies
+    data1 = data["movie_list"]
     training_data = []
     for movie in data1:
-        movie_with_rating = {
-            'title': movie,
-            'rating': 5.0
-        }
+        movie_with_rating = {"title": movie, "rating": 5.0}
         training_data.append(movie_with_rating)
     recommendations = recommendForNewUser(training_data)
-    resp = {
-        'recommendations':recommendations
-    }
+    resp = {"recommendations": recommendations}
     return resp
+
 
 @app.route("/search", methods=["POST"])
 def search():
@@ -47,5 +43,6 @@ def search():
     resp.status_code = 200
     return resp
 
-if __name__=='__main__':
-    app.run(port = 5000, debug = True)
+
+if __name__ == "__main__":
+    app.run(port=5000, debug=True)
