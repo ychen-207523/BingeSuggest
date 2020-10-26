@@ -17,7 +17,7 @@ appearance, race, religion, or sexual identity and orientation.
 * When you agree to undertake a task that has been assigned to you by the group you must try work to the agreed deadline since failure to do so could impede the          progress of the whole project
 * You have the right, naturally, to challenge other’s opinions but please try to do it in a non-aggressive way
 * It is your responsibility to attend all meetings arranged by the group to advance the project, and to arrive at those meetings on time.  If you can’t attend a meeting of the group you should consider providing your input in written form and giving this to the other group members before the meeting
-*	If another member of your group tells you something in confidence, you should respect their wishes
+*	If another member of your group tells you something in confidence.
 
 ## Our Standards
 

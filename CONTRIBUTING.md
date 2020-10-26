@@ -11,7 +11,7 @@
 * Helping the community by delivering a better product.
 
 ## Style checkers standards:
-
+* to be added
 
 
 ## Code of Conduct:
