@@ -134,4 +134,4 @@ dmypy.json
 
 
 #results
-/experiment_results
+experiment_results/
