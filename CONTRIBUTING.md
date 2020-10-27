@@ -1,4 +1,4 @@
-## Contributing:
+git git ## Contributing:
 
 * If you would like to contribute and collaborate for this repository, then please intimate us through email at atiwari4@ncsu.edu
 
@@ -13,12 +13,12 @@
 * Help us to scale the system to a larger database
 
 ## Style checkers standards:
-* to be added
+* Use the `pylance` package for python (VS code), and use `black` for auto-styling and auto-formatting the code.
 
 
 ## Code of Conduct:
 
-* Please go through the [Code of Conduct](https://github.com/jayeshjakkani/SE21-project/blob/master/CODE_OF_CONDUCT.md) before you begin contributing.
+* Please go through the [Code of Conduct](https://github.com/git-ankit/MovieRecommender/blob/master/CODE_OF_CONDUCT.md) before you begin contributing.
 
 ## Pull Request Submission Guidelines
 
@@ -35,7 +35,7 @@
 * Any code which is not tested should be committed to the test codes in the code folder. After they are successfully tested, the  main code can be updated.
 * Variable Names should be self-explanatory
 * Comment the code so that a new contributor can understand the functionality of the modules easily
-* PEP8 is used as linter
+* `black` is used as linter
 
 
 

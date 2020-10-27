@@ -14,7 +14,6 @@ app.secret_key = "secret key"
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-
 @app.route("/")
 def landing_page():
     return render_template("landing_page.html")
@@ -22,14 +21,11 @@ def landing_page():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    data = json.loads(request.data)#contains movies
-    data1 = data['movie_list']
+    data = json.loads(request.data)  # contains movies
+    data1 = data["movie_list"]
     training_data = []
     for movie in data1:
-        movie_with_rating = {
-            'title': movie,
-            'rating': 5.0
-        }
+        movie_with_rating = {"title": movie, "rating": 5.0}
         training_data.append(movie_with_rating)
     recommendations = recommendForNewUser(training_data)
     recommendations = recommendations[:20]
@@ -37,6 +33,7 @@ def predict():
         'recommendations':recommendations
     }
     return resp
+
 
 @app.route("/search", methods=["POST"])
 def search():
@@ -61,3 +58,4 @@ def feedback():
 
 if __name__=='__main__':
     app.run(port = 5000, debug = True)
+
