@@ -131,3 +131,7 @@ dmypy.json
 .pyre/
 .DS_Store
 .vscode
+
+
+#results
+/experiment_results

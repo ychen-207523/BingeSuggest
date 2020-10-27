@@ -2,6 +2,8 @@ from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
 import json
 import sys
+import csv
+import time
 sys.path.append('../../')
 from Code.prediction_scripts.item_based import recommendForNewUser
 from search import Search
@@ -30,6 +32,7 @@ def predict():
         }
         training_data.append(movie_with_rating)
     recommendations = recommendForNewUser(training_data)
+    recommendations = recommendations[:20]
     resp = {
         'recommendations':recommendations
     }
@@ -46,6 +49,15 @@ def search():
     resp = jsonify(filtered_dict)
     resp.status_code = 200
     return resp
+
+@app.route("/feedback", methods=["POST"])
+def feedback():
+    data  = json.loads(request.data)
+    with open('experiment_results/feedback_{}.csv'.format(int(time.time())), 'w') as f:
+        for key in data.keys():
+            f.write("%s - %s\n"%(key, data[key]))
+    print(data)
+    return data
 
 if __name__=='__main__':
     app.run(port = 5000, debug = True)
