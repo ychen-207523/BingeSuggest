@@ -131,4 +131,8 @@ dmypy.json
 .pyre/
 .DS_Store
 .vscode
-*.pyc
+
+
+
+#results
+/Code/recommenderapp/experiment_results
