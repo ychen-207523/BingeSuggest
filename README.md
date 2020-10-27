@@ -25,10 +25,10 @@
 
 - python 3.5 +
 - pip
-- Style check  - autopep8
-    `pip install autopep8`
-- Static code analyser - Pylint
-    `sudo apt-get install pylint`
+- Style check  - black
+    `pip install black`
+- Static code analyser - Pylance
+    `Install it in VS Code`
 
 - Install all required python packages
     `pip install -r requirements.txt `
