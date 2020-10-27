@@ -1,13 +1,13 @@
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="git-ankit",  # Replace with your own username
     version="1.0.0",
     author="Suraj,Amit,Jay,Ankit",
-    author_email="ankit@example.com",
+    author_email="tiwariankit1006@gmail.com",
     description="A recommendation engine",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -18,5 +18,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires=">=3.6",
 )

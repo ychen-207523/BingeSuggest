@@ -18,12 +18,6 @@
 ### Tech stack 👨‍💻
 - Python, Flask, HTML, CSS and JavaScript
 
-### Usage
-1. `cd Code/recommenderapp`
-2. `python3 app.py`
-
-![Execution](https://raw.githubusercontent.com/git-ankit/MovieRecommender/master/asset/execution.gif)
-
 ### Requirements and Setup ⚙️
 
 
@@ -36,6 +30,20 @@
 
 - Install all required python packages
     `pip install -r requirements.txt `
+
+### Usage
+1. `cd Code/recommenderapp`
+2. `python3 app.py`
+
+![Execution](https://raw.githubusercontent.com/git-ankit/MovieRecommender/master/asset/execution.gif)
+
+### Installation using package manager
+
+Using terminal, type the following line:
+
+`pip install -i https://test.pypi.org/simple/ git-ankit==1.0.0`
+
+This is the version1.0 package uploaded on the [PyPi](https://test.pypi.org/project/git-ankit/) 
 
 ### Documentation 📚
 Refer to Wiki page [here](https://github.com/git-ankit/MovieRecommender/wiki/Documentation)
