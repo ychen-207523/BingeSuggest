@@ -134,4 +134,4 @@ dmypy.json
 
 
 #results
-experiment_results/
+/Code/recommender_app/experiment_results
