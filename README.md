@@ -36,3 +36,5 @@
 Refer to Wiki page [here](https://github.com/git-ankit/MovieRecommender/wiki/Documentation)
 
 
+### Bug? 🐛
+Raise a issue on this repository, we would love to look at it ❤️
