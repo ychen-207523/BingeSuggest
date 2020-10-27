@@ -8,10 +8,10 @@ setuptools.setup(
     version="1.0.0",
     author="Suraj,Amit,Jay,Ankit",
     author_email="ankit@example.com",
-    description="A recommnedation engine",
+    description="A recommendation engine",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/git-ankit/MovieRecommender",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
