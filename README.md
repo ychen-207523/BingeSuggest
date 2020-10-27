@@ -6,7 +6,7 @@
 
 
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://gitHub.com/git-ankit/MovieRecommender/graphs/commit-activity) [![Contributors Activity](https://img.shields.io/github/commit-activity/m/git-ankit/MovieRecommender)](https://github.com/git-ankit/MovieRecommender/pulse) [![GitHub issues](https://img.shields.io/github/issues/git-ankit/MovieRecommender.svg)](https://github.com/git-ankit/MovieRecommender/issues/) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/git-ankit/MovieRecommender.svg)](https://github.com/git-ankit/MovieRecommender/issues?q=is%3Aissue+is%3Aclosed) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4127507.svg)](https://doi.org/10.5281/zenodo.4127507) [![Build Status](https://travis-ci.com/git-ankit/MovieRecommender.svg?branch=master)](https://travis-ci.com/git-ankit/MovieRecommender) [![codecov](https://codecov.io/gh/git-ankit/MovieRecommender/branch/master/graph/badge.svg?token=8K0VL8106C)](undefined) [![GitHub release](https://img.shields.io/github/release/git-ankit/MovieRecommender.svg)](https://GitHub.com/git-ankit/MovieRecommenderreleases/) [![Autopep8](https://img.shields.io/badge/StyleChecker-Autopep8-purple.svg)](https://pypi.org/project/autopep8/) 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://gitHub.com/git-ankit/MovieRecommender/graphs/commit-activity) [![Contributors Activity](https://img.shields.io/github/commit-activity/m/git-ankit/MovieRecommender)](https://github.com/git-ankit/MovieRecommender/pulse) [![GitHub issues](https://img.shields.io/github/issues/git-ankit/MovieRecommender.svg)](https://github.com/git-ankit/MovieRecommender/issues/) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/git-ankit/MovieRecommender.svg)](https://github.com/git-ankit/MovieRecommender/issues?q=is%3Aissue+is%3Aclosed) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4127507.svg)](https://doi.org/10.5281/zenodo.4127507) [![Build Status](https://travis-ci.com/git-ankit/MovieRecommender.svg?branch=master)](https://travis-ci.com/git-ankit/MovieRecommender) [![codecov](https://codecov.io/gh/git-ankit/MovieRecommender/branch/master/graph/badge.svg?token=8K0VL8106C)](undefined) [![GitHub release](https://img.shields.io/github/release/git-ankit/MovieRecommender.svg)](https://GitHub.com/git-ankit/MovieRecommenderreleases/) [![black](https://img.shields.io/badge/StyleChecker-black-purple.svg)](https://pypi.org/project/black/) 
 
 ### Video ▶️ 
 
@@ -19,9 +19,13 @@
 - Python, Flask, HTML, CSS and JavaScript
 
 ### Usage
-`python3 app.py`
+1. `cd Code/recommenderapp`
+2. `python3 app.py`
+
+![Execution](https://raw.githubusercontent.com/git-ankit/MovieRecommender/master/asset/execution.gif)
 
 ### Requirements and Setup ⚙️
+
 
 - python 3.5 +
 - pip
