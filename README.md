@@ -12,8 +12,21 @@
 
 <a  href="https://youtu.be/OSjpryqI1RQ"><img height=150 width=500 alt="logo here" src="https://raw.githubusercontent.com/git-ankit/MovieRecommender/master/asset/group12.png"/></a>
 
+
+
 ### Working 📱
 ![Demo](https://raw.githubusercontent.com/git-ankit/MovieRecommender/master/asset/demo.gif)
+
+## Testing how good the Movie Recommender is:
+
+1. Pick 10-15 very famous movies.
+2. Make sure the movies have diversity based on genre, cast and production style.
+3. Show users a set of 10 randomly generated movies vs top 10 movies recommended by the Movie Recommender.
+4. Also ask the user how satisfied is he/she with the recommended movies.
+4. Collect your results and quantify them.
+
+Make sure you taste your own medicine first and take into account other peoples familiarity with the system before you design your tests.
+
 
 ### Tech stack 👨‍💻
 - Python, Flask, HTML, CSS and JavaScript
