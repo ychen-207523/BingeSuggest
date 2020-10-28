@@ -8,7 +8,7 @@
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://gitHub.com/git-ankit/MovieRecommender/graphs/commit-activity) [![Contributors Activity](https://img.shields.io/github/commit-activity/m/git-ankit/MovieRecommender)](https://github.com/git-ankit/MovieRecommender/pulse) [![GitHub issues](https://img.shields.io/github/issues/git-ankit/MovieRecommender.svg)](https://github.com/git-ankit/MovieRecommender/issues/) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/git-ankit/MovieRecommender.svg)](https://github.com/git-ankit/MovieRecommender/issues?q=is%3Aissue+is%3Aclosed) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4127507.svg)](https://doi.org/10.5281/zenodo.4127507) [![Build Status](https://travis-ci.com/git-ankit/MovieRecommender.svg?branch=master)](https://travis-ci.com/git-ankit/MovieRecommender) [![codecov](https://codecov.io/gh/git-ankit/MovieRecommender/branch/master/graph/badge.svg?token=8K0VL8106C)](undefined) [![GitHub release](https://img.shields.io/github/release/git-ankit/MovieRecommender.svg)](https://GitHub.com/git-ankit/MovieRecommenderreleases/) [![black](https://img.shields.io/badge/StyleChecker-black-purple.svg)](https://pypi.org/project/black/) 
 
-#### Project 3 Plan
+### Project 3 Plan
 
 (Please see [wiki](https://github.com/git-ankit/MovieRecommender/wiki/Project-3-Plan) for detailed information.)
 
@@ -34,15 +34,7 @@ Make sure you taste your own medicine first and take into account other peoples 
 ### Working 📱
 ![Demo](https://raw.githubusercontent.com/git-ankit/MovieRecommender/master/asset/demo.gif)
 
-## Testing how good the Movie Recommender is:
 
-1. Pick 10-15 very famous movies.
-2. Make sure the movies have diversity based on genre, cast and production style.
-3. Show users a set of 10 randomly generated movies vs top 10 movies recommended by the Movie Recommender.
-4. Also ask the user how satisfied is he/she with the recommended movies.
-4. Collect your results and quantify them.
-
-Make sure you taste your own medicine first and take into account other peoples familiarity with the system before you design your tests.
 
 
 ### Tech stack 👨‍💻
