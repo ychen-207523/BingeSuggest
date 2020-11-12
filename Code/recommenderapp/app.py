@@ -29,7 +29,7 @@ def predict():
         movie_with_rating = {"title": movie, "rating": 5.0}
         training_data.append(movie_with_rating)
     recommendations = recommendForNewUser(training_data)
-    recommendations = recommendations[:20]
+    recommendations = recommendations[:10]
     resp = {"recommendations": recommendations}
     return resp
 
@@ -56,6 +56,10 @@ def feedback():
     print(data)
     return data
 
+
+@app.route("/success")
+def success():
+    return render_template("success.html")
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
