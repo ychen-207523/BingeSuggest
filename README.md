@@ -59,13 +59,6 @@ Make sure you taste your own medicine first and take into account other peoples 
 
 ![Execution](https://raw.githubusercontent.com/git-ankit/MovieRecommender/master/asset/execution.gif)
 
-### Installation using package manager
-
-Using terminal, type the following line:
-
-`pip install -i https://test.pypi.org/simple/ git-ankit==1.0.0`
-
-This is the version1.0 package uploaded on the [PyPi](https://test.pypi.org/project/git-ankit/) 
 
 ### Documentation 📚
 Refer to Wiki page [here](https://github.com/git-ankit/MovieRecommender/wiki/Documentation)
