@@ -27,7 +27,8 @@ def predict():
     training_data = []
     for movie in data1:
         movie_with_rating = {"title": movie, "rating": 5.0}
-        training_data.append(movie_with_rating)
+        if(movie_with_rating not in training_data):
+            training_data.append(movie_with_rating)
     recommendations = recommendForNewUser(training_data)
     recommendations = recommendations[:10]
     resp = {"recommendations": recommendations}
