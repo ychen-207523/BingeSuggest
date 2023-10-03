@@ -79,8 +79,13 @@
                 },
                 select: function (event, ui) {
                     var ulList = $('#selectedMovies');
+                    // Check if the value already exists in the list
+                    if (ulList.find('li:contains("' + ui.item.value + '")').length > 0) {
+                        $('#searchBox').val("");
+                        return false;
+                    }
+
                     var li = $('<li/>').text(ui.item.value).appendTo(ulList);
-                    // ulList = Array.from(new Set(ulList));
                     $('#searchBox').val("");
                     return false;
                 },
