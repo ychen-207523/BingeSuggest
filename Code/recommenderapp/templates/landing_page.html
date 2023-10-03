@@ -104,6 +104,8 @@
 
             var movies = {"movie_list": movie_list};
 
+            // if movies list empty then throw an error box saying select atleast 1 movie!!
+
             $.ajax({
                 type: "POST",
                 url: "/predict",
