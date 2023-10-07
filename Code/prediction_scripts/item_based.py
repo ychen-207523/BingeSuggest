@@ -6,7 +6,7 @@ app_dir = os.path.dirname(os.path.abspath(__file__))
 code_dir = os.path.dirname(app_dir)
 project_dir = os.path.dirname(code_dir)
 
-warnings.filterwarnings("ignore")
+#warnings.filterwarnings("ignore")
 
 
 def recommendForNewUser(user_rating):

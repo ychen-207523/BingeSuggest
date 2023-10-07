@@ -1,6 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import logging
 
 def beautify_feedback_data(data):
     """
@@ -19,8 +20,8 @@ def send_email_to_user(recipient_email, message_body):
     smtp_port = 587  
     sender_email = 'popcornpicks504@gmail.com'
 
-    # Use an app password if 2-factor authentication is enabled
-    sender_password = '' 
+    # Use an app password since 2-factor authentication is enabled
+    sender_password = 'uxnd shis sazo mstj' 
     subject = 'Your movie recommendation from PopcornPicks'
 
     # Create the email message
@@ -35,15 +36,16 @@ def send_email_to_user(recipient_email, message_body):
     # Connect to the SMTP server
     try:
         server = smtplib.SMTP(smtp_server, smtp_port)
-        server.starttls()  # Start TLS encryption
+        # Start TLS encryption
+        server.starttls()  
         server.login(sender_email, sender_password)
 
         # Send the email
         server.sendmail(sender_email, recipient_email, message.as_string())
-        print('Email sent successfully!')
+        logging.info("Email sent successfully!")
 
     except Exception as e:
-        print(f'Email could not be sent. Error: {str(e)}')
+        logging.warning(f'Email could not be sent. Error: {str(e)}')
 
     finally:
         server.quit()
