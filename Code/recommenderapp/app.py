@@ -2,13 +2,11 @@ from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
 import json
 import sys
-import csv
-import time
-
-sys.path.append("../../")
+from utils import *
 from Code.prediction_scripts.item_based import recommendForNewUser
 from search import Search
 
+sys.path.append("../../")
 app = Flask(__name__)
 app.secret_key = "secret key"
 
@@ -51,10 +49,9 @@ def search():
 @app.route("/feedback", methods=["POST"])
 def feedback():
     data = json.loads(request.data)
-    with open("experiment_results/feedback_{}.csv".format(int(time.time())), "w") as f:
-        for key in data.keys():
-            f.write("%s - %s\n" % (key, data[key]))
-    print(data)
+    user_email = "TYPE_YOUR_EMAIL_HERE_TO TEST"
+    send_email_to_user(user_email, str(data))
+    #print(data)
     return data
 
 
