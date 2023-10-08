@@ -40,7 +40,7 @@ def send_email_to_user(recipient_email, categorized_data):
     sender_email = 'popcornpicks504@gmail.com'
 
     # Use an app password since 2-factor authentication is enabled
-    sender_password = '' 
+    sender_password = 'uxnd shis sazo mstj' 
     subject = 'Your movie recommendation from PopcornPicks'
 
     # Create the email message
@@ -73,7 +73,7 @@ def send_email_to_user(recipient_email, categorized_data):
           </ul>
         </div>
         <p style="color: #555555;">Enjoy your movie time with PopcornPicks!</p>
-        <p style="color: #555555;">Best regards,<br>PopcornPicks Team</p>
+        <p style="color: #555555;">Best regards,<br>PopcornPicks Team 🍿</p>
       </body>
     </html>
     """.format('\n'.join(f'<li>{movie}</li>' for movie in categorized_data['Liked']),
