@@ -306,15 +306,27 @@
           2: "Yet to watch",
           3: "Like",
         };
+        var error = false;  // Flag to track errors
+
         for (var i = 0; i < myForm.length; i++) {
-          var input = $("#" + i)
-            .find("div")
-            .find("input:checked")[0].value;
-          var movieName = $("#" + i)
-            .find("div")
-            .find("li")[0].innerText;
-          data[movieName] = labels[input];
+        var input = $("#" + i).find("div").find("input:checked")[0];
+        var movieName = $("#" + i).find("div").find("li")[0].innerText;
+
+        if (!input) {
+            // If no selection is made, set error flag to true and break the loop
+            error = true;
+            break;
         }
+
+        data[movieName] = labels[input.value];
+        }
+
+        if (error) {
+        // Display an error message if there are missing selections
+        alert("Please select a feedback for all movies.");
+        return;  // Exit the function without making the AJAX call
+        }
+        
         console.log(data);
 
         $.ajax({
