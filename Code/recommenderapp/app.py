@@ -1,11 +1,11 @@
+from search import Search
+from Code.prediction_scripts.item_based import recommendForNewUser
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
 import json
 import sys
 from utils import *
 sys.path.append("../../")
-from Code.prediction_scripts.item_based import recommendForNewUser
-from search import Search
 
 app = Flask(__name__)
 app.secret_key = "secret key"
@@ -20,12 +20,13 @@ def landing_page():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    data = json.loads(request.data)  # contains movies
+    # contains movies
+    data = json.loads(request.data)
     data1 = data["movie_list"]
     training_data = []
     for movie in data1:
         movie_with_rating = {"title": movie, "rating": 5.0}
-        if(movie_with_rating not in training_data):
+        if (movie_with_rating not in training_data):
             training_data.append(movie_with_rating)
     recommendations = recommendForNewUser(training_data)
     recommendations = recommendations[:10]
@@ -36,11 +37,8 @@ def predict():
 @app.route("/search", methods=["POST"])
 def search():
     term = request.form["q"]
-    print("term: ", term)
-
     search = Search()
     filtered_dict = search.resultsTop10(term)
-
     resp = jsonify(filtered_dict)
     resp.status_code = 200
     return resp
@@ -49,15 +47,15 @@ def search():
 @app.route("/feedback", methods=["POST"])
 def feedback():
     data = json.loads(request.data)
-    user_email = "TYPE_YOUR_EMAIL_HERE_TO TEST"
+    user_email = "adipai16@gmail.com"
     send_email_to_user(user_email, str(data))
-    #print(data)
     return data
 
 
 @app.route("/success")
 def success():
     return render_template("success.html")
+
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
