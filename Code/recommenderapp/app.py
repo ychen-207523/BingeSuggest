@@ -47,8 +47,8 @@ def search():
 @app.route("/feedback", methods=["POST"])
 def feedback():
     data = json.loads(request.data)
-    user_email = "ananyamantravadi@gmail.com"
-    send_email_to_user(user_email, str(beautify_feedback_data(data)))
+    user_email = "11rishi.singhal@gmail.com"
+    send_email_to_user(user_email, beautify_feedback_data(data))
     return data
 
 
