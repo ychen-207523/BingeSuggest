@@ -21,14 +21,14 @@ def beautify_feedback_data(data):
         elif status == 'Dislike':
             dislike.append(movie)
 
-    # Create a plain text string for the categorized data
-    categorized_data_str = "Movies Yet to Watch:\n" + "\n".join(yet_to_watch) + "\n\n"
-    categorized_data_str += "Movies Liked:\n" + "\n".join(like) + "\n\n"
-    categorized_data_str += "Movies Disliked:\n" + "\n".join(dislike)
+    # Create a category-dictionary of liked, disliked and yet to watch movies
+    categorized_data_dict = {"Liked":like, "Disliked":dislike, "Yet to Watch":yet_to_watch}
 
-    return categorized_data_str
+    return categorized_data_dict
 
-def send_email_to_user(recipient_email, message_body):
+        
+
+def send_email_to_user(recipient_email, categorized_data):
     """
     Utility function to send movie recommendations to user over email
     """
@@ -44,14 +44,45 @@ def send_email_to_user(recipient_email, message_body):
     subject = 'Your movie recommendation from PopcornPicks'
 
     # Create the email message
-    message = MIMEMultipart()
+    message = MIMEMultipart('alternative')
     message['From'] = sender_email
     message['To'] = recipient_email
     message['Subject'] = subject
 
-    # Attach the email body
-    message.attach(MIMEText(message_body, 'plain'))
+    # Create the email message with HTML content
+    html_content = """
+    <html>
+      <head></head>
+      <body>
+        <h1 style="color: #333333;">Movie Recommendations from PopcornPicks</h1>
+        <p style="color: #555555;">Dear Movie Enthusiast,</p>
+        <p style="color: #555555;">We hope you're having a fantastic day!</p>
+        <div style="padding: 10px; border: 1px solid #cccccc; border-radius: 5px; background-color: #f9f9f9;">
+          <h2>Your Movie Recommendations:</h2>
+          <h3>Movies Liked:</h3>
+          <ul style="color: #555555;">
+            {}
+          </ul>
+          <h3>Movies Disliked:</h3>
+          <ul style="color: #555555;">
+            {}
+          </ul>
+          <h3>Movies Yet to Watch:</h3>
+          <ul style="color: #555555;">
+            {}
+          </ul>
+        </div>
+        <p style="color: #555555;">Enjoy your movie time with PopcornPicks!</p>
+        <p style="color: #555555;">Best regards,<br>PopcornPicks Team</p>
+      </body>
+    </html>
+    """.format('\n'.join(f'<li>{movie}</li>' for movie in categorized_data['Liked']),
+               '\n'.join(f'<li>{movie}</li>' for movie in categorized_data['Disliked']),
+               '\n'.join(f'<li>{movie}</li>' for movie in categorized_data['Yet to Watch']))
 
+    # Attach the HTML email body
+    message.attach(MIMEText(html_content, 'html'))
+    
     # Connect to the SMTP server
     try:
         server = smtplib.SMTP(smtp_server, smtp_port)
