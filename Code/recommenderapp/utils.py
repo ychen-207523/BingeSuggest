@@ -7,7 +7,26 @@ def beautify_feedback_data(data):
     """
     Utility function to beautify the feedback json containing predicted movies for sending in email
     """
-    pass
+    # Create empty lists for each category
+    yet_to_watch = []
+    like = []
+    dislike = []
+
+    # Iterate through the data and categorize movies
+    for movie, status in data.items():
+        if status == 'Yet to watch':
+            yet_to_watch.append(movie)
+        elif status == 'Like':
+            like.append(movie)
+        elif status == 'Dislike':
+            dislike.append(movie)
+
+    # Create a plain text string for the categorized data
+    categorized_data_str = "Movies Yet to Watch:\n" + "\n".join(yet_to_watch) + "\n\n"
+    categorized_data_str += "Movies Liked:\n" + "\n".join(like) + "\n\n"
+    categorized_data_str += "Movies Disliked:\n" + "\n".join(dislike)
+
+    return categorized_data_str
 
 def send_email_to_user(recipient_email, message_body):
     """
@@ -21,7 +40,7 @@ def send_email_to_user(recipient_email, message_body):
     sender_email = 'popcornpicks504@gmail.com'
 
     # Use an app password since 2-factor authentication is enabled
-    sender_password = '' 
+    sender_password = 'uxnd shis sazo mstj' 
     subject = 'Your movie recommendation from PopcornPicks'
 
     # Create the email message

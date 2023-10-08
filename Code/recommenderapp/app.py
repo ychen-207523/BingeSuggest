@@ -1,11 +1,11 @@
-from search import Search
-from Code.prediction_scripts.item_based import recommendForNewUser
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
 import json
 import sys
 from utils import *
 sys.path.append("../../")
+from Code.prediction_scripts.item_based import recommendForNewUser
+from search import Search
 
 app = Flask(__name__)
 app.secret_key = "secret key"
@@ -47,8 +47,8 @@ def search():
 @app.route("/feedback", methods=["POST"])
 def feedback():
     data = json.loads(request.data)
-    user_email = "adipai16@gmail.com"
-    send_email_to_user(user_email, str(data))
+    user_email = "ananyamantravadi@gmail.com"
+    send_email_to_user(user_email, str(beautify_feedback_data(data)))
     return data
 
 
