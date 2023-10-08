@@ -3,10 +3,10 @@ from flask_cors import CORS, cross_origin
 import json
 import sys
 from utils import *
+sys.path.append("../../")
 from Code.prediction_scripts.item_based import recommendForNewUser
 from search import Search
 
-sys.path.append("../../")
 app = Flask(__name__)
 app.secret_key = "secret key"
 
