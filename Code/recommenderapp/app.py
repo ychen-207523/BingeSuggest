@@ -4,7 +4,7 @@ import json
 import sys
 from utils import *
 sys.path.append("../../")
-from Code.prediction_scripts.item_based import recommendForNewUser
+from Code.prediction_scripts.item_based import recommend_for_new_user
 from search import Search
 
 app = Flask(__name__)
@@ -28,7 +28,7 @@ def predict():
         movie_with_rating = {"title": movie, "rating": 5.0}
         if (movie_with_rating not in training_data):
             training_data.append(movie_with_rating)
-    recommendations = recommendForNewUser(training_data)
+    recommendations = recommend_for_new_user(training_data)
     recommendations = recommendations[:10]
     resp = {"recommendations": recommendations}
     return resp
