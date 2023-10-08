@@ -252,6 +252,9 @@
         $("#predictedMovies").empty();
         
         // if movies list empty then throw an error box saying select atleast 1 movie!!
+        if(movie_list.length == 0){
+            alert("Select atleast 1 movie!!")
+        }
 
         $.ajax({
           type: "POST",
