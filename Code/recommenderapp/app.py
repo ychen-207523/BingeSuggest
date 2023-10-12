@@ -1,11 +1,16 @@
+"""
+Module for routing all calls from the frontend
+"""
+
 import json
 import sys
+from search import Search
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from utils import send_email_to_user, beautify_feedback_data
+
 sys.path.append("../../")
 from Code.prediction_scripts.item_based import recommend_for_new_user
-from search import Search
 
 app = Flask(__name__)
 app.secret_key = "secret key"
@@ -45,8 +50,8 @@ def search():
     Handles movie search requests.
     """
     term = request.form["q"]
-    search = Search()
-    filtered_dict = search.resultsTop10(term)
+    finder = Search()
+    filtered_dict = finder.results_top_ten(term)
     resp = jsonify(filtered_dict)
     resp.status_code = 200
     return resp
@@ -58,7 +63,7 @@ def feedback():
     Handles user feedback submission and mails the results.
     """
     data = json.loads(request.data)
-    user_email = "ananyamantravadi@gmail.com"
+    user_email = "adipai16@gmail.com"
     send_email_to_user(user_email, beautify_feedback_data(data))
     return data
 
