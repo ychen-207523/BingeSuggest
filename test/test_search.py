@@ -1,3 +1,7 @@
+"""
+Test suit for search feature
+"""
+
 import unittest
 import warnings
 import sys
@@ -8,12 +12,18 @@ from Code.recommenderapp.search import Search
 
 warnings.filterwarnings("ignore")
 
-
 class Tests(unittest.TestCase):
-    def testSearchToy(self):
+    """
+    Test cases for search feature
+    """
+
+    def test_search_toy(self):
+        """
+        Test case 1
+        """
         search_word = "toy"
-        search = Search()
-        filtered_dict = search.resultsTop10(search_word)
+        finder = Search()
+        filtered_dict = finder.results_top_ten(search_word)
         expected_resp = [
             "Toy Story (1995)",
             "Toys (1992)",
@@ -26,10 +36,13 @@ class Tests(unittest.TestCase):
         ]
         self.assertTrue(filtered_dict == expected_resp)
 
-    def testSearchLove(self):
+    def test_search_love(self):
+        """
+        Test case 2
+        """
         search_word = "love"
-        search = Search()
-        filtered_dict = search.resultsTop10(search_word)
+        finder = Search()
+        filtered_dict = finder.results_top_ten(search_word)
         expected_resp = [
             "Love & Human Remains (1993)",
             "Love Affair (1994)",
@@ -44,17 +57,23 @@ class Tests(unittest.TestCase):
         ]
         self.assertTrue(filtered_dict == expected_resp)
 
-    def testSearchGibberish(self):
+    def test_search_gibberish(self):
+        """
+        Test case 3
+        """
         search_word = "gibberish"
-        search = Search()
-        filtered_dict = search.resultsTop10(search_word)
+        finder = Search()
+        filtered_dict = finder.results_top_ten(search_word)
         expected_resp = []
         self.assertTrue(filtered_dict == expected_resp)
 
-    def testSearch1995(self):
+    def test_search_1995(self):
+        """
+        Test case 4
+        """
         search_word = "1995"
-        search = Search()
-        filtered_dict = search.resultsTop10(search_word)
+        finder = Search()
+        filtered_dict = finder.results_top_ten(search_word)
         expected_resp = [
             "Toy Story (1995)",
             "Jumanji (1995)",
