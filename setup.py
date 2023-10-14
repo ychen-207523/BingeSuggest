@@ -1,3 +1,14 @@
+"""
+Movie Recommender Setup Script
+
+This script is used to package and distribute the Movie Recommender project.
+It contains information about the project, including its name, version, authors,
+description, and other relevant details, to facilitate distribution and installation.
+
+For more information about the Movie Recommender project, visit:
+https://github.com/git-ankit/MovieRecommender
+"""
+
 import setuptools
 
 with open("README.md", "r", encoding="utf8") as fh:

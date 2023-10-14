@@ -2,13 +2,12 @@
 Test suit for search feature
 """
 
-import unittest
-import warnings
 import sys
-import os
-
 sys.path.append("../")
 from Code.recommenderapp.search import Search
+
+import unittest
+import warnings
 
 warnings.filterwarnings("ignore")
 
