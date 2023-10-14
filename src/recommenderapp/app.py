@@ -11,7 +11,9 @@ from search import Search
 from utils import beautify_feedback_data, send_email_to_user
 
 sys.path.append("../../")
+#pylint: disable=wrong-import-position
 from src.prediction_scripts.item_based import recommend_for_new_user
+#pylint: enable=wrong-import-position
 
 app = Flask(__name__)
 app.secret_key = "secret key"
