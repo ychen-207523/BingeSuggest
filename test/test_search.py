@@ -6,7 +6,7 @@ import sys
 import unittest
 import warnings
 sys.path.append("../")
-from Code.recommenderapp.search import Search
+from src.recommenderapp.search import Search
 
 warnings.filterwarnings("ignore")
 
