@@ -3,11 +3,11 @@ Test suite for recommender system
 """
 
 import sys
+import unittest
+import warnings
 sys.path.append("../")
 from Code.prediction_scripts.item_based import recommend_for_new_user
 
-import unittest
-import warnings
 warnings.filterwarnings("ignore")
 
 

@@ -2,15 +2,15 @@
 Module for routing all calls from the frontend
 """
 
-import sys
-sys.path.append("../../")
-from Code.prediction_scripts.item_based import recommend_for_new_user
-
 import json
+import sys
 from search import Search
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from utils import send_email_to_user, beautify_feedback_data
+
+sys.path.append("../../")
+from Code.prediction_scripts.item_based import recommend_for_new_user
 
 app = Flask(__name__)
 app.secret_key = "secret key"

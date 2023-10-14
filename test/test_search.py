@@ -3,11 +3,10 @@ Test suit for search feature
 """
 
 import sys
-sys.path.append("../")
-from Code.recommenderapp.search import Search
-
 import unittest
 import warnings
+sys.path.append("../")
+from Code.recommenderapp.search import Search
 
 warnings.filterwarnings("ignore")
 

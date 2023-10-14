@@ -2,6 +2,7 @@
 
 import logging
 import smtplib
+from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -75,10 +76,6 @@ def send_email_to_user(recipient_email, categorized_data):
     except SMTPException as e:
         # Handle SMTP-related exceptions
         logging.error("SMTP error while sending email: %s", str(e))
-
-    except Exception as e:
-        # Handle other exceptions
-        logging.error("An unexpected error occurred while sending email: %s", str(e))
 
     finally:
         server.quit()
