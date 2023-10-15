@@ -69,6 +69,21 @@ def beautify_feedback_data(data):
 
     return categorized_data_dict
 
+def create_movie_genres(movie_genre_df):
+    """
+        Utility function for creating a dictionary for movie-genres mapping
+    """
+    # Create a dictionary to map movies to their genres
+    movie_to_genres = {}
+
+    # Iterating on all movies to create the map
+    for row in movie_genre_df.iterrows():
+        movie = row[1]['title']
+        genres = row[1]['genres'].split('|')
+        movie_to_genres[movie] = genres
+    return movie_to_genres
+    
+
 def send_email_to_user(recipient_email, categorized_data):
     """
     Utility function to send movie recommendations to user over email
@@ -91,15 +106,8 @@ def send_email_to_user(recipient_email, categorized_data):
     message['Subject'] = subject
     # Load the CSV file into a DataFrame
     movie_genre_df = pd.read_csv('../../data/movies.csv')
-
-    # Create a dictionary to map movies to their genres
-    movie_to_genres = {}
-
-    for row in movie_genre_df.iterrows():
-        movie = row[1]['title']
-        genres = row[1]['genres'].split('|')
-        movie_to_genres[movie] = genres
-
+    # Creating movie-genres map
+    movie_to_genres = create_movie_genres(movie_genre_df)
     # Create the email message with HTML content
     html_content = c.EMAIL_HTML_CONTENT.format(
         '\n'.join(f'<li>{movie} \
