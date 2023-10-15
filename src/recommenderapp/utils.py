@@ -2,14 +2,18 @@
 
 import logging
 import smtplib
-import pandas as pd
 from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+import pandas as pd
 import constants as c
 
 def create_colored_tags(genres):
+    """
+        Utitilty function to create colored tags for different
+        movie genres
+    """
     # Define colors for specific genres
     genre_colors = {
         'Musical': '#FF1493',  # DeepPink
@@ -35,10 +39,10 @@ def create_colored_tags(genres):
     }
     tags = []
     for genre in genres:
-      color = genre_colors.get(genre, '#CCCCCC')  # Default color if not found
-      tag = f'<span style="background-color: {color}; color: #FFFFFF; \
-          padding: 5px; border-radius: 5px;">{genre}</span>'
-      tags.append(tag)
+        color = genre_colors.get(genre, '#CCCCCC')  # Default color if not found
+        tag = f'<span style="background-color: {color}; color: #FFFFFF; \
+            padding: 5px; border-radius: 5px;">{genre}</span>'
+        tags.append(tag)
     return ' '.join(tags)
 
 def beautify_feedback_data(data):
@@ -85,7 +89,6 @@ def send_email_to_user(recipient_email, categorized_data):
     message['From'] = sender_email
     message['To'] = recipient_email
     message['Subject'] = subject
-    
     # Load the CSV file into a DataFrame
     movie_genre_df = pd.read_csv('../../data/movies.csv')
 
