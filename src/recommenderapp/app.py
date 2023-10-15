@@ -2,14 +2,16 @@
 Module for routing all calls from the frontend
 """
 
+sys.path.append("../../")
+from src.prediction_scripts.item_based import recommend_for_new_user
 from utils import send_email_to_user, beautify_feedback_data
 from flask_cors import CORS
 from flask import Flask, jsonify, render_template, request
 from search import Search
 import sys
 import json
-sys.path.append("../../")
-from Code.prediction_scripts.item_based import recommend_for_new_user
+# pylint: disable=wrong-import-position
+# pylint: enable=wrong-import-position
 
 
 app = Flask(__name__)
@@ -64,6 +66,7 @@ def feedback():
     """
     data = json.loads(request.data)
     return data
+
 
 @app.route("/sendMail", methods=["POST"])
 def sendMail():
