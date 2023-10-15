@@ -66,7 +66,7 @@ def feedback():
     Handles user feedback submission and mails the results.
     """
     data = json.loads(request.data)
-    user_email = "ananyamantravadi@gmail.com"
+    user_email = "11rishi.singhal@gmail.com"
     send_email_to_user(user_email, beautify_feedback_data(data))
     return data
 
