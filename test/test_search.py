@@ -2,13 +2,13 @@
 Test suit for search feature
 """
 
+import sys
 import unittest
 import warnings
-import sys
-import os
-
 sys.path.append("../")
-from Code.recommenderapp.search import Search
+#pylint: disable=wrong-import-position
+from src.recommenderapp.search import Search
+#pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")
 

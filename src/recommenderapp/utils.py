@@ -2,11 +2,11 @@
 
 import logging
 import smtplib
+from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 import constants as c
-
 
 def beautify_feedback_data(data):
     """
@@ -54,10 +54,10 @@ def send_email_to_user(recipient_email, categorized_data):
     message['Subject'] = subject
 
     # Create the email message with HTML content
-    html_content = c.EMAIL_HTML_CONTENT.format('\n'.join(f'<li>{movie}</li>' for movie in categorized_data['Liked']),
-                                             '\n'.join(
-                                                 f'<li>{movie}</li>' for movie in categorized_data['Disliked']),
-                                             '\n'.join(f'<li>{movie}</li>' for movie in categorized_data['Yet to Watch']))
+    html_content = c.EMAIL_HTML_CONTENT.format(
+    '\n'.join(f'<li>{movie}</li>' for movie in categorized_data['Liked']),
+    '\n'.join(f'<li>{movie}</li>' for movie in categorized_data['Disliked']),
+    '\n'.join(f'<li>{movie}</li>' for movie in categorized_data['Yet to Watch']))
 
     # Attach the HTML email body
     message.attach(MIMEText(html_content, 'html'))
@@ -73,8 +73,9 @@ def send_email_to_user(recipient_email, categorized_data):
         server.sendmail(sender_email, recipient_email, message.as_string())
         logging.info("Email sent successfully!")
 
-    except Exception as e:
-        logging.warning("Email could not be sent. Error: %s", str(e))
+    except SMTPException as e:
+        # Handle SMTP-related exceptions
+        logging.error("SMTP error while sending email: %s", str(e))
 
     finally:
         server.quit()
