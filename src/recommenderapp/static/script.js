@@ -170,9 +170,19 @@ $(document).ready(function () {
   });
 
   $("#notifyButton").click(function () {
-    data = JSON.parse(localStorage.getItem("fbData"));
+    var data = JSON.parse(localStorage.getItem("fbData"));
+  
+    if (!data) {
+      alert("No feedback data found. Please provide feedback.");
+      return;
+    }
+  
     var emailString = $("#emailField").val();
     data.email = emailString;
+  
+    // Remove the "emailSent" flag to allow sending the email again
+    localStorage.removeItem("emailSent");
+  
     $.ajax({
       type: "POST",
       url: "/sendMail",
@@ -182,7 +192,13 @@ $(document).ready(function () {
       cache: false,
       data: JSON.stringify(data),
       success: function (response) {
-        localStorage.removeItem("fbData");
+        // localStorage.removeItem("fbData");
+        $("#emailSentSuccess").show();
+        // Hide the success message after 5 seconds (5000 milliseconds)
+        setTimeout(function () {
+          $("#emailSentSuccess").fadeOut("slow");
+        }, 2000);
+        console.log("Email sent successfully!")
         console.log(response);
       },
       error: function (error) {
@@ -191,4 +207,5 @@ $(document).ready(function () {
       },
     });
   });
+  
 });
