@@ -116,6 +116,12 @@ $(document).ready(function () {
       2: "Yet to watch",
       3: "Like",
     };
+
+    // to check if any movies selected before giving feedback
+    if(myForm.length == 0){
+      alert("No movies found. Please add movies to provide feedback.");
+      return;
+    }
     var error = false; // Flag to track errors
 
     for (var i = 0; i < myForm.length; i++) {
