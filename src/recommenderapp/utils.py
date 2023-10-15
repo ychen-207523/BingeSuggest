@@ -83,7 +83,6 @@ def create_movie_genres(movie_genre_df):
         movie_to_genres[movie] = genres
     return movie_to_genres
     
-
 def send_email_to_user(recipient_email, categorized_data):
     """
     Utility function to send movie recommendations to user over email
