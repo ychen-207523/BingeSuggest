@@ -63,6 +63,7 @@ def beautify_feedback_data(data):
         elif status == 'Dislike':
             dislike.append(movie)
 
+
     # Create a category-dictionary of liked, disliked and yet to watch movies
     categorized_data_dict = {"Liked": like,
                              "Disliked": dislike, "Yet to Watch": yet_to_watch}
