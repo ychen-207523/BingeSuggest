@@ -22,5 +22,5 @@ jobs:
         pip install -U Flask
         pip install -U flask-cors
     - name: Running test cases for searching
-      run: python ../../test/tests.py
+      run: python test/tests.py
     
