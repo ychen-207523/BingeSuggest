@@ -49,4 +49,4 @@ def recommend_for_new_user(user_rating):
         by="recommended", ascending=False, inplace=True
     )
 
-    return list(join_movies_and_recommendations["title"][:201])
+    return list(join_movies_and_recommendations["title"][:201]), list(join_movies_and_recommendations["genres"][:201]), list(join_movies_and_recommendations["imdb_id"][:201])
