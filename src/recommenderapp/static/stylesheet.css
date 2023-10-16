@@ -1,3 +1,10 @@
+.landing-page {
+  background-image: url("image.jpg");
+  background-size: cover;
+  color: azure !important;
+}
+
+
 body {
   background-image: url("224299.jpg");
   background-size: cover;
