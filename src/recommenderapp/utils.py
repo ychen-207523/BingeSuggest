@@ -95,7 +95,7 @@ def send_email_to_user(recipient_email, categorized_data):
     sender_email = 'popcornpicks504@gmail.com'
 
     # Use an app password since 2-factor authentication is enabled
-    sender_password = 'uxnd shis sazo mstj'
+    sender_password = ''
     subject = 'Your movie recommendation from PopcornPicks'
 
     # Create the email message
