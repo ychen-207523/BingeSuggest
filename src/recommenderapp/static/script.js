@@ -104,6 +104,17 @@ $(document).ready(function () {
     });
   });
 
+  // Function to handle Get Started button click
+  function getStarted() {
+    // Navigate to the search page
+    window.location.href = "/search_page"; // Replace with the actual URL of your search page
+  }
+
+  // Bind the getStarted function to the Get Started button click
+  $("#getStartedButton").click(function () {
+    getStarted();
+  });
+
   var FeedbackData;
 
   $("#feedback").click(function () {
