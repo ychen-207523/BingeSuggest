@@ -5,7 +5,7 @@ Module for routing all calls from the frontend
 import json
 import sys
 
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from search import Search
 from utils import beautify_feedback_data, send_email_to_user
