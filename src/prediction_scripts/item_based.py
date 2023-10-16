@@ -33,11 +33,13 @@ def recommend_for_new_user(user_rating):
     movies_genre_filled = movies_genre_filled.fillna(0)
 
     user_genre = movies_genre_filled[movies_genre_filled.movieId.isin(user_ratings.movieId)]
-    user_genre.drop(["movieId", "title", "genres", "imdb_id", "overview", "poster_path", "runtime"], axis=1, inplace=True)
+    user_genre.drop(["movieId", "title", "genres", "imdb_id", "overview", "poster_path", "runtime"],
+                     axis=1, inplace=True)
     user_profile = user_genre.T.dot(user_ratings.rating.to_numpy())
 
     movies_genre_filled.set_index(movies_genre_filled.movieId)
-    movies_genre_filled.drop(["movieId", "title", "genres", "imdb_id", "overview", "poster_path", "runtime"], axis=1, inplace=True)
+    movies_genre_filled.drop(["movieId", "title", "genres", "imdb_id", "overview", "poster_path",
+                               "runtime"], axis=1, inplace=True)
 
     recommendations = (movies_genre_filled.dot(user_profile)) / user_profile.sum()
 
