@@ -27,7 +27,23 @@ def landing_page():
     """
     Renders the landing page.
     """
-    return render_template("landing_page.html")
+    return render_template("search_page.html")
+
+
+@app.route("/get_started", methods=["POST"])
+def get_started():
+    """
+    Handle the Get Started button click and redirect to search_page.
+    """
+    return redirect(url_for("search_page.html"))
+
+
+@app.route("/search_page")
+def search_page():
+    """
+    Renders the search page.
+    """
+    return render_template("search_page.html")
 
 
 @app.route("/predict", methods=["POST"])
@@ -42,9 +58,9 @@ def predict():
         movie_with_rating = {"title": movie, "rating": 5.0}
         if movie_with_rating not in training_data:
             training_data.append(movie_with_rating)
-    recommendations = recommend_for_new_user(training_data)
-    recommendations = recommendations[:10]
-    resp = {"recommendations": recommendations}
+    recommendations, genres, imdb_id = recommend_for_new_user(training_data)
+    recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
+    resp = {"recommendations": recommendations, "genres": genres, "imdb_id":imdb_id}
     return resp
 
 

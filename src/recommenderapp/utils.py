@@ -19,23 +19,23 @@ def create_colored_tags(genres):
         'Musical': '#FF1493',  # DeepPink
         'Sci-Fi': '#00CED1',  # DarkTurquoise
         'Mystery': '#8A2BE2',  # BlueViolet
-        'Thriller': '#FF4500',  # OrangeRed
-        'Horror': '#FF0000',  # Red
+        'Thriller': '#FF6347',  # Tomato
+        'Horror': '#FF4500',  # OrangeRed
         'Documentary': '#228B22',  # ForestGreen
-        'Fantasy': '#FF8C00',  # DarkOrange
+        'Fantasy': '#FFA500',  # Orange
         'Adventure': '#FFD700',  # Gold
         'Children': '#32CD32',  # LimeGreen
-        'Film-Noir': '#000000',  # Black
-        'Comedy': '#FFD700',  # Gold
+        'Film-Noir': '#2F4F4F',  # DarkSlateGray
+        'Comedy': '#FFB500',  # VividYellow
         'Crime': '#8B0000',  # DarkRed
         'Drama': '#8B008B',  # DarkMagenta
-        'Western': '#FF6347',  # Tomato
-        'IMAX': '#7FFFD4',  # Aquamarine
-        'Action': '#FF4500',  # OrangeRed
+        'Western': '#FF8C00',  # DarkOrange
+        'IMAX': '#20B2AA',  # LightSeaGreen
+        'Action': '#FF0000',  # Red
         'War': '#B22222',  # FireBrick
         '(no genres listed)': '#A9A9A9',  # DarkGray
         'Romance': '#FF69B4',  # HotPink
-        'Animation': '#20B2AA'  # LightSeaGreen
+        'Animation': '#4B0082'  # Indigo
     }
     tags = []
     for genre in genres:
@@ -95,7 +95,7 @@ def send_email_to_user(recipient_email, categorized_data):
     sender_email = 'popcornpicks504@gmail.com'
 
     # Use an app password since 2-factor authentication is enabled
-    sender_password = 'uxnd shis sazo mstj'
+    sender_password = ''
     subject = 'Your movie recommendation from PopcornPicks'
 
     # Create the email message
