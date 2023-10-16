@@ -30,6 +30,22 @@ def landing_page():
     return render_template("search_page.html")
 
 
+@app.route("/get_started", methods=["POST"])
+def get_started():
+    """
+    Handle the Get Started button click and redirect to search_page.
+    """
+    return redirect(url_for("search_page.html"))
+
+
+@app.route("/search_page")
+def search_page():
+    """
+    Renders the search page.
+    """
+    return render_template("search_page.html")
+
+
 @app.route("/predict", methods=["POST"])
 def predict():
     """
