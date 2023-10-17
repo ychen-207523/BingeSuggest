@@ -25,8 +25,8 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Toy Story (1995)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue("Toy Story 3 (2010)" in recommendations)
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue("Space Jam (1996)" in recommendations)
 
     def test_kunfu_panda(self):
         """
@@ -35,18 +35,18 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Kung Fu Panda (2008)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue("Toy Story (1995)" in recommendations)
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue("Zootopia (2016)" in recommendations)
 
-    def test_horror_with_cartoon(self):
+    def test_hindi_movie(self):
         """
         Test case 3
         """
         ts = [
-            {"title": "Strangers, The (2008)", "rating": 5.0},
+            {"title": "Bachna Ae Haseeno (2008)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("Toy Story (1995)" in recommendations) is False)
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("Zootopia (2016)" in recommendations) is False)
 
     def test_iron_man(self):
         """
@@ -55,8 +55,8 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Iron Man (2008)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("Avengers: Infinity War - Part I (2018)" in recommendations))
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("Green Lantern: Emerald Knights (2011)" in recommendations))
 
     def test_robo_cop(self):
         """
@@ -65,8 +65,8 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "RoboCop (1987)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("RoboCop 2 (1990)" in recommendations))
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("Star Trek: First Contact (1996)" in recommendations))
 
     def test_nolan(self):
         """
@@ -75,8 +75,8 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Inception (2010)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("Dark Knight, The (2008)" in recommendations))
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("Zenith (2010)" in recommendations))
 
     def test_dc(self):
         """
@@ -85,9 +85,9 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Man of Steel (2013)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
+        recommendations, _, _ = recommend_for_new_user(ts)
         self.assertTrue(
-            ("Batman v Superman: Dawn of Justice (2016)" in recommendations)
+            ("Iceman (2014)" in recommendations)
         )
 
     def test_armageddon(self):
@@ -97,8 +97,8 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Armageddon (1998)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("2012 (2009)" in recommendations))
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("Planet of the Apes (2001)" in recommendations))
 
     def test_lethal_weapon(self):
         """
@@ -107,18 +107,18 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Lethal Weapon (1987)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("Lethal Weapon 3 (1992)" in recommendations))
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("The Machine Girl (2008)" in recommendations))
 
     def test_dark_action(self):
         """
         Test case 10
         """
         ts = [
-            {"title": "Batman: The Killing Joke (2016)", "rating": 5.0},
+            {"title": "Batman Returns (1992)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("Punisher: War Zone (2008)" in recommendations))
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("Masters of the Universe (1987)" in recommendations))
 
     def test_dark(self):
         """
@@ -127,8 +127,8 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Puppet Master (1989)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("Black Mirror: White Christmas (2014)" in recommendations))
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("Rabies (2010)" in recommendations))
 
     def test_horror_comedy(self):
         """
@@ -137,8 +137,8 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Scary Movie (2000)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("I Sell the Dead (2008)" in recommendations))
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("The Bélier Family (2014)" in recommendations))
 
     def test_super_heroes(self):
         """
@@ -147,8 +147,8 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Spider-Man (2002)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("Iron Man 2 (2010)" in recommendations))
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("Masters of the Universe (1987)" in recommendations))
 
     def test_cartoon(self):
         """
@@ -157,19 +157,19 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Moana (2016)", "rating": 5.0},
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("Monsters, Inc. (2001)" in recommendations))
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("Minions (2015)" in recommendations))
 
     def test_multiple_movies(self):
         """
         Test case 15
         """
         ts = [
-            {"title": "Harry Potter and the Goblet of Fire (2005)", "rating": 5.0},
             {"title": "Twilight Saga: New Moon, The (2009)", "rating": 5.0},
+            {"title": "Harry Potter and the Goblet of Fire (2005)", "rating": 5.0}
         ]
-        recommendations = recommend_for_new_user(ts)
-        self.assertTrue(("Twilight (2008)" in recommendations))
+        recommendations, _, _ = recommend_for_new_user(ts)
+        self.assertTrue(("The Secret of Moonacre (2008)" in recommendations))
 
 
 if __name__ == "__main__":

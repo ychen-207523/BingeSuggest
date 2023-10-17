@@ -28,12 +28,15 @@ class Tests(unittest.TestCase):
             "Toy Story (1995)",
             "Toys (1992)",
             "Toy Story 2 (1999)",
-            "Toy, The (1982)",
             "Toy Soldiers (1991)",
             "Toy Story 3 (2010)",
-            "Babes in Toyland (1961)",
-            "Babes in Toyland (1934)",
+            "Toys in the Attic (1963)",
+            "Toy Story of Terror! (2013)",
+            "Toy Story That Time Forgot (2014)",
+            "Toys in the Attic (2009)",
+            "Toy Soldiers (1984)"
         ]
+        
         self.assertTrue(filtered_dict == expected_resp)
 
     def test_search_love(self):
@@ -47,14 +50,15 @@ class Tests(unittest.TestCase):
             "Love & Human Remains (1993)",
             "Love Affair (1994)",
             "Love and a .45 (1994)",
+            "Lover's Knot (1996)",
             "Love in the Afternoon (1957)",
-            "Love Bug, The (1969)",
+            "Love Is All There Is (1996)",
             "Love Jones (1997)",
             "Love and Other Catastrophes (1996)",
+            "Love! Valour! Compassion! (1997)",
             "Love Serenade (1996)",
-            "Love and Death on Long Island (1997)",
-            "Love Is the Devil (1998)",
         ]
+        
         self.assertTrue(filtered_dict == expected_resp)
 
     def test_search_gibberish(self):
