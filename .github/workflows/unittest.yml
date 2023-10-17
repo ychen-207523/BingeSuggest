@@ -21,6 +21,8 @@ jobs:
         pip install pandas
         pip install -U Flask
         pip install -U flask-cors
-    - name: Running test cases for searching
+    - name: Running test cases for predicting
       run: python test/tests.py
+    - name: Running test cases for searching
+      run: python test/test_search.py
     
