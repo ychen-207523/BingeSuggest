@@ -32,9 +32,8 @@ jobs:
 
       - name: Run tests and generate coverage
         run: |
-          cd ../..
           cd test
-          coverage run pytest --cov=./ 
+          coverage run pytest --cov=./ test_util
           coverage xml -i
 
       - name: Upload coverage report to Codecov
