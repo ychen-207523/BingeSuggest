@@ -32,6 +32,8 @@ jobs:
 
       - name: Run tests and generate coverage
         run: |
+          cd test
+          pwd
           coverage run --source=test -m pytest test_util.py
           coverage xml -i
 
