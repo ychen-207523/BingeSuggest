@@ -1,4 +1,9 @@
 """
+Copyright (c) 2023 Aditya Pai, Ananya Mantravadi, Rishi Singhal, Samarth Shetty
+This code is licensed under MIT license (see LICENSE for details)
+
+@author: PopcornPicks
+
 Movie Recommender Setup Script
 
 This script is used to package and distribute the Movie Recommender project.
