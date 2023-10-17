@@ -7,7 +7,7 @@ import unittest
 import warnings
 sys.path.append("../")
 #pylint: disable=wrong-import-position
-from Code.recommenderapp.search import Search
+from src.recommenderapp.search import Search
 #pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")
