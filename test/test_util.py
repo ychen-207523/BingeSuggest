@@ -5,8 +5,8 @@ Test suit for search feature
 import sys
 import unittest
 import warnings
-import pandas as pd
 sys.path.append(str(Path(__file__).resolve().parents[1]))
+import pandas as pd
 #pylint: disable=wrong-import-position
 from src.recommenderapp.utils import create_colored_tags, beautify_feedback_data, create_movie_genres, send_email_to_user
 #pylint: enable=wrong-import-position
