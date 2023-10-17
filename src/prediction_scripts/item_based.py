@@ -1,6 +1,8 @@
 """
-This module provides a recommendation system for movies based on user ratings.
-It uses user ratings data and movie information to generate movie recommendations for new users.
+Copyright (c) 2023 Aditya Pai, Ananya Mantravadi, Rishi Singhal, Samarth Shetty
+This code is licensed under MIT license (see LICENSE for details)
+
+@author: PopcornPicks
 """
 
 import os
