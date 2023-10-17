@@ -7,7 +7,6 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 import pandas as pd
-import constants as c
 
 def create_colored_tags(genres):
     """
@@ -83,10 +82,39 @@ def create_movie_genres(movie_genre_df):
         genres = row[1]['genres'].split('|')
         movie_to_genres[movie] = genres
     return movie_to_genres
+
 def send_email_to_user(recipient_email, categorized_data):
     """
     Utility function to send movie recommendations to user over email
     """
+
+    email_html_content = """
+                        <html>
+                        <head></head>
+                        <body>
+                            <h1 style="color: #333333;">Movie Recommendations from PopcornPicks</h1>
+                            <p style="color: #555555;">Dear Movie Enthusiast,</p>
+                            <p style="color: #555555;">We hope you're having a fantastic day!</p>
+                            <div style="padding: 10px; border: 1px solid #cccccc; border-radius: 5px; background-color: #f9f9f9;">
+                            <h2>Your Movie Recommendations:</h2>
+                            <h3>Movies Liked:</h3>
+                            <ul style="color: #555555;">
+                                {}
+                            </ul>
+                            <h3>Movies Disliked:</h3>
+                            <ul style="color: #555555;">
+                                {}
+                            </ul>
+                            <h3>Movies Yet to Watch:</h3>
+                            <ul style="color: #555555;">
+                                {}
+                            </ul>
+                            </div>
+                            <p style="color: #555555;">Enjoy your movie time with PopcornPicks!</p>
+                            <p style="color: #555555;">Best regards,<br>PopcornPicks Team 🍿</p>
+                        </body>
+                        </html>
+                        """
 
     # Email configuration
     smtp_server = 'smtp.gmail.com'
@@ -95,7 +123,7 @@ def send_email_to_user(recipient_email, categorized_data):
     sender_email = 'popcornpicks504@gmail.com'
 
     # Use an app password since 2-factor authentication is enabled
-    sender_password = ''
+    sender_password = 'uxnd shis sazo mstj'
     subject = 'Your movie recommendation from PopcornPicks'
 
     # Create the email message
@@ -108,7 +136,7 @@ def send_email_to_user(recipient_email, categorized_data):
     # Creating movie-genres map
     movie_to_genres = create_movie_genres(movie_genre_df)
     # Create the email message with HTML content
-    html_content = c.EMAIL_HTML_CONTENT.format(
+    html_content = email_html_content.format(
         '\n'.join(f'<li>{movie} \
             {create_colored_tags(movie_to_genres.get(movie, ["Unknown Genre"]))}</li><br>' \
             for movie in categorized_data['Liked']),
