@@ -33,8 +33,7 @@ jobs:
       - name: Run tests and generate coverage
         run: |
           cd test
-          pwd
-          coverage run --source=test -m pytest test_util.py
+          coverage run --source=test -m pytest test_*.py
           coverage xml -i
 
       - name: Upload coverage report to Codecov
