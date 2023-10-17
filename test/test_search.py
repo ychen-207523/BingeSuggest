@@ -36,9 +36,7 @@ class Tests(unittest.TestCase):
             "Toys in the Attic (2009)",
             "Toy Soldiers (1984)"
         ]
-        
         self.assertTrue(filtered_dict == expected_resp)
-
     def test_search_love(self):
         """
         Test case 2
@@ -58,9 +56,7 @@ class Tests(unittest.TestCase):
             "Love! Valour! Compassion! (1997)",
             "Love Serenade (1996)",
         ]
-        
         self.assertTrue(filtered_dict == expected_resp)
-
     def test_search_gibberish(self):
         """
         Test case 3
