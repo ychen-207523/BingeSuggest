@@ -5,10 +5,12 @@ Test suit for search feature
 import sys
 import unittest
 import warnings
+from pathlib import Path
 import pandas as pd
-sys.path.append("../")
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 #pylint: disable=wrong-import-position
-from src.recommenderapp.utils import create_colored_tags, beautify_feedback_data, create_movie_genres, send_email_to_user
+from src.recommenderapp.utils import create_colored_tags, \
+    beautify_feedback_data, create_movie_genres, send_email_to_user
 #pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")
@@ -35,7 +37,8 @@ class Tests(unittest.TestCase):
         """
         Test case 2
         """
-        expected_result = '<span style="background-color: #FF1493; color: #FFFFFF;             padding: 5px; border-radius: 5px;">Musical</span>'
+        expected_result = '<span style="background-color: #FF1493; color: #FFFFFF; \
+            padding: 5px; border-radius: 5px;">Musical</span>'
         result = create_colored_tags(['Musical'])
         self.assertTrue(result == expected_result)
 
@@ -43,9 +46,18 @@ class Tests(unittest.TestCase):
         """
         Test case 3
         """
-        expected_result = {'Toy Story (1995)': ['Animation', 'Comedy', 'Family'], 'Jumanji (1995)': [
+        expected_result = {'Toy Story (1995)': ['Animation', 'Comedy', 'Family'], \
+                           'Jumanji (1995)': [
             'Adventure', 'Fantasy', 'Family']}
-        movie_genre_df = pd.read_csv('../data/movies.csv').head(n=2)
+
+        data = [["862", "Toy Story (1995)", "Animation|Comedy|Family", \
+                 "tt0114709", " ", "/rhIRbceoE9lR4veEXuwCC2wARtG.jpg", "81"], \
+                ["8844", "Jumanji (1995)", "Adventure|Fantasy|Family", "tt0113497", " ", \
+                  "/vzmL6fP7aPKNKPRTFnZmiUfciyV.jpg", "104"]]
+
+        movie_genre_df = pd.DataFrame(data, columns=[
+            'movieId', 'title', 'genres', 'imdb_id', 'overview', 'poster_path', 'runtime'])
+
         result = create_movie_genres(movie_genre_df)
         self.assertTrue(result == expected_result)
 
