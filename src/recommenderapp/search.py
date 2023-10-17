@@ -1,7 +1,9 @@
 """
-Search feature for the web application
-"""
+Copyright (c) 2023 Aditya Pai, Ananya Mantravadi, Rishi Singhal, Samarth Shetty
+This code is licensed under MIT license (see LICENSE for details)
 
+@author: PopcornPicks
+"""
 import os
 import pandas as pd
 #from flask import jsonify, request, render_template
