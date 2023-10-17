@@ -5,7 +5,7 @@ Test suite for recommender system
 import sys
 import unittest
 import warnings
-# sys.path.append("../")
+sys.path.append("../")
 #pylint: disable=wrong-import-position
 from src.prediction_scripts.item_based import recommend_for_new_user
 #pylint: enable=wrong-import-position
