@@ -4,6 +4,16 @@
   color: azure !important;
 }
 
+.highlighted-section {
+  background-color: black;
+  color: white;
+  width: 21rem;
+  height: 4.5rem;
+  margin: auto;
+  display: flex;
+  align-items: center; 
+  flex-direction: column;
+}
 
 body {
   background-image: url("224299.jpg");
