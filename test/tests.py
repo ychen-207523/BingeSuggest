@@ -3,15 +3,16 @@ Test suite for recommender system
 """
 
 import sys
+import os
 import unittest
 import warnings
-sys.path.append("../src")
+sys.path.append("../")
 #pylint: disable=wrong-import-position
-from prediction_scripts.item_based import recommend_for_new_user
+from src.prediction_scripts.item_based import recommend_for_new_user
 #pylint: enable=wrong-import-position
-print(sys.path)
 warnings.filterwarnings("ignore")
-
+print("Current working directory:", os.getcwd())
+print("sys.path:", sys.path)
 
 class Tests(unittest.TestCase):
     """
