@@ -1,9 +1,11 @@
-name: Upload Code Coverage
+name: Code Coverage
 
 on:
   push:
     branches:
-      - main  # Change this to your main branch name or any other branch
+      - 'master'
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   upload-coverage:
@@ -31,10 +33,9 @@ jobs:
       - name: Run tests and generate coverage
         run: |
           cd test
-          coverage run pytest --cov=./ 
+          coverage run --source=test -m pytest test_*.py
           coverage xml -i
 
       - name: Upload coverage report to Codecov
         run: |
           bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
-
