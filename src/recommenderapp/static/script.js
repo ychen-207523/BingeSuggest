@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   $(function () {
     $("#searchBox").autocomplete({
       source: function (request, response) {
@@ -41,6 +42,8 @@ $(document).ready(function () {
   });
 
   $("#predict").click(function () {
+    $("#loader").attr("class", "d-flex justify-content-center");
+
     var movie_list = [];
 
     $("#selectedMovies li").each(function () {
@@ -94,20 +97,34 @@ $(document).ready(function () {
           ulList.append(fieldset);
           i += 1;
         });
-
-        // var li = $('<li/>').text()
+        $("#loader").attr("class", "d-none");
         console.log("->", response["recommendations"]);
       },
       error: function (error) {
         console.log("ERROR ->" + error);
+        $("#loader").attr("class", "d-none");
       },
     });
+  });
+
+  window.addEventListener("popstate", function (event) {
+    // Check if the user is navigating back
+    if (event.state && event.state.page === "redirect") {
+      // Redirect the user to a specific URL
+      window.location.href = "/";
+      location.reload();
+    }
   });
 
   // Function to handle Get Started button click
   function getStarted() {
     // Navigate to the search page
-    window.location.href = "/search_page"; // Replace with the actual URL of your search page
+    $("#loaderLanding").attr("class", "d-flex justify-content-center");
+    $("#centralDivLanding").hide();
+    $('#landingTopNav').hide();
+    setTimeout(function() {
+      window.location.href = "/search_page"; // Replace with the actual URL of your search page
+    }, 2000);
   }
 
   // Bind the getStarted function to the Get Started button click
