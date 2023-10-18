@@ -22,9 +22,9 @@
 ## Why use PopcornPicks?
 
 <img
-  src="https://github.com/adipai/PopcornPicks/blob/master/asset/landing_page.png"
+  src="https://media.giphy.com/media/l1J9GIXk9w7OYsd5S/giphy.gif"
   alt="Starship with iTerm2 and the Snazzy theme"
-  width="50%"
+  width="40%"
   align="right"
 />
 
