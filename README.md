@@ -94,10 +94,10 @@ In case of any issues, please e-mail your queries to popcornpicks504@gmail.com o
 Please refer to the [Contributing.md](https://github.com/adipai/PopcornPicks/blob/master/CONTRIBUTING.md) if you want to contribute to the PopcornPicks source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️❤️!
 
 ## Contributors
-Aditya Pai Brahmavar<br/>
-Ananya Mantravadi<br/>
-Rishi Singhal<br/>
-Samarth Shetty<br/>
+[Aditya Pai Brahmavar](https://www.linkedin.com/in/adityapai16/)<br/>
+[Ananya Mantravadi](https://www.linkedin.com/in/ananya-mantravadi/)<br/>
+[Rishi Singhal](https://www.linkedin.com/in/rishi-singhal1101/)<br/>
+[Samarth Shetty](https://www.linkedin.com/in/samarthshetty09/)<br/>
 
 ## Future Scope
 
