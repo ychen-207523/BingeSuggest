@@ -3,8 +3,30 @@
 
 PopcornPicks is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, PopcornPicks is here to transform the way you discover, enjoy, and connect with movies.
 
-## Goal
+# Table of Contents  
+
+- [Why use PopcornPicks?](#why-use-popcornpicks)
+- [Documentation](#documentation)
+- [Project Presentation Video](#project-presentation-video)
+- [Brief Overview of Project](#project-description)
+- Improvements Made in the Project(#project-2-delta)
+- [TechStack Used for the Development of Project:](#tech-stack-used)
+- [Core Applications of the Project:]
+- [Steps for Execution:](#getting-started)
+- [Future Scope](#future-scope)
+- [Team Members](#contributors)
+- [Contribution](#contributions-to-the-project?)
+- [License](#license)
+- 
+## Why use PopcornPicks
 PopcornPicks: Your movie recommender! Input movies, get tailored suggestions, and share via email. Elevate your movie choices effortlessly!
+
+- **Efficient:** Lightning-fast recommendations for movie buffs! 🚀
+- **Adaptable:** Tailor the recommendations to your taste.
+- **Accessible:** Works across all platforms and shells.
+- **Insightful:** Get movie insights at a glance.
+- **Comprehensive:** Supports a wide array of user-preferred movies.
+- **Simple:** Easy installation and setup – start discovering great movies in no time!"
 
 ## Documentation 📚
 Checkout for project documentation at - [here](https://github.com/adipai/PopcornPicks/wiki)
@@ -54,6 +76,8 @@ Ananya Mantravadi<br/>
 Rishi Singhal<br/>
 Samarth Shetty<br/>
 
+## Future Scope
+
 ## Join the PopcornPicks Community:
 
 Contribute to the project and help us improve recommendations.
@@ -61,3 +85,6 @@ Share your experience and film discoveries with us.
 Together, let's make PopcornPicks the ultimate movie companion!
 PopcornPicks is more than just code; it's a passion for cinema, and we invite you to be a part of this exciting journey. Start exploring, sharing, and discovering movies like never before with PopcornPicks !
 Let's make movie nights extraordinary together!
+
+## License
+This project is under the MIT License.
