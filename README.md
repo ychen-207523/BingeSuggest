@@ -47,7 +47,7 @@ You can see the project presentation at - .
 PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki-page](https://github.com/adipai/PopcornPicks/wiki)
 
 ## Project 2 Delta
-Checkout the significant changes that we made for Project 2 [here](https://github.com/adipai/PopcornPicks/wiki/Installation-and-setup)
+Checkout the significant changes that we made for Project 2 [here](https://github.com/adipai/PopcornPicks/wiki/The-Delta-(Project-2))
 
 ## Tech stack Used👨‍💻:
 
