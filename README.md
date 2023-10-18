@@ -22,9 +22,9 @@
 ## Why use PopcornPicks?
 
 <img
-  src="https://github.com/adipai/PopcornPicks/blob/master/asset/landing_page.png"
+  src="https://media.giphy.com/media/l1J9GIXk9w7OYsd5S/giphy.gif"
   alt="Starship with iTerm2 and the Snazzy theme"
-  width="50%"
+  width="40%"
   align="right"
 />
 
@@ -47,7 +47,7 @@ You can see the project presentation at - .
 PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki-page](https://github.com/adipai/PopcornPicks/wiki)
 
 ## Project 2 Delta
-Checkout the significant changes that we made for Project 2 [here](https://github.com/adipai/PopcornPicks/wiki/Installation-and-setup)
+Checkout the significant changes that we made for Project 2 [here](https://github.com/adipai/PopcornPicks/wiki/The-Delta-(Project-2))
 
 ## Tech stack Used👨‍💻:
 
@@ -55,7 +55,7 @@ Checkout the significant changes that we made for Project 2 [here](https://githu
 <code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/w3_css/w3_css-ar21.svg"></a></code>
 <code><a href="https://www.python.org/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/python/python-horizontal.svg"></a></code>
 <code><a href="https://www.javascript.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/javascript/javascript-ar21.svg"></a></code>
-<code><a href="https://www.jquery.com//" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/jquery/jquery-horizontal.svg"></a></code>
+<code><a href="https://www.jquery.com//" target="_blank"><img height="40" src="https://www.vectorlogo.zone/logos/jquery/jquery-horizontal.svg"></a></code>
 <code><a href="https://flask.palletsprojects.com/en/1.1.x/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-ar21.svg"></a></code>
 <code><a href="https://github.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/github/github-ar21.svg"></a></code>
 <!-- <code><a href="https://git-scm.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg"></a></code>
