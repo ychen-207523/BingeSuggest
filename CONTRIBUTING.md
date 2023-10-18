@@ -11,6 +11,7 @@
 * Helping the community by delivering a better product.
 * Help us find solutions to computationally/memory intensive processes
 * Help us to scale the system to a larger database
+* To run the email notifier feature - make your own gmail account and password and replace the same in the utils.py(function: send_email_to_user(recipient_email, categorized_data))
 
 ## Style checkers standards:
 * Use the `pylance` package for python (VS code), and use `black` for auto-styling and auto-formatting the code.
