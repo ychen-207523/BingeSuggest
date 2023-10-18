@@ -10,8 +10,8 @@ This script is used to package and distribute the Movie Recommender project.
 It contains information about the project, including its name, version, authors,
 description, and other relevant details, to facilitate distribution and installation.
 
-For more information about the Movie Recommender project, visit:
-https://github.com/git-ankit/MovieRecommender
+For more information about the PopcornPicks project, visit:
+https://github.com/adipai/PopcornPicks
 """
 
 import setuptools
@@ -22,12 +22,12 @@ with open("README.md", "r", encoding="utf8") as fh:
 setuptools.setup(
     name="git-ankit",  # Replace with your own username
     version="1.0.0",
-    author="Suraj,Amit,Jay,Ankit",
-    author_email="tiwariankit1006@gmail.com",
-    description="A recommendation engine",
+    author="Aditya, Ananya, Rishi, Samarth",
+    author_email="popcornpicks504@gmail.com",
+    description="A movie recommendation engine",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/git-ankit/MovieRecommender",
+    url="https://github.com/adipai/PopcornPicks",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
