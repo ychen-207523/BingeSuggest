@@ -6,6 +6,12 @@
 
 .table {
   color: white !important;
+  width: 60% !important;
+  margin-bottom: 0rem !important;
+}
+
+.tipHeader {
+  text-align: center;
 }
 
 .highlighted-section {
@@ -28,7 +34,7 @@ body {
 
 :root {
   --borderSize: 0.5vw;
-  --baseSize: 5rem;
+  --baseSize: 2rem;
   --icon: "🙂";
 }
 * {

@@ -231,6 +231,8 @@ $(document).ready(function () {
         setTimeout(function () {
           $("#emailSentSuccess").fadeOut("slow");
         }, 2000);
+        $('#area1').attr('placeholder', 'Email'); 
+        $('#emailField').val('');
       },
       error: function (error) {
         $("#loaderSuccess").attr("class", "d-none");
