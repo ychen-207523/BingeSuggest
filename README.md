@@ -56,7 +56,7 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
 ### Movie Recommendation Mechanism
 **The user selects upto 5 movies to get a tailored watchlist and provide feedback for the same**
   
-<img src="https://github.com/adipai/PopcornPicks/blob/master/asset/recommend_mechanism.gif" width="600" height="375"/>
+<img src="https://github.com/adipai/PopcornPicks/blob/master/asset/recommend_mechanism.gif" width="600" height="375">
 
 ### Email Notifier
 **The user sends his/her movies feedback via an email (Notify Me button)**
@@ -111,7 +111,6 @@ Check out the significant changes that we made for Project 2 [here](https://gith
 <b>Finally, start enjoying personalized movie recommendations!</b>
 
 ## Future Scope
-
 PopcornPicks is a dynamic project with endless possibilities for expansion and enhancement. Here are some exciting avenues for future development:
 
 1. **Add poster, overview, and runtime**: Use the updated database to include additional information, pulling it up on the website while showing the list of recommended movies. 
@@ -137,6 +136,7 @@ PopcornPicks is a dynamic project with endless possibilities for expansion and e
 The future of PopcornPicks is full of potential, and we invite developers, movie lovers, and anyone passionate about cinema to join us in making this platform the ultimate movie companion. 
 
 ## Contribute to the Project!
+
 Please refer to the [CONTRIBUTING.md](https://github.com/adipai/PopcornPicks/blob/master/CONTRIBUTING.md) if you want to contribute to the PopcornPicks source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️❤️!
 
 ## Contributors
