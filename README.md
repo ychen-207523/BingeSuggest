@@ -46,7 +46,7 @@ PopcornPicks: Your movie recommender! Input movies, get tailored suggestions, an
 Checkout for project documentation at our [wiki page](https://github.com/adipai/PopcornPicks/wiki)
 
 ## Project Presentation Video
-You can see the project presentation at -.
+You can see the project presentation at - https://youtu.be/ymAo_zXfZ0c
 
 ## Project Description
 PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki page](https://github.com/adipai/PopcornPicks/wiki)
