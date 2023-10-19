@@ -12,7 +12,9 @@
 - [Brief Overview of Project](#project-description)
 - [Improvements Made in the Project](#project-2-delta)
 - [TechStack Used for the Development of Project](#tech-stack-used)
-- [Core Applications of the Project](#core-applications-of-the-project)
+- [Core Applications of the Project](#core-applications-of-the-project)<br/>
+      - [Recommendation Mechanism](#movie-recommendation-mechanism)<br/>
+      - [Email Notifier](#email-notifier)
 - [Steps for Execution](#getting-started)
 - [Future Scope](#future-scope)
 - [Team Members](#contributors)
