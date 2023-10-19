@@ -12,15 +12,16 @@
 - [Project Documentation](#documentation)
 - [Project Presentation Video](#project-presentation-video)
 - [Brief Overview of Project](#project-description)
+- [Core Applications of the Project](#core-applications-of-the-project)<br/>
+    - [Recommendation Mechanism](#movie-recommendation-mechanism)<br/>
+    - [Email Notifier](#email-notifier)
 - [Improvements Made in the Project](#project-2-delta)
 - [TechStack Used for the Development of Project](#tech-stack-used)
-- [Core Applications of the Project](#core-applications-of-the-project)<br/>
-      - [Recommendation Mechanism](#movie-recommendation-mechanism)<br/>
-      - [Email Notifier](#email-notifier)
 - [Steps for Execution](#getting-started)
 - [Future Scope](#future-scope)
+- [Contribute](#contribute-to-the-project)
 - [Team Members](#contributors)
-- [Contribution](#contributions-to-the-project)
+- [Contact](#contact)
 - [License](#license)
 
 ## Why use PopcornPicks?
@@ -50,26 +51,44 @@ You can see the project presentation at -.
 ## Project Description
 PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki page](https://github.com/adipai/PopcornPicks/wiki)
 
+## Core Applications of the Project
+
+### Movie Recommendation Mechanism
+**The user selects upto 5 movies to get a tailored watchlist and provide feedback for the same**
+  
+<img src="https://github.com/adipai/PopcornPicks/blob/master/asset/recommend_mechanism.gif" width="600" height="375">
+
+### Email Notifier
+**The user sends his/her movies feedback via an email (Notify Me button)**
+  
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github.com/adipai/PopcornPicks/blob/master/asset/email_notifier.gif" alt="Email Notifier" width="600" height="375">
+    <img src="https://github.com/adipai/PopcornPicks/blob/master/asset/email.png" alt="Email" width="400" height="400">
+</div>
+
 ## Project 2 Delta
 Check out the significant changes that we made for Project 2 [here](https://github.com/adipai/PopcornPicks/wiki/The-Delta-(Project-2))
 
 ## Tech stack Used👨‍💻:
 
 <code><a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-ar21.svg"></a></code>
-<code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/w3_css/w3_css-ar21.svg"></a></code>
-<code><a href="https://www.python.org/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/python/python-horizontal.svg"></a></code>
-<code><a href="https://www.javascript.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/javascript/javascript-ar21.svg"></a></code>
+<code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/w3_css/w3_css-ar21.svg"></a></code> <code><a href="https://www.javascript.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/javascript/javascript-ar21.svg"></a></code>
 <code><a href="https://www.jquery.com//" target="_blank"><img height="35" src="https://www.vectorlogo.zone/logos/jquery/jquery-horizontal.svg"></a></code>
 <code><a href="https://getbootstrap.com/" target="_blank"><img height="35" src="https://www.vectorlogo.zone/logos/getbootstrap/getbootstrap-ar21.svg"></a></code>
 <code><a href="https://flask.palletsprojects.com/en/1.1.x/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-ar21.svg"></a></code>
-<code><a href="https://github.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/github/github-ar21.svg"></a></code>
-<!-- <code><a href="https://git-scm.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg"></a></code>
+<!--<code><a href="https://github.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/github/github-ar21.svg"></a></code>
+ <code><a href="https://git-scm.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg"></a></code>
 <code><a href="https://github.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/github/github-ar21.svg"></a></code> -->
 <!-- <code><a href="https://code.visualstudio.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/visualstudio_code/visualstudio_code-ar21.svg"></a></code>
 <code><a href="https://www.python.org/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/python/python-ar21.svg"></a></code>-->
+<!-- <code><a href="https://www.python.org/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/python/python-horizontal.svg"></a></code>-->
 
-<p align="center">
-<img src="https://i.giphy.com/media/LMt9638dO8dftAjtco/200.webp" width="150"> <img src="https://i.giphy.com/media/KzJkzjggfGN5Py6nkT/200.webp" width="150"><img src="https://i.giphy.com/media/IdyAQJVN2kVPNUrojM/200.webp" width="150"> <img src="https://media.giphy.com/media/UWt0rhp21JgLwoeFQP/giphy.gif" width ="150"/> <img src="https://media.giphy.com/media/kH6CqYiquZawmU1HI6/giphy.gif" width ="150"/> 
+<p>
+<img src="https://i.giphy.com/media/LMt9638dO8dftAjtco/200.webp" width="150"> 
+<img src="https://i.giphy.com/media/KzJkzjggfGN5Py6nkT/200.webp" width="150">
+<img src="https://i.giphy.com/media/IdyAQJVN2kVPNUrojM/200.webp" width="150"> 
+<img src="https://media.giphy.com/media/UWt0rhp21JgLwoeFQP/giphy.gif" width ="150"/> 
+<img src="https://media.giphy.com/media/kH6CqYiquZawmU1HI6/giphy.gif" width ="150"/> 
 </p>
 
 ## Getting Started
@@ -91,23 +110,33 @@ Check out the significant changes that we made for Project 2 [here](https://gith
     
 <b>Finally, start enjoying personalized movie recommendations!</b>
 
-## Core Applications of the Project
+## Future Scope
+PopcornPicks is a dynamic project with endless possibilities for expansion and enhancement. Here are some exciting avenues for future development:
 
-### Movie Recommendation Mechanism
-**The user selects upto 5 movies to get a tailored watchlist and provide feedback for the same**
-<img src="https://github.com/adipai/PopcornPicks/blob/master/asset/recommend_mechanism.gif" width="600" height="350"/>
+1. **Add poster, overview, and runtime**: Use the updated database to include additional information, pulling it up on the website while showing the list of recommended movies. 
 
-### Email Notifier
-**The user sends his/her movies feedback via an email (Notify Me button)**
-<div style="display: flex; justify-content: space-between;">
-    <img src="https://github.com/adipai/PopcornPicks/blob/master/asset/email_notifier.gif" alt="Email Notifier" width="600" height="350">
-    <img src="https://github.com/adipai/PopcornPicks/blob/master/asset/email.png" alt="Email" width="400" height="350">
-</div>
+2. **User Profiles and Preferences**: Implement user profiles where users can save their preferences, ratings, and watch history for a more personalized movie discovery experience.
 
-## Contact
-In case of any issues, please e-mail your queries to popcornpicks504@gmail.com or raise an issue on this repository.
+3. **Social Integration**: Allow users to connect with friends and share their movie recommendations, ratings, and reviews, creating a social platform for movie enthusiasts.
 
-## Contributions to the Project?
+4. **Customized Categories**: Enable users to create and explore custom movie categories based on their specific interests and moods.
+
+5. **Mobile App**: Develop a mobile application for PopcornPicks to make it accessible on smartphones and tablets, providing a seamless movie discovery experience on the go.
+
+6. **Integration with Streaming Services**: Integrate with popular streaming services to provide real-time availability information and seamless access to recommended movies.
+
+7. **Enhanced User Feedback**: Improve the feedback mechanism to gather more detailed information from users about their movie preferences and opinions.
+
+8. **Movie Reviews and Ratings**: Allow users to write and read movie reviews and ratings, fostering a community of film critics and enthusiasts.
+  
+9. **Improved Recommendation Algorithm**: Enhance the recommendation engine with more advanced machine learning models and collaborative filtering techniques to provide even more accurate and personalized movie suggestions.
+
+10. **Data Visualization**: Implement data visualization tools to provide users with insights into their movie-watching habits and preferences.
+
+The future of PopcornPicks is full of potential, and we invite developers, movie lovers, and anyone passionate about cinema to join us in making this platform the ultimate movie companion. 
+
+## Contribute to the Project!
+
 Please refer to the [CONTRIBUTING.md](https://github.com/adipai/PopcornPicks/blob/master/CONTRIBUTING.md) if you want to contribute to the PopcornPicks source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️❤️!
 
 ## Contributors
@@ -116,7 +145,8 @@ Please refer to the [CONTRIBUTING.md](https://github.com/adipai/PopcornPicks/blo
 [Rishi Singhal](https://www.linkedin.com/in/rishi-singhal1101/)<br/>
 [Samarth Shetty](https://www.linkedin.com/in/samarthshetty09/)<br/>
 
-## Future Scope
+## Contact
+In case of any issues, please e-mail your queries to popcornpicks504@gmail.com or raise an issue on this repository.
 
 ## Join the PopcornPicks Community:
 
