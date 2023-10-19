@@ -87,6 +87,11 @@ Checkout the significant changes that we made for Project 2 [here](https://githu
 <b>Finally, start enjoying personalized movie recommendations!</b>
 
 ## Core Applications of the Project
+
+### Movie Recommendation Mechanism
+
+### Email Notifier
+
 ## Contact
 In case of any issues, please e-mail your queries to popcornpicks504@gmail.com or raise an issue on this repository.
 
