@@ -56,6 +56,7 @@ Checkout the significant changes that we made for Project 2 [here](https://githu
 <code><a href="https://www.python.org/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/python/python-horizontal.svg"></a></code>
 <code><a href="https://www.javascript.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/javascript/javascript-ar21.svg"></a></code>
 <code><a href="https://www.jquery.com//" target="_blank"><img height="35" src="https://www.vectorlogo.zone/logos/jquery/jquery-horizontal.svg"></a></code>
+<code><a href="https://getbootstrap.com/" target="_blank"><img height="35" src="https://www.vectorlogo.zone/logos/getbootstrap/getbootstrap-ar21.svg"></a></code>
 <code><a href="https://flask.palletsprojects.com/en/1.1.x/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-ar21.svg"></a></code>
 <code><a href="https://github.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/github/github-ar21.svg"></a></code>
 <!-- <code><a href="https://git-scm.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg"></a></code>
