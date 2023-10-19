@@ -83,7 +83,7 @@ $(document).ready(function () {
                       <tr>
                         <td class='radio-inline'>
                           <section id="pattern1">
-                            <label style="--icon:'😍"><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="LIKE"></label><br />
+                            <label style="--icon:'😍"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="LIKE"></label><br />
                           </section>
                         </td>
                         <td class='radio-inline'>
@@ -93,7 +93,7 @@ $(document).ready(function () {
                         </td>
                         <td class='radio-inline'>
                           <section id="pattern1">
-                            <label style="--icon:'😤'"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="DISLIKE"></label><br />
+                            <label style="--icon:'😤'"><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE"></label><br />
                           </section>
                         </td>
                       </tr>
