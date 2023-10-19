@@ -89,8 +89,10 @@ Checkout the significant changes that we made for Project 2 [here](https://githu
 ## Core Applications of the Project
 
 ### Movie Recommendation Mechanism
+**The user selects upto 5 movies to get a tailored watchlist and provide feedback for the same**
 
 ### Email Notifier
+**The user sends his/her movies feedback via an email (Notify Me button)**
 
 ## Contact
 In case of any issues, please e-mail your queries to popcornpicks504@gmail.com or raise an issue on this repository.
