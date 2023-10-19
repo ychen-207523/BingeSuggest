@@ -113,25 +113,14 @@ Check out the significant changes that we made for Project 2 [here](https://gith
 ## Future Scope
 PopcornPicks is a dynamic project with endless possibilities for expansion and enhancement. Here are some exciting avenues for future development:
 
-1. **Add poster, overview, and runtime**: Use the updated database to include additional information, pulling it up on the website while showing the list of recommended movies. 
 
-2. **User Profiles and Preferences**: Implement user profiles where users can save their preferences, ratings, and watch history for a more personalized movie discovery experience.
+1. **User Profiles and Preferences**: Implement user profiles where users can save their preferences, ratings, and watch history for a more personalized movie discovery experience.
 
-3. **Social Integration**: Allow users to connect with friends and share their movie recommendations, ratings, and reviews, creating a social platform for movie enthusiasts.
+2. **Integration with Streaming Services**: Integrate with popular streaming services to provide real-time availability information and seamless access to recommended movies.
 
-4. **Customized Categories**: Enable users to create and explore custom movie categories based on their specific interests and moods.
-
-5. **Mobile App**: Develop a mobile application for PopcornPicks to make it accessible on smartphones and tablets, providing a seamless movie discovery experience on the go.
-
-6. **Integration with Streaming Services**: Integrate with popular streaming services to provide real-time availability information and seamless access to recommended movies.
-
-7. **Enhanced User Feedback**: Improve the feedback mechanism to gather more detailed information from users about their movie preferences and opinions.
-
-8. **Movie Reviews and Ratings**: Allow users to write and read movie reviews and ratings, fostering a community of film critics and enthusiasts.
+3. **Movie Reviews and Ratings**: Allow users to write and read movie reviews and ratings, fostering a community of film critics and enthusiasts.
   
-9. **Improved Recommendation Algorithm**: Enhance the recommendation engine with more advanced machine learning models and collaborative filtering techniques to provide even more accurate and personalized movie suggestions.
-
-10. **Data Visualization**: Implement data visualization tools to provide users with insights into their movie-watching habits and preferences.
+4. **Improved Recommendation Algorithm**: Enhance the recommendation engine with more advanced machine learning models and collaborative filtering techniques to provide even more accurate and personalized movie suggestions.
 
 The future of PopcornPicks is full of potential, and we invite developers, movie lovers, and anyone passionate about cinema to join us in making this platform the ultimate movie companion. 
 
