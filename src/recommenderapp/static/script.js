@@ -12,8 +12,6 @@ $(document).ready(function () {
             q: request.term,
           },
           success: function (data) {
-            //alert(data);
-            // console.log(data);
             response(data);
           },
           error: function (jqXHR, textStatus, errorThrown) {
@@ -71,34 +69,45 @@ $(document).ready(function () {
       success: function (response) {
         var ulList = $("#predictedMovies");
         var i = 0;
-        response["recommendations"].forEach((element) => {
+        var recommendations = response["recommendations"];
+        var imdbIds = response["imdb_id"]
+        for (var i = 0; i < recommendations.length; i++) {
+          var element = recommendations[i];
+          var imdbID = imdbIds[i]
           var diventry = $("<div/>");
           var fieldset = $("<fieldset/>", { id: i }).css("border", "0");
+          var link = $("<a/>").text("IMDb🔗").css({"text-decoration": "none"}).attr("href", "https://www.imdb.com/title/" + imdbID);
           var li = $("<li/>").text(element);
           var radios = $(`
-                    <table class='table'>
-                        <tr>
+                    <table class='table predictTable'>
+                      <tr>
                         <td class='radio-inline'>
-                            <label><input type='radio' name="${i}" value='1'>Dislike</label>
+                          <section id="pattern1">
+                            <label style="--icon:'😍"><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="LIKE"></label><br />
+                          </section>
                         </td>
                         <td class='radio-inline'>
-                            <label><input type='radio' name="${i}" value='2'>Yet to watch</label>
+                          <section id="pattern1">
+                            <label style="--icon:'😐'"><input type="radio" name="${i}" value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH"></label><br />
+                          </section>
                         </td>
                         <td class='radio-inline'>
-                            <label><input type='radio' name="${i}" value='3'>Like</label>
+                          <section id="pattern1">
+                            <label style="--icon:'😤'"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="DISLIKE"></label><br />
+                          </section>
                         </td>
-                        </tr>
+                      </tr>
                     </table>
-                    `);
+                  `);
 
           diventry.append(li);
+          diventry.append(link);
           diventry.append(radios);
           fieldset.append(diventry);
           ulList.append(fieldset);
-          i += 1;
-        });
+        }
+
         $("#loader").attr("class", "d-none");
-        console.log("->", response["recommendations"]);
       },
       error: function (error) {
         console.log("ERROR ->" + error);
@@ -175,10 +184,8 @@ $(document).ready(function () {
       return; // Exit the function without making the AJAX call
     }
 
-    console.log(data);
     FeedbackData = data;
     localStorage.setItem("fbData", JSON.stringify(data));
-    console.log(localStorage.getItem("fbData"));
     $.ajax({
       type: "POST",
       url: "/feedback",
@@ -189,7 +196,6 @@ $(document).ready(function () {
       data: JSON.stringify(data),
       success: function (response) {
         window.location.href = "/success";
-        console.log("Success");
       },
       error: function (error) {
         console.log("ERROR ->" + error);
@@ -199,7 +205,7 @@ $(document).ready(function () {
 
   $("#notifyButton").click(function () {
     var data = JSON.parse(localStorage.getItem("fbData"));
-  
+    $("#loaderSuccess").attr("class", "d-flex justify-content-center");
     if (!data) {
       alert("No feedback data found. Please provide feedback.");
       return;
@@ -220,16 +226,14 @@ $(document).ready(function () {
       cache: false,
       data: JSON.stringify(data),
       success: function (response) {
-        // localStorage.removeItem("fbData");
+        $("#loaderSuccess").attr("class", "d-none");
         $("#emailSentSuccess").show();
-        // Hide the success message after 5 seconds (5000 milliseconds)
         setTimeout(function () {
           $("#emailSentSuccess").fadeOut("slow");
         }, 2000);
-        console.log("Email sent successfully!")
-        console.log(response);
       },
       error: function (error) {
+        $("#loaderSuccess").attr("class", "d-none");
         console.log("ERROR ->" + error);
         localStorage.removeItem("fbData");
       },
