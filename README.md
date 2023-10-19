@@ -1,6 +1,8 @@
 # <i> PopcornPicks🍿: Your Destination for Movie Recommendations </i>
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://gitHub.com/adipai/PopcornPicks/graphs/commit-activity) [![Contributors Activity](https://img.shields.io/github/commit-activity/m/adipai/PopcornPicks)](https://github.com/adipai/PopcornPicks/pulse) [![GitHub issues](https://img.shields.io/github/issues/adipai/PopcornPicks.svg)](https://github.com/adipai/PopcornPicks/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/adipai/PopcornPicks.svg)](https://github.com/adipai/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/adipai/PopcornPicks) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4127507.svg)](https://doi.org/10.5281/zenodo.4127507) [![Unittest](https://github.com/adipai/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/adipai/PopcornPicks/actions/workflows/unittest.yml) [![codecov](https://codecov.io/gh/adipai/PopcornPicks/graph/badge.svg?token=0XN6K2DMGS)](https://codecov.io/gh/adipai/PopcornPicks) [![GitHub release](https://img.shields.io/github/release/adipai/PopcornPicks.svg)](https://GitHub.com/adipai/PopcornPicksreleases/) [![StyleCheck: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint) [![HitCount](https://hits.dwyl.com/adipai/PopcornPicks.svg)](https://hits.dwyl.com/adipai/PopcornPicks) ![GitHub contributors](https://img.shields.io/github/contributors/adipai/PopcornPicks) ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/adipai/PopcornPicks) ![GitHub repo size](https://img.shields.io/github/repo-size/adipai/PopcornPicks)
+  
 
+  
 <img src="https://github.com/adipai/PopcornPicks/blob/master/asset/header_display.png" alt="drawing" style="width:1000px;"/>
 <b>PopcornPicks is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, PopcornPicks is here to transform the way you discover, enjoy, and connect with movies.</b>
 
@@ -38,16 +40,16 @@ PopcornPicks: Your movie recommender! Input movies, get tailored suggestions, an
 - **Simple:** Easy installation and setup – start discovering great movies in no time!"
 
 ## Documentation
-Checkout for project documentation at our [Wiki-Page](https://github.com/adipai/PopcornPicks/wiki)
+Checkout for project documentation at our [wiki page](https://github.com/adipai/PopcornPicks/wiki)
 
 ## Project Presentation Video
-You can see the project presentation at - .
+You can see the project presentation at -.
 
 ## Project Description
-PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki-page](https://github.com/adipai/PopcornPicks/wiki)
+PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki page](https://github.com/adipai/PopcornPicks/wiki)
 
 ## Project 2 Delta
-Checkout the significant changes that we made for Project 2 [here](https://github.com/adipai/PopcornPicks/wiki/The-Delta-(Project-2))
+Check out the significant changes that we made for Project 2 [here](https://github.com/adipai/PopcornPicks/wiki/The-Delta-(Project-2))
 
 ## Tech stack Used👨‍💻:
 
@@ -92,7 +94,7 @@ Checkout the significant changes that we made for Project 2 [here](https://githu
 In case of any issues, please e-mail your queries to popcornpicks504@gmail.com or raise an issue on this repository.
 
 ## Contributions to the Project?
-Please refer to the [Contributing.md](https://github.com/adipai/PopcornPicks/blob/master/CONTRIBUTING.md) if you want to contribute to the PopcornPicks source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️❤️!
+Please refer to the [CONTRIBUTING.md](https://github.com/adipai/PopcornPicks/blob/master/CONTRIBUTING.md) if you want to contribute to the PopcornPicks source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️❤️!
 
 ## Contributors
 [Aditya Pai Brahmavar](https://www.linkedin.com/in/adityapai16/)<br/>
@@ -107,7 +109,7 @@ Please refer to the [Contributing.md](https://github.com/adipai/PopcornPicks/blo
 Contribute to the project and help us improve recommendations.
 Share your experience and film discoveries with us.
 Together, let's make PopcornPicks the ultimate movie companion!
-PopcornPicks is more than just code; it's a passion for cinema, and we invite you to be a part of this exciting journey. Start exploring, sharing, and discovering movies like never before with PopcornPicks !
+PopcornPicks is more than just code; it's a passion for cinema, and we invite you to be a part of this exciting journey. Start exploring, sharing, and discovering movies like never before with PopcornPicks!
 Let's make movie nights extraordinary together!
 
 ## License
