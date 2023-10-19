@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>What movies do you like?</title>
+    <title>PopcornPicks</title>
+    <link rel="icon" href="{{ url_for('static', filename='Popcorn-icon.png') }}" />
     <link
       rel="stylesheet"
       type="text/css"
@@ -29,41 +30,53 @@
   </head>
 
   <body>
+    <div id="dataCollected">
+      <div class="d-none" id="loaderSuccess">
+        <div class="spinner-border" role="status">
+          <span class="sr-only"></span>
+        </div>
+      </div>
+      <h1 class="hLast">Have your watchlist sent to your email!</h1>
+      <br/>
+      <div class="notifyDivs">
+        <input class="c-checkbox" type="checkbox" id="checkbox" />
+        <div class="c-formContainer" id="formContainer">
+          <form class="c-form" action="">
+            <input
+              class="c-form__input"
+              placeholder="E-mail"
+              type="text"
+              id="emailField"
+              required
+            />
+            <label class="c-form__buttonLabel" for="checkbox">
+              <button class="c-form__button" type="button" id="notifyButton">
+                Send
+              </button>
+            </label>
+            <label
+              class="c-form__toggle"
+              for="checkbox"
+              data-title="Notify me"
+            ></label>
+          </form>
+        </div>
+    </div>
     <br /><br />
-    <div id="dataCollected" style="width: 600px; margin: auto">
-      <h1>Thanks!! Your response was stored.</h1>
-      <input
+    <div class="d-flex justify-content-center">
+      <h1>
+        Or
+      </h1>
+    </div>
+    <br /><br />
+    <input
         type="button"
         id="refreshPage"
-        class="btn btn-danger"
+        class="btn btn-danger attemptBtn"
         name="refreshPage"
         value="Take another attempt"
       />
-    </div>
-    <br /><br />
-    <div>
-      <input class="c-checkbox" type="checkbox" id="checkbox" />
-      <div class="c-formContainer" id="formContainer">
-        <form class="c-form" action="">
-          <input
-            class="c-form__input"
-            placeholder="E-mail"
-            type="text"
-            id="emailField"
-            required
-          />
-          <label class="c-form__buttonLabel" for="checkbox">
-            <button class="c-form__button" type="button" id="notifyButton">
-              Send
-            </button>
-          </label>
-          <label
-            class="c-form__toggle"
-            for="checkbox"
-            data-title="Notify me"
-          ></label>
-        </form>
-      </div>
+    
     </div>
 
     <!-- Add the "Email sent successfully!" message here -->
