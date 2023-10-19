@@ -92,9 +92,14 @@ Checkout the significant changes that we made for Project 2 [here](https://githu
 
 ### Movie Recommendation Mechanism
 **The user selects upto 5 movies to get a tailored watchlist and provide feedback for the same**
-![Recommendation Mechanism](https://github.com/adipai/PopcornPicks/blob/readme_branch2/asset/recommendation_mech.gif)
+<img src="https://github.com/adipai/PopcornPicks/blob/readme_branch2/asset/recommend_mechanism.gif" width="600" height="350"/>
+
 ### Email Notifier
 **The user sends his/her movies feedback via an email (Notify Me button)**
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github.com/adipai/PopcornPicks/blob/readme_branch2/asset/email_notifier.gif" alt="Email Notifier" width="600" height="350">
+    <img src="https://github.com/adipai/PopcornPicks/blob/readme_branch2/asset/email.png" alt="Email" width="400" height="350">
+</div>
 
 ## Contact
 In case of any issues, please e-mail your queries to popcornpicks504@gmail.com or raise an issue on this repository.
