@@ -12,7 +12,9 @@
 - [Brief Overview of Project](#project-description)
 - [Improvements Made in the Project](#project-2-delta)
 - [TechStack Used for the Development of Project](#tech-stack-used)
-- [Core Applications of the Project](#core-applications-of-the-project)
+- [Core Applications of the Project](#core-applications-of-the-project)<br/>
+      - [Recommendation Mechanism](#movie-recommendation-mechanism)<br/>
+      - [Email Notifier](#email-notifier)
 - [Steps for Execution](#getting-started)
 - [Future Scope](#future-scope)
 - [Team Members](#contributors)
@@ -88,6 +90,18 @@ Checkout the significant changes that we made for Project 2 [here](https://githu
 <b>Finally, start enjoying personalized movie recommendations!</b>
 
 ## Core Applications of the Project
+
+### Movie Recommendation Mechanism
+**The user selects upto 5 movies to get a tailored watchlist and provide feedback for the same**
+<img src="https://github.com/adipai/PopcornPicks/blob/readme_branch2/asset/recommend_mechanism.gif" width="600" height="350"/>
+
+### Email Notifier
+**The user sends his/her movies feedback via an email (Notify Me button)**
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github.com/adipai/PopcornPicks/blob/readme_branch2/asset/email_notifier.gif" alt="Email Notifier" width="600" height="350">
+    <img src="https://github.com/adipai/PopcornPicks/blob/readme_branch2/asset/email.png" alt="Email" width="400" height="350">
+</div>
+
 ## Contact
 In case of any issues, please e-mail your queries to popcornpicks504@gmail.com or raise an issue on this repository.
 
