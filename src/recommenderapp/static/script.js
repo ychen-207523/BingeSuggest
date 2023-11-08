@@ -125,6 +125,21 @@ $(document).ready(function () {
     }
   });
 
+
+  function login() {
+    // Navigate to the search page
+    $("#loaderLogin").attr("class", "d-flex justify-content-center");
+    $("#centralDivLogin").hide();
+    $('#loginTopNav').hide();
+    setTimeout(function() {
+      window.location.href = "/landing"; // Replace with the actual URL of your search page
+    }, 2000);
+  }
+
+  // Bind the login function to the login button click
+  $("#loginButton").click(function () {
+    login();
+  });
   // Function to handle Get Started button click
   function getStarted() {
     // Navigate to the search page

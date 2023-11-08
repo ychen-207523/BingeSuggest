@@ -26,6 +26,13 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route("/")
+def login_page():
+    """
+    Renders the login page.
+    """
+    return render_template("login.html")
+
+@app.route("/landing")
 def landing_page():
     """
     Renders the landing page.
