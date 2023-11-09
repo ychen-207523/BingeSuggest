@@ -126,20 +126,54 @@ $(document).ready(function () {
   });
 
 
-  function login() {
-    // Navigate to the search page
-    $("#loaderLogin").attr("class", "d-flex justify-content-center");
-    $("#centralDivLogin").hide();
-    $('#loginTopNav').hide();
-    setTimeout(function() {
-      window.location.href = "/landing"; // Replace with the actual URL of your search page
-    }, 2000);
+  function login(user, password) {
+    console.log(user);
+    console.log(password);
+    if (user === 'test' && password === 'test') {
+      // Navigate to the search page
+      $("#loaderLogin").attr("class", "d-flex justify-content-center");
+      $("#centralDivLogin").hide();
+      $('#loginTopNav').hide();
+      setTimeout(function() {
+        window.location.href = "/landing"; // Replace with the actual URL of your search page
+      }, 2000);
+    }
+    else {
+      $('#User').empty();
+      $('#Password').empty();
+    }
   }
 
   // Bind the login function to the login button click
   $("#loginButton").click(function () {
-    login();
+    login($('#User').val(), $('Password').val());
   });
+
+  function createAcouunt() {
+    $("#createAccountForm").attr("class", "d-flex justify-content-center");
+    $("#centralDivLogin").hide();
+    $('#loginTopNav').hide();
+    
+  }
+
+  // Bind the login function to the login button click
+  $("#createAccountButton").click(function () {
+    createAcouunt();
+  });
+
+  function makeAccount() {
+    // Navigate to the search page
+    $("#createAccountForm").attr("class", "d-flex justify-content-center");
+    $("#centralDivLogin").hide();
+    $('#loginTopNav').hide();
+    
+  }
+
+  // Bind the login function to the login button click
+  $("#makeAccountButton").click(function () {
+    makeAccount();
+  });
+
   // Function to handle Get Started button click
   function getStarted() {
     // Navigate to the search page
