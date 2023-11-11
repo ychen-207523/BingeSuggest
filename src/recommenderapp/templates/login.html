@@ -46,6 +46,9 @@
       <center><input class="form-control mr-sm-2" type="text" placeholder="Password" aria-label="PassId" id="Password"
           style="width:25%; align-items: center;" /></center>
       <br>
+      <div class="d-none" id="logInError" style="orientation: portrait;">
+        <h3 style="color:red; height: 30%;">Incorrect Username or Password</h3>
+      </div>
       <center>
         <div style="width:35%">
           <button id="loginButton" onclick="login()" class="btn btn-primary mx-auto">Login</button>

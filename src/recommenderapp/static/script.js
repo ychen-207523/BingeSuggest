@@ -127,8 +127,7 @@ $(document).ready(function () {
 
 
   function login(user, password) {
-    console.log(user);
-    console.log(password);
+    $("#logInError").hide();
     if (user === 'test' && password === 'test') {
       // Navigate to the search page
       $("#loaderLogin").attr("class", "d-flex justify-content-center");
@@ -139,14 +138,15 @@ $(document).ready(function () {
       }, 2000);
     }
     else {
-      $('#User').empty();
-      $('#Password').empty();
+      $('#User').val("");
+      $('#Password').val("");
+      $("#logInError").attr("class", "d-flex justify-content-center");
     }
   }
 
   // Bind the login function to the login button click
   $("#loginButton").click(function () {
-    login($('#User').val(), $('Password').val());
+    login($('#User').val(), $('#Password').val());
   });
 
   function createAcouunt() {
@@ -161,17 +161,17 @@ $(document).ready(function () {
     createAcouunt();
   });
 
-  function makeAccount() {
-    // Navigate to the search page
-    $("#createAccountForm").attr("class", "d-flex justify-content-center");
-    $("#centralDivLogin").hide();
-    $('#loginTopNav').hide();
+  function makeAccount(username, password, dupPassword) {
+    if (password !== dupPassword) {
+      //Case 1
+    }
+    //Possibility of other cases.
     
   }
 
   // Bind the login function to the login button click
   $("#makeAccountButton").click(function () {
-    makeAccount();
+    makeAccount($('#newUser').val(), $('#newPassword').val(), $('#dupPassword').val());
   });
 
   // Function to handle Get Started button click
