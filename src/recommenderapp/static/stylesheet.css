@@ -25,6 +25,41 @@
   flex-direction: column;
 }
 
+.post {
+    border: 1px solid #ccc;
+    width: 1000px;
+    padding: 16px;
+    color: black;
+  }
+
+.post > div {
+    display:inline-block;
+    padding-left: 20px;
+    max-width: 550px;
+    vertical-align: middle;
+}
+
+.postTitle > div {
+    display:inline-block;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.username {
+    font-weight: bold; 
+}
+
+.moviename {
+    font-style: italic;  
+}
+
+.movie-data{
+    float: right;
+    text-align: right;
+    padding: 20px;
+
+}
+
 body {
   background-image: url("image.jpg") !important;
   background-size: cover;

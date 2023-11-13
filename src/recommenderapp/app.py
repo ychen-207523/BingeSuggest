@@ -32,6 +32,13 @@ def login_page():
     """
     return render_template("login.html")
 
+@app.route("/wall")
+def wall_page():
+    """
+    Renders the wall page.
+    """
+    return render_template("wall.html")
+
 @app.route("/landing")
 def landing_page():
     """
