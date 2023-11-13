@@ -39,6 +39,13 @@ def wall_page():
     """
     return render_template("wall.html")
 
+@app.route("/review")
+def review_page():
+    """
+    Renders the review page.
+    """
+    return render_template("review.html")
+
 @app.route("/landing")
 def landing_page():
     """
