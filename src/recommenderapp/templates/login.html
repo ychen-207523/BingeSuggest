@@ -30,27 +30,20 @@
 
   <div class="container" style="margin-top: 60px;" id="centralDivLogin">
     <div class="heading1"><br><br><br><br>
-      <h2>
+      <h1 style="margin-bottom: 5px;">
         <center>🎬 PopcornPicks🍿: Log In</center>
-      </h2>
-      <br><br><br><br>
-      <p style="text-align: center; color: azure; font-size: 18px">
-      <h3 style="align-items:left;">
-        <center>Enter in Your Username:</center>
-      </h3>
-      <center><input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="UserId" id="User"
-          style="width:25%; align-items: center;" /></center>
-      <h3 style="align-items:left;">
-        <center>Enter in Your Password:</center>
-      </h3>
-      <center><input class="form-control mr-sm-2" type="text" placeholder="Password" aria-label="PassId" id="Password"
-          style="width:25%; align-items: center;" /></center>
-      <br>
-      <div class="d-none" id="logInError" style="orientation: portrait;">
-        <h3 style="color:red; height: 30%;">Incorrect Username or Password</h3>
+      </h1>
+      <div class="wrapper" style="width: 100%; margin-bottom: 30px; orientation: portrait; flex-direction: column;">
+        <center><input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="UserId" id="User"
+            style="width:30%; align-items: center; border-radius: 40px; margin-bottom: 20px;" /></center>
+        <center><input class="form-control mr-sm-2" type="text" placeholder="Password" aria-label="PassId" id="Password"
+            style="width:30%; align-items: center; border-radius: 40px;" /></center>
+        <div class="d-none" id="logInError" style="orientation: portrait;">
+          <h3 style="color:red; height: 30%;">Incorrect Username or Password</h3>
+        </div>
       </div>
       <center>
-        <div style="width:35%">
+        <div style="width:35%; height:20%;">
           <button id="loginButton" onclick="login()" class="btn btn-primary mx-auto">Login</button>
           <button id="createAccountButton" onclick="createAccount()" class="btn btn-primary mx-auto">Create an
             Account</button>
@@ -73,22 +66,28 @@
   </div>
   <div class="d-none" id="createAccountForm" style="orientation: portrait;">
     <div class="container" style="width:100%">
-      <h2>
+      <h1>
         <center>🎬 PopcornPicks🍿: Create an Account</center>
-      </h2><br><br>
-      <p style="text-align: center; color: azure; font-size: 18px">
-      <h3 style="align-items:left;">Create Your Username:</h3>
-      <input class="form-control mr-sm-2" type="newUser" placeholder="Username" aria-label="UserId" id="newUser"
-        style="align-items: center;" />
-      <h3 style="align-items:left;">Create Your Password:</h3>
-      <input class="form-control mr-sm-2" type="newPass" placeholder="Password" aria-label="PassId" id="newPassword"
-        style="align-items: center;" />
-      <h3 style="align-items:left;">Re-enter Your Password:</h3>
-      <input class="form-control mr-sm-2" type="dupPass" placeholder="Password" aria-label="PassId" id="dupPassword"
-        style="align-items: center;" />
+      </h1><br><br>
+      <center>
+        <h3 style="align-items:left;">Enter Your Email:</h3>
+        <input class="form-control mr-sm-2" type="newUser" placeholder="Email" aria-label="emailAcc" id="emailAcc"
+          style="width:50%; align-items: center; border-radius: 40px;" />
+        <h3 style="align-items:left;">Create Your Username:</h3>
+        <input class="form-control mr-sm-2" type="newUser" placeholder="Username" aria-label="UserId" id="newUser"
+          style="width:50%; align-items: center; border-radius: 40px;" />
+        <h3 style="align-items:left;">Create Your Password:</h3>
+        <input class="form-control mr-sm-2" type="newPass" placeholder="Password" aria-label="PassId" id="newPassword"
+          style="width:50%; align-items: center; border-radius: 40px;" />
+        <h3 style="width:50%; align-items: center; border-radius: 40px;">Re-enter Your Password:</h3>
+        <input class="form-control mr-sm-2" type="dupPass" placeholder="Re-enter Password" aria-label="PassId"
+          id="dupPassword" style="width:50%; align-items: center; border-radius: 40px;" />
+      </center>
       <br>
       <div>
-        <button id="makeAccountButton" onclick="makeAccount()" class="btn btn-primary mx-auto">Create Account</button>
+        <center>
+          <button id="makeAccountButton" onclick="makeAccount()" class="btn btn-primary mx-auto">Create Account</button>
+        </center>
       </div>
     </div>
 

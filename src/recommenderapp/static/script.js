@@ -161,17 +161,39 @@ $(document).ready(function () {
     createAcouunt();
   });
 
-  function makeAccount(username, password, dupPassword) {
+  function makeAccount(email, username, password, dupPassword) {
     if (password !== dupPassword) {
       //Case 1
     }
+    data = {
+          email: email,
+          username: username,
+          password: password,
+          dupPassword: dupPassword
+    }
+    console.log(JSON.stringify(data))
     //Possibility of other cases.
-    
+    $.ajax({
+      type: 'POST',
+      url: '/',
+      dataType: 'json',
+      contentType: "application/json;charset=UTF-8",
+      traditional: "true",
+      cache: false,
+      data: JSON.stringify(data),
+      success: function(response) {
+        console.log(response)
+          resolve(response);
+      },
+      error: function(error) {
+          
+      }
+  });
   }
 
   // Bind the login function to the login button click
   $("#makeAccountButton").click(function () {
-    makeAccount($('#newUser').val(), $('#newPassword').val(), $('#dupPassword').val());
+    makeAccount($('#emailAcc').val(), $('#newUser').val(), $('#newPassword').val(), $('#dupPassword').val());
   });
 
   // Function to handle Get Started button click

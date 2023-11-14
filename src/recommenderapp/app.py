@@ -7,7 +7,7 @@ This code is licensed under MIT license (see LICENSE for details)
 
 import json
 import sys
-
+import mysql.connector
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from search import Search
@@ -23,7 +23,6 @@ app = Flask(__name__)
 app.secret_key = "secret key"
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
 
 @app.route("/")
 def login_page():
@@ -91,6 +90,11 @@ def search():
     resp = jsonify(filtered_dict)
     resp.status_code = 200
     return resp
+
+@app.route("/", methods=["POST"])
+def createAcc():
+    print(json.loads(request.data))
+    return request.data
 
 
 @app.route("/feedback", methods=["POST"])
