@@ -7,11 +7,13 @@ This code is licensed under MIT license (see LICENSE for details)
 
 import json
 import sys
-import mysql.connector
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 from search import Search
 from utils import beautify_feedback_data, send_email_to_user
+import mysql.connector
+import os
+from dotenv import load_dotenv
 
 sys.path.append("../../")
 #pylint: disable=wrong-import-position
@@ -116,7 +118,6 @@ def send_mail():
     send_email_to_user(user_email, beautify_feedback_data(data))
     return data
 
-
 @app.route("/success")
 def success():
     """
@@ -124,6 +125,19 @@ def success():
     """
     return render_template("success.html")
 
+@app.before_request
+def before_request():
+    print('opening db connection')
+    load_dotenv()
+    g.db = mysql.connector.connect(user='root', password=os.getenv('DB_PASSWORD'),
+                                host='127.0.0.1',
+                                database='popcornpicksdb')
+
+@app.after_request
+def after_request(response):
+    print('closing db connection')
+    g.db.close()
+    return response
 
 if __name__ == "__main__":
     app.run(port=5000)
