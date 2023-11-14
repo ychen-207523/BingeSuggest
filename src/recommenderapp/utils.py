@@ -7,6 +7,8 @@ This code is licensed under MIT license (see LICENSE for details)
 
 import logging
 import smtplib
+import mysql.connector
+import os.path
 from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -172,3 +174,17 @@ def send_email_to_user(recipient_email, categorized_data):
 
     finally:
         server.quit()
+
+def createAccount(db, email, username, password):
+    executor = db.cursor()
+    executor.execute("INSERT INTO popcornpicksdb.users(username, email, password) VALUES (%s, %s, %s);", (username, email, password))
+    db.commit()
+    db.close()
+
+def logintoAccount(db, username, password):
+    executor = db.cursor()
+    executor.execute("SELECT * FROM popcornpicksdb.users WHERE username = %s AND password = %s;", (username, password))
+    result = executor.fetchall()
+    if (len(result) == 0):
+        return False
+    return True
