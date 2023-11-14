@@ -10,7 +10,7 @@ import sys
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 from search import Search
-from utils import beautify_feedback_data, send_email_to_user, createAccount
+from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount
 import mysql.connector
 import os
 from dotenv import load_dotenv
@@ -98,6 +98,14 @@ def createAcc():
     data = json.loads(request.data)
     createAccount(g.db, data["email"], data["username"], data["password"])
     return request.data
+
+@app.route("/log", methods=["POST"])
+def logIn():
+    data = json.loads(request.data)
+    resp = logintoAccount(g.db, data["username"], data["password"])
+    if (resp):
+        return request.data
+    return 400
 
 
 @app.route("/feedback", methods=["POST"])
