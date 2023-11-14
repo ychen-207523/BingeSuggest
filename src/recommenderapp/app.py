@@ -10,7 +10,7 @@ import sys
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 from search import Search
-from utils import beautify_feedback_data, send_email_to_user
+from utils import beautify_feedback_data, send_email_to_user, createAccount
 import mysql.connector
 import os
 from dotenv import load_dotenv
@@ -95,7 +95,8 @@ def search():
 
 @app.route("/", methods=["POST"])
 def createAcc():
-    print(json.loads(request.data))
+    data = json.loads(request.data)
+    createAccount(g.db, data["email"], data["username"], data["password"])
     return request.data
 
 

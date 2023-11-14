@@ -168,10 +168,8 @@ $(document).ready(function () {
     data = {
           email: email,
           username: username,
-          password: password,
-          dupPassword: dupPassword
+          password: password
     }
-    console.log(JSON.stringify(data))
     //Possibility of other cases.
     $.ajax({
       type: 'POST',
@@ -182,8 +180,7 @@ $(document).ready(function () {
       cache: false,
       data: JSON.stringify(data),
       success: function(response) {
-        console.log(response)
-          resolve(response);
+          
       },
       error: function(error) {
           
