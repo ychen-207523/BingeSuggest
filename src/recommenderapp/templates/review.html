@@ -5,7 +5,6 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheet.css') }}">
     <title>PopcornPicks</title>
     <link rel="icon" href="{{ url_for('static', filename='Popcorn-icon.png') }}" />
-    <script src="{{ url_for('static', filename='review.js') }}"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width device-width, initial-scale=1" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
@@ -134,13 +133,43 @@
     </div>
     
     <script>
-        let movie = null;
 
         let rating = 0;
     
-        function setMovie(value) {
-            movie = value;
-        }
+        var selectedMovie = ''; // Variable to store the selected movie
+    
+        $(function () {
+            $("#searchBox").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                type: "POST",
+                url: "http://localhost:5000/search",
+                dataType: "json",
+                cache: false,
+                data: {
+                    q: request.term,
+                },
+                success: function (data) {
+                    response(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus + " " + errorThrown);
+                },
+                });
+            },
+            select: function (event, ui) {
+                // Clear the previous selection
+                $("#selectedMovies").empty();
+                selectedMovie = ui.item.value;
+                // Append the new selection
+                var li = $("<li class='list-group-item'/>").text(selectedMovie);
+                $("#selectedMovies").append(li);
+                $("#searchBox").val("");
+                return false;
+            },
+            minLength: 1,
+            });
+        });
 
         function setRating(value) {
             rating = value;
@@ -161,7 +190,9 @@
 
         function submitReview() {
 
-            alert("Review submitted! Rating: " + rating + ", Comments: " + document.getElementById('comments').value);
+            //MAKE POST CALL TO DB TO ADD MOVIE REVIEW TO TABLE
+
+            alert("Review submitted for " + selectedMovie + ". Rating: " + rating + "/10");
         }
     
         // Initial highlighting
@@ -172,5 +203,4 @@
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" crossorigin="anonymous"></script>
-  <script src="{{ url_for('static', filename='review.js') }}"></script>
 </html>
