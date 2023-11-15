@@ -13,7 +13,7 @@ import datetime
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 from search import Search
-from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount, submitReview
+from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount, submitReview, getWallPosts
 import mysql.connector
 import os
 from dotenv import load_dotenv
@@ -137,6 +137,10 @@ def review():
     submitReview(g.db, 1, data["movie"], data["score"], data["review"], timestamp)
     return request.data
 
+@app.route("/getWallData", methods=["GET"])
+def wallPosts():
+    return getWallPosts(g.db)
+
 
 @app.route("/feedback", methods=["POST"])
 def feedback():
@@ -166,7 +170,6 @@ def success():
 
 @app.before_request
 def before_request():
-    print('opening db connection')
     load_dotenv()
     g.db = mysql.connector.connect(user='root', password=os.getenv('DB_PASSWORD'),
                                 host='127.0.0.1',
@@ -174,7 +177,6 @@ def before_request():
 
 @app.after_request
 def after_request(response):
-    print('closing db connection')
     g.db.close()
     return response
 

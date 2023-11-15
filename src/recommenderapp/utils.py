@@ -10,6 +10,7 @@ import smtplib
 from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from flask import jsonify
 
 import pandas as pd
 
@@ -194,3 +195,13 @@ def submitReview(db, user, movie, score, review, timestamp):
     print("REVIEW IS " + review)
     executor.execute("INSERT INTO popcornpicksdb.ratings(user_id, movie_id, score, review, time) VALUES (%s, %s, %s, %s, %s);", (int(user), int(movie_id), int(score), str(review), int(timestamp)))
     db.commit()
+
+def getWallPosts(db):
+    executor = db.cursor()
+    executor.execute("SELECT name, imdb_id, review, score, username, time FROM users JOIN (SELECT name, imdb_id, review, score, user_id, time FROM ratings JOIN movies on ratings.movie_id = movies.idMovies) AS moviereview ON users.idUsers = moviereview.user_id ORDER BY time limit 50")
+    rows = [x[0] for x in executor.description]
+    result = executor.fetchall()
+    json_data = []
+    for r in result:
+        json_data.append(dict(zip(rows, r)))
+    return jsonify(json_data)
