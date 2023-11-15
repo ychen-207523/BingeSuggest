@@ -7,8 +7,6 @@ This code is licensed under MIT license (see LICENSE for details)
 
 import logging
 import smtplib
-import mysql.connector
-import os.path
 from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
