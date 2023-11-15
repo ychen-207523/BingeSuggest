@@ -186,8 +186,8 @@ def logintoAccount(db, username, password):
     executor.execute("SELECT * FROM popcornpicksdb.users WHERE username = %s AND password = %s;", (username, password))
     result = executor.fetchall()
     if (len(result) == 0):
-        return False
-    return True
+        return None
+    return result[0][0]
 
 def submitReview(db, user, movie, score, review, timestamp):
     executor = db.cursor()

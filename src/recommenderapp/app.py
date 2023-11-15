@@ -28,6 +28,9 @@ app = Flask(__name__)
 app.secret_key = "secret key"
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+user = {
+    1:'None'
+}
 
 @app.route("/")
 def login_page():
@@ -41,21 +44,27 @@ def wall_page():
     """
     Renders the wall page.
     """
-    return render_template("wall.html")
+    if (user[1] != None or user[1] == 'guest'):
+        return render_template("wall.html")
+    return 400
 
 @app.route("/review")
 def review_page():
     """
     Renders the review page.
     """
-    return render_template("review.html")
+    if (user[1] != None or user[1] == 'guest'):
+        return render_template("review.html")
+    return 400
 
 @app.route("/landing")
 def landing_page():
     """
     Renders the landing page.
     """
-    return render_template("landing_page.html")
+    if (user[1] != None or user[1] == 'guest'):
+        return render_template("landing_page.html")
+    return 400
 
 
 @app.route("/search_page")
@@ -63,7 +72,9 @@ def search_page():
     """
     Renders the search page.
     """
-    return render_template("search_page.html")
+    if (user[1] != None or user[1] == 'guest'):
+        return render_template("search_page.html")
+    return 400
 
 
 @app.route("/predict", methods=["POST"])
@@ -106,9 +117,17 @@ def createAcc():
 def logIn():
     data = json.loads(request.data)
     resp = logintoAccount(g.db, data["username"], data["password"])
-    if (resp):
-        return request.data
-    return 400
+    print(resp)
+    if (resp == None):
+        return 400
+    user[1] = resp
+    return request.data
+
+@app.route("/guest", methods=["POST"])
+def guest():
+    data = json.loads(request.data)
+    user[1] = data["guest"]
+    return request.data
 
 @app.route("/review", methods=["POST"])
 def review():

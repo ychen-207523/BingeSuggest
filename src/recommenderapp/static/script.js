@@ -157,19 +157,6 @@ $(document).ready(function () {
 			  $("#logInError").attr("class", "d-flex justify-content-center")
       },
 		})
-		// if (user === "test" && password === "test") {
-		// 	// Navigate to the search page
-		// 	$("#loaderLogin").attr("class", "d-flex justify-content-center")
-		// 	$("#centralDivLogin").hide()
-		// 	$("#loginTopNav").hide()
-		// 	setTimeout(function () {
-		// 		window.location.href = "/landing" // Replace with the actual URL of your search page
-		// 	}, 2000)
-		// } else {
-		// 	$("#User").val("")
-		// 	$("#Password").val("")
-		// 	$("#logInError").attr("class", "d-flex justify-content-center")
-		// }
 	}
 
 	// Bind the login function to the login button click
@@ -186,6 +173,36 @@ $(document).ready(function () {
 	// Bind the login function to the login button click
 	$("#createAccountButton").click(function () {
 		createAcouunt()
+	})
+
+	function guest() {
+		data = {
+			guest:'guest'
+		}
+		//Possibility of other cases.
+		$.ajax({
+			type: "POST",
+			url: "/guest",
+			dataType: "json",
+      		contentType: "application/json;charset=UTF-8",
+			traditional: "true",
+			cache: false,
+			data: JSON.stringify(data),
+			success: function (response) {
+          	// Navigate to the search page
+        	$("#centralDivLogin").hide()
+       		$("#loginTopNav").hide()
+        	setTimeout(function () {
+          	window.location.href = "/landing" // Replace with the actual URL of your search page
+        	}, 2000)
+			},
+			error: function (error) {
+        
+      },
+		})
+	}
+	$("#guestPass").click(function () {
+		guest()
 	})
 
 	function makeAccount(email, username, password, dupPassword) {
