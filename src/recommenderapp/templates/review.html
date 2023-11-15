@@ -135,8 +135,6 @@
     <script>
 
         let rating = 0;
-    
-        var comments = $("#comments").val()
 
         var selectedMovie = ''; // Variable to store the selected movie
     
@@ -193,6 +191,8 @@
         function submitReview() {
 
             //MAKE POST CALL TO DB TO ADD MOVIE REVIEW TO TABLE
+
+            var comments = document.getElementById('comments').value;
 
             data = {
                 movie: selectedMovie,
