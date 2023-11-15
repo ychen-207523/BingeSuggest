@@ -7,10 +7,13 @@ This code is licensed under MIT license (see LICENSE for details)
 
 import json
 import sys
+import calendar
+import time
+import datetime
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 from search import Search
-from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount
+from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount, submitReview
 import mysql.connector
 import os
 from dotenv import load_dotenv
@@ -106,6 +109,14 @@ def logIn():
     if (resp):
         return request.data
     return 400
+
+@app.route("/review", methods=["POST"])
+def review():
+    data = json.loads(request.data)
+    d = datetime.datetime.utcnow()
+    timestamp = calendar.timegm(d.timetuple())
+    submitReview(g.db, 1, data["movie"], data["score"], data["review"], timestamp)
+    return request.data
 
 
 @app.route("/feedback", methods=["POST"])

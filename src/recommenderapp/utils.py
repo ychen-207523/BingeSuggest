@@ -188,3 +188,10 @@ def logintoAccount(db, username, password):
     if (len(result) == 0):
         return False
     return True
+
+def submitReview(db, user, movie, score, review, timestamp):
+    executor = db.cursor()
+    executor.execute("SELECT idMovies FROM movies WHERE name = %s", movie)
+    movie_id = executor.fetchall()[0]
+    executor.execute("INSERT INTO popcornpicksdb.ratings(user_id, movie_id, score, review, time) VALUES (%d, %d, %d, %s, %s);", (user, movie_id, score, review, timestamp))
+    db.commit()

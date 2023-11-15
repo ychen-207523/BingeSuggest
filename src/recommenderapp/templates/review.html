@@ -136,6 +136,8 @@
 
         let rating = 0;
     
+        var comments = $("#comments").val()
+
         var selectedMovie = ''; // Variable to store the selected movie
     
         $(function () {
@@ -192,7 +194,29 @@
 
             //MAKE POST CALL TO DB TO ADD MOVIE REVIEW TO TABLE
 
-            alert("Review submitted for " + selectedMovie + ". Rating: " + rating + "/10");
+            data = {
+                movie: selectedMovie,
+                score: rating,
+                review: comments,
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/review",
+                dataType: "json",
+                contentType: "application/json;charset=UTF-8",
+                traditional: "true",
+                cache: false,
+                data: JSON.stringify(data),
+                success: function() {
+                    alert("Review submitted for " + selectedMovie + ". Rating: " + rating + "/10");
+                },
+                error: function() {
+                    alert("Error submitting review.");
+                }
+            })
+
+            
         }
     
         // Initial highlighting
