@@ -38,6 +38,9 @@ jobs:
         cat << EOF > .env
         DB_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
         EOF
+    - name: Set up DB
+      run: | 
+        mysql src\test_init.sql
     - name: Running test cases for predicting
       run: python test/test_predict.py
     - name: Running test cases for searching
