@@ -36,7 +36,7 @@ jobs:
     - name: Create env file
       run: |
         cat << EOF > .env
-        DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+        DB_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
         EOF
     - name: Running test cases for predicting
       run: python test/test_predict.py

@@ -79,7 +79,7 @@ class Tests(unittest.TestCase):
         """
         Test case 5
         """
-        db = mysql.connector.connect(user='root', password=os.getenv('DB_PASSWORD'),
+        db = mysql.connector.connect(user='root', password=os.getenv('MYSQL_ROOT_PASSWORD'),
                                 host='127.0.0.1')
         self.setUpMockDB(db)
         createAccount(db, "test@test.com", "testUser", "testPassword")
