@@ -102,9 +102,9 @@ class Tests(unittest.TestCase):
 
     def setUpMockDB(self, db):
         exector = db.cursor()
-        exector.execute("DROP DATABASE IF EXISTS testDB;")
-        exector.execute("CREATE DATABASE testDB;")
-        exector.execute("USE testDB;")
+        exector.execute("DROP DATABASE IF EXISTS testDB1;")
+        exector.execute("CREATE DATABASE testDB1;")
+        exector.execute("USE testDB1;")
         exector.execute("""
                         CREATE TABLE IF NOT EXISTS Users (
                         idUsers INT NOT NULL AUTO_INCREMENT,
