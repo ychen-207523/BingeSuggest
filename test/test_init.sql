@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Users (
   PRIMARY KEY (idUsers),
   UNIQUE INDEX username_UNIQUE (username ASC),
   UNIQUE INDEX email_UNIQUE (email ASC)
-) ENGINE = InnoDB;
+);
 
 -- Create the Movies table
 CREATE TABLE IF NOT EXISTS Movies (
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Movies (
   imdb_id VARCHAR(45) NOT NULL,
   PRIMARY KEY (idMovies),
   UNIQUE INDEX imdb_id_UNIQUE (imdb_id ASC)
-) ENGINE = InnoDB;
+);
 
 -- Create the Ratings table
 CREATE TABLE IF NOT EXISTS Ratings (
@@ -44,4 +44,4 @@ CREATE TABLE IF NOT EXISTS Ratings (
     REFERENCES Movies (idMovies)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-) ENGINE = InnoDB;
+);
