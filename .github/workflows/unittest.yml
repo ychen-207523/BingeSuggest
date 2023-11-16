@@ -39,7 +39,8 @@ jobs:
         DB_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
         EOF
     - name: Set up DB
-      run: | 
+      run: |
+        sudo /etc/init.d/mysql start
         mysql src\test_init.sql
     - name: Running test cases for predicting
       run: python test/test_predict.py
