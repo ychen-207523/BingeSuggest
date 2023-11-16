@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Ratings (
   INDEX movie_id_idx (movie_id ASC),
   CONSTRAINT user_id
     FOREIGN KEY (user_id)
-    REFERENCES Users (idUsers)
+    REFERENCES users (idUsers)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT movie_id
