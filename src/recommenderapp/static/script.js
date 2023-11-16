@@ -256,10 +256,26 @@ $(document).ready(function () {
 		}, 2000)
 	}
 
-	// Bind the getStarted function to the Get Started button click
+    	// Bind the getStarted function to the Get Started button click
 	$("#getStartedButton").click(function () {
-		getStarted()
-	})
+		getStarted();
+	});
+
+    // Function to handle Get Started button click
+	function goToWall() {
+		// Navigate to the search page
+		$("#loaderLanding").attr("class", "d-flex justify-content-center")
+		$("#centralDivLanding").hide()
+		$("#landingTopNav").hide()
+		setTimeout(function () {
+			window.location.href = "/wall" // Replace with the actual URL of your search page
+		}, 2000)
+	}
+
+    // Bind the getStarted function to the Get Started button click
+	$("#goToWallButton").click(function () {
+		goToWall();
+	});
 
 	var FeedbackData
 
