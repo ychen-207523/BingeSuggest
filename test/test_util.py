@@ -83,18 +83,6 @@ class Tests(unittest.TestCase):
                                 host='127.0.0.1')
         executor = db.cursor()
         executor.execute("USE testDB;")
-        executor.execute("""
-                        CREATE TABLE IF NOT EXISTS Users (
-                        idUsers INT NOT NULL AUTO_INCREMENT,
-                        username VARCHAR(45) NOT NULL,
-                        email VARCHAR(45) NOT NULL,
-                        password VARCHAR(45) NOT NULL,
-                        PRIMARY KEY (idUsers),
-                        UNIQUE INDEX username_UNIQUE (username ASC),
-                        UNIQUE INDEX email_UNIQUE (email ASC)
-                        );
-                         """)
-        db.commit()
         createAccount(db, "test@test.com", "testUser", "testPassword")
         expectedUserName="testUser"
         expectedEmail = "test@test.com"
