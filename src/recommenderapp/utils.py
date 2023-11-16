@@ -176,13 +176,12 @@ def send_email_to_user(recipient_email, categorized_data):
 
 def createAccount(db, email, username, password):
     executor = db.cursor()
-    executor.execute("INSERT INTO popcornpicksdb.users(username, email, password) VALUES (%s, %s, %s);", (username, email, password))
+    executor.execute("INSERT INTO users(username, email, password) VALUES (%s, %s, %s);", (username, email, password))
     db.commit()
-    db.close()
 
 def logintoAccount(db, username, password):
     executor = db.cursor()
-    executor.execute("SELECT * FROM popcornpicksdb.users WHERE username = %s AND password = %s;", (username, password))
+    executor.execute("SELECT * FROM users WHERE username = %s AND password = %s;", (username, password))
     result = executor.fetchall()
     if (len(result) == 0):
         return None

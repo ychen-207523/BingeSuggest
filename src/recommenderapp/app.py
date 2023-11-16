@@ -46,7 +46,7 @@ def wall_page():
     """
     if (user[1] != None or user[1] == 'guest'):
         return render_template("wall.html")
-    return 400
+    return render_template("login.html")
 
 @app.route("/review")
 def review_page():
@@ -55,7 +55,7 @@ def review_page():
     """
     if (user[1] != None or user[1] == 'guest'):
         return render_template("review.html")
-    return 400
+    return render_template("login.html")
 
 @app.route("/landing")
 def landing_page():
@@ -64,7 +64,7 @@ def landing_page():
     """
     if (user[1] != None or user[1] == 'guest'):
         return render_template("landing_page.html")
-    return 400
+    return render_template("login.html")
 
 
 @app.route("/search_page")
@@ -74,7 +74,7 @@ def search_page():
     """
     if (user[1] != None or user[1] == 'guest'):
         return render_template("search_page.html")
-    return 400
+    return render_template("login.html")
 
 
 @app.route("/predict", methods=["POST"])
