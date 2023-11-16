@@ -40,7 +40,7 @@ jobs:
         EOF
     - name: Set up DB
       run: |
-        sudo /etc/init.d/mysql start
+        sudo /etc/init.d/mysql start -h 127.0.0.1
         python test/test_setupDB.py
     - name: Running test cases for predicting
       run: python test/test_predict.py
