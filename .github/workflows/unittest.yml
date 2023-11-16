@@ -36,12 +36,11 @@ jobs:
     - name: Create env file
       run: |
         cat << EOF > .env
-        DB_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
+        DB_PASSWORD=${{ secrets.DB_PASSWORD }}
         EOF
     - name: Set up DB
       run: |
-        sudo /etc/init.d/mysql start --user=root --password=testrootpass
-        mysql src\test_init.sql --user=root --password=testrootpass
+        mysql source src\test_init.sql --user=root --password=testrootpass
     - name: Running test cases for predicting
       run: python test/test_predict.py
     - name: Running test cases for searching
