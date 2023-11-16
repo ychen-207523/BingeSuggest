@@ -92,8 +92,9 @@ class Tests(unittest.TestCase):
                         PRIMARY KEY (idUsers),
                         UNIQUE INDEX username_UNIQUE (username ASC),
                         UNIQUE INDEX email_UNIQUE (email ASC)
-);
+                        );
                          """)
+        db.commit()
         createAccount(db, "test@test.com", "testUser", "testPassword")
         expectedUserName="testUser"
         expectedEmail = "test@test.com"
