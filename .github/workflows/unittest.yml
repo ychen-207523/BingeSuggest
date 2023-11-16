@@ -40,8 +40,8 @@ jobs:
         EOF
     - name: Set up DB
       run: |
-        sudo /etc/init.d/mysql start
-        mysql src\test_init.sql
+        sudo /etc/init.d/mysql start --user=root --password=testrootpass
+        mysql src\test_init.sql --user=root --password=testrootpass
     - name: Running test cases for predicting
       run: python test/test_predict.py
     - name: Running test cases for searching
