@@ -34,10 +34,10 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Create env file
-        run: |
-          cat << EOF > .env
-          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          EOF
+      run: |
+        cat << EOF > .env
+        DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+        EOF
     - name: Running test cases for predicting
       run: python test/test_predict.py
     - name: Running test cases for searching
