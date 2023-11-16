@@ -90,6 +90,7 @@ class Tests(unittest.TestCase):
         executor = db.cursor()
         executor.execute("SELECT * FROM  testdb.users;")
         dbResult = executor.fetchall()
+        self.assertTrue(len(dbResult) > 0)
         self.assertEqual(expectedUserName, dbResult[0][1])
         self.assertEqual(expectedEmail, dbResult[0][2])
         self.assertEqual(expectedPassword, dbResult[0][3])
