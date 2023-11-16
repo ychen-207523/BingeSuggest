@@ -41,7 +41,7 @@ jobs:
         EOF
     - name: Set up DB
       run: |
-        sudo /etc/init.d/mysql start
+        sudo systemctl start mysql.service
         mysql --host 127.0.0.1 --port 3306 -u root -ptestrootpass < test/test_init.sql
         mysql --host 127.0.0.1 --port 3306 -u root -ptestrootpass -D testdb -e "SHOW TABLES;"
     - name: Running test cases for predicting
