@@ -204,3 +204,17 @@ def getWallPosts(db):
     for r in result:
         json_data.append(dict(zip(rows, r)))
     return jsonify(json_data)
+
+def getRecentMovies(db, user):
+    executor = db.cursor()
+    executor.execute("SELECT name, score FROM ratings AS r JOIN \
+    movies AS m ON m.idMovies = r.movie_id \
+    WHERE user_id = %d \
+    ORDER BY time DESC \
+    LIMIT 5;", [int(user)])
+    rows = [x[0] for x in executor.description]
+    result = executor.fetchall()
+    json_data = []
+    for r in result:
+        json_data.append(dict(zip(rows, r)))
+    return jsonify(json_data)
