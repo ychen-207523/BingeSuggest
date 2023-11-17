@@ -5,6 +5,22 @@ on: [push]
 jobs:
   upload-coverage:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          # The MySQL docker container requires these environment variables to be set
+          # so we can create and migrate the test database.
+          # See: https://hub.docker.com/_/mysql
+          MYSQL_DATABASE: testdb
+          MYSQL_ROOT_PASSWORD: testrootpass
+          DB_HOST: 127.0.0.1
+        ports:
+          # Opens port 3306 on service container and host
+          # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
+          - 3306:3306
+          # Before continuing, verify the mysql container is reachable from the ubuntu host
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout code
@@ -19,6 +35,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      
+      - name: Set up DB
+        run: |
+          mysql -h 127.0.0.1 --port 3306 -u root -ptestrootpass < test/test_init.sql
 
       - name: Run tests and generate coverage
         run: |

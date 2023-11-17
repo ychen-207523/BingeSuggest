@@ -9,6 +9,7 @@ import sys
 import unittest
 import warnings
 import os
+import hashlib
 from dotenv import load_dotenv
 from pathlib import Path
 import mysql.connector
@@ -89,13 +90,17 @@ class Tests(unittest.TestCase):
         expectedUserName="testUser"
         expectedEmail = "test@test.com"
         expectedPassword="testPassword"
+        newPass =  (expectedPassword + os.getenv("SALT") + expectedUserName).encode()
+        #now hash it
+        h = hashlib.sha256()
+        h.update(newPass)
         executor = db.cursor()
         executor.execute("SELECT * FROM users;")
         dbResult = executor.fetchall()
         self.assertTrue(len(dbResult) > 0)
         self.assertEqual(expectedUserName, dbResult[0][1])
         self.assertEqual(expectedEmail, dbResult[0][2])
-        self.assertEqual(expectedPassword, dbResult[0][3])
+        self.assertEqual(h.hexdigest(), dbResult[0][3])
         id = logintoAccount(db, "testUser", "testPassword")
         expectedId = 1
         self.assertEqual(expectedId, id)

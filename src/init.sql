@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS Users (
   idUsers INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(45) NOT NULL,
   email VARCHAR(45) NOT NULL,
-  password VARCHAR(45) NOT NULL,
+  password VARCHAR(64) NOT NULL,
   PRIMARY KEY (idUsers),
   UNIQUE INDEX username_UNIQUE (username ASC),
   UNIQUE INDEX email_UNIQUE (email ASC)

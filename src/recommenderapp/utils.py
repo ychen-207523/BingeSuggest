@@ -7,6 +7,8 @@ This code is licensed under MIT license (see LICENSE for details)
 
 import logging
 import smtplib
+import os
+import hashlib
 from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -176,12 +178,22 @@ def send_email_to_user(recipient_email, categorized_data):
 
 def createAccount(db, email, username, password):
     executor = db.cursor()
-    executor.execute("INSERT INTO users(username, email, password) VALUES (%s, %s, %s);", (username, email, password))
+    #salt our password
+    newPass =  (password + os.getenv("SALT") + username).encode()
+    #now hash it
+    h = hashlib.sha256()
+    h.update(newPass)
+    #now store
+    executor.execute("INSERT INTO users(username, email, password) VALUES (%s, %s, %s);", (username, email, h.hexdigest()))
     db.commit()
 
 def logintoAccount(db, username, password):
     executor = db.cursor()
-    executor.execute("SELECT * FROM users WHERE username = %s AND password = %s;", (username, password))
+    newPass =  (password + os.getenv("SALT") + username).encode()
+    #now hash it
+    h = hashlib.sha256()
+    h.update(newPass)
+    executor.execute("SELECT * FROM users WHERE username = %s AND password = %s;", (username, h.hexdigest()))
     result = executor.fetchall()
     if (len(result) == 0):
         return None
