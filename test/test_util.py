@@ -9,6 +9,7 @@ import sys
 import unittest
 import warnings
 import os
+from dotenv import load_dotenv
 from pathlib import Path
 import mysql.connector
 import pandas as pd
@@ -79,7 +80,8 @@ class Tests(unittest.TestCase):
         """
         Test case 5
         """
-        db = mysql.connector.connect(user='root', password='testrootpass',
+        load_dotenv()
+        db = mysql.connector.connect(user='root', password=os.getenv('DB_PASSWORD'),
                                 host='127.0.0.1')
         executor = db.cursor()
         executor.execute("USE testDB;")
