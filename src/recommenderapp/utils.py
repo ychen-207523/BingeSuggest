@@ -9,6 +9,7 @@ import logging
 import smtplib
 import os
 import hashlib
+from dotenv import load_dotenv
 from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -179,6 +180,7 @@ def send_email_to_user(recipient_email, categorized_data):
 def createAccount(db, email, username, password):
     executor = db.cursor()
     #salt our password
+    load_dotenv()
     newPass =  (password + os.getenv("SALT") + username).encode()
     #now hash it
     h = hashlib.sha256()
