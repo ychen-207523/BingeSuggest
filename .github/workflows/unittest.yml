@@ -38,6 +38,7 @@ jobs:
       run: |
         cat << EOF > .env
         DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+        SALT=${{ secrets.SALT }}
         EOF
     - name: Set up DB
       run: |

@@ -36,6 +36,13 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       
+      - name: Create env file
+        run: |
+          cat << EOF > .env
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          SALT=${{ secrets.SALT }}
+          EOF
+
       - name: Set up DB
         run: |
           mysql -h 127.0.0.1 --port 3306 -u root -ptestrootpass < test/test_init.sql
