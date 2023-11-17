@@ -13,7 +13,7 @@ import datetime
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 from search import Search
-from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount, submitReview, getWallPosts
+from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount, submitReview, getWallPosts, getRecentMovies
 import mysql.connector
 import os
 from dotenv import load_dotenv
@@ -140,6 +140,10 @@ def review():
 @app.route("/getWallData", methods=["GET"])
 def wallPosts():
     return getWallPosts(g.db)
+
+@app.route("/getRecentMovies", methods=["GET"])
+def recentMovies():
+    return getRecentMovies(g.db, user[1])
 
 
 @app.route("/feedback", methods=["POST"])
