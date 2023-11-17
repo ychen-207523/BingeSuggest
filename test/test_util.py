@@ -88,7 +88,7 @@ class Tests(unittest.TestCase):
         expectedEmail = "test@test.com"
         expectedPassword="testPassword"
         executor = db.cursor()
-        executor.execute("SELECT * FROM  testdb.users;")
+        executor.execute("SELECT * FROM users;")
         dbResult = executor.fetchall()
         self.assertTrue(len(dbResult) > 0)
         self.assertEqual(expectedUserName, dbResult[0][1])
