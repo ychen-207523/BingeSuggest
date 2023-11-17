@@ -29,7 +29,7 @@ app.secret_key = "secret key"
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 user = {
-    1:'None'
+    1:None
 }
 
 @app.route("/")
@@ -111,6 +111,11 @@ def search():
 def createAcc():
     data = json.loads(request.data)
     createAccount(g.db, data["email"], data["username"], data["password"])
+    return request.data
+
+@app.route("/out", methods=["POST"])
+def signout():
+    user[1] = None
     return request.data
 
 @app.route("/log", methods=["POST"])

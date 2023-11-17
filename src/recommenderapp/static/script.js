@@ -138,7 +138,7 @@ $(document).ready(function () {
 			type: "POST",
 			url: "/log",
 			dataType: "json",
-      contentType: "application/json;charset=UTF-8",
+      		contentType: "application/json;charset=UTF-8",
 			traditional: "true",
 			cache: false,
 			data: JSON.stringify(data),
@@ -173,6 +173,35 @@ $(document).ready(function () {
 	// Bind the login function to the login button click
 	$("#createAccountButton").click(function () {
 		createAcouunt()
+	})
+
+	
+	function signOut() {
+		data = {
+			user: 'None'
+		}
+		$.ajax({
+			type: "POST",
+			url: "/out",
+			dataType: "json",
+      		contentType: "application/json;charset=UTF-8",
+			traditional: "true",
+			cache: false,
+			data: JSON.stringify(data),
+			success: function (response) {
+			// Navigate to the search page
+			setTimeout(function () {
+			window.location.href = "/" // Replace with the actual URL of your search page
+			})
+			},
+			error: function (error) {
+        	
+      },
+		})
+	}
+
+	$("#signOut").click(function () {
+		signOut()
 	})
 
 	function guest() {
