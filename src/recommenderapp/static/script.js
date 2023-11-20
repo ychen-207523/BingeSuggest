@@ -20,6 +20,7 @@ $(document).ready(function () {
 			},
 			select: function (event, ui) {
 				var ulList = $("#selectedMovies")
+				var ulList2 = $("#recentMovies")
 				// Check if the value already exists in the list
 				if (ulList.find('li:contains("' + ui.item.value + '")').length > 0) {
 					$("#searchBox").val("")
@@ -30,6 +31,11 @@ $(document).ready(function () {
 					.text(ui.item.value)
 					.appendTo(ulList)
 				$("#searchBox").val("")
+
+				var li2 = $("<li class='list-group-item'/>")
+					.text(ui.item.value)
+					.appendTo(ulList2)
+				$("#recentMovies").val("")
 				return false
 			},
 
@@ -37,6 +43,27 @@ $(document).ready(function () {
 			minLength: 1,
 		})
 	})
+
+	function getRecentMovies(){
+		var ulList = $("#recentMovies")
+		$.ajax({
+		type: 'GET',
+		url: '/getRecentMovies',
+		contentType: "application/json;charset=UTF-8",
+		success: function(response) {
+			console.log(response)
+			resolve(response)
+			var li = $("<li class='list-group-item'/>")
+					.text(ui.item.value)
+					.appendTo(ulList)
+		},
+		error: function(error) {
+			reject(error);
+		}
+		});
+	}
+
+	// $("#recentMovies").click(function (event, ui)
 
 	$("#predict").click(function () {
 		$("#loader").attr("class", "d-flex justify-content-center")
@@ -288,6 +315,7 @@ $(document).ready(function () {
     	// Bind the getStarted function to the Get Started button click
 	$("#getStartedButton").click(function () {
 		getStarted();
+		getRecentMovies();
 	});
 
     // Function to handle Get Started button click
