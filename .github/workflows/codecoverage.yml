@@ -39,6 +39,7 @@ jobs:
       - name: Create env file
         run: |
           cat << EOF > .env
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           DB_PASSWORD=${{ secrets.DB_PASSWORD }}
           SALT=${{ secrets.SALT }}
           EOF
