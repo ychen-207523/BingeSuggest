@@ -5,11 +5,14 @@ This code is licensed under MIT license (see LICENSE for details)
 @author: PopcornPicks
 """
 
+import calendar
+import datetime
 import sys
 import unittest
 import warnings
 import os
 import hashlib
+import flask
 from dotenv import load_dotenv
 from pathlib import Path
 import mysql.connector
@@ -17,7 +20,7 @@ import pandas as pd
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 #pylint: disable=wrong-import-position
 from src.recommenderapp.utils import create_colored_tags, \
-    beautify_feedback_data, create_movie_genres, send_email_to_user, createAccount, logintoAccount, getWallPosts
+    beautify_feedback_data, create_movie_genres, send_email_to_user, createAccount, logintoAccount, getWallPosts, submitReview
 #pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")
@@ -116,7 +119,16 @@ class Tests(unittest.TestCase):
                                 host='127.0.0.1')
         executor = db.cursor()
         executor.execute("USE testDB;")
-        a = getWallPosts(db)
+        executor.execute("DELETE FROM users WHERE username = 'testUser'")
+        createAccount(db, "test@test.com", "testUser", "testPassword")
+        user = executor.execute("SELECT idUsers FROM users WHERE username='testUser'")
+        d = datetime.datetime.utcnow()
+        timestamp = calendar.timegm(d.timetuple())
+        submitReview(db, user, 'James and the Giant Peach (1996)', 4, 'this was a good movie', timestamp)
+        app = flask.Flask(__name__)
+        a = ''
+        with app.test_request_context('/'):
+            a = getWallPosts(db)
         print(a)
 
 
