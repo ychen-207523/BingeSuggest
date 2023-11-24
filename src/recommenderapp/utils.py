@@ -206,7 +206,7 @@ def submitReview(db, user, movie, score, review, timestamp):
     executor.execute("SELECT idMovies FROM movies WHERE name = %s", [movie])
     movie_id = executor.fetchall()[0][0]
     print("REVIEW IS " + review)
-    executor.execute("INSERT INTO popcornpicksdb.ratings(user_id, movie_id, score, review, time) VALUES (%s, %s, %s, %s, %s);", (int(user), int(movie_id), int(score), str(review), int(timestamp)))
+    executor.execute("INSERT INTO ratings(user_id, movie_id, score, review, time) VALUES (%s, %s, %s, %s, %s);", (int(user), int(movie_id), int(score), str(review), int(timestamp)))
     db.commit()
 
 def getWallPosts(db):

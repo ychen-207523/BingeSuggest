@@ -119,17 +119,23 @@ class Tests(unittest.TestCase):
                                 host='127.0.0.1')
         executor = db.cursor()
         executor.execute("USE testDB;")
+        executor.execute("SET FOREIGN_KEY_CHECKS=0;")
         executor.execute("DELETE FROM users WHERE username = 'testUser'")
+        executor.execute("DELETE FROM ratings WHERE idRatings > 0")
         createAccount(db, "test@test.com", "testUser", "testPassword")
-        user = executor.execute("SELECT idUsers FROM users WHERE username='testUser'")
-        d = datetime.datetime.utcnow()
-        timestamp = calendar.timegm(d.timetuple())
-        submitReview(db, user, 'James and the Giant Peach (1996)', 4, 'this was a good movie', timestamp)
+        executor.execute("SELECT idUsers FROM users WHERE username='testUser'")
+        dbResult = executor.fetchall()
+        user = dbResult[0][0]
+        executor.execute("INSERT INTO ratings(user_id, movie_id, score, review, time) VALUES (%s, %s, %s, %s, %s);", (int(user), int(11), int(4), 'this is a great movie', '990300'))
+        db.commit()
         app = flask.Flask(__name__)
         a = ''
         with app.test_request_context('/'):
             a = getWallPosts(db)
-        print(a)
+        self.assertEqual(a.json[0]['imdb_id'], 'tt0076759')
+        self.assertEqual(a.json[0]['name'], 'Star Wars (1977)')
+        self.assertEqual(a.json[0]['review'], 'this is a great movie')
+        self.assertEqual(a.json[0]['score'], 4)
 
 
 
