@@ -266,7 +266,10 @@ $(document).ready(function () {
 			$("#newPassword").val("")
 			$("#dupPassword").val("")
 			$("#misMatchPass").attr("class", "d-flex justify-content-center")
-		} else {
+		} else if (username == 'testUser'){
+            $("#newUser").val("")
+            $("#invalidUsername").attr("class", "d-flex justify-content-center")
+        } else {
 			data = {
 				email: email,
 				username: username,
