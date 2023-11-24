@@ -189,6 +189,13 @@ def createAccount(db, email, username, password):
     executor.execute("INSERT INTO users(username, email, password) VALUES (%s, %s, %s);", (username, email, h.hexdigest()))
     db.commit()
 
+def addFriend(db, username, userId):
+    executor = db.cursor()
+    executor.execute("SELECT idUsers FROM users WHERE username = %s;", [username])
+    friendId = executor.fetchall()[0][0]
+    executor.execute("INSERT INTO friends(idUsers, idFriend) VALUES (%s, %s);", (int(userId), int(friendId)))
+    db.commit()
+
 def logintoAccount(db, username, password):
     executor = db.cursor()
     newPass =  (password + os.getenv("SALT") + username).encode()
@@ -238,3 +245,9 @@ def getUserName(db, user):
     executor.execute("SELECT username FROM users WHERE idUsers = %s;", [int(user)])
     result = executor.fetchall()
     return jsonify(result[0][0])
+
+def getFriends(db, user):
+    executor = db.cursor()
+    executor.execute("SELECT username FROM users AS u JOIN friends AS f ON u.idUsers = f.idFriend WHERE f.idUsers = %s;", [int(user)])
+    result = executor.fetchall()
+    return jsonify(result)

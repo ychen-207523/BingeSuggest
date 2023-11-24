@@ -45,3 +45,21 @@ CREATE TABLE IF NOT EXISTS Ratings (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
+
+-- Create the Friends table
+CREATE TABLE IF NOT EXISTS Friends (
+  idFriendship INT NOT NULL AUTO_INCREMENT,
+  idUsers INT NOT NULL,
+  idFriend INT NOT NULL,
+  PRIMARY KEY (idFriendship),
+  CONSTRAINT idUsers
+    FOREIGN KEY (idUsers)
+    REFERENCES Users (idUsers)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT idFriend
+    FOREIGN KEY (idFriend)
+    REFERENCES Users (idUsers)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;

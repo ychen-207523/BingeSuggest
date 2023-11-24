@@ -228,7 +228,26 @@ $(document).ready(function () {
 	}
 
 	function friend(username) {
-		
+		data = {
+			username:username
+		}
+		$.ajax({
+			type: "POST",
+			url: "/friend",
+			dataType: "json",
+      		contentType: "application/json;charset=UTF-8",
+			traditional: "true",
+			cache: false,
+			data: JSON.stringify(data),
+			success: function (response) {
+				console.log(response)
+				$("#friendsList").append(response.username);
+				$("#addFriend").val("")
+			},
+			error: function (error) {
+        
+      		},
+		})
 	}
 
 	$("#friendButton").click(function () {

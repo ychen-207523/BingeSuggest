@@ -13,7 +13,7 @@ import datetime
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 from search import Search
-from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount, submitReview, getWallPosts, getRecentMovies, getUserName
+from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount, submitReview, getWallPosts, getRecentMovies, getUserName, addFriend, getFriends
 import mysql.connector
 import os
 from dotenv import load_dotenv
@@ -44,7 +44,9 @@ def profile_page():
     """
     Renders the login page.
     """
-    return render_template("profile.html")
+    if (user[1] != None):
+        return render_template("profile.html")
+    return render_template("login.html")
 
 @app.route("/wall")
 def wall_page():
@@ -129,10 +131,15 @@ def signout():
 def logIn():
     data = json.loads(request.data)
     resp = logintoAccount(g.db, data["username"], data["password"])
-    print(resp)
     if (resp == None):
         return 400
     user[1] = resp
+    return request.data
+
+@app.route("/friend", methods=["POST"])
+def friend():
+    data = json.loads(request.data)
+    addFriend(g.db, data["username"], user[1])
     return request.data
 
 @app.route("/guest", methods=["POST"])
@@ -160,6 +167,10 @@ def recentMovies():
 @app.route("/getUserName", methods=["GET"])
 def username():
     return getUserName(g.db, user[1])
+
+@app.route("/getFriends", methods=["GET"])
+def getFriend():
+    return getFriends(g.db, user[1])
 
 
 @app.route("/feedback", methods=["POST"])
