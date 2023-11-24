@@ -232,3 +232,9 @@ def getRecentMovies(db, user):
     for r in result:
         json_data.append(dict(zip(rows, r)))
     return jsonify(json_data)
+
+def getUserName(db, user):
+    executor = db.cursor()
+    executor.execute("SELECT username FROM users WHERE idUsers = %s;", [int(user)])
+    result = executor.fetchall()
+    return jsonify(result[0][0])
