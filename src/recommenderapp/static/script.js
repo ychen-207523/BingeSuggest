@@ -227,6 +227,14 @@ $(document).ready(function () {
 		})
 	}
 
+	function friend(username) {
+		
+	}
+
+	$("#friendButton").click(function () {
+		friend($("#addFriend").val())
+	})
+
 	$("#signOut").click(function () {
 		signOut()
 	})

@@ -13,7 +13,7 @@ import datetime
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 from search import Search
-from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount, submitReview, getWallPosts, getRecentMovies
+from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount, submitReview, getWallPosts, getRecentMovies, getUserName
 import mysql.connector
 import os
 from dotenv import load_dotenv
@@ -38,6 +38,13 @@ def login_page():
     Renders the login page.
     """
     return render_template("login.html")
+
+@app.route("/profile")
+def profile_page():
+    """
+    Renders the login page.
+    """
+    return render_template("profile.html")
 
 @app.route("/wall")
 def wall_page():
@@ -139,7 +146,7 @@ def review():
     data = json.loads(request.data)
     d = datetime.datetime.utcnow()
     timestamp = calendar.timegm(d.timetuple())
-    submitReview(g.db, 1, data["movie"], data["score"], data["review"], timestamp)
+    submitReview(g.db, user[1], data["movie"], data["score"], data["review"], timestamp)
     return request.data
 
 @app.route("/getWallData", methods=["GET"])
@@ -149,6 +156,10 @@ def wallPosts():
 @app.route("/getRecentMovies", methods=["GET"])
 def recentMovies():
     return getRecentMovies(g.db, user[1])
+
+@app.route("/getUserName", methods=["GET"])
+def username():
+    return getUserName(g.db, user[1])
 
 
 @app.route("/feedback", methods=["POST"])
