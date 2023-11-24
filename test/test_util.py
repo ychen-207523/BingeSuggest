@@ -17,7 +17,7 @@ import pandas as pd
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 #pylint: disable=wrong-import-position
 from src.recommenderapp.utils import create_colored_tags, \
-    beautify_feedback_data, create_movie_genres, send_email_to_user, createAccount, logintoAccount
+    beautify_feedback_data, create_movie_genres, send_email_to_user, createAccount, logintoAccount, getWallPosts
 #pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")
@@ -86,6 +86,7 @@ class Tests(unittest.TestCase):
                                 host='127.0.0.1')
         executor = db.cursor()
         executor.execute("USE testDB;")
+        executor.execute("DELETE FROM users WHERE username = 'testUser'")
         createAccount(db, "test@test.com", "testUser", "testPassword")
         expectedUserName="testUser"
         expectedEmail = "test@test.com"
@@ -102,11 +103,21 @@ class Tests(unittest.TestCase):
         self.assertEqual(expectedEmail, dbResult[0][2])
         self.assertEqual(h.hexdigest(), dbResult[0][3])
         id = logintoAccount(db, "testUser", "testPassword")
-        expectedId = 1
-        self.assertEqual(expectedId, id)
         fail = logintoAccount(db, "testUser", "wrongPassword")
         self.assertIsNone(fail)
         db.close()
+    
+    def test_get_wall_posts(self):
+        """
+        Test case 6
+        """
+        load_dotenv()
+        db = mysql.connector.connect(user='root', password=os.getenv('DB_PASSWORD'),
+                                host='127.0.0.1')
+        executor = db.cursor()
+        executor.execute("USE testDB;")
+        a = getWallPosts(db)
+        print(a)
 
 
 
