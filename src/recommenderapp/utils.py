@@ -5,9 +5,9 @@ This code is licensed under MIT license (see LICENSE for details)
 @author: PopcornPicks
 """
 
-#pylint: disable=wrong-import-position
-#pylint: disable=wrong-import-order
-#pylint: disable=import-error
+# pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-order
+# pylint: disable=import-error
 import calendar
 import datetime
 import logging
@@ -22,41 +22,43 @@ from flask import jsonify
 
 import pandas as pd
 
+
 def create_colored_tags(genres):
     """
-        Utitilty function to create colored tags for different
-        movie genres
+    Utitilty function to create colored tags for different
+    movie genres
     """
     # Define colors for specific genres
     genre_colors = {
-        'Musical': '#FF1493',  # DeepPink
-        'Sci-Fi': '#00CED1',  # DarkTurquoise
-        'Mystery': '#8A2BE2',  # BlueViolet
-        'Thriller': '#FF6347',  # Tomato
-        'Horror': '#FF4500',  # OrangeRed
-        'Documentary': '#228B22',  # ForestGreen
-        'Fantasy': '#FFA500',  # Orange
-        'Adventure': '#FFD700',  # Gold
-        'Children': '#32CD32',  # LimeGreen
-        'Film-Noir': '#2F4F4F',  # DarkSlateGray
-        'Comedy': '#FFB500',  # VividYellow
-        'Crime': '#8B0000',  # DarkRed
-        'Drama': '#8B008B',  # DarkMagenta
-        'Western': '#FF8C00',  # DarkOrange
-        'IMAX': '#20B2AA',  # LightSeaGreen
-        'Action': '#FF0000',  # Red
-        'War': '#B22222',  # FireBrick
-        '(no genres listed)': '#A9A9A9',  # DarkGray
-        'Romance': '#FF69B4',  # HotPink
-        'Animation': '#4B0082'  # Indigo
+        "Musical": "#FF1493",  # DeepPink
+        "Sci-Fi": "#00CED1",  # DarkTurquoise
+        "Mystery": "#8A2BE2",  # BlueViolet
+        "Thriller": "#FF6347",  # Tomato
+        "Horror": "#FF4500",  # OrangeRed
+        "Documentary": "#228B22",  # ForestGreen
+        "Fantasy": "#FFA500",  # Orange
+        "Adventure": "#FFD700",  # Gold
+        "Children": "#32CD32",  # LimeGreen
+        "Film-Noir": "#2F4F4F",  # DarkSlateGray
+        "Comedy": "#FFB500",  # VividYellow
+        "Crime": "#8B0000",  # DarkRed
+        "Drama": "#8B008B",  # DarkMagenta
+        "Western": "#FF8C00",  # DarkOrange
+        "IMAX": "#20B2AA",  # LightSeaGreen
+        "Action": "#FF0000",  # Red
+        "War": "#B22222",  # FireBrick
+        "(no genres listed)": "#A9A9A9",  # DarkGray
+        "Romance": "#FF69B4",  # HotPink
+        "Animation": "#4B0082",  # Indigo
     }
     tags = []
     for genre in genres:
-        color = genre_colors.get(genre, '#CCCCCC')  # Default color if not found
+        color = genre_colors.get(genre, "#CCCCCC")  # Default color if not found
         tag = f'<span style="background-color: {color}; color: #FFFFFF; \
             padding: 5px; border-radius: 5px;">{genre}</span>'
         tags.append(tag)
-    return ' '.join(tags)
+    return " ".join(tags)
+
 
 def beautify_feedback_data(data):
     """
@@ -69,33 +71,37 @@ def beautify_feedback_data(data):
 
     # Iterate through the data and categorize movies
     for movie, status in data.items():
-        if status == 'Yet to watch':
+        if status == "Yet to watch":
             yet_to_watch.append(movie)
-        elif status == 'Like':
+        elif status == "Like":
             like.append(movie)
-        elif status == 'Dislike':
+        elif status == "Dislike":
             dislike.append(movie)
 
-
     # Create a category-dictionary of liked, disliked and yet to watch movies
-    categorized_data_dict = {"Liked": like,
-                             "Disliked": dislike, "Yet to Watch": yet_to_watch}
+    categorized_data_dict = {
+        "Liked": like,
+        "Disliked": dislike,
+        "Yet to Watch": yet_to_watch,
+    }
 
     return categorized_data_dict
 
+
 def create_movie_genres(movie_genre_df):
     """
-        Utility function for creating a dictionary for movie-genres mapping
+    Utility function for creating a dictionary for movie-genres mapping
     """
     # Create a dictionary to map movies to their genres
     movie_to_genres = {}
 
     # Iterating on all movies to create the map
     for row in movie_genre_df.iterrows():
-        movie = row[1]['title']
-        genres = row[1]['genres'].split('|')
+        movie = row[1]["title"]
+        genres = row[1]["genres"].split("|")
         movie_to_genres[movie] = genres
     return movie_to_genres
+
 
 def send_email_to_user(recipient_email, categorized_data):
     """
@@ -131,38 +137,45 @@ def send_email_to_user(recipient_email, categorized_data):
                         """
 
     # Email configuration
-    smtp_server = 'smtp.gmail.com'
+    smtp_server = "smtp.gmail.com"
     # Port for TLS
     smtp_port = 587
-    sender_email = 'popcornpicks504@gmail.com'
+    sender_email = "popcornpicks504@gmail.com"
 
     # Use an app password since 2-factor authentication is enabled
-    sender_password = ' '
-    subject = 'Your movie recommendation from PopcornPicks'
+    sender_password = " "
+    subject = "Your movie recommendation from PopcornPicks"
 
     # Create the email message
-    message = MIMEMultipart('alternative')
-    message['From'] = sender_email
-    message['To'] = recipient_email
-    message['Subject'] = subject
+    message = MIMEMultipart("alternative")
+    message["From"] = sender_email
+    message["To"] = recipient_email
+    message["Subject"] = subject
     # Load the CSV file into a DataFrame
-    movie_genre_df = pd.read_csv('../../data/movies.csv')
+    movie_genre_df = pd.read_csv("../../data/movies.csv")
     # Creating movie-genres map
     movie_to_genres = create_movie_genres(movie_genre_df)
     # Create the email message with HTML content
     html_content = email_html_content.format(
-        '\n'.join(f'<li>{movie} \
-            {create_colored_tags(movie_to_genres.get(movie, ["Unknown Genre"]))}</li><br>' \
-            for movie in categorized_data['Liked']),
-        '\n'.join(f'<li>{movie} \
-            {create_colored_tags(movie_to_genres.get(movie, ["Unknown Genre"]))}</li><br>' \
-            for movie in categorized_data['Disliked']),
-        '\n'.join(f'<li>{movie} \
-            {create_colored_tags(movie_to_genres.get(movie, ["Unknown Genre"]))}</li><br>' \
-            for movie in categorized_data['Yet to Watch']))
+        "\n".join(
+            f'<li>{movie} \
+            {create_colored_tags(movie_to_genres.get(movie, ["Unknown Genre"]))}</li><br>'
+            for movie in categorized_data["Liked"]
+        ),
+        "\n".join(
+            f'<li>{movie} \
+            {create_colored_tags(movie_to_genres.get(movie, ["Unknown Genre"]))}</li><br>'
+            for movie in categorized_data["Disliked"]
+        ),
+        "\n".join(
+            f'<li>{movie} \
+            {create_colored_tags(movie_to_genres.get(movie, ["Unknown Genre"]))}</li><br>'
+            for movie in categorized_data["Yet to Watch"]
+        ),
+    )
 
     # Attach the HTML email body
-    message.attach(MIMEText(html_content, 'html'))
+    message.attach(MIMEText(html_content, "html"))
 
     # Connect to the SMTP server
     try:
@@ -182,52 +195,62 @@ def send_email_to_user(recipient_email, categorized_data):
     finally:
         server.quit()
 
+
 def create_account(db, email, username, password):
     """
-        Utility function for creating an account
+    Utility function for creating an account
     """
     executor = db.cursor()
-    #salt our password
+    # salt our password
     load_dotenv()
-    new_pass =  (password + os.getenv("SALT") + username).encode()
-    #now hash it
+    new_pass = (password + os.getenv("SALT") + username).encode()
+    # now hash it
     h = hashlib.sha256()
     h.update(new_pass)
-    #now store
-    executor.execute("INSERT INTO users(username, email, password) VALUES (%s, %s, %s);", \
-                     (username, email, h.hexdigest()))
+    # now store
+    executor.execute(
+        "INSERT INTO users(username, email, password) VALUES (%s, %s, %s);",
+        (username, email, h.hexdigest()),
+    )
     db.commit()
+
 
 def add_friend(db, username, user_id):
     """
-        Utility function for adding a friend
+    Utility function for adding a friend
     """
     executor = db.cursor()
     executor.execute("SELECT idUsers FROM users WHERE username = %s;", [username])
     friend_id = executor.fetchall()[0][0]
-    executor.execute("INSERT INTO friends(idUsers, idFriend) VALUES (%s, %s);", \
-                      (int(user_id), int(friend_id)))
+    executor.execute(
+        "INSERT INTO friends(idUsers, idFriend) VALUES (%s, %s);",
+        (int(user_id), int(friend_id)),
+    )
     db.commit()
+
 
 def login_to_account(db, username, password):
     """
-        Utility function for logging in to an account
+    Utility function for logging in to an account
     """
     executor = db.cursor()
-    new_pass =  (password + os.getenv("SALT") + username).encode()
-    #now hash it
+    new_pass = (password + os.getenv("SALT") + username).encode()
+    # now hash it
     h = hashlib.sha256()
     h.update(new_pass)
-    executor.execute("SELECT * FROM users WHERE username = %s AND password = %s;",\
-                      (username, h.hexdigest()))
+    executor.execute(
+        "SELECT * FROM users WHERE username = %s AND password = %s;",
+        (username, h.hexdigest()),
+    )
     result = executor.fetchall()
     if len(result) == 0:
         return None
     return result[0][0]
 
+
 def submit_review(db, user, movie, score, review):
     """
-        Utility function for creating a dictionary for submitting a review
+    Utility function for creating a dictionary for submitting a review
     """
     executor = db.cursor()
     executor.execute("SELECT idMovies FROM movies WHERE name = %s", [movie])
@@ -235,36 +258,45 @@ def submit_review(db, user, movie, score, review):
     print("REVIEW IS " + review)
     d = datetime.datetime.utcnow()
     timestamp = calendar.timegm(d.timetuple())
-    executor.execute("INSERT INTO ratings(user_id, movie_id, score, review, time) \
-                        VALUES (%s, %s, %s, %s, %s);",\
-                        (int(user), int(movie_id), int(score), str(review), int(timestamp)))
+    executor.execute(
+        "INSERT INTO ratings(user_id, movie_id, score, review, time) \
+                        VALUES (%s, %s, %s, %s, %s);",
+        (int(user), int(movie_id), int(score), str(review), int(timestamp)),
+    )
     db.commit()
+
 
 def get_wall_posts(db):
     """
-        Utility function for creating getting wall posts from the db
+    Utility function for creating getting wall posts from the db
     """
     executor = db.cursor()
-    executor.execute("SELECT name, imdb_id, review, score, username, time FROM users JOIN \
+    executor.execute(
+        "SELECT name, imdb_id, review, score, username, time FROM users JOIN \
                      (SELECT name, imdb_id, review, score, user_id, time FROM ratings JOIN movies on ratings.movie_id = movies.idMovies) \
-                     AS moviereview ON users.idUsers = moviereview.user_id ORDER BY time limit 50")
+                     AS moviereview ON users.idUsers = moviereview.user_id ORDER BY time limit 50"
+    )
     rows = [x[0] for x in executor.description]
     result = executor.fetchall()
     json_data = []
     for r in result:
         json_data.append(dict(zip(rows, r)))
     return jsonify(json_data)
+
 
 def get_recent_movies(db, user):
     """
-        Utility function for getting recent movies reviewed by a user
+    Utility function for getting recent movies reviewed by a user
     """
     executor = db.cursor()
-    executor.execute("SELECT name, score FROM ratings AS r JOIN \
+    executor.execute(
+        "SELECT name, score FROM ratings AS r JOIN \
     movies AS m ON m.idMovies = r.movie_id \
     WHERE user_id = %s \
     ORDER BY time DESC \
-    LIMIT 5;", [int(user)])
+    LIMIT 5;",
+        [int(user)],
+    )
     rows = [x[0] for x in executor.description]
     result = executor.fetchall()
     json_data = []
@@ -272,22 +304,26 @@ def get_recent_movies(db, user):
         json_data.append(dict(zip(rows, r)))
     return jsonify(json_data)
 
+
 def get_username(db, user):
     """
-        Utility function for getting the current users username
+    Utility function for getting the current users username
     """
     executor = db.cursor()
     executor.execute("SELECT username FROM users WHERE idUsers = %s;", [int(user)])
     result = executor.fetchall()
     return jsonify(result[0][0])
 
+
 def get_friends(db, user):
     """
-        Utility function for getting the current users friends
+    Utility function for getting the current users friends
     """
     executor = db.cursor()
-    executor.execute("SELECT username FROM users AS u \
-                     JOIN friends AS f ON u.idUsers = f.idFriend WHERE f.idUsers = %s;",\
-                          [int(user)])
+    executor.execute(
+        "SELECT username FROM users AS u \
+                     JOIN friends AS f ON u.idUsers = f.idFriend WHERE f.idUsers = %s;",
+        [int(user)],
+    )
     result = executor.fetchall()
     return jsonify(result)

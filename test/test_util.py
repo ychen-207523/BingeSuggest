@@ -4,9 +4,9 @@ This code is licensed under MIT license (see LICENSE for details)
 
 @author: PopcornPicks
 """
-#pylint: disable=wrong-import-position
-#pylint: disable=wrong-import-order
-#pylint: disable=import-error
+# pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-order
+# pylint: disable=import-error
 import sys
 import unittest
 import warnings
@@ -17,12 +17,20 @@ from dotenv import load_dotenv
 from pathlib import Path
 import mysql.connector
 import pandas as pd
+
 sys.path.append(str(Path(__file__).resolve().parents[1]))
-#pylint: disable=wrong-import-position
-from src.recommenderapp.utils import create_colored_tags, \
-    beautify_feedback_data, create_movie_genres, send_email_to_user, \
-        create_account, login_to_account, get_wall_posts
-#pylint: enable=wrong-import-position
+# pylint: disable=wrong-import-position
+from src.recommenderapp.utils import (
+    create_colored_tags,
+    beautify_feedback_data,
+    create_movie_genres,
+    send_email_to_user,
+    create_account,
+    login_to_account,
+    get_wall_posts,
+)
+
+# pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")
 
@@ -36,11 +44,13 @@ class Tests(unittest.TestCase):
         """
         Test case 1
         """
-        data = {'Movie 1': 'Yet to watch',
-                'Movie 2': 'Like', 'Movie 3': 'Dislike'}
+        data = {"Movie 1": "Yet to watch", "Movie 2": "Like", "Movie 3": "Dislike"}
         result = beautify_feedback_data(data)
-        expected_result = {"Liked": ['Movie 2'], "Disliked": [
-            'Movie 3'], "Yet to Watch": ['Movie 1']}
+        expected_result = {
+            "Liked": ["Movie 2"],
+            "Disliked": ["Movie 3"],
+            "Yet to Watch": ["Movie 1"],
+        }
 
         self.assertTrue(result == expected_result)
 
@@ -50,24 +60,51 @@ class Tests(unittest.TestCase):
         """
         expected_result = '<span style="background-color: #FF1493; color: #FFFFFF; \
             padding: 5px; border-radius: 5px;">Musical</span>'
-        result = create_colored_tags(['Musical'])
+        result = create_colored_tags(["Musical"])
         self.assertTrue(result == expected_result)
 
     def test_create_movie_genres(self):
         """
         Test case 3
         """
-        expected_result = {'Toy Story (1995)': ['Animation', 'Comedy', 'Family'], \
-                           'Jumanji (1995)': [
-            'Adventure', 'Fantasy', 'Family']}
+        expected_result = {
+            "Toy Story (1995)": ["Animation", "Comedy", "Family"],
+            "Jumanji (1995)": ["Adventure", "Fantasy", "Family"],
+        }
 
-        data = [["862", "Toy Story (1995)", "Animation|Comedy|Family", \
-                 "tt0114709", " ", "/rhIRbceoE9lR4veEXuwCC2wARtG.jpg", "81"], \
-                ["8844", "Jumanji (1995)", "Adventure|Fantasy|Family", "tt0113497", " ", \
-                  "/vzmL6fP7aPKNKPRTFnZmiUfciyV.jpg", "104"]]
+        data = [
+            [
+                "862",
+                "Toy Story (1995)",
+                "Animation|Comedy|Family",
+                "tt0114709",
+                " ",
+                "/rhIRbceoE9lR4veEXuwCC2wARtG.jpg",
+                "81",
+            ],
+            [
+                "8844",
+                "Jumanji (1995)",
+                "Adventure|Fantasy|Family",
+                "tt0113497",
+                " ",
+                "/vzmL6fP7aPKNKPRTFnZmiUfciyV.jpg",
+                "104",
+            ],
+        ]
 
-        movie_genre_df = pd.DataFrame(data, columns=[
-            'movieId', 'title', 'genres', 'imdb_id', 'overview', 'poster_path', 'runtime'])
+        movie_genre_df = pd.DataFrame(
+            data,
+            columns=[
+                "movieId",
+                "title",
+                "genres",
+                "imdb_id",
+                "overview",
+                "poster_path",
+                "runtime",
+            ],
+        )
 
         result = create_movie_genres(movie_genre_df)
         self.assertTrue(result == expected_result)
@@ -76,8 +113,11 @@ class Tests(unittest.TestCase):
         """
         Test case 4
         """
-        data = {"Liked": ['Toy Story (1995)'], "Disliked": [
-            'Cutthroat Island (1995)'], "Yet to Watch": ['Assassins (1995)']}
+        data = {
+            "Liked": ["Toy Story (1995)"],
+            "Disliked": ["Cutthroat Island (1995)"],
+            "Yet to Watch": ["Assassins (1995)"],
+        }
         with self.assertRaises(Exception):
             send_email_to_user("wrong_email", beautify_feedback_data(data))
 
@@ -86,17 +126,18 @@ class Tests(unittest.TestCase):
         Test case 5
         """
         load_dotenv()
-        db = mysql.connector.connect(user='root', password=os.getenv('DB_PASSWORD'),
-                                host='127.0.0.1')
+        db = mysql.connector.connect(
+            user="root", password=os.getenv("DB_PASSWORD"), host="127.0.0.1"
+        )
         executor = db.cursor()
         executor.execute("USE testDB;")
         executor.execute("DELETE FROM users WHERE username = 'testUser'")
         create_account(db, "test@test.com", "testUser", "testPassword")
-        expected_username="testUser"
+        expected_username = "testUser"
         expected_email = "test@test.com"
-        expected_password="testPassword"
-        new_pass =  (expected_password + os.getenv("SALT") + expected_username).encode()
-        #now hash it
+        expected_password = "testPassword"
+        new_pass = (expected_password + os.getenv("SALT") + expected_username).encode()
+        # now hash it
         h = hashlib.sha256()
         h.update(new_pass)
         executor = db.cursor()
@@ -115,8 +156,9 @@ class Tests(unittest.TestCase):
         Test case 6
         """
         load_dotenv()
-        db = mysql.connector.connect(user='root', password=os.getenv('DB_PASSWORD'),
-                                host='127.0.0.1')
+        db = mysql.connector.connect(
+            user="root", password=os.getenv("DB_PASSWORD"), host="127.0.0.1"
+        )
         executor = db.cursor()
         executor.execute("USE testDB;")
         executor.execute("SET FOREIGN_KEY_CHECKS=0;")
@@ -126,20 +168,20 @@ class Tests(unittest.TestCase):
         executor.execute("SELECT idUsers FROM users WHERE username='testUser'")
         db_result = executor.fetchall()
         user = db_result[0][0]
-        executor.execute("INSERT INTO Ratings(user_id, movie_id, score, review, time) \
-                         VALUES (%s, %s, %s, %s, %s);", \
-                            (int(user), int(11), int(4), 'this is a great movie', '990300'))
+        executor.execute(
+            "INSERT INTO Ratings(user_id, movie_id, score, review, time) \
+                         VALUES (%s, %s, %s, %s, %s);",
+            (int(user), int(11), int(4), "this is a great movie", "990300"),
+        )
         db.commit()
         app = flask.Flask(__name__)
-        a = ''
-        with app.test_request_context('/'):
+        a = ""
+        with app.test_request_context("/"):
             a = get_wall_posts(db)
-        self.assertEqual(a.json[0]['imdb_id'], 'tt0076759')
-        self.assertEqual(a.json[0]['name'], 'Star Wars (1977)')
-        self.assertEqual(a.json[0]['review'], 'this is a great movie')
-        self.assertEqual(a.json[0]['score'], 4)
-
-
+        self.assertEqual(a.json[0]["imdb_id"], "tt0076759")
+        self.assertEqual(a.json[0]["name"], "Star Wars (1977)")
+        self.assertEqual(a.json[0]["review"], "this is a great movie")
+        self.assertEqual(a.json[0]["score"], 4)
 
 
 if __name__ == "__main__":

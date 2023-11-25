@@ -6,7 +6,8 @@ This code is licensed under MIT license (see LICENSE for details)
 """
 import os
 import pandas as pd
-#from flask import jsonify, request, render_template
+
+# from flask import jsonify, request, render_template
 
 
 app_dir = os.path.dirname(os.path.abspath(__file__))
@@ -69,5 +70,5 @@ class Search:
         return self.results(word)[:10]
 
 
-#if __name__ == "__main__":
+# if __name__ == "__main__":
 #    app.run()

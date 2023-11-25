@@ -11,12 +11,15 @@ import sys
 import unittest
 import warnings
 from pathlib import Path
+
 sys.path.append(str(Path(__file__).resolve().parents[1]))
-#pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-position
 from src.recommenderapp.search import Search
-#pylint: enable=wrong-import-position
+
+# pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")
+
 
 class Tests(unittest.TestCase):
     """
@@ -40,9 +43,10 @@ class Tests(unittest.TestCase):
             "Toy Story of Terror! (2013)",
             "Toy Story That Time Forgot (2014)",
             "Toys in the Attic (2009)",
-            "Toy Soldiers (1984)"
+            "Toy Soldiers (1984)",
         ]
         self.assertTrue(filtered_dict == expected_resp)
+
     def test_search_love(self):
         """
         Test case 2
@@ -63,6 +67,7 @@ class Tests(unittest.TestCase):
             "Love Serenade (1996)",
         ]
         self.assertTrue(filtered_dict == expected_resp)
+
     def test_search_gibberish(self):
         """
         Test case 3

@@ -9,11 +9,14 @@ import sys
 import unittest
 import warnings
 from pathlib import Path
+
 sys.path.append(str(Path(__file__).resolve().parents[1]))
-#pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-position
 from src.prediction_scripts.item_based import recommend_for_new_user
-#pylint: enable=wrong-import-position
+
+# pylint: enable=wrong-import-position
 warnings.filterwarnings("ignore")
+
 
 class Tests(unittest.TestCase):
     """
@@ -88,9 +91,7 @@ class Tests(unittest.TestCase):
             {"title": "Man of Steel (2013)", "rating": 5.0},
         ]
         recommendations, _, _ = recommend_for_new_user(ts)
-        self.assertTrue(
-            ("Iceman (2014)" in recommendations)
-        )
+        self.assertTrue(("Iceman (2014)" in recommendations))
 
     def test_armageddon(self):
         """
@@ -168,7 +169,7 @@ class Tests(unittest.TestCase):
         """
         ts = [
             {"title": "Twilight Saga: New Moon, The (2009)", "rating": 5.0},
-            {"title": "Harry Potter and the Goblet of Fire (2005)", "rating": 5.0}
+            {"title": "Harry Potter and the Goblet of Fire (2005)", "rating": 5.0},
         ]
         recommendations, _, _ = recommend_for_new_user(ts)
         self.assertTrue(("The Secret of Moonacre (2008)" in recommendations))
