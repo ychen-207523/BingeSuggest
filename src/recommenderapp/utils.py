@@ -273,8 +273,9 @@ def get_wall_posts(db):
     executor = db.cursor()
     executor.execute(
         "SELECT name, imdb_id, review, score, username, time FROM users JOIN \
-                     (SELECT name, imdb_id, review, score, user_id, time FROM ratings JOIN movies on ratings.movie_id = movies.idMovies) \
-                     AS moviereview ON users.idUsers = moviereview.user_id ORDER BY time limit 50"
+                     (SELECT name, imdb_id, review, score, user_id, time FROM Ratings\
+                          JOIN Movies on Ratings.movie_id = Movies.idMovies) AS moviereview \
+                            ON users.idUsers = moviereview.user_id ORDER BY time limit 50"
     )
     rows = [x[0] for x in executor.description]
     result = executor.fetchall()
