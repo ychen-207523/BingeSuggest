@@ -226,6 +226,10 @@ def add_friend(db, username, user_id):
         "INSERT INTO friends(idUsers, idFriend) VALUES (%s, %s);",
         (int(user_id), int(friend_id)),
     )
+    executor.execute(
+        "INSERT INTO friends(idUsers, idFriend) VALUES (%s, %s);",
+        (int(friend_id), int(user_id)),
+    )
     db.commit()
 
 
@@ -253,13 +257,13 @@ def submit_review(db, user, movie, score, review):
     Utility function for creating a dictionary for submitting a review
     """
     executor = db.cursor()
-    executor.execute("SELECT idMovies FROM movies WHERE name = %s", [movie])
+    executor.execute("SELECT idMovies FROM mMvies WHERE name = %s", [movie])
     movie_id = executor.fetchall()[0][0]
     print("REVIEW IS " + review)
     d = datetime.datetime.utcnow()
     timestamp = calendar.timegm(d.timetuple())
     executor.execute(
-        "INSERT INTO ratings(user_id, movie_id, score, review, time) \
+        "INSERT INTO Ratings(user_id, movie_id, score, review, time) \
                         VALUES (%s, %s, %s, %s, %s);",
         (int(user), int(movie_id), int(score), str(review), int(timestamp)),
     )
