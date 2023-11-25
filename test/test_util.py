@@ -155,7 +155,7 @@ class Tests(unittest.TestCase):
         h = hashlib.sha256()
         h.update(new_pass)
         executor = db.cursor()
-        executor.execute("SELECT * FROM users;")
+        executor.execute("SELECT * FROM Users;")
         db_result = executor.fetchall()
         self.assertTrue(len(db_result) > 0)
         self.assertEqual(expected_username, db_result[0][1])

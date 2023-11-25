@@ -257,7 +257,7 @@ def submit_review(db, user, movie, score, review):
     Utility function for creating a dictionary for submitting a review
     """
     executor = db.cursor()
-    executor.execute("SELECT idMovies FROM mMvies WHERE name = %s", [movie])
+    executor.execute("SELECT idMovies FROM Movies WHERE name = %s", [movie])
     movie_id = executor.fetchall()[0][0]
     print("REVIEW IS " + review)
     d = datetime.datetime.utcnow()
@@ -295,8 +295,8 @@ def get_recent_movies(db, user):
     """
     executor = db.cursor()
     executor.execute(
-        "SELECT name, score FROM ratings AS r JOIN \
-    movies AS m ON m.idMovies = r.movie_id \
+        "SELECT name, score FROM Ratings AS r JOIN \
+    Movies AS m ON m.idMovies = r.movie_id \
     WHERE user_id = %s \
     ORDER BY time DESC \
     LIMIT 5;",
