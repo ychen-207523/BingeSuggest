@@ -30,6 +30,8 @@ from src.recommenderapp.utils import (
     get_wall_posts,
     get_username,
     get_recent_movies,
+    add_friend,
+    get_friends,
 )
 
 # pylint: enable=wrong-import-position
@@ -51,8 +53,9 @@ class Tests(unittest.TestCase):
         executor = db.cursor()
         executor.execute("USE testDB;")
         executor.execute("SET FOREIGN_KEY_CHECKS=0;")
-        executor.execute("DELETE FROM Users WHERE username = 'testUser'")
-        executor.execute("DELETE FROM Ratings WHERE idRatings > 0")
+        executor.execute("DELETE FROM Users")
+        executor.execute("DELETE FROM Ratings")
+        executor.execute("DELETE FROM Friends")
         db.commit()
 
     def test_beautify_feedback_data(self):
@@ -255,7 +258,41 @@ class Tests(unittest.TestCase):
         for i, movie in enumerate(recent_movies.json):
             self.assertEqual(movie["score"], movies_to_review[i][1])
 
-    # def test_get_friends(self):
+    def test_friends(self):
+        """
+        Test case 9
+        """
+        load_dotenv()
+        db = mysql.connector.connect(
+            user="root", password=os.getenv("DB_PASSWORD"), host="127.0.0.1"
+        )
+        executor = db.cursor()
+        executor.execute("USE testDB;")
+        create_account(db, "test@test.com", "testUser", "testPassword")
+        user = login_to_account(db, "testUser", "testPassword")
+        executor.execute(
+            "INSERT INTO Users(username, email, password) VALUES \
+                          ('testFriend', 'friend@test.com', 'testPassword')"
+        )
+        executor.execute(
+            "INSERT INTO Users(username, email, password) VALUES \
+                         ('testFriend2', 'friend2@test.com', 'testPassword')"
+        )
+        app = flask.Flask(__name__)
+
+        result = ""
+        with app.test_request_context("/"):
+            add_friend(db, "testFriend", user)
+            add_friend(db, "testFriend2", user)
+            db.commit()
+
+            result = get_friends(db, user)
+
+        friends = []
+        friends.append(result.json[0][0])
+        friends.append(result.json[1][0])
+        self.assertIn("testFriend", friends)
+        self.assertIn("testFriend2", friends)
 
 
 if __name__ == "__main__":
