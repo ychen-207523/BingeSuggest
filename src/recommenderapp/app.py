@@ -9,15 +9,13 @@ This code is licensed under MIT license (see LICENSE for details)
 #pylint: disable=import-error
 import json
 import sys
-import calendar
-import datetime
 import os
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 import mysql.connector
 from dotenv import load_dotenv
-from utils import beautify_feedback_data, send_email_to_user, createAccount, \
-    logintoAccount, submitReview, getWallPosts, getRecentMovies, getUserName, addFriend, getFriends
+from utils import beautify_feedback_data, send_email_to_user, create_account, \
+    login_to_account, submit_review, get_wall_posts, get_recent_movies, get_username, add_friend, get_friends
 from search import Search
 sys.path.append("../../")
 from src.prediction_scripts.item_based import recommend_for_new_user
@@ -125,7 +123,7 @@ def create_acc():
     Handles creating a new account
     """
     data = json.loads(request.data)
-    createAccount(g.db, data["email"], data["username"], data["password"])
+    create_account(g.db, data["email"], data["username"], data["password"])
     return request.data
 
 @app.route("/out", methods=["POST"])
@@ -142,7 +140,7 @@ def login():
     Handles logging in the active user
     """
     data = json.loads(request.data)
-    resp = logintoAccount(g.db, data["username"], data["password"])
+    resp = login_to_account(g.db, data["username"], data["password"])
     if resp is None:
         return 400
     user[1] = resp
@@ -154,7 +152,7 @@ def friend():
     Handles adding a new friend
     """
     data = json.loads(request.data)
-    addFriend(g.db, data["username"], user[1])
+    add_friend(g.db, data["username"], user[1])
     return request.data
 
 @app.route("/guest", methods=["POST"])
@@ -172,9 +170,7 @@ def review():
     Handles the submission of a movie review
     """
     data = json.loads(request.data)
-    d = datetime.datetime.utcnow()
-    timestamp = calendar.timegm(d.timetuple())
-    submitReview(g.db, user[1], data["movie"], data["score"], data["review"], timestamp)
+    submit_review(g.db, user[1], data["movie"], data["score"], data["review"])
     return request.data
 
 @app.route("/getWallData", methods=["GET"])
@@ -182,28 +178,28 @@ def wall_posts():
     """
     Gets the posts for the wall
     """
-    return getWallPosts(g.db)
+    return get_wall_posts(g.db)
 
 @app.route("/getRecentMovies", methods=["GET"])
 def recent_movies():
     """
     Gets the recent movies of the active user
     """
-    return getRecentMovies(g.db, user[1])
+    return get_recent_movies(g.db, user[1])
 
 @app.route("/getUserName", methods=["GET"])
 def username():
     """
     Gets the username of the active user
     """
-    return getUserName(g.db, user[1])
+    return get_username(g.db, user[1])
 
 @app.route("/getFriends", methods=["GET"])
 def get_friend():
     """
     Gets the friends of the active user
     """
-    return getFriends(g.db, user[1])
+    return get_friends(g.db, user[1])
 
 
 @app.route("/feedback", methods=["POST"])

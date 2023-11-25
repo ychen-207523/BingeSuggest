@@ -20,7 +20,7 @@ import pandas as pd
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 #pylint: disable=wrong-import-position
 from src.recommenderapp.utils import create_colored_tags, \
-    beautify_feedback_data, create_movie_genres, send_email_to_user, createAccount, logintoAccount, getWallPosts, submitReview
+    beautify_feedback_data, create_movie_genres, send_email_to_user, create_account, login_to_account, get_wall_posts, submit_review
 #pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")
@@ -90,7 +90,7 @@ class Tests(unittest.TestCase):
         executor = db.cursor()
         executor.execute("USE testDB;")
         executor.execute("DELETE FROM users WHERE username = 'testUser'")
-        createAccount(db, "test@test.com", "testUser", "testPassword")
+        create_account(db, "test@test.com", "testUser", "testPassword")
         expectedUserName="testUser"
         expectedEmail = "test@test.com"
         expectedPassword="testPassword"
@@ -105,8 +105,8 @@ class Tests(unittest.TestCase):
         self.assertEqual(expectedUserName, dbResult[0][1])
         self.assertEqual(expectedEmail, dbResult[0][2])
         self.assertEqual(h.hexdigest(), dbResult[0][3])
-        id = logintoAccount(db, "testUser", "testPassword")
-        fail = logintoAccount(db, "testUser", "wrongPassword")
+        id = login_to_account(db, "testUser", "testPassword")
+        fail = login_to_account(db, "testUser", "wrongPassword")
         self.assertIsNone(fail)
         db.close()
     
@@ -122,7 +122,7 @@ class Tests(unittest.TestCase):
         executor.execute("SET FOREIGN_KEY_CHECKS=0;")
         executor.execute("DELETE FROM users WHERE username = 'testUser'")
         executor.execute("DELETE FROM ratings WHERE idRatings > 0")
-        createAccount(db, "test@test.com", "testUser", "testPassword")
+        create_account(db, "test@test.com", "testUser", "testPassword")
         executor.execute("SELECT idUsers FROM users WHERE username='testUser'")
         dbResult = executor.fetchall()
         user = dbResult[0][0]
@@ -131,7 +131,7 @@ class Tests(unittest.TestCase):
         app = flask.Flask(__name__)
         a = ''
         with app.test_request_context('/'):
-            a = getWallPosts(db)
+            a = get_wall_posts(db)
         self.assertEqual(a.json[0]['imdb_id'], 'tt0076759')
         self.assertEqual(a.json[0]['name'], 'Star Wars (1977)')
         self.assertEqual(a.json[0]['review'], 'this is a great movie')

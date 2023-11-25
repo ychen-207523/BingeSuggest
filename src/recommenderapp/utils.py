@@ -5,6 +5,11 @@ This code is licensed under MIT license (see LICENSE for details)
 @author: PopcornPicks
 """
 
+#pylint: disable=wrong-import-position
+#pylint: disable=wrong-import-order
+#pylint: disable=import-error
+import calendar
+import datetime
 import logging
 import smtplib
 import os
@@ -177,48 +182,72 @@ def send_email_to_user(recipient_email, categorized_data):
     finally:
         server.quit()
 
-def createAccount(db, email, username, password):
+def create_account(db, email, username, password):
+    """
+        Utility function for creating an account
+    """
     executor = db.cursor()
     #salt our password
     load_dotenv()
-    newPass =  (password + os.getenv("SALT") + username).encode()
+    new_pass =  (password + os.getenv("SALT") + username).encode()
     #now hash it
     h = hashlib.sha256()
-    h.update(newPass)
+    h.update(new_pass)
     #now store
-    executor.execute("INSERT INTO users(username, email, password) VALUES (%s, %s, %s);", (username, email, h.hexdigest()))
+    executor.execute("INSERT INTO users(username, email, password) VALUES (%s, %s, %s);", \
+                     (username, email, h.hexdigest()))
     db.commit()
 
-def addFriend(db, username, userId):
+def add_friend(db, username, user_id):
+    """
+        Utility function for adding a friend
+    """
     executor = db.cursor()
     executor.execute("SELECT idUsers FROM users WHERE username = %s;", [username])
-    friendId = executor.fetchall()[0][0]
-    executor.execute("INSERT INTO friends(idUsers, idFriend) VALUES (%s, %s);", (int(userId), int(friendId)))
+    friend_id = executor.fetchall()[0][0]
+    executor.execute("INSERT INTO friends(idUsers, idFriend) VALUES (%s, %s);", \
+                      (int(user_id), int(friend_id)))
     db.commit()
 
-def logintoAccount(db, username, password):
+def login_to_account(db, username, password):
+    """
+        Utility function for logging in to an account
+    """
     executor = db.cursor()
-    newPass =  (password + os.getenv("SALT") + username).encode()
+    new_pass =  (password + os.getenv("SALT") + username).encode()
     #now hash it
     h = hashlib.sha256()
-    h.update(newPass)
-    executor.execute("SELECT * FROM users WHERE username = %s AND password = %s;", (username, h.hexdigest()))
+    h.update(new_pass)
+    executor.execute("SELECT * FROM users WHERE username = %s AND password = %s;",\
+                      (username, h.hexdigest()))
     result = executor.fetchall()
-    if (len(result) == 0):
+    if len(result) == 0:
         return None
     return result[0][0]
 
-def submitReview(db, user, movie, score, review, timestamp):
+def submit_review(db, user, movie, score, review):
+    """
+        Utility function for creating a dictionary for submitting a review
+    """
     executor = db.cursor()
     executor.execute("SELECT idMovies FROM movies WHERE name = %s", [movie])
     movie_id = executor.fetchall()[0][0]
     print("REVIEW IS " + review)
-    executor.execute("INSERT INTO ratings(user_id, movie_id, score, review, time) VALUES (%s, %s, %s, %s, %s);", (int(user), int(movie_id), int(score), str(review), int(timestamp)))
+    d = datetime.datetime.utcnow()
+    timestamp = calendar.timegm(d.timetuple())
+    executor.execute("INSERT INTO ratings(user_id, movie_id, score, review, time) \
+                        VALUES (%s, %s, %s, %s, %s);",\
+                        (int(user), int(movie_id), int(score), str(review), int(timestamp)))
     db.commit()
 
-def getWallPosts(db):
+def get_wall_posts(db):
+    """
+        Utility function for creating getting wall posts from the db
+    """
     executor = db.cursor()
-    executor.execute("SELECT name, imdb_id, review, score, username, time FROM users JOIN (SELECT name, imdb_id, review, score, user_id, time FROM ratings JOIN movies on ratings.movie_id = movies.idMovies) AS moviereview ON users.idUsers = moviereview.user_id ORDER BY time limit 50")
+    executor.execute("SELECT name, imdb_id, review, score, username, time FROM users JOIN \
+                     (SELECT name, imdb_id, review, score, user_id, time FROM ratings JOIN movies on ratings.movie_id = movies.idMovies) \
+                     AS moviereview ON users.idUsers = moviereview.user_id ORDER BY time limit 50")
     rows = [x[0] for x in executor.description]
     result = executor.fetchall()
     json_data = []
@@ -226,7 +255,10 @@ def getWallPosts(db):
         json_data.append(dict(zip(rows, r)))
     return jsonify(json_data)
 
-def getRecentMovies(db, user):
+def get_recent_movies(db, user):
+    """
+        Utility function for getting recent movies reviewed by a user
+    """
     executor = db.cursor()
     executor.execute("SELECT name, score FROM ratings AS r JOIN \
     movies AS m ON m.idMovies = r.movie_id \
@@ -240,14 +272,22 @@ def getRecentMovies(db, user):
         json_data.append(dict(zip(rows, r)))
     return jsonify(json_data)
 
-def getUserName(db, user):
+def get_username(db, user):
+    """
+        Utility function for getting the current users username
+    """
     executor = db.cursor()
     executor.execute("SELECT username FROM users WHERE idUsers = %s;", [int(user)])
     result = executor.fetchall()
     return jsonify(result[0][0])
 
-def getFriends(db, user):
+def get_friends(db, user):
+    """
+        Utility function for getting the current users friends
+    """
     executor = db.cursor()
-    executor.execute("SELECT username FROM users AS u JOIN friends AS f ON u.idUsers = f.idFriend WHERE f.idUsers = %s;", [int(user)])
+    executor.execute("SELECT username FROM users AS u \
+                     JOIN friends AS f ON u.idUsers = f.idFriend WHERE f.idUsers = %s;",\
+                          [int(user)])
     result = executor.fetchall()
     return jsonify(result)
