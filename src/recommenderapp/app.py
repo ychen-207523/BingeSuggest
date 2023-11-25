@@ -4,24 +4,27 @@ This code is licensed under MIT license (see LICENSE for details)
 
 @author: PopcornPicks
 """
-
+#pylint: disable=wrong-import-position
+#pylint: disable=wrong-import-order
+#pylint: disable=import-error
 import json
 import sys
 import calendar
-import time
 import datetime
+import os
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
-from search import Search
-from utils import beautify_feedback_data, send_email_to_user, createAccount, logintoAccount, submitReview, getWallPosts, getRecentMovies, getUserName, addFriend, getFriends
 import mysql.connector
-import os
 from dotenv import load_dotenv
-
+from utils import beautify_feedback_data, send_email_to_user, createAccount, \
+    logintoAccount, submitReview, getWallPosts, getRecentMovies, getUserName, addFriend, getFriends
+from search import Search
 sys.path.append("../../")
-#pylint: disable=wrong-import-position
 from src.prediction_scripts.item_based import recommend_for_new_user
-#pylint: enable=wrong-import-position
+sys.path.remove("../../")
+
+
+
 
 
 app = Flask(__name__)
@@ -44,7 +47,7 @@ def profile_page():
     """
     Renders the login page.
     """
-    if (user[1] != None):
+    if user[1] is not None:
         return render_template("profile.html")
     return render_template("login.html")
 
@@ -53,7 +56,7 @@ def wall_page():
     """
     Renders the wall page.
     """
-    if (user[1] != None or user[1] == 'guest'):
+    if user[1] is not None or user[1] == 'guest':
         return render_template("wall.html")
     return render_template("login.html")
 
@@ -62,7 +65,7 @@ def review_page():
     """
     Renders the review page.
     """
-    if (user[1] != None or user[1] == 'guest'):
+    if user[1] is not None or user[1] == 'guest':
         return render_template("review.html")
     return render_template("login.html")
 
@@ -71,7 +74,7 @@ def landing_page():
     """
     Renders the landing page.
     """
-    if (user[1] != None or user[1] == 'guest'):
+    if user[1] is not None or user[1] == 'guest':
         return render_template("landing_page.html")
     return render_template("login.html")
 
@@ -81,7 +84,7 @@ def search_page():
     """
     Renders the search page.
     """
-    if (user[1] != None or user[1] == 'guest'):
+    if user[1] is not None or user[1] == 'guest':
         return render_template("search_page.html")
     return render_template("login.html")
 
@@ -117,39 +120,57 @@ def search():
     return resp
 
 @app.route("/", methods=["POST"])
-def createAcc():
+def create_acc():
+    """
+    Handles creating a new account
+    """
     data = json.loads(request.data)
     createAccount(g.db, data["email"], data["username"], data["password"])
     return request.data
 
 @app.route("/out", methods=["POST"])
 def signout():
+    """
+    Handles signing out the active user
+    """
     user[1] = None
     return request.data
 
 @app.route("/log", methods=["POST"])
-def logIn():
+def login():
+    """
+    Handles logging in the active user
+    """
     data = json.loads(request.data)
     resp = logintoAccount(g.db, data["username"], data["password"])
-    if (resp == None):
+    if resp is None:
         return 400
     user[1] = resp
     return request.data
 
 @app.route("/friend", methods=["POST"])
 def friend():
+    """
+    Handles adding a new friend
+    """
     data = json.loads(request.data)
     addFriend(g.db, data["username"], user[1])
     return request.data
 
 @app.route("/guest", methods=["POST"])
 def guest():
+    """
+    Sets the user to be a guest user
+    """
     data = json.loads(request.data)
     user[1] = data["guest"]
     return request.data
 
 @app.route("/review", methods=["POST"])
 def review():
+    """
+    Handles the submission of a movie review
+    """
     data = json.loads(request.data)
     d = datetime.datetime.utcnow()
     timestamp = calendar.timegm(d.timetuple())
@@ -157,19 +178,31 @@ def review():
     return request.data
 
 @app.route("/getWallData", methods=["GET"])
-def wallPosts():
+def wall_posts():
+    """
+    Gets the posts for the wall
+    """
     return getWallPosts(g.db)
 
 @app.route("/getRecentMovies", methods=["GET"])
-def recentMovies():
+def recent_movies():
+    """
+    Gets the recent movies of the active user
+    """
     return getRecentMovies(g.db, user[1])
 
 @app.route("/getUserName", methods=["GET"])
 def username():
+    """
+    Gets the username of the active user
+    """
     return getUserName(g.db, user[1])
 
 @app.route("/getFriends", methods=["GET"])
-def getFriend():
+def get_friend():
+    """
+    Gets the friends of the active user
+    """
     return getFriends(g.db, user[1])
 
 
@@ -201,6 +234,9 @@ def success():
 
 @app.before_request
 def before_request():
+    """
+    Opens the db connection.
+    """
     load_dotenv()
     g.db = mysql.connector.connect(user='root', password=os.getenv('DB_PASSWORD'),
                                 host='127.0.0.1',
@@ -208,6 +244,9 @@ def before_request():
 
 @app.after_request
 def after_request(response):
+    """
+    Closes the db connection.
+    """
     g.db.close()
     return response
 
