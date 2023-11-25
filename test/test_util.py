@@ -171,7 +171,7 @@ class Tests(unittest.TestCase):
         executor.execute(
             "INSERT INTO Ratings(user_id, movie_id, score, review, time) \
                          VALUES (%s, %s, %s, %s, %s);",
-            (int(user), int(11), int(4), "this is a great movie", "990300"),
+            (int(user), int(11), int(4), "this is a great movie", "1970-01-01"),
         )
         db.commit()
         app = flask.Flask(__name__)
