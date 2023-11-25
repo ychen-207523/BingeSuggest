@@ -15,7 +15,8 @@ from flask_cors import CORS
 import mysql.connector
 from dotenv import load_dotenv
 from utils import beautify_feedback_data, send_email_to_user, create_account, \
-    login_to_account, submit_review, get_wall_posts, get_recent_movies, get_username, add_friend, get_friends
+    login_to_account, submit_review, get_wall_posts, get_recent_movies, get_username, \
+        add_friend, get_friends
 from search import Search
 sys.path.append("../../")
 from src.prediction_scripts.item_based import recommend_for_new_user

@@ -4,9 +4,9 @@ This code is licensed under MIT license (see LICENSE for details)
 
 @author: PopcornPicks
 """
-
-import calendar
-import datetime
+#pylint: disable=wrong-import-position
+#pylint: disable=wrong-import-order
+#pylint: disable=import-error
 import sys
 import unittest
 import warnings
@@ -20,7 +20,8 @@ import pandas as pd
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 #pylint: disable=wrong-import-position
 from src.recommenderapp.utils import create_colored_tags, \
-    beautify_feedback_data, create_movie_genres, send_email_to_user, create_account, login_to_account, get_wall_posts, submit_review
+    beautify_feedback_data, create_movie_genres, send_email_to_user, \
+        create_account, login_to_account, get_wall_posts
 #pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")
@@ -79,7 +80,7 @@ class Tests(unittest.TestCase):
             'Cutthroat Island (1995)'], "Yet to Watch": ['Assassins (1995)']}
         with self.assertRaises(Exception):
             send_email_to_user("wrong_email", beautify_feedback_data(data))
-    
+
     def test_accounts(self):
         """
         Test case 5
@@ -91,25 +92,24 @@ class Tests(unittest.TestCase):
         executor.execute("USE testDB;")
         executor.execute("DELETE FROM users WHERE username = 'testUser'")
         create_account(db, "test@test.com", "testUser", "testPassword")
-        expectedUserName="testUser"
-        expectedEmail = "test@test.com"
-        expectedPassword="testPassword"
-        newPass =  (expectedPassword + os.getenv("SALT") + expectedUserName).encode()
+        expected_username="testUser"
+        expected_email = "test@test.com"
+        expected_password="testPassword"
+        new_pass =  (expected_password + os.getenv("SALT") + expected_username).encode()
         #now hash it
         h = hashlib.sha256()
-        h.update(newPass)
+        h.update(new_pass)
         executor = db.cursor()
         executor.execute("SELECT * FROM users;")
-        dbResult = executor.fetchall()
-        self.assertTrue(len(dbResult) > 0)
-        self.assertEqual(expectedUserName, dbResult[0][1])
-        self.assertEqual(expectedEmail, dbResult[0][2])
-        self.assertEqual(h.hexdigest(), dbResult[0][3])
-        id = login_to_account(db, "testUser", "testPassword")
+        db_result = executor.fetchall()
+        self.assertTrue(len(db_result) > 0)
+        self.assertEqual(expected_username, db_result[0][1])
+        self.assertEqual(expected_email, db_result[0][2])
+        self.assertEqual(h.hexdigest(), db_result[0][3])
         fail = login_to_account(db, "testUser", "wrongPassword")
         self.assertIsNone(fail)
         db.close()
-    
+
     def test_get_wall_posts(self):
         """
         Test case 6
@@ -124,9 +124,11 @@ class Tests(unittest.TestCase):
         executor.execute("DELETE FROM ratings WHERE idRatings > 0")
         create_account(db, "test@test.com", "testUser", "testPassword")
         executor.execute("SELECT idUsers FROM users WHERE username='testUser'")
-        dbResult = executor.fetchall()
-        user = dbResult[0][0]
-        executor.execute("INSERT INTO ratings(user_id, movie_id, score, review, time) VALUES (%s, %s, %s, %s, %s);", (int(user), int(11), int(4), 'this is a great movie', '990300'))
+        db_result = executor.fetchall()
+        user = db_result[0][0]
+        executor.execute("INSERT INTO ratings(user_id, movie_id, score, review, time) \
+                         VALUES (%s, %s, %s, %s, %s);", \
+                            (int(user), int(11), int(4), 'this is a great movie', '990300'))
         db.commit()
         app = flask.Flask(__name__)
         a = ''
