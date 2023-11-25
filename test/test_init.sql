@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS testDB;
 USE testDB;
 
 -- Create the Users table
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS Users (
   idUsers INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(45) NOT NULL,
   email VARCHAR(45) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Ratings (
   INDEX movie_id_idx (movie_id ASC),
   CONSTRAINT user_id
     FOREIGN KEY (user_id)
-    REFERENCES users (idUsers)
+    REFERENCES Users (idUsers)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT movie_id

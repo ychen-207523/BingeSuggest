@@ -209,7 +209,7 @@ def create_account(db, email, username, password):
     h.update(new_pass)
     # now store
     executor.execute(
-        "INSERT INTO users(username, email, password) VALUES (%s, %s, %s);",
+        "INSERT INTO Users(username, email, password) VALUES (%s, %s, %s);",
         (username, email, h.hexdigest()),
     )
     db.commit()
@@ -220,14 +220,14 @@ def add_friend(db, username, user_id):
     Utility function for adding a friend
     """
     executor = db.cursor()
-    executor.execute("SELECT idUsers FROM users WHERE username = %s;", [username])
+    executor.execute("SELECT idUsers FROM Users WHERE username = %s;", [username])
     friend_id = executor.fetchall()[0][0]
     executor.execute(
-        "INSERT INTO friends(idUsers, idFriend) VALUES (%s, %s);",
+        "INSERT INTO Friends(idUsers, idFriend) VALUES (%s, %s);",
         (int(user_id), int(friend_id)),
     )
     executor.execute(
-        "INSERT INTO friends(idUsers, idFriend) VALUES (%s, %s);",
+        "INSERT INTO Friends(idUsers, idFriend) VALUES (%s, %s);",
         (int(friend_id), int(user_id)),
     )
     db.commit()
@@ -243,7 +243,7 @@ def login_to_account(db, username, password):
     h = hashlib.sha256()
     h.update(new_pass)
     executor.execute(
-        "SELECT * FROM users WHERE username = %s AND password = %s;",
+        "SELECT * FROM Users WHERE username = %s AND password = %s;",
         (username, h.hexdigest()),
     )
     result = executor.fetchall()
@@ -276,10 +276,10 @@ def get_wall_posts(db):
     """
     executor = db.cursor()
     executor.execute(
-        "SELECT name, imdb_id, review, score, username, time FROM users JOIN \
+        "SELECT name, imdb_id, review, score, username, time FROM Users JOIN \
                      (SELECT name, imdb_id, review, score, user_id, time FROM Ratings\
                           JOIN Movies on Ratings.movie_id = Movies.idMovies) AS moviereview \
-                            ON users.idUsers = moviereview.user_id ORDER BY time limit 50"
+                            ON Users.idUsers = moviereview.user_id ORDER BY time limit 50"
     )
     rows = [x[0] for x in executor.description]
     result = executor.fetchall()
@@ -315,7 +315,7 @@ def get_username(db, user):
     Utility function for getting the current users username
     """
     executor = db.cursor()
-    executor.execute("SELECT username FROM users WHERE idUsers = %s;", [int(user)])
+    executor.execute("SELECT username FROM Users WHERE idUsers = %s;", [int(user)])
     result = executor.fetchall()
     return jsonify(result[0][0])
 
@@ -326,8 +326,8 @@ def get_friends(db, user):
     """
     executor = db.cursor()
     executor.execute(
-        "SELECT username FROM users AS u \
-                     JOIN friends AS f ON u.idUsers = f.idFriend WHERE f.idUsers = %s;",
+        "SELECT username FROM Users AS u \
+                     JOIN Friends AS f ON u.idUsers = f.idFriend WHERE f.idUsers = %s;",
         [int(user)],
     )
     result = executor.fetchall()

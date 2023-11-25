@@ -51,7 +51,7 @@ class Tests(unittest.TestCase):
         executor = db.cursor()
         executor.execute("USE testDB;")
         executor.execute("SET FOREIGN_KEY_CHECKS=0;")
-        executor.execute("DELETE FROM users WHERE username = 'testUser'")
+        executor.execute("DELETE FROM Users WHERE username = 'testUser'")
         executor.execute("DELETE FROM Ratings WHERE idRatings > 0")
         db.commit()
 
@@ -177,7 +177,7 @@ class Tests(unittest.TestCase):
         executor.execute("USE testDB;")
         executor.execute("SET FOREIGN_KEY_CHECKS=0;")
         create_account(db, "test@test.com", "testUser", "testPassword")
-        executor.execute("SELECT idUsers FROM users WHERE username='testUser'")
+        executor.execute("SELECT idUsers FROM Users WHERE username='testUser'")
         db_result = executor.fetchall()
         user = db_result[0][0]
         executor.execute(
