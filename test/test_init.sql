@@ -46,6 +46,24 @@ CREATE TABLE IF NOT EXISTS Ratings (
     ON UPDATE NO ACTION
 );
 
+CREATE TABLE IF NOT EXISTS Friends (
+  idFriendship INT NOT NULL AUTO_INCREMENT,
+  idUsers INT NOT NULL,
+  idFriend INT NOT NULL,
+  PRIMARY KEY (idFriendship),
+  CONSTRAINT idUsers
+    FOREIGN KEY (idUsers)
+    REFERENCES Users (idUsers)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT idFriend
+    FOREIGN KEY (idFriend)
+    REFERENCES Users (idUsers)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+
 INSERT INTO Movies (idMovies, name, imdb_id) VALUES (2, 'Ariel (1988)', 'tt0094675');
 INSERT INTO Movies (idMovies, name, imdb_id) VALUES (3, 'Shadows in Paradise (1986)', 'tt0092149');
 INSERT INTO Movies (idMovies, name, imdb_id) VALUES (5, 'Four Rooms (1995)', 'tt0113101');

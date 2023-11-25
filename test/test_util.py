@@ -29,6 +29,7 @@ from src.recommenderapp.utils import (
     login_to_account,
     get_wall_posts,
     get_username,
+    get_recent_movies,
 )
 
 # pylint: enable=wrong-import-position
@@ -194,7 +195,6 @@ class Tests(unittest.TestCase):
         self.assertEqual(a.json[0]["review"], "this is a great movie")
         self.assertEqual(a.json[0]["score"], 4)
 
-    # def test_get_recent_movies(self):
     def test_get_username(self):
         """
         Test case 7
@@ -212,6 +212,48 @@ class Tests(unittest.TestCase):
         with app.test_request_context("/"):
             username = get_username(db, user).json
         self.assertEqual("testUser", username)
+
+    def test_get_recent_movies(self):
+        """
+        Test case 8
+        """
+        load_dotenv()
+        db = mysql.connector.connect(
+            user="root", password=os.getenv("DB_PASSWORD"), host="127.0.0.1"
+        )
+        executor = db.cursor()
+        executor.execute("USE testDB;")
+        create_account(db, "test@test.com", "testUser", "testPassword")
+        user = login_to_account(db, "testUser", "testPassword")
+
+        movies_to_review = [
+            (2, 3, "1970-01-06"),
+            (3, 4, "1970-01-05"),
+            (5, 5, "1970-01-04"),
+            (6, 2, "1970-01-03"),
+            (11, 1, "1970-01-02"),
+            (12, 3, "1970-01-01"),
+        ]
+        for movie in movies_to_review:
+            executor.execute(
+                "INSERT INTO Ratings(user_id, movie_id, score, review, time) \
+                             VALUES (%s, %s, %s, %s, %s);",
+                (
+                    int(user),
+                    int(movie[0]),
+                    int(movie[1]),
+                    "this is a great movie",
+                    movie[2],
+                ),
+            )
+        db.commit()
+        app = flask.Flask(__name__)
+        recent_movies = []
+        with app.test_request_context("/"):
+            recent_movies = get_recent_movies(db, user)
+        self.assertEqual(5, len(recent_movies.json))
+        for i, movie in enumerate(recent_movies.json):
+            self.assertEqual(movie["score"], movies_to_review[i][1])
 
     # def test_get_friends(self):
 
