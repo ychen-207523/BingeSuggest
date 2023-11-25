@@ -46,13 +46,13 @@ CREATE TABLE IF NOT EXISTS Ratings (
     ON UPDATE NO ACTION
 );
 
-INSERT INTO movies (idMovies, name, imdb_id) VALUES (2, 'Ariel (1988)', 'tt0094675');
-INSERT INTO movies (idMovies, name, imdb_id) VALUES (3, 'Shadows in Paradise (1986)', 'tt0092149');
-INSERT INTO movies (idMovies, name, imdb_id) VALUES (5, 'Four Rooms (1995)', 'tt0113101');
-INSERT INTO movies (idMovies, name, imdb_id) VALUES (6, 'Judgment Night (1993)', 'tt0107286');
-INSERT INTO movies (idMovies, name, imdb_id) VALUES (11, 'Star Wars (1977)', 'tt0076759');
-INSERT INTO movies (idMovies, name, imdb_id) VALUES (12, 'Finding Nemo (2003)', 'tt0266543');
-INSERT INTO movies (idMovies, name, imdb_id) VALUES (13, 'Forrest Gump (1994)', 'tt0109830');
-INSERT INTO movies (idMovies, name, imdb_id) VALUES (14, 'American Beauty (1999)', 'tt0169547');
-INSERT INTO movies (idMovies, name, imdb_id) VALUES (15, 'Citizen Kane (1941)', 'tt0033467');
-INSERT INTO movies (idMovies, name, imdb_id) VALUES (16, 'Dancer in the Dark (2000)', 'tt0168629');
+INSERT INTO Movies (idMovies, name, imdb_id) VALUES (2, 'Ariel (1988)', 'tt0094675');
+INSERT INTO Movies (idMovies, name, imdb_id) VALUES (3, 'Shadows in Paradise (1986)', 'tt0092149');
+INSERT INTO Movies (idMovies, name, imdb_id) VALUES (5, 'Four Rooms (1995)', 'tt0113101');
+INSERT INTO Movies (idMovies, name, imdb_id) VALUES (6, 'Judgment Night (1993)', 'tt0107286');
+INSERT INTO Movies (idMovies, name, imdb_id) VALUES (11, 'Star Wars (1977)', 'tt0076759');
+INSERT INTO Movies (idMovies, name, imdb_id) VALUES (12, 'Finding Nemo (2003)', 'tt0266543');
+INSERT INTO Movies (idMovies, name, imdb_id) VALUES (13, 'Forrest Gump (1994)', 'tt0109830');
+INSERT INTO Movies (idMovies, name, imdb_id) VALUES (14, 'American Beauty (1999)', 'tt0169547');
+INSERT INTO Movies (idMovies, name, imdb_id) VALUES (15, 'Citizen Kane (1941)', 'tt0033467');
+INSERT INTO Movies (idMovies, name, imdb_id) VALUES (16, 'Dancer in the Dark (2000)', 'tt0168629');
