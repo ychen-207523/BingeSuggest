@@ -121,12 +121,12 @@ class Tests(unittest.TestCase):
         executor.execute("USE testDB;")
         executor.execute("SET FOREIGN_KEY_CHECKS=0;")
         executor.execute("DELETE FROM users WHERE username = 'testUser'")
-        executor.execute("DELETE FROM ratings WHERE idRatings > 0")
+        executor.execute("DELETE FROM Ratings WHERE idRatings > 0")
         create_account(db, "test@test.com", "testUser", "testPassword")
         executor.execute("SELECT idUsers FROM users WHERE username='testUser'")
         db_result = executor.fetchall()
         user = db_result[0][0]
-        executor.execute("INSERT INTO ratings(user_id, movie_id, score, review, time) \
+        executor.execute("INSERT INTO Ratings(user_id, movie_id, score, review, time) \
                          VALUES (%s, %s, %s, %s, %s);", \
                             (int(user), int(11), int(4), 'this is a great movie', '990300'))
         db.commit()
