@@ -28,6 +28,7 @@ from src.recommenderapp.utils import (
     create_account,
     login_to_account,
     get_wall_posts,
+    get_username,
 )
 
 # pylint: enable=wrong-import-position
@@ -39,6 +40,19 @@ class Tests(unittest.TestCase):
     """
     Test cases for utility functions
     """
+
+    def setUp(self):
+        print("\nrunning setup method")
+        load_dotenv()
+        db = mysql.connector.connect(
+            user="root", password=os.getenv("DB_PASSWORD"), host="127.0.0.1"
+        )
+        executor = db.cursor()
+        executor.execute("USE testDB;")
+        executor.execute("SET FOREIGN_KEY_CHECKS=0;")
+        executor.execute("DELETE FROM users WHERE username = 'testUser'")
+        executor.execute("DELETE FROM Ratings WHERE idRatings > 0")
+        db.commit()
 
     def test_beautify_feedback_data(self):
         """
@@ -131,7 +145,6 @@ class Tests(unittest.TestCase):
         )
         executor = db.cursor()
         executor.execute("USE testDB;")
-        executor.execute("DELETE FROM users WHERE username = 'testUser'")
         create_account(db, "test@test.com", "testUser", "testPassword")
         expected_username = "testUser"
         expected_email = "test@test.com"
@@ -162,8 +175,6 @@ class Tests(unittest.TestCase):
         executor = db.cursor()
         executor.execute("USE testDB;")
         executor.execute("SET FOREIGN_KEY_CHECKS=0;")
-        executor.execute("DELETE FROM users WHERE username = 'testUser'")
-        executor.execute("DELETE FROM Ratings WHERE idRatings > 0")
         create_account(db, "test@test.com", "testUser", "testPassword")
         executor.execute("SELECT idUsers FROM users WHERE username='testUser'")
         db_result = executor.fetchall()
@@ -182,6 +193,27 @@ class Tests(unittest.TestCase):
         self.assertEqual(a.json[0]["name"], "Star Wars (1977)")
         self.assertEqual(a.json[0]["review"], "this is a great movie")
         self.assertEqual(a.json[0]["score"], 4)
+
+    # def test_get_recent_movies(self):
+    def test_get_username(self):
+        """
+        Test case 7
+        """
+        load_dotenv()
+        db = mysql.connector.connect(
+            user="root", password=os.getenv("DB_PASSWORD"), host="127.0.0.1"
+        )
+        executor = db.cursor()
+        executor.execute("USE testDB;")
+        create_account(db, "test@test.com", "testUser", "testPassword")
+        user = login_to_account(db, "testUser", "testPassword")
+        app = flask.Flask(__name__)
+        username = ""
+        with app.test_request_context("/"):
+            username = get_username(db, user).json
+        self.assertEqual("testUser", username)
+
+    # def test_get_friends(self):
 
 
 if __name__ == "__main__":
