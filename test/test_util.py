@@ -312,7 +312,7 @@ class Tests(unittest.TestCase):
             db.commit()
 
             executor.execute("SELECT score FROM Ratings WHERE movie_id = %s", 862)
-            result = executor.fetchall()[0][0]
+            result = executor.fetchall()[0]
             self.assertEqual(9, int(result))
 
 
