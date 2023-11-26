@@ -313,9 +313,7 @@ class Tests(unittest.TestCase):
 
             executor.execute("SELECT score FROM Ratings WHERE movie_id = %s", 862)
             result = executor.fetchall()[0][0]
-            self.assertEquals(9, int(result))
-
-
+            self.assertEqual(9, int(result))
 
 if __name__ == "__main__":
     unittest.main()
