@@ -48,12 +48,11 @@ jobs:
         run: |
           mysql -h 127.0.0.1 --port 3306 -u root -ptestrootpass < test/test_init.sql
 
-      - name: Run tests and generate coverage
-        run: |
-          cd test
-          coverage run --source=test -m pytest test_*.py
-          coverage xml -i
-
-      - name: Upload coverage report to Codecov
-        run: |
-          bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
+      - name: Test with pytest
+        run: pytest --tb=line
+      - name: Generate coverage
+        run:  pytest --tb=line --cov-config=.coveragerc --cov --cov-report=xml
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
