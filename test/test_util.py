@@ -32,6 +32,7 @@ from src.recommenderapp.utils import (
     get_recent_movies,
     add_friend,
     get_friends,
+    submit_review,
 )
 
 # pylint: enable=wrong-import-position
@@ -290,6 +291,30 @@ class Tests(unittest.TestCase):
         friends.append(result.json[1][0])
         self.assertIn("testFriend", friends)
         self.assertIn("testFriend2", friends)
+
+    def test_submit_review(self):
+        """
+        Test case 10
+        """
+        load_dotenv()
+        db = mysql.connector.connect(
+            user="root", password=os.getenv("DB_PASSWORD"), host="127.0.0.1"
+        )
+        executor = db.cursor()
+        executor.execute("USE testDB;")
+        create_account(db, "test@test.com", "testUser", "testPassword")
+        user = login_to_account(db, "testUser", "testPassword")
+        app = flask.Flask(__name__)
+
+        result = ""
+        with app.test_request_context("/"):
+            submit_review(db, user, "Toy Story (1995)", 9, "testReview")
+            db.commit()
+
+            executor.execute("SELECT score FROM Ratings WHERE movie_id = %s", 862)
+            result = executor.fetchall()[0][0]
+            self.assertEquals(9, int(result))
+
 
 
 if __name__ == "__main__":
