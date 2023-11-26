@@ -12,16 +12,16 @@ CREATE TABLE IF NOT EXISTS Users (
   PRIMARY KEY (idUsers),
   UNIQUE INDEX username_UNIQUE (username ASC),
   UNIQUE INDEX email_UNIQUE (email ASC)
-) ENGINE = InnoDB;
+);
 
 -- Create the Movies table
 CREATE TABLE IF NOT EXISTS Movies (
   idMovies INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(45) NOT NULL,
+  name VARCHAR(128) NOT NULL,
   imdb_id VARCHAR(45) NOT NULL,
   PRIMARY KEY (idMovies),
   UNIQUE INDEX imdb_id_UNIQUE (imdb_id ASC)
-) ENGINE = InnoDB;
+);
 
 -- Create the Ratings table
 CREATE TABLE IF NOT EXISTS Ratings (
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS Ratings (
   user_id INT NOT NULL,
   movie_id INT NOT NULL,
   score INT NOT NULL,
-  review VARCHAR(45) NULL,
+  review VARCHAR(60000) NULL,
   time DATETIME NOT NULL,
   PRIMARY KEY (idRatings),
   INDEX user_id_idx (user_id ASC),
@@ -44,9 +44,8 @@ CREATE TABLE IF NOT EXISTS Ratings (
     REFERENCES Movies (idMovies)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-) ENGINE = InnoDB;
+);
 
--- Create the Friends table
 CREATE TABLE IF NOT EXISTS Friends (
   idFriendship INT NOT NULL AUTO_INCREMENT,
   idUsers INT NOT NULL,
