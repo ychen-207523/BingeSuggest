@@ -301,7 +301,7 @@ class Tests(unittest.TestCase):
             user="root", password=os.getenv("DB_PASSWORD"), host="127.0.0.1"
         )
         executor = db.cursor()
-        executor.execute("USE testDB;")
+        executor.execute("USE testdb;")
         create_account(db, "test@test.com", "testUser", "testPassword")
         user = login_to_account(db, "testUser", "testPassword")
         app = flask.Flask(__name__)
