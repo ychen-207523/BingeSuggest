@@ -210,6 +210,12 @@
                 data: JSON.stringify(data),
                 success: function() {
                     alert("Review submitted for " + selectedMovie + ". Rating: " + rating + "/10");
+                    $("#selectedMovies").empty();
+                    $("#searchBox").val("");
+                    $("#comments").val("");
+                    $("#searchBox").val("");
+                    setRating(0);
+                    highlightStars();
                 },
                 error: function() {
                     alert("Error submitting review.");

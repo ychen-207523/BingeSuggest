@@ -259,13 +259,12 @@ def submit_review(db, user, movie, score, review):
     executor = db.cursor()
     executor.execute("SELECT idMovies FROM Movies WHERE name = %s", [movie])
     movie_id = executor.fetchall()[0][0]
-    print("REVIEW IS " + review)
     d = datetime.datetime.utcnow()
-    timestamp = calendar.timegm(d.timetuple())
+    timestamp = d.strftime("%Y-%m-%d %H:%M:%S")
     executor.execute(
         "INSERT INTO Ratings(user_id, movie_id, score, review, time) \
                         VALUES (%s, %s, %s, %s, %s);",
-        (int(user), int(movie_id), int(score), str(review), int(timestamp)),
+        (int(user), int(movie_id), int(score), str(review), timestamp),
     )
     db.commit()
 
