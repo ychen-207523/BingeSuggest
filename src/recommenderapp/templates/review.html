@@ -131,8 +131,26 @@
             <button id="submit-btn" onclick="submitReview()">Submit</button>
         </div>
     </div>
+    <br /><br /><br />
+    <button id="backToLanding" onclick="backToLandingPage()" class="btn btn-primary mx-auto">Return home.</button>
     
     <script>
+
+        // Function to handle Get Started button click
+        function backToLandingPage() {
+            // Navigate to the search page
+            $("#loaderLanding").attr("class", "d-flex justify-content-center");
+            $(".container").hide();
+            $("#post-container").hide();
+            setTimeout(function () {
+                window.location.href = "/landing" // Replace with the actual URL of your search page
+            }, 2000);
+        }
+
+        // Bind the getStarted function to the Get Started button click
+        $("#backToLanding").click(function () {
+            backToLandingPage();
+        });
 
         let rating = 0;
 

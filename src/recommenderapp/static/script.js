@@ -396,6 +396,22 @@ $(document).ready(function () {
 		goToProfile();
 	});
 
+	// Function to handle Get Started button click
+	function backToLandingPage() {
+		// Navigate to the search page
+		$("#loaderLanding").attr("class", "d-flex justify-content-center");
+		$(".container").hide();
+		$("#post-container").hide();
+		setTimeout(function () {
+			window.location.href = "/landing" // Replace with the actual URL of your search page
+		}, 2000);
+	}
+
+	// Bind the getStarted function to the Get Started button click
+	$("#backToLanding").click(function () {
+		backToLandingPage();
+	});
+
 	var FeedbackData
 
 	$("#feedback").click(function () {
