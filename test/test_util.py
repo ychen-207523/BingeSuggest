@@ -315,5 +315,6 @@ class Tests(unittest.TestCase):
             result = executor.fetchall()[0][0]
             self.assertEqual(9, int(result))
 
+
 if __name__ == "__main__":
     unittest.main()
