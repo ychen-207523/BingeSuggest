@@ -13,3 +13,4 @@ pytest |MIT |https://github.com/pytest-dev/pytest
 pytest-cov |MIT| https://github.com/pytest-dev/pytest-cov
 python-dotenv| BSD-3-Clause "New" or "Revised"| https://github.com/theskumar/python-dotenv
 pandas| BSD-3-Clause |https://github.com/pandas-dev/pandas
+bcrypt | Apache-2 | https://github.com/pyca/bcrypt/
