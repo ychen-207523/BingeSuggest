@@ -11,7 +11,7 @@ import sys
 import unittest
 import warnings
 import os
-import hashlib
+import bcrypt
 import flask
 from dotenv import load_dotenv
 from pathlib import Path
@@ -152,18 +152,15 @@ class Tests(unittest.TestCase):
         create_account(db, "test@test.com", "testUser", "testPassword")
         expected_username = "testUser"
         expected_email = "test@test.com"
-        expected_password = "testPassword"
-        new_pass = (expected_password + os.getenv("SALT") + expected_username).encode()
-        # now hash it
-        h = hashlib.sha256()
-        h.update(new_pass)
+        expected_password = ("testPassword").encode("utf-8")
         executor = db.cursor()
         executor.execute("SELECT * FROM Users;")
         db_result = executor.fetchall()
+        actual_password = (db_result[0][3]).encode("utf-8")
         self.assertTrue(len(db_result) > 0)
         self.assertEqual(expected_username, db_result[0][1])
         self.assertEqual(expected_email, db_result[0][2])
-        self.assertEqual(h.hexdigest(), db_result[0][3])
+        self.assertTrue(bcrypt.checkpw(expected_password, actual_password))
         fail = login_to_account(db, "testUser", "wrongPassword")
         self.assertIsNone(fail)
         db.close()

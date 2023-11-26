@@ -8,13 +8,10 @@ This code is licensed under MIT license (see LICENSE for details)
 # pylint: disable=wrong-import-position
 # pylint: disable=wrong-import-order
 # pylint: disable=import-error
-import calendar
 import datetime
 import logging
 import smtplib
-import os
-import hashlib
-from dotenv import load_dotenv
+import bcrypt
 from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -201,16 +198,11 @@ def create_account(db, email, username, password):
     Utility function for creating an account
     """
     executor = db.cursor()
-    # salt our password
-    load_dotenv()
-    new_pass = (password + os.getenv("SALT") + username).encode()
-    # now hash it
-    h = hashlib.sha256()
-    h.update(new_pass)
-    # now store
+    new_pass = password.encode("utf-8")
+    h = bcrypt.hashpw(new_pass, bcrypt.gensalt())
     executor.execute(
         "INSERT INTO Users(username, email, password) VALUES (%s, %s, %s);",
-        (username, email, h.hexdigest()),
+        (username, email, h),
     )
     db.commit()
 
@@ -238,16 +230,14 @@ def login_to_account(db, username, password):
     Utility function for logging in to an account
     """
     executor = db.cursor()
-    new_pass = (password + os.getenv("SALT") + username).encode()
-    # now hash it
-    h = hashlib.sha256()
-    h.update(new_pass)
     executor.execute(
-        "SELECT * FROM Users WHERE username = %s AND password = %s;",
-        (username, h.hexdigest()),
+        "SELECT IdUsers, username, password FROM Users WHERE username = %s;",
+        [username],
     )
     result = executor.fetchall()
-    if len(result) == 0:
+    new_pass = password.encode("utf-8")
+    actual_pass = (result[0][2]).encode("utf-8")
+    if len(result) == 0 or not bcrypt.checkpw(new_pass, actual_pass):
         return None
     return result[0][0]
 
