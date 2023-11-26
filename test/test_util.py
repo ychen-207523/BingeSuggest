@@ -308,11 +308,11 @@ class Tests(unittest.TestCase):
 
         result = ""
         with app.test_request_context("/"):
-            submit_review(db, user, "Toy Story (1995)", 9, "testReview")
+            submit_review(db, user, "Forrest Gump (1994)", 9, "testReview")
             db.commit()
 
-            executor.execute("SELECT score FROM Ratings WHERE movie_id = %s", 862)
-            result = executor.fetchall()[0]
+            executor.execute("SELECT score FROM ratings WHERE movie_id = %s", 13)
+            result = executor.fetchall()[0][0]
             self.assertEqual(9, int(result))
 
 

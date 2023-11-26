@@ -364,6 +364,38 @@ $(document).ready(function () {
 		goToWall();
 	});
 
+	// Function to handle Review button click
+	function goToReview() {
+		// Navigate to the search page
+		$("#loaderLanding").attr("class", "d-flex justify-content-center")
+		$("#centralDivLanding").hide()
+		$("#landingTopNav").hide()
+		setTimeout(function () {
+			window.location.href = "/review" // Replace with the actual URL of your search page
+		}, 2000)
+	}
+
+    // Bind the review function to the Review button click
+	$("#goToReviewButton").click(function () {
+		goToReview();
+	});
+
+	// Function to handle Profile button click
+	function goToProfile() {
+		// Navigate to the search page
+		$("#loaderLanding").attr("class", "d-flex justify-content-center")
+		$("#centralDivLanding").hide()
+		$("#landingTopNav").hide()
+		setTimeout(function () {
+			window.location.href = "/profile" // Replace with the actual URL of your search page
+		}, 2000)
+	}
+
+    // Bind the getStarted function to the Get Started button click
+	$("#goToProfileButton").click(function () {
+		goToProfile();
+	});
+
 	var FeedbackData
 
 	$("#feedback").click(function () {
