@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Users (
 -- Create the Movies table
 CREATE TABLE IF NOT EXISTS Movies (
   idMovies INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(45) NOT NULL,
+  name VARCHAR(128) NOT NULL,
   imdb_id VARCHAR(45) NOT NULL,
   PRIMARY KEY (idMovies),
   UNIQUE INDEX imdb_id_UNIQUE (imdb_id ASC)
