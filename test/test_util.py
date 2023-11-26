@@ -301,7 +301,7 @@ class Tests(unittest.TestCase):
             user="root", password=os.getenv("DB_PASSWORD"), host="127.0.0.1"
         )
         executor = db.cursor()
-        executor.execute("USE testdb;")
+        executor.execute("USE testDB;")
         create_account(db, "test@test.com", "testUser", "testPassword")
         user = login_to_account(db, "testUser", "testPassword")
         app = flask.Flask(__name__)
@@ -311,7 +311,7 @@ class Tests(unittest.TestCase):
             submit_review(db, user, "Forrest Gump (1994)", 9, "testReview")
             db.commit()
 
-            executor.execute("SELECT score FROM ratings WHERE movie_id = 13")
+            executor.execute("SELECT score FROM Ratings WHERE movie_id = 13")
             result = executor.fetchall()[0][0]
             self.assertEqual(9, int(result))
 
