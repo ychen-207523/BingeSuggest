@@ -311,7 +311,7 @@ class Tests(unittest.TestCase):
             submit_review(db, user, "Forrest Gump (1994)", 9, "testReview")
             db.commit()
 
-            executor.execute("SELECT score FROM ratings WHERE movie_id = %s", 13)
+            executor.execute("SELECT score FROM ratings WHERE movie_id = %s", "13")
             result = executor.fetchall()[0][0]
             self.assertEqual(9, int(result))
 
