@@ -1,4 +1,4 @@
 # .coveragerc
 
 [run]
-include = src/recommenderapp*,test/*
+include = src/recommenderapp/*,test/*
