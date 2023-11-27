@@ -10,6 +10,11 @@ Users can rate their favorite (or least favorite) movies out of ten possible poi
 
 Details on these additions can be found here: [FIX ME](https://github.com/brwali/PopcornPicks)
 
+### The Wall
+Users can view all of their movie reviews and ratings at a glance in a visually appealing dashboard.
+
+Details on these additions can be found here: [FIX ME](https://github.com/brwali/PopcornPicks)
+
 ### Friends
 People are often interested in what their friends are watching. With the project 3 updates, this is now possible. As long as users are friends, they are able to see what they have reviewed.
 
