@@ -1,4 +1,4 @@
-# <i> PopcornPicks🍿: Your Destination for Movie Recommendations </i>
+f# <i> PopcornPicks🍿: Your Destination for Movie Recommendations </i>
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://gitHub.com/brwali/PopcornPicks/graphs/commit-activity) [![Contributors Activity](https://img.shields.io/github/commit-activity/m/brwali/PopcornPicks)](https://github.com/brwali/PopcornPicks/pulse) [![GitHub issues](https://img.shields.io/github/issues/brwali/PopcornPicks.svg)](https://github.com/brwali/PopcornPicks/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/brwali/PopcornPicks.svg)](https://github.com/brwali/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/brwali/PopcornPicks) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) [![Unittest](https://github.com/brwali/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/brwali/PopcornPicks/actions/workflows/unittest.yml) [![codecov](https://codecov.io/gh/brwali/PopcornPicks/graph/badge.svg?token=0XN6K2DMGS)](https://codecov.io/gh/brwali/PopcornPicks) [![GitHub release](https://img.shields.io/github/release/brwali/PopcornPicks.svg)](https://GitHub.com/brwali/PopcornPicksreleases/) [![StyleCheck: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint) [![HitCount](https://hits.dwyl.com/brwali/PopcornPicks.svg)](https://hits.dwyl.com/brwali/PopcornPicks) ![GitHub contributors](https://img.shields.io/github/contributors/brwali/PopcornPicks) ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/brwali/PopcornPicks) ![GitHub repo size](https://img.shields.io/github/repo-size/brwali/PopcornPicks) [![Black](https://github.com/brwali/PopcornPicks/actions/workflows/black.yml/badge.svg)](https://github.com/brwali/PopcornPicks/actions/workflows/black.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/260d558f17ae5e1027e5/maintainability)](https://codeclimate.com/github/brwali/PopcornPicks/maintainability) [![GitHub closed issues by-label](https://img.shields.io/github/issues-closed-raw/brwali/PopcornPicks/bug?color=green&label=Squished%20bugs)](https://github.com/brwali/PopcornPicks/issues?q=is%3Aissue+label%3Abug+is%3Aclosed) ![Discord](https://img.shields.io/discord/1143966088695124110)
   
 
@@ -49,7 +49,7 @@ Checkout for project documentation at our [wiki page](https://github.com/brwali/
 You can see the project presentation at - https://youtu.be/ymAo_zXfZ0c
 
 ## Project Description
-PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our [wiki page](https://github.com/brwali/PopcornPicks/wiki)
+PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our documentation [here](https://github.com/brwali/PopcornPicks/tree/master/docs)
 
 ## Core Applications of the Project
 
@@ -66,8 +66,8 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
     <img src="https://github.com/brwali/PopcornPicks/blob/master/asset/email.png" alt="Email" width="400" height="400">
 </div>
 
-## Project 2 Delta
-Check out the significant changes that we made for Project 2 [here](https://github.com/brwali/PopcornPicks/wiki/The-Delta-(Project-2))
+## Project 3 Delta
+Check out the significant changes that we made for Project 3 [here](https://github.com/brwali/PopcornPicks/blob/master/proj3/Proj3Changes.md)
 
 ## Tech stack Used👨‍💻:
 
