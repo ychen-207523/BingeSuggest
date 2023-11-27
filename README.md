@@ -20,7 +20,7 @@
     - [Login to Account](#login-to-account)
     - [Profile and Friends](#profile-and-friends)
     - [Wall](#wall)
-- [Improvements Made in the Project](#project-2-delta)
+- [Improvements Made in the Project](#project-3-delta)
 - [TechStack Used for the Development of Project](#tech-stack-used)
 - [Steps for Execution](#getting-started)
 - [Future Scope](#future-scope)
