@@ -33,6 +33,7 @@ from src.recommenderapp.utils import (
     add_friend,
     get_friends,
     submit_review,
+    get_recent_friend_movies,
 )
 
 # pylint: enable=wrong-import-position
@@ -291,6 +292,41 @@ class Tests(unittest.TestCase):
         friends.append(result.json[1][0])
         self.assertIn("testFriend", friends)
         self.assertIn("testFriend2", friends)
+
+
+        executor.execute(
+            "SELECT idUsers FROM Users WHERE username = 'testFriend'"
+        )
+        friend = executor.fetchall()[0][0]
+        movies_to_review = [
+            (2, 3, "1970-01-06"),
+            (3, 4, "1970-01-05"),
+            (5, 5, "1970-01-04"),
+            (6, 2, "1970-01-03"),
+            (11, 1, "1970-01-02"),
+            (12, 3, "1970-01-01"),
+        ]
+        for movie in movies_to_review:
+            executor.execute(
+                "INSERT INTO Ratings(user_id, movie_id, score, review, time) \
+                             VALUES (%s, %s, %s, %s, %s);",
+                (
+                    int(friend),
+                    int(movie[0]),
+                    int(movie[1]),
+                    "this is a great movie",
+                    movie[2],
+                ),
+            )
+        db.commit()
+        app = flask.Flask(__name__)
+        result = []
+        with app.test_request_context("/"):
+            result = get_recent_friend_movies(db, 'testFriend')
+        self.assertEqual(5, len(result.json))
+        for i, movie in enumerate(result.json):
+            self.assertEqual(movie["score"], movies_to_review[i][1])
+        
 
     def test_submit_review(self):
         """
