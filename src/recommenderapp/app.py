@@ -25,6 +25,7 @@ from utils import (
     get_username,
     add_friend,
     get_friends,
+    get_recent_friend_movies,
 )
 from search import Search
 
@@ -206,6 +207,14 @@ def recent_movies():
     Gets the recent movies of the active user
     """
     return get_recent_movies(g.db, user[1])
+
+@app.route("/getRecentFriendMovies", methods=["POST"])
+def recent_friend_movies():
+    """
+    Gets the recent movies of a certain friend
+    """
+    data = json.loads(request.data)
+    return get_recent_friend_movies(g.db, str(data))
 
 
 @app.route("/getUserName", methods=["GET"])
