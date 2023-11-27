@@ -116,6 +116,37 @@
     <br /><br /><br />
     <button id="backToLanding" onclick="backToLandingPage()" class="btn btn-primary mx-auto">Return home.</button>
   </body>
+  <script>
+    window.onload = function () {
+        getRecentMovies();
+    }
+
+    function addRecentMovie(i) {
+      var li = document.createElement("li");
+      li.appendChild(document.createTextNode(i));
+      li.className = 'list-group-item';
+      $("#recentMovies").append(li);
+    }
+
+    function getRecentMovies(){
+      var ulList = $("#recentMovies")
+      $.ajax({
+      type: 'GET',
+      url: '/getRecentMovies',
+      contentType: "application/json;charset=UTF-8",
+      success: function(response) {
+        response.forEach(element => {
+        	addRecentMovie(element.name)
+        });
+      },
+      error: function(error) {
+        reject(error);
+      }
+      });
+    }
+
+
+  </script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" crossorigin="anonymous"></script>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
