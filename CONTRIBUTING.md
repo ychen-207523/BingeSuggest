@@ -109,3 +109,7 @@ Any suggested enhancements like adding new features or improving existing functi
 * Add comments in the code so that a new contributor can understand the functionality of the modules easily
 * `black` is used as linter
 * 'Pylint' used for proper coding standards
+
+## Governal Policies
+
+All contributions will be carefully reviewed by our entire development team. We will discuss the advantages and disadvantages of adding the change, and a final decision will be decided based on a vote, with all members' votes having equal weight.
