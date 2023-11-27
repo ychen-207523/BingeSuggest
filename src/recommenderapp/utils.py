@@ -311,7 +311,7 @@ def get_username(db, user):
 
 def get_recent_friend_movies(db, user):
     """
-    Utility function for getting a certain users id
+    Utility function for getting a certain friends recent movies
     """
     executor = db.cursor()
     executor.execute("SELECT idUsers FROM Users WHERE username = %s;", [str(user)])
