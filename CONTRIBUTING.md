@@ -16,10 +16,12 @@
 ## Our Table Of Contents
 
 - .github/workflows  
-  - all GitHub workflow YAML files  
-- proj2  
-   - score_card.md  
-  
+  - all GitHub workflow YAML files
+    
+- proj3  
+   - README.md
+   - Proj3Changes.md
+     
 - src  
   - prediction_scripts    
      - item_based.py   
@@ -27,13 +29,20 @@
     - static
       - script.js
       - stylesheet.css
+      - wall.js
     - templates
       - landing_page.html
+      - login.html
+      - profile.html
+      - review.html
       - search_page.html
       - success.html
+      - wall.html
     - app.py
     - search.py
     - utils.py
+  - init.sql
+  - movies.sql
   
 - test  
     - test_predict.py  
@@ -42,9 +51,15 @@
   
 - .gitignore
 
+- CHAT.md
+
+- CITATION.md
+
 - CODE_OF_CONDUCT.md
 
 - CONTRIBUTING.md
+
+- Dependencies.md
 
 - LICENSE
 
