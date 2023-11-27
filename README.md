@@ -72,7 +72,7 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
 </div>
 
 ### Create an Acccount (NEW in project 3)
-**Users can now create accounts, allowing them to have data persisted in the app, including their movie reviews and recommendations**
+**Users can now create accounts, persisting data including their movie reviews and recommendations**
 <img src="https://github.com/brwali/PopcornPicks/blob/master/asset/create_account.gif" width="600" height="375">
 
 ### Login to account (NEW in project 3)
