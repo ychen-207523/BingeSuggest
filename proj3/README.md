@@ -17,8 +17,8 @@ Prepare a  markdown  with **three** columns:
 |workload is spread over the whole team (one team member is often Xtimes more productive than the others but nevertheless, here is a track record that everyone is contributing a lot) | 3 | in GH
 | Number of commits|3|in GH|
 | Number of commits: by different people|3| in GH
-| Issues reports: there are **many**|3| https://github.com/nfoster1492/ClassMateBot-1/issues
-| Issues are being  closed|3| https://github.com/nfoster1492/ClassMateBot-1/issues?q=is%3Aissue+is%3Aclosed
+| Issues reports: there are **many**|3| https://github.com/brwali/PopcornPicks/issues
+| Issues are being  closed|3| https://github.com/brwali/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed
 | DOI badge: exists |3| on README
 |Docs: doco generated , format not ugly |3| In Docs folder|
 |Docs: what: point descriptions of each class/function (in isolation) |3| In Docs folder|
@@ -40,7 +40,7 @@ Prepare a  markdown  with **three** columns:
 | evidence that the whole team is using the same tools: everyone can get to all tools and files|3| we use VSCode and everyone has the software installed via the tools in the installation guide
 | evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)|3||
 | evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)|3||
-| evidence that the members of the team are working across multiple places in the code base|3|We wrote and debugged the tests of the cogs that we were not working on. For example if most of my work was in grades, I worked on testing and debugging calendar|
+| evidence that the members of the team are working across multiple places in the code base|3||
 |short release cycles |2| visible in commit history |
 |Does your website and documentation provide a clear, high-level overview of your software?|3|In Readme and docs files|
 |Does your website and documentation provide a clear, high-level overview of your software?|3|In Readme and docs files|
