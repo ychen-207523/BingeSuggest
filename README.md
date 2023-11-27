@@ -10,7 +10,7 @@
 
 - [Why use PopcornPicks?](#why-use-popcornpicks)
 - [Project Documentation](#documentation)
-- [Project Presentation Video](#project-presentation-video)
+- [Project Presentation Videos](#project-presentation-video)
 - [Brief Overview of Project](#project-description)
 - [Core Applications of the Project](#core-applications-of-the-project)<br/>
     - [Recommendation Mechanism](#movie-recommendation-mechanism)<br/>
@@ -45,8 +45,13 @@ PopcornPicks: Your movie recommender! Input movies, get tailored suggestions, an
 ## Documentation
 Checkout for project documentation [here](https://github.com/brwali/PopcornPicks/tree/master/docs)
 
-## Project Presentation Video
-You can see the project presentation at - https://youtu.be/ymAo_zXfZ0c
+## Project Presentation Videos
+### New Features 2 minute demo
+[![why contribute video](https://img.youtube.com/vi/QHju8EzQUQ4/0.jpg)](https://www.youtube.com/watch?v=QHju8EzQUQ4)
+
+### Why contribute?
+[![why contribute video](https://img.youtube.com/vi/aQ1cryH4B7A/0.jpg)](https://www.youtube.com/watch?v=aQ1cryH4B7A)
+
 
 ## Project Description
 PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our documentation [here](https://github.com/brwali/PopcornPicks/tree/master/docs)
@@ -75,7 +80,7 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
 <img src="https://github.com/brwali/PopcornPicks/blob/master/asset/login.gif" width="600" height="375">
 
 ### Profile/Friends Features (NEW in project 3)
-**The user can add friends, view the movies reviewed by the friends, and see their reviewed movies in their profile page**
+**The user can add friends, view the movies reviewed by the friends, and see their reviewed movies in their profile**
 <img src="https://github.com/brwali/PopcornPicks/blob/master/asset/profile.gif" width="600" height="375">
 
 ### Wall (NEW in project 3)
