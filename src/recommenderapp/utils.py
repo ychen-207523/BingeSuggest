@@ -299,8 +299,6 @@ def get_recent_movies(db, user):
     return jsonify(json_data)
 
 
-
-
 def get_username(db, user):
     """
     Utility function for getting the current users username
@@ -310,6 +308,7 @@ def get_username(db, user):
     result = executor.fetchall()
     return jsonify(result[0][0])
 
+
 def get_recent_friend_movies(db, user):
     """
     Utility function for getting a certain users id
@@ -317,15 +316,14 @@ def get_recent_friend_movies(db, user):
     executor = db.cursor()
     executor.execute("SELECT idUsers FROM Users WHERE username = %s;", [str(user)])
     result = executor.fetchall()
-    id = result[0][0]
-
+    userId = result[0][0]
     executor.execute(
         "SELECT name, score FROM Ratings AS r JOIN \
     Movies AS m ON m.idMovies = r.movie_id \
     WHERE user_id = %s \
     ORDER BY time DESC \
     LIMIT 5;",
-        [int(id)],
+        [int(userId)],
     )
     rows = [x[0] for x in executor.description]
     result = executor.fetchall()
@@ -333,7 +331,6 @@ def get_recent_friend_movies(db, user):
     for r in result:
         json_data.append(dict(zip(rows, r)))
     return jsonify(json_data)
-
 
 
 def get_friends(db, user):

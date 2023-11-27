@@ -208,6 +208,7 @@ def recent_movies():
     """
     return get_recent_movies(g.db, user[1])
 
+
 @app.route("/getRecentFriendMovies", methods=["POST"])
 def recent_friend_movies():
     """
