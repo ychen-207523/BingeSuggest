@@ -46,8 +46,14 @@
 **Input : database handle, email, username, password;<br/> Output: Enters user data into database**<br/>
 
 ### add_friend(db, username, user_id)
+**Utility function for adding a friend to an existing account**<br/>
+**Input: database handle, username of the friend to be added to the logged in account, user_id of the user account logged in**<br/>
+**Result: Enters the ids of the logged in user and friend into the Friends table in the database**<br/>
 
 ### login_to_account(db, username, password)
+**Utility function for logging into an user account**<br/>
+**Input: database handle, username of the user account, password of the user account**<br/>
+**Output: returns the id of the logged in user if successful otherwise reports an error to the log**<br/>
 
 ### submit_review(db, user, movie, score, review)
 
@@ -58,10 +64,16 @@
 **Input : database handle, user_id;<br/> Output: Movies names from most five most recent results of ratings from the logged-in user**<br/>
 
 ### get_username(db, user)
+**Utility function for getting the username of a user based on the inputted id**<br/>
+**Input: database handle, user_id of the user logged in**<br/>
+**Output: returns the username stored in the database for that corresponding id**<br/>
 
 ### get_recent_friend_movies(db, user)
 
 ### get_friends(db, user)
+**Utility function for getting all friends of a logged in user**<br/>
+**Input: database handle, user_id of the user logged in**<br/>
+**Output: returns a list of all the friends of the user stored in the database**<br/>
 
 ## [search.py](https://github.com/brwali/PopcornPicks/blob/master/src/recommenderapp/search.py)
 **Class that handles the search feature of the landing page.**
