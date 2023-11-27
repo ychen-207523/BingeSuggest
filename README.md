@@ -147,7 +147,8 @@ Please refer to the [CONTRIBUTING.md](https://github.com/brwali/PopcornPicks/blo
 [Samarth Shetty](https://www.linkedin.com/in/samarthshetty09/)<br/>
 
 ## Contact
-In case of any issues, please e-mail your queries to popcornpicks504@gmail.com or raise an issue on this repository.
+In case of any issues, please e-mail your queries to popcornpicks777@gmail.com or raise an issue on this repository.<br>
+Our team of developers monitors this e-mail address and would be happy to answer any and all questions you have about setup or use of this project!
 
 ## Join the PopcornPicks Community:
 
