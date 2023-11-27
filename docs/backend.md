@@ -41,6 +41,27 @@
 **Utility function to send movie recommendations to user over email**<br/>
 **Input : email of recipient_email and output of [beautify_feedback_data](https://github.com/adipai/PopcornPicks/wiki/Backend/_edit#beautify_feedback_datadata);<br/> Output: Sends email for valid email, otherwise raises exception in the server logs**<br/>
 
+### create_account(db, email, username, password)
+**Utility function for creating an account**<br/>
+**Input : database handle, email, username, password;<br/> Output: Enters user data into database**<br/>
+
+### add_friend(db, username, user_id)
+
+### login_to_account(db, username, password)
+
+### submit_review(db, user, movie, score, review)
+
+### get_wall_posts(db)
+
+### get_recent_movies(db, user)
+**Utility function for getting recent movies of logged-in user.**<br/>
+**Input : database handle, user_id;<br/> Output: Movies names from most five most recent results of ratings from the logged-in user**<br/>
+
+### get_username(db, user)
+
+### get_recent_friend_movies(db, user)
+
+### get_friends(db, user)
 
 ## [search.py](https://github.com/brwali/PopcornPicks/blob/master/src/recommenderapp/search.py)
 **Class that handles the search feature of the landing page.**
