@@ -2,6 +2,18 @@
 
 ## [app.py](https://github.com/brwali/PopcornPicks/blob/master/src/recommenderapp/app.py)
 
+### login_page()
+**Renders to the login page of the web-app**
+
+### profile_page()
+**Renders to the profile page of the web-app**
+
+### wall_page()
+**Renders to the wall page of the web-app**
+
+### review_page()
+**Renders to the review page of the web-app**
+
 ### landing_page()
 **Renders to the landing page of the web-app**
 
@@ -14,6 +26,39 @@
 ### search()
 **Returns top-10 movie searches for an input string in the search box**
 
+### create_acc()
+**Handles creating a new account**
+
+### signout()
+**Handles signing out the active user**
+
+### login()
+**Handles logging in the active user**
+
+### friend()
+**Handles adding a new friend**
+
+### guest()
+**Sets the user to be a guest user**
+
+### review()
+**Handles the submission of a movie review**
+
+### wall_posts()
+**Gets the posts for the wall**
+
+### recent_movies()
+**Gets the recent movies of the active user**
+
+### recent_friend_movies()
+**Gets the recent movies of a certain friend**
+
+### username()
+**Gets the username of the active user**
+
+### get_friend()
+**Gets the friends of the active user**
+
 ### feedback()
 **Handles user feedback submission**
 
@@ -22,6 +67,12 @@
 
 ### success()
 **Renders to the success page**
+
+### before_request()
+**Opens the db connection.**
+
+### after_request()
+**Closes the db connection.**
 
 ## [utils.py](https://github.com/brwali/PopcornPicks/blob/master/src/recommenderapp/utils.py)
 
@@ -52,10 +103,13 @@
 
 ### login_to_account(db, username, password)
 **Utility function for logging into an user account**<br/>
-**Input: database handle, username of the user account, password of the user account**<br/>
-**Output: returns the id of the logged in user if successful otherwise reports an error to the log**<br/>
+**Input: database handle, id of the user account, movie title, score out of ten, and a written review**<br/>
+**Result: adds a row to the Ratings table in the database detailing this movie review**<br/>
 
 ### submit_review(db, user, movie, score, review)
+**Utility function for submitting a movie review**<br/>
+**Input: database handle, username of the user account, password of the user account**<br/>
+**Output: returns the id of the logged in user if successful otherwise reports an error to the log**<br/>
 
 ### get_wall_posts(db)
 
@@ -69,6 +123,9 @@
 **Output: returns the username stored in the database for that corresponding id**<br/>
 
 ### get_recent_friend_movies(db, user)
+**Utility function for getting recent movies of a specific user**<br/>
+**Input : database handle, user_id**<br/> 
+**Output: Movies names from most five most recent results of ratings from the specified user**<br/>
 
 ### get_friends(db, user)
 **Utility function for getting all friends of a logged in user**<br/>
