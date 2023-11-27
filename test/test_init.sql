@@ -1,3 +1,8 @@
+--Copyright (c) 2023 Nathan Kohen, Nicholas Foster, Brandon Walia, Robert Kenney
+--This code is licensed under MIT license (see LICENSE for details)
+
+--@author: PopcornPicks
+
 CREATE DATABASE IF NOT EXISTS testDB;
 
 -- Switch to the testDB database

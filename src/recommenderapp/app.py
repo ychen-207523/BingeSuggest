@@ -1,5 +1,5 @@
 """
-Copyright (c) 2023 Aditya Pai, Ananya Mantravadi, Rishi Singhal, Samarth Shetty
+Copyright (c) 2023 Nathan Kohen, Nicholas Foster, Brandon Walia, Robert Kenney
 This code is licensed under MIT license (see LICENSE for details)
 
 @author: PopcornPicks

@@ -12,4 +12,4 @@ For example, for keyword "love" the top-10 searches that PopcornPicks returns co
 
 # [test_util.py](https://github.com/brwali/PopcornPicks/blob/master/test/test_util.py)
 
-Here test cases are written to check the functionality of the email notifier feature, i.e., for every function corresponding to the feature - test_beautify_feedback_data(), test_create_colored_tags(), test_create_movie_genres() and test_send_email_to_user()
+Here test cases are written to check the functionality of the email notifier feature, i.e., for every function corresponding to the feature - test_beautify_feedback_data(), test_create_colored_tags(), test_create_movie_genres(), test_send_email_to_user(), test_accounts(), test_get_wall_posts(), test_get_username(), test_get_recent_movies(), test_friends() and test_submit_review()

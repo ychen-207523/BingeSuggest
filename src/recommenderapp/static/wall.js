@@ -1,3 +1,9 @@
+/**
+Copyright (c) 2023 Nathan Kohen, Nicholas Foster, Brandon Walia, Robert Kenney
+This code is licensed under MIT license (see LICENSE for details)
+
+@author: PopcornPicks
+ */
 // Function to handle Get Started button click
 function backToLandingPage() {
     // Navigate to the search page
@@ -36,9 +42,6 @@ function loadPosts(){
 }
 
 function fetchMovieData(imdbID){
-
-    var apikey = '77da67f1';
-
     return new Promise(function(resolve, reject){
         $.ajax({
             type: 'GET',
@@ -46,7 +49,7 @@ function fetchMovieData(imdbID){
             dataType: 'json',
             data: {
                 i: imdbID,
-                apikey: apikey,
+                apikey: '77da67f1',
             },
             success: function(response) {
                 resolve(response);

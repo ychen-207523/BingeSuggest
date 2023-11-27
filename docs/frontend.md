@@ -44,6 +44,13 @@ With a bit of code wizardry, it handles user interactions, animations, and ensur
 
 ---
 
+## [Wall.js](https://github.com/brwali/PopcornPicks/blob/master/src/recommenderapp/static/script.js)
+
+Wall.js includes the functions that make the wall work, including ajax calls to the app getting the reviews from the users, and to omdb to get movie data.
+
+
+---
+
 ## [Stylesheet.css](https://github.com/brwali/PopcornPicks/blob/master/src/recommenderapp/static/stylesheet.css)
 
 Stylesheet.css, the fashion designer for your website! This file makes sure your website looks as stylish as a Hollywood star on the red carpet.
