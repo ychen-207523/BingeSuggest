@@ -316,14 +316,14 @@ def get_recent_friend_movies(db, user):
     executor = db.cursor()
     executor.execute("SELECT idUsers FROM Users WHERE username = %s;", [str(user)])
     result = executor.fetchall()
-    userId = result[0][0]
+    user_id = result[0][0]
     executor.execute(
         "SELECT name, score FROM Ratings AS r JOIN \
     Movies AS m ON m.idMovies = r.movie_id \
     WHERE user_id = %s \
     ORDER BY time DESC \
     LIMIT 5;",
-        [int(userId)],
+        [int(user_id)],
     )
     rows = [x[0] for x in executor.description]
     result = executor.fetchall()
