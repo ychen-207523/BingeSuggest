@@ -293,10 +293,7 @@ class Tests(unittest.TestCase):
         self.assertIn("testFriend", friends)
         self.assertIn("testFriend2", friends)
 
-
-        executor.execute(
-            "SELECT idUsers FROM Users WHERE username = 'testFriend'"
-        )
+        executor.execute("SELECT idUsers FROM Users WHERE username = 'testFriend'")
         friend = executor.fetchall()[0][0]
         movies_to_review = [
             (2, 3, "1970-01-06"),
@@ -322,11 +319,10 @@ class Tests(unittest.TestCase):
         app = flask.Flask(__name__)
         result = []
         with app.test_request_context("/"):
-            result = get_recent_friend_movies(db, 'testFriend')
+            result = get_recent_friend_movies(db, "testFriend")
         self.assertEqual(5, len(result.json))
         for i, movie in enumerate(result.json):
             self.assertEqual(movie["score"], movies_to_review[i][1])
-        
 
     def test_submit_review(self):
         """
