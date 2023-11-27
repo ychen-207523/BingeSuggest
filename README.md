@@ -51,9 +51,9 @@ You can see the project presentation at - https://youtu.be/ymAo_zXfZ0c
 ## Project Description
 PopcornPicks is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, PopcornPicks offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our documentation [here](https://github.com/brwali/PopcornPicks/tree/master/docs)
 
-## Core Applications of the Project
+## Core Applications of the Project (How docs)
 
-### Movie Recommendation Mechanism
+### Movie Recommendation Mechanism (Modified in project 3)
 **The user selects upto 5 movies to get a tailored watchlist and provide feedback for the same**
   
 <img src="https://github.com/brwali/PopcornPicks/blob/master/asset/recommend_mechanism.gif" width="600" height="375">
@@ -65,6 +65,22 @@ PopcornPicks is a user-friendly movie recommender that curates a tailored list o
     <img src="https://github.com/brwali/PopcornPicks/blob/master/asset/email_notifier.gif" alt="Email Notifier" width="600" height="375">
     <img src="https://github.com/brwali/PopcornPicks/blob/master/asset/email.png" alt="Email" width="400" height="400">
 </div>
+
+### Create an Acccount (NEW in project 3)
+**Users can now create accounts, allowing them to have data persisted in the app, including their movie reviews and recommendations**
+<img src="https://github.com/brwali/PopcornPicks/blob/master/asset/create_account.gif" width="600" height="375">
+
+### Login to account (NEW in project 3)
+**The user can log in to their account securly with encrypted passwords stored in our database**
+<img src="https://github.com/brwali/PopcornPicks/blob/master/asset/login.gif" width="600" height="375">
+
+### Profile/Friends Features (NEW in project 3)
+**The user can add friends, view the movies reviewed by the friends, and see their reviewed movies in their profile page**
+<img src="https://github.com/brwali/PopcornPicks/blob/master/asset/profile.gif" width="600" height="375">
+
+### Wall (NEW in project 3)
+**The user can interact with other users, by viewing a community sourced wall of recent moview reviews**
+<img src="https://github.com/brwali/PopcornPicks/blob/master/asset/wall.gif" width="600" height="375">
 
 ## Project 3 Delta
 Check out the significant changes that we made for Project 3 [here](https://github.com/brwali/PopcornPicks/blob/master/proj3/Proj3Changes.md)
@@ -116,13 +132,13 @@ Check out the significant changes that we made for Project 3 [here](https://gith
 PopcornPicks is a dynamic project with endless possibilities for expansion and enhancement. Here are some exciting avenues for future development:
 
 
-1. **User Profiles and Preferences**: Implement user profiles where users can save their preferences, ratings, and watch history for a more personalized movie discovery experience.
+1. **User Profiles and Preferences**: Continue to improve user profiles. More features could be added with friend interaction, such as ability to send messages. More data on the users could be persisted such as preferences and watch history for a more personalized movie discovery experience.
 
 2. **Integration with Streaming Services**: Integrate with popular streaming services to provide real-time availability information and seamless access to recommended movies.
-
-3. **Movie Reviews and Ratings**: Allow users to write and read movie reviews and ratings, fostering a community of film critics and enthusiasts.
   
-4. **Improved Recommendation Algorithm**: Enhance the recommendation engine with more advanced machine learning models and collaborative filtering techniques to provide even more accurate and personalized movie suggestions.
+3. **Improved Recommendation Algorithm**: Enhance the recommendation engine with more advanced machine learning models and collaborative filtering techniques to provide even more accurate and personalized movie suggestions.
+ 
+4. **Frontend rework**: Currently the frontend uses jquery, which is a bit dated. As the program becomes more complex, it may be nice to use a component based architecture such as React, Angular, or Blazor.
 
 The future of PopcornPicks is full of potential, and we invite developers, movie lovers, and anyone passionate about cinema to join us in making this platform the ultimate movie companion. 
 
