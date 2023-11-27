@@ -112,10 +112,14 @@
 **Output: returns the id of the logged in user if successful otherwise reports an error to the log**<br/>
 
 ### get_wall_posts(db)
+**Utility function for getting wall posts from the db**<br/>
+**Input: database handle**<br/>
+**Output: returns the recent movies and their data**<br/>
 
 ### get_recent_movies(db, user)
-**Utility function for getting recent movies of logged-in user.**<br/>
-**Input : database handle, user_id;<br/> Output: Movies names from most five most recent results of ratings from the logged-in user**<br/>
+**Utility function for getting recent movies of logged-in user**<br/>
+**Input : database handle, user_id**<br/> 
+**Output: Movies names from most five most recent results of ratings from the logged-in user**<br/>
 
 ### get_username(db, user)
 **Utility function for getting the username of a user based on the inputted id**<br/>
