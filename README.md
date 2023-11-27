@@ -43,7 +43,7 @@ PopcornPicks: Your movie recommender! Input movies, get tailored suggestions, an
 - **Simple:** Easy installation and setup – start discovering great movies in no time!"
 
 ## Documentation
-Checkout for project documentation at our [wiki page](https://github.com/brwali/PopcornPicks/wiki)
+Checkout for project documentation [here](https://github.com/brwali/PopcornPicks/tree/master/docs)
 
 ## Project Presentation Video
 You can see the project presentation at - https://youtu.be/ymAo_zXfZ0c
@@ -105,9 +105,9 @@ Check out the significant changes that we made for Project 3 [here](https://gith
     https://github.com/brwali/PopcornPicks
   
  Step 2:
-   Follow the setup instructions in the wiki documentation
+   Follow the setup instructions in the installation documentation
    
-    https://github.com/brwali/PopcornPicks/wiki/Installation-and-setup
+    https://github.com/brwali/PopcornPicks/blob/master/docs/install.md
     
     
 <b>Finally, start enjoying personalized movie recommendations!</b>
