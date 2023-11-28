@@ -51,3 +51,5 @@ This table was required for storing friend information between different users
 |.|.|.|
 
 ## Documentation
+
+Installation documentation was revised to account for the additional steps in setting up the database and server on user/developer's local machine.
