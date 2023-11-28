@@ -137,7 +137,7 @@ def send_email_to_user(recipient_email, categorized_data):
     smtp_server = "smtp.gmail.com"
     # Port for TLS
     smtp_port = 587
-    sender_email = "popcornpicks504@gmail.com"
+    sender_email = "popcornpicks777@gmail.com"
 
     # Use an app password since 2-factor authentication is enabled
     sender_password = " "
