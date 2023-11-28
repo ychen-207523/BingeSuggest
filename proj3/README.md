@@ -9,7 +9,7 @@ Prepare a  markdown  with **three** columns:
 - At the top,  show the sum of column2,
 
 
-| Notes| Score (SUM 240)| Evidence|
+| Notes| Score (SUM 244)| Evidence|
 |------|------|---------|
 | Video | 3 | On README.md (https://www.youtube.com/watch?v=QHju8EzQUQ4)
 |workload is spread over the whole team (one team member is often Xtimes more productive than the others but nevertheless, here is a track record that everyone is contributing a lot) | 3 | in GH
