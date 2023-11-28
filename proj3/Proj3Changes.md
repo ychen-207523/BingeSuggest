@@ -8,7 +8,7 @@ Details on these additions can be found here: [The Login Page](https://github.co
 ### Saved Reviews
 Users can rate their favorite (or least favorite) movies out of ten possible points, as well as write brief comments to document their thoughts.
 
-Details on these additions can be found here: [FIX ME](https://github.com/brwali/PopcornPicks)
+Details on these additions can be found here: [Review Page](https://github.com/brwali/PopcornPicks/blob/master/docs/frontend.md#review-page)
 
 ### The Wall
 Users can view all of their movie reviews and ratings at a glance in a visually appealing dashboard.
