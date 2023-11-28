@@ -29,7 +29,7 @@ Prepare a  markdown  with **three** columns:
 | Use of syntax checkers. |3|Pylint|
 | Use of code coverage |3|Codecov: badge on readme|
 | other automated analysis tools|3|workflows/main.yml and CodeQL|
-| test cases exist|3|test/test_bot.py|
+| test cases exist|3|/test/ directory|
 | test cases are routinely executed|3|workflows/pytest.yml: see actions|
 | the files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up|3| In Contributing.md|
 | issues are discussed before they are closed|3|We discussed issues in discord, and summarized on the issue comments|
