@@ -1,7 +1,5 @@
 # Project 3 Rubric
 
-## NEEDS TO BE UPDATED *(ONLY A TEMPLATE)*
-
 Prepare a  markdown  with **three** columns:
 
 - Column1 has all the following points PLUS all the  points from the
@@ -13,7 +11,7 @@ Prepare a  markdown  with **three** columns:
 
 | Notes| Score (SUM 240)| Evidence|
 |------|------|---------|
-| Video | 3 | On README.md (https://www.youtube.com/watch?v=8CfEfXnoKMs)
+| Video | 3 | On README.md (https://www.youtube.com/watch?v=QHju8EzQUQ4)
 |workload is spread over the whole team (one team member is often Xtimes more productive than the others but nevertheless, here is a track record that everyone is contributing a lot) | 3 | in GH
 | Number of commits|3|in GH|
 | Number of commits: by different people|3| in GH
@@ -58,17 +56,17 @@ Prepare a  markdown  with **three** columns:
 |Do you provide troubleshooting information that describes the symptoms and step-by-step solutions for problems and error messages?|2|see docs/troubleshoot.md
 |If your software can be used as a library, package or service by other software, do you provide comprehensive API documentation?|0|
 |Do you store your documentation under revision control with your source code?|3|Yes, in docs folder and Readme|
-|Do you publish your release history e.g. release data, version numbers, key features of each release etc. on your web site or in your documentation?|2|see badge on github readme and the changes in project 2 docs file|
+|Do you publish your release history e.g. release data, version numbers, key features of each release etc. on your web site or in your documentation?|2|see badge on github readme and the changes in project 3 docs file|
 |Does your software describe how a user can get help with using your software?|3|Info in Contributing, and on the bottom of readme with a help email|
 |Does your website and documentation describe what support, if any, you provide to users and developers?|3|Info in Contributing, nd on the bottom of readme with a help email|
 |Does your project have an e-mail address or forum that is solely for supporting users?|3|At the bottom of readme|
 |Are e-mails to your support e-mail address received by more than one person?|3| All of our developers check the help email|
 |Does your project have a ticketing system to manage bug reports and feature requests?|3|In issues and projects tab|
 |Is your project's ticketing system publicly visible to your users, so they can view bug reports and feature requests?|3|In issues and projects tab|
-|Is your software’s architecture and design modular?|3|Yes, users can add functionality through cogs|
+|Is your software’s architecture and design modular?|2|Yes, but a little more separation could improve this|
 |Does your software use an accepted coding standard or convention?|2|Consistent standards followed across codebase, conventions are defined in our pylint and black configuration|
-|Does your software allow communications using open communications protocols?|2|we use http to communicate with google calendar|
-|Is your software cross-platform compatible?|3|
+|Does your software allow communications using open communications protocols?|2|we use http (AJAX) for communication|
+|Is your software cross-platform compatible?|3|Has been tested witih Edge, Firefox, Chrome|
 |Does your software adhere to appropriate accessibility conventions or standards?|1|
 |Does your documentation adhere to appropriate accessibility conventions or standards?|1|
 |Is your source code stored in a repository under revision control?|3|All code in github|
@@ -85,7 +83,7 @@ Prepare a  markdown  with **three** columns:
 |Can you download dependencies using a dependency management tool or package manager?|3|Using pip install requirements|
 |Do you have tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful?|3|Testing through github actions|
 |Do you have an automated test suite for your software? |3|Testing through github actions|
-|Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code?|0|
+|Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code?|3|
 |Do you use continuous integration, automatically running tests whenever changes are made to your source code?|3|On-push testing through github actions|
 |Are your test results publicly visible?|3|Test results in actions build tab|
 |Are all manually-run tests documented?|0|
@@ -102,12 +100,12 @@ Prepare a  markdown  with **three** columns:
 |Is your contributions' policy publicly available?|3|In Contributing on Github|
 |Do contributors keep the copyright/IP of their contributions? |3|MIT license is used
 |Does your website and documentation clearly state the copyright owners of your software and documentation?|3|all files say copytright informations and doi is listed on readme
-|Does each of your source code files include a copyright statement?|3|At top of each .py file|
+|Does each of your source code files include a copyright statement?|3|At top of each source file|
 |Does your website and documentation clearly state the licence of your software?|3|MIT License
 |Is your software released under an open source licence?|3|MIT Liscense|
 |Is your software released under an OSI-approved open-source licence?|3|MIT Liscense|
-|Does each of your source code files include a licence header?|0|
+|Does each of your source code files include a licence header?|2|
 |Do you have a recommended citation for your software?|3|Citation.md|
-|Does your website or documentation include a project roadmap (a list of project and development milestones for the next 3, 6 and 12 months)?|3|In projects tab|
+|Does your website or documentation include a project roadmap (a list of project and development milestones for the next 3, 6 and 12 months)?|3|In projects tab and open issues tagged|
 |Does your website or documentation describe how your project is funded, and the period over which funding is guaranteed?|0|
 |Do you make timely announcements of the deprecation of components, APIs, etc.?|0|
