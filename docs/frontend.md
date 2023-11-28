@@ -20,6 +20,14 @@ Whether you're hunting for action-packed blockbusters, heartwarming rom-coms, or
 
 ---
 
+## [Review Page](https://github.com/brwali/PopcornPicks/blob/master/src/recommenderapp/templates/review.html)
+
+The Review Page, where users can praise or rant about movies they recently watched! Rate movies out of ten stars and add comments to prodive context for your ratings!
+
+All reviews submitted will appear on the Wall!
+
+---
+
 ## [Success!](https://github.com/brwali/PopcornPicks/blob/master/src/recommenderapp/templates/success.html)
 
 Success! The moment users find the movie they've been looking for. This page is like the end credits of a fantastic film, complete with the feeling of satisfaction.
