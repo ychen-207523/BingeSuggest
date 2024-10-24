@@ -1,5 +1,5 @@
-numpy==1.25.2
-pandas==2.1.0
+numpy>1.25.2
+pandas>2.1.0
 Flask==2.3.3
 Flask-Cors==4.0.0
 autopep8==2.0.4
@@ -8,7 +8,7 @@ pytest-cov==4.1.0
 pylint==3.0.1
 python-dotenv==1.0.0
 mysql==0.0.3
-mysqlclient==2.2.0
+mysqlclient>2.2.0
 mysql-connector-python==8.2.0
 black===23.7.0
 bcrypt===4.0.1

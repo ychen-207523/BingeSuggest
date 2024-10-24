@@ -137,10 +137,10 @@ def send_email_to_user(recipient_email, categorized_data):
     smtp_server = "smtp.gmail.com"
     # Port for TLS
     smtp_port = 587
-    sender_email = "popcornpicks777@gmail.com"
+    sender_email = "dashytisbest@gmail.com"
 
     # Use an app password since 2-factor authentication is enabled
-    sender_password = " "
+    sender_password = "peuehggqasvdbwmr"
     subject = "Your movie recommendation from PopcornPicks"
 
     # Create the email message

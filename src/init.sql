@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS Ratings (
   user_id INT NOT NULL,
   movie_id INT NOT NULL,
   score INT NOT NULL,
-  review VARCHAR(60000) NULL,
+  review Text(60000) NULL,
   time DATETIME NOT NULL,
   PRIMARY KEY (idRatings),
   INDEX user_id_idx (user_id ASC),
