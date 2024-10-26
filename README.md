@@ -1,5 +1,5 @@
 # <i> BingeSuggest🍿: Your Destination for Movie Recommendations </i>
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://gitHub.com/svd-ncsu/BingesSuggest/graphs/commit-activity) [![Contributors Activity](https://img.shields.io/github/commit-activity/m/brwali/PopcornPicks)](https://github.com/brwali/PopcornPicks/pulse) [![GitHub issues](https://img.shields.io/github/issues/brwali/PopcornPicks.svg)](https://github.com/brwali/PopcornPicks/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/brwali/PopcornPicks.svg)](https://github.com/brwali/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/brwali/PopcornPicks) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) [![Unittest](https://github.com/brwali/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/brwali/PopcornPicks/actions/workflows/unittest.yml) [![codecov](https://codecov.io/gh/brwali/PopcornPicks/graph/badge.svg?token=0XN6K2DMGS)](https://codecov.io/gh/brwali/PopcornPicks) [![GitHub release](https://img.shields.io/github/release/brwali/PopcornPicks.svg)](https://GitHub.com/brwali/PopcornPicksreleases/) [![StyleCheck: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint) [![HitCount](https://hits.dwyl.com/brwali/PopcornPicks.svg)](https://hits.dwyl.com/brwali/PopcornPicks) ![GitHub contributors](https://img.shields.io/github/contributors/brwali/PopcornPicks) ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/brwali/PopcornPicks) ![GitHub repo size](https://img.shields.io/github/repo-size/brwali/PopcornPicks) [![Black](https://github.com/brwali/PopcornPicks/actions/workflows/black.yml/badge.svg)](https://github.com/brwali/PopcornPicks/actions/workflows/black.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/260d558f17ae5e1027e5/maintainability)](https://codeclimate.com/github/brwali/PopcornPicks/maintainability) [![GitHub closed issues by-label](https://img.shields.io/github/issues-closed-raw/brwali/PopcornPicks/bug?color=green&label=Squished%20bugs)](https://github.com/brwali/PopcornPicks/issues?q=is%3Aissue+label%3Abug+is%3Aclosed) ![Discord](https://img.shields.io/discord/1143966088695124110) [![DOI](https://zenodo.org/badge/713118657.svg)](https://zenodo.org/doi/10.5281/zenodo.10210915)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://gitHub.com/svd-ncsu/BingeSuggest/graphs/commit-activity) [![Contributors Activity](https://img.shields.io/github/commit-activity/m/brwali/PopcornPicks)](https://github.com/brwali/PopcornPicks/pulse) [![GitHub issues](https://img.shields.io/github/issues/brwali/PopcornPicks.svg)](https://github.com/brwali/PopcornPicks/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/brwali/PopcornPicks.svg)](https://github.com/brwali/PopcornPicks/issues?q=is%3Aissue+is%3Aclosed) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/brwali/PopcornPicks) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) [![Unittest](https://github.com/brwali/PopcornPicks/actions/workflows/unittest.yml/badge.svg?branch=master&event=push)](https://github.com/brwali/PopcornPicks/actions/workflows/unittest.yml) [![codecov](https://codecov.io/gh/brwali/PopcornPicks/graph/badge.svg?token=0XN6K2DMGS)](https://codecov.io/gh/brwali/PopcornPicks) [![GitHub release](https://img.shields.io/github/release/brwali/PopcornPicks.svg)](https://GitHub.com/brwali/PopcornPicksreleases/) [![StyleCheck: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint) [![HitCount](https://hits.dwyl.com/brwali/PopcornPicks.svg)](https://hits.dwyl.com/brwali/PopcornPicks) ![GitHub contributors](https://img.shields.io/github/contributors/brwali/PopcornPicks) ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/brwali/PopcornPicks) ![GitHub repo size](https://img.shields.io/github/repo-size/brwali/PopcornPicks) [![Black](https://github.com/brwali/PopcornPicks/actions/workflows/black.yml/badge.svg)](https://github.com/brwali/PopcornPicks/actions/workflows/black.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/260d558f17ae5e1027e5/maintainability)](https://codeclimate.com/github/brwali/PopcornPicks/maintainability) [![GitHub closed issues by-label](https://img.shields.io/github/issues-closed-raw/brwali/PopcornPicks/bug?color=green&label=Squished%20bugs)](https://github.com/brwali/PopcornPicks/issues?q=is%3Aissue+label%3Abug+is%3Aclosed) ![Discord](https://img.shields.io/discord/1143966088695124110) [![DOI](https://zenodo.org/badge/713118657.svg)](https://zenodo.org/doi/10.5281/zenodo.10210915)
   
 
   
@@ -48,7 +48,7 @@ BingeSuggest: Your movie recommender! Input movies, get tailored suggestions, an
 - **Simple:** Easy installation and setup – start discovering great movies in no time!"
 
 ## Documentation
-Checkout for project documentation [here](https://github.com/svd-ncsu/BingesSuggest/tree/das/docs)
+Checkout for project documentation [here](https://github.com/svd-ncsu/BingeSuggest/tree/das/docs)
 
 ## Project Presentation Videos
 ### New Features 2 minute demo
@@ -75,40 +75,40 @@ View our autogenerated doco here [Doco](https://github.com/svd-ncsu/BingeSuggest
 #### (Modified in project 3)
 **The user selects upto 5 movies to get a tailored watchlist and provide feedback for the same**
   
-<img src="https://github.com/svd-ncsu/BingesSuggest/blob/das/asset/recommend_mechanism.gif" width="600" height="375">
+<img src="https://github.com/svd-ncsu/BingeSuggest/blob/das/asset/recommend_mechanism.gif" width="600" height="375">
 
 ### Email Notifier
 **The user sends his/her movies feedback via an email (Notify Me button)**
   
 <div style="display: flex; justify-content: space-between;">
-    <img src="https://github.com/svd-ncsu/BingesSuggest/blob/das/asset/email_notifier.gif" alt="Email Notifier" width="600" height="375">
-    <img src="https://github.com/svd-ncsu/BingesSuggest/blob/das/asset/email.png" alt="Email" width="400" height="400">
+    <img src="https://github.com/svd-ncsu/BingeSuggest/blob/das/asset/email_notifier.gif" alt="Email Notifier" width="600" height="375">
+    <img src="https://github.com/svd-ncsu/BingeSuggest/blob/das/asset/email.png" alt="Email" width="400" height="400">
 </div>
 
 ### Create an Account
 #### (NEW in project 3)
 **Users can now create accounts, persisting data including their movie reviews and recommendations**
-<img src="https://github.com/svd-ncsu/BingesSuggest/blob/das/asset/create_account.gif" width="600" height="375">
+<img src="https://github.com/svd-ncsu/BingeSuggest/blob/das/asset/create_account.gif" width="600" height="375">
 
 ### Login to account
 #### (NEW in project 3)
 **The user can log in to their account securly with encrypted passwords stored in our database**
-<img src="https://github.com/svd-ncsu/BingesSuggest/blob/das/asset/login.gif" width="600" height="375">
+<img src="https://github.com/svd-ncsu/BingeSuggest/blob/das/asset/login.gif" width="600" height="375">
 
 ### Profile and Friends
 #### (NEW in project 3)
 **The user can add friends, view the movies reviewed by the friends, and see their reviewed movies in their profile**
-<img src="https://github.com/svd-ncsu/BingesSuggest/blob/das/asset/profile.gif" width="600" height="375">
+<img src="https://github.com/svd-ncsu/BingeSuggest/blob/das/asset/profile.gif" width="600" height="375">
 
 ### Wall
 #### (NEW in project 3)
 **The user can interact with other users, by viewing a community sourced wall of recent moview reviews**
-<img src="https://github.com/svd-ncsu/BingesSuggest/blob/das/asset/wall.gif" width="600" height="375">
+<img src="https://github.com/svd-ncsu/BingeSuggest/blob/das/asset/wall.gif" width="600" height="375">
 
 ## Project 3 Delta
-Check out the significant changes that we made for Project 3 [here](https://github.com/svd-ncsu/BingesSuggest/blob/das/proj3/Proj3Changes.md)
+Check out the significant changes that we made for Project 3 [here](https://github.com/svd-ncsu/BingeSuggest/blob/das/proj3/Proj3Changes.md)
 
-Our grading scorecard can be found [here](https://github.com/svd-ncsu/BingesSuggest/blob/das/proj3/README.md)
+Our grading scorecard can be found [here](https://github.com/svd-ncsu/BingeSuggest/blob/das/proj3/README.md)
 
 ## Tech stack Used👨‍💻:
 
@@ -183,7 +183,7 @@ Please refer to the [CONTRIBUTING.md](https://github.com/svd-ncsu/BingeSuggest/b
 
 <table>
   <tr>
-    <td><a href="https://github.com/svd-ncsu/BingesSuggest">Version 5</a></td>
+    <td><a href="https://github.com/svd-ncsu/BingeSuggest">Version 5</a></td>
     <td align="center"><a href="https://github.com/brwali/"><img src="https://avatars.githubusercontent.com/u/144480335?v=4" width="75px;" alt=""/><br /><sub><b>Brandon Walia</b></sub></a></td>
     <td align="center"><a href="https://github.com/nathankohen/"><img src="https://avatars.githubusercontent.com/u/99231385?v=4" width="75px;" alt=""/><br /><sub><b>Nathan Kohen</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/nfoster1492/"><img src="https://avatars.githubusercontent.com/u/144182217?v=4" width="75px;" alt=""/><br /><sub><b>Nicholas Foster</b></sub></a><br /></td>
