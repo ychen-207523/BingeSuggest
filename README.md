@@ -4,7 +4,7 @@
 
   
 <img src="https://github.com/svd-ncsu/BingeSuggest/blob/master/asset/header_display.png" alt="drawing" style="width:1000px;"/>
-<b>BingeSuggest is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, PopcornPicks is here to transform the way you discover, enjoy, and connect with movies.</b>
+<b>BingeSuggest is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, BingeSuggest is here to transform the way you discover, enjoy, and connect with movies.</b>
 
 # Contents  
 
