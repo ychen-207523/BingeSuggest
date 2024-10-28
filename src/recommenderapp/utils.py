@@ -346,6 +346,7 @@ def get_friends(db, user):
     result = executor.fetchall()
     return jsonify(result)
 
+
 def add_to_watchlist(db, user_id, movie_id):
     """
     Utility function to add a movie to the user's watchlist.
@@ -354,6 +355,6 @@ def add_to_watchlist(db, user_id, movie_id):
     timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     executor.execute(
         "INSERT INTO Watchlist (user_id, movie_id, time) VALUES (%s, %s, %s);",
-        (int(user_id), int(movie_id), timestamp)
+        (int(user_id), int(movie_id), timestamp),
     )
     db.commit()
