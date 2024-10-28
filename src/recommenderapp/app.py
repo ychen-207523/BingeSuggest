@@ -30,7 +30,7 @@ from utils import (
 from search import Search
 
 sys.path.append("../../")
-from src.prediction_scripts.item_based import recommend_for_new_user
+from src.prediction_scripts.item_based import recommend_for_new_user_g,recommend_for_new_user_d,recommend_for_new_user_a,recommend_for_new_user_all
 
 sys.path.remove("../../")
 
@@ -100,8 +100,8 @@ def search_page():
     return render_template("login.html")
 
 
-@app.route("/predict", methods=["POST"])
-def predict():
+@app.route("/genreBased", methods=["POST"])
+def predict_g():
     """
     Predicts movie recommendations based on user ratings.
     """
@@ -112,11 +112,60 @@ def predict():
         movie_with_rating = {"title": movie, "rating": 5.0}
         if movie_with_rating not in training_data:
             training_data.append(movie_with_rating)
-    recommendations, genres, imdb_id = recommend_for_new_user(training_data)
+    recommendations, genres, imdb_id = recommend_for_new_user_g(training_data)
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
     resp = {"recommendations": recommendations, "genres": genres, "imdb_id": imdb_id}
     return resp
 
+@app.route("/dirBased", methods=["POST"])
+def predict_d():
+    """
+    Predicts movie recommendations based on user ratings.
+    """
+    data = json.loads(request.data)
+    data1 = data["movie_list"]
+    training_data = []
+    for movie in data1:
+        movie_with_rating = {"title": movie, "rating": 5.0}
+        if movie_with_rating not in training_data:
+            training_data.append(movie_with_rating)
+    recommendations, genres, imdb_id = recommend_for_new_user_d(training_data)
+    recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
+    resp = {"recommendations": recommendations, "genres": genres, "imdb_id": imdb_id}
+    return resp
+
+@app.route("/actorBased", methods=["POST"])
+def predict_a():
+    """
+    Predicts movie recommendations based on user ratings.
+    """
+    data = json.loads(request.data)
+    data1 = data["movie_list"]
+    training_data = []
+    for movie in data1:
+        movie_with_rating = {"title": movie, "rating": 5.0}
+        if movie_with_rating not in training_data:
+            training_data.append(movie_with_rating)
+    recommendations, genres, imdb_id = recommend_for_new_user_a(training_data)
+    recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
+    resp = {"recommendations": recommendations, "genres": genres, "imdb_id": imdb_id}
+    return resp
+
+@app.route("/all", methods=["POST"])
+def predict_all():
+    """
+    Predicts movie recommendations based on user ratings.
+    """
+    data = json.loads(request.data)
+    data1 = data["movie_list"]
+    training_data = []
+    for movie in data1:
+        movie_with_rating = {"title": movie, "rating": 5.0}
+        if movie_with_rating not in training_data:
+            training_data.append(movie_with_rating)
+    recommendations, genres, imdb_id = recommend_for_new_user_all(training_data)
+    recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
+    resp = {"recommendations": recommendations, "genres": genres, "imdb_id": imdb_id}
 
 @app.route("/search", methods=["POST"])
 def search():

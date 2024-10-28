@@ -46,7 +46,7 @@ $(document).ready(function () {
 
 
 
-	$("#predict").click(function () {
+	$("#genreBased").click(function () {
 		$("#loader").attr("class", "d-flex justify-content-center")
 
 		var movie_list = []
@@ -67,7 +67,7 @@ $(document).ready(function () {
 
 		$.ajax({
 			type: "POST",
-			url: "/predict",
+			url: "/genreBased",
 			dataType: "json",
 			contentType: "application/json;charset=UTF-8",
 			traditional: "true",
@@ -125,6 +125,247 @@ $(document).ready(function () {
 			},
 		})
 	})
+
+	$("#dirBased").click(function () {
+		$("#loader").attr("class", "d-flex justify-content-center")
+
+		var movie_list = []
+
+		$("#selectedMovies li").each(function () {
+			movie_list.push($(this).text())
+		})
+
+		var movies = { movie_list: movie_list }
+
+		// Clear the existing recommendations
+		$("#predictedMovies").empty()
+
+		// if movies list empty then throw an error box saying select atleast 1 movie!!
+		if (movie_list.length == 0) {
+			alert("Select atleast 1 movie!!")
+		}
+
+		$.ajax({
+			type: "POST",
+			url: "/dirBased",
+			dataType: "json",
+			contentType: "application/json;charset=UTF-8",
+			traditional: "true",
+			cache: false,
+			data: JSON.stringify(movies),
+			success: function (response) {
+				var ulList = $("#predictedMovies")
+				var i = 0
+				var recommendations = response["recommendations"]
+				var imdbIds = response["imdb_id"]
+				for (var i = 0; i < recommendations.length; i++) {
+					var element = recommendations[i]
+					var imdbID = imdbIds[i]
+					var diventry = $("<div/>")
+					var fieldset = $("<fieldset/>", { id: i }).css("border", "0")
+					var link = $("<a/>")
+						.text("IMDb🔗")
+						.css({ "text-decoration": "none" })
+						.attr("href", "https://www.imdb.com/title/" + imdbID)
+					var li = $("<li/>").text(element)
+					var radios = $(`
+                    <table class='table predictTable'>
+                      <tr>
+                        <td class='radio-inline'>
+                          <section id="pattern1">
+                            <label style="--icon:'😍"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="LIKE"></label><br />
+                          </section>
+                        </td>
+                        <td class='radio-inline'>
+                          <section id="pattern1">
+                            <label style="--icon:'😐'"><input type="radio" name="${i}" value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH"></label><br />
+                          </section>
+                        </td>
+                        <td class='radio-inline'>
+                          <section id="pattern1">
+                            <label style="--icon:'😤'"><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE"></label><br />
+                          </section>
+                        </td>
+                      </tr>
+                    </table>
+                  `)
+
+					diventry.append(li)
+					diventry.append(link)
+					diventry.append(radios)
+					fieldset.append(diventry)
+					ulList.append(fieldset)
+				}
+
+				$("#loader").attr("class", "d-none")
+			},
+			error: function (error) {
+				console.log("ERROR ->" + error)
+				$("#loader").attr("class", "d-none")
+			},
+		})
+	})
+
+	$("#actorBased").click(function () {
+		$("#loader").attr("class", "d-flex justify-content-center")
+
+		var movie_list = []
+
+		$("#selectedMovies li").each(function () {
+			movie_list.push($(this).text())
+		})
+
+		var movies = { movie_list: movie_list }
+
+		// Clear the existing recommendations
+		$("#predictedMovies").empty()
+
+		// if movies list empty then throw an error box saying select atleast 1 movie!!
+		if (movie_list.length == 0) {
+			alert("Select atleast 1 movie!!")
+		}
+
+		$.ajax({
+			type: "POST",
+			url: "/actorBased",
+			dataType: "json",
+			contentType: "application/json;charset=UTF-8",
+			traditional: "true",
+			cache: false,
+			data: JSON.stringify(movies),
+			success: function (response) {
+				var ulList = $("#predictedMovies")
+				var i = 0
+				var recommendations = response["recommendations"]
+				var imdbIds = response["imdb_id"]
+				for (var i = 0; i < recommendations.length; i++) {
+					var element = recommendations[i]
+					var imdbID = imdbIds[i]
+					var diventry = $("<div/>")
+					var fieldset = $("<fieldset/>", { id: i }).css("border", "0")
+					var link = $("<a/>")
+						.text("IMDb🔗")
+						.css({ "text-decoration": "none" })
+						.attr("href", "https://www.imdb.com/title/" + imdbID)
+					var li = $("<li/>").text(element)
+					var radios = $(`
+                    <table class='table predictTable'>
+                      <tr>
+                        <td class='radio-inline'>
+                          <section id="pattern1">
+                            <label style="--icon:'😍"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="LIKE"></label><br />
+                          </section>
+                        </td>
+                        <td class='radio-inline'>
+                          <section id="pattern1">
+                            <label style="--icon:'😐'"><input type="radio" name="${i}" value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH"></label><br />
+                          </section>
+                        </td>
+                        <td class='radio-inline'>
+                          <section id="pattern1">
+                            <label style="--icon:'😤'"><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE"></label><br />
+                          </section>
+                        </td>
+                      </tr>
+                    </table>
+                  `)
+
+					diventry.append(li)
+					diventry.append(link)
+					diventry.append(radios)
+					fieldset.append(diventry)
+					ulList.append(fieldset)
+				}
+
+				$("#loader").attr("class", "d-none")
+			},
+			error: function (error) {
+				console.log("ERROR ->" + error)
+				$("#loader").attr("class", "d-none")
+			},
+		})
+	})
+
+	$("#all").click(function () {
+		$("#loader").attr("class", "d-flex justify-content-center")
+
+		var movie_list = []
+
+		$("#selectedMovies li").each(function () {
+			movie_list.push($(this).text())
+		})
+
+		var movies = { movie_list: movie_list }
+
+		// Clear the existing recommendations
+		$("#predictedMovies").empty()
+
+		// if movies list empty then throw an error box saying select atleast 1 movie!!
+		if (movie_list.length == 0) {
+			alert("Select atleast 1 movie!!")
+		}
+
+		$.ajax({
+			type: "POST",
+			url: "/all",
+			dataType: "json",
+			contentType: "application/json;charset=UTF-8",
+			traditional: "true",
+			cache: false,
+			data: JSON.stringify(movies),
+			success: function (response) {
+				var ulList = $("#predictedMovies")
+				var i = 0
+				var recommendations = response["recommendations"]
+				var imdbIds = response["imdb_id"]
+				for (var i = 0; i < recommendations.length; i++) {
+					var element = recommendations[i]
+					var imdbID = imdbIds[i]
+					var diventry = $("<div/>")
+					var fieldset = $("<fieldset/>", { id: i }).css("border", "0")
+					var link = $("<a/>")
+						.text("IMDb🔗")
+						.css({ "text-decoration": "none" })
+						.attr("href", "https://www.imdb.com/title/" + imdbID)
+					var li = $("<li/>").text(element)
+					var radios = $(`
+                    <table class='table predictTable'>
+                      <tr>
+                        <td class='radio-inline'>
+                          <section id="pattern1">
+                            <label style="--icon:'😍"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="LIKE"></label><br />
+                          </section>
+                        </td>
+                        <td class='radio-inline'>
+                          <section id="pattern1">
+                            <label style="--icon:'😐'"><input type="radio" name="${i}" value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH"></label><br />
+                          </section>
+                        </td>
+                        <td class='radio-inline'>
+                          <section id="pattern1">
+                            <label style="--icon:'😤'"><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE"></label><br />
+                          </section>
+                        </td>
+                      </tr>
+                    </table>
+                  `)
+
+					diventry.append(li)
+					diventry.append(link)
+					diventry.append(radios)
+					fieldset.append(diventry)
+					ulList.append(fieldset)
+				}
+
+				$("#loader").attr("class", "d-none")
+			},
+			error: function (error) {
+				console.log("ERROR ->" + error)
+				$("#loader").attr("class", "d-none")
+			},
+		})
+	})
+
 
 	window.addEventListener("popstate", function (event) {
 		// Check if the user is navigating back
