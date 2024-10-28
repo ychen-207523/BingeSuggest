@@ -26,6 +26,7 @@ from utils import (
     add_friend,
     get_friends,
     get_recent_friend_movies,
+    add_to_watchlist,
 )
 from search import Search
 
@@ -115,6 +116,7 @@ def predict_g():
     recommendations, genres, imdb_id = recommend_for_new_user_g(training_data)
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
     resp = {"recommendations": recommendations, "genres": genres, "imdb_id": imdb_id}
+    print(resp)
     return resp
 
 @app.route("/dirBased", methods=["POST"])
@@ -303,6 +305,51 @@ def send_mail():
     return data
 
 
+@app.route("/add_to_watchlist", methods=["POST"])
+def add_movie_to_watchlist():
+    """
+    Adds a movie to the user's watchlist.
+    """
+    data = request.get_json()
+    imdb_id = data["imdb_id"]
+
+    # Fetch movie_id using the IMDb ID
+    cursor = g.db.cursor()
+    cursor.execute("SELECT idMovies FROM Movies WHERE imdb_id = %s", [imdb_id])
+    movie_id_result = cursor.fetchone()
+
+    if movie_id_result:
+        movie_id = movie_id_result[0]
+        user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
+
+        # Add movie to the watchlist
+        add_to_watchlist(g.db, user_id, movie_id)
+        return jsonify({"status": "success", "message": "Movie added to watchlist"}), 200
+    else:
+        return jsonify({"status": "error", "message": "Movie not found"}), 404
+
+
+@app.route("/watchlist", methods=["GET"])
+def get_watchlist():
+    """
+    Retrieves the current user's watchlist.
+    """
+    user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
+    cursor = g.db.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT m.name, m.imdb_id, w.time
+        FROM Watchlist w
+        JOIN Movies m ON w.movie_id = m.idMovies
+        WHERE w.user_id = %s
+        ORDER BY w.time DESC;
+        """,
+        [user_id]
+    )
+    watchlist = cursor.fetchall()
+    return jsonify(watchlist), 200
+
+
 @app.route("/success")
 def success():
     """
@@ -335,4 +382,4 @@ def after_request(response):
 
 
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(port=5000, debug=True)
