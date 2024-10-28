@@ -1,58 +1,65 @@
 name: Code Coverage
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 jobs:
-  upload-coverage:
+  build:
     runs-on: ubuntu-latest
+
     services:
       mysql:
         image: mysql:8.0
         env:
-          # The MySQL docker container requires these environment variables to be set
-          # so we can create and migrate the test database.
-          # See: https://hub.docker.com/_/mysql
-          MYSQL_DATABASE: testdb
-          MYSQL_ROOT_PASSWORD: testrootpass
-          DB_HOST: 127.0.0.1
+          MYSQL_DATABASE: root
+          MYSQL_ROOT_PASSWORD: root
         ports:
-          # Opens port 3306 on service container and host
-          # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
           - 3306:3306
-          # Before continuing, verify the mysql container is reachable from the ubuntu host
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.11  # Replace '3.x' with your desired Python version
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"  # Use desired Python version
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      
-      - name: Create env file
-        run: |
-          cat << EOF > .env
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          SALT=${{ secrets.SALT }}
-          EOF
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-cov genbadge defusedxml
 
-      - name: Set up DB
-        run: |
-          mysql -h 127.0.0.1 --port 3306 -u root -ptestrootpass < test/test_init.sql
+    - name: Set up Database Schema
+      run: |
+        mysql -h 127.0.0.1 --port 3306 -u root -proot < test/test_init.sql
 
-      - name: Test with pytest
-        run: pytest --tb=line
-      - name: Generate coverage
-        run:  pytest --tb=line --cov-config=.coveragerc --cov --cov-report=xml
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    - name: Run tests and generate coverage report
+      run: |
+        pytest --cov-report=xml:reports/coverage/coverage.xml --cov=. test.py
+
+    - name: Generate Coverage Badge
+      run: |
+        mkdir -p reports/badge  # Ensure directory for badge output
+        genbadge coverage -i reports/coverage/coverage.xml -o reports/badge/coverage-badge.svg
+
+    - name: Commit and push coverage report and badge
+      if: success()
+      run: |
+        git config --global user.name "GitHub Action"
+        git config --global user.email "action@github.com"
+        git add reports/coverage/coverage.xml reports/badge/coverage-badge.svg
+        git pull --rebase
+        git commit -m "Update coverage report and badge"
+        git push origin main
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
