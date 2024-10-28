@@ -25,6 +25,7 @@ $(document).ready(function () {
 				})
 			},
 			select: function (event, ui) {
+				console.log(ui.item)
 				var ulList = $("#selectedMovies")
 				// Check if the value already exists in the list
 				if (ulList.find('li:contains("' + ui.item.value + '")').length > 0) {
@@ -32,8 +33,14 @@ $(document).ready(function () {
 					return false
 				}
 
-				var li = $("<li class='list-group-item'/>")
+				var li = $("<li class='list-group-item d-flex justify-content-between align-items-center'/>")
 					.text(ui.item.value)
+					.append(
+                        $("<button class='btn-close' aria-label='Close'></button>")
+                            .on("click", function () {
+                                $(this).parent().remove(); // Remove the movie from the list
+                            })
+                    )
 					.appendTo(ulList)
 				$("#searchBox").val("")
 				return false
@@ -41,10 +48,88 @@ $(document).ready(function () {
 			// changed the min-length for searching movies from 2 to 1
 			minLength: 1,
 		})
+		
+
+		$("#searchBoxWatchlist").autocomplete({
+			source: function (request, response) {
+				$.ajax({
+					type: "POST",
+					url: "http://localhost:5000/search",
+					dataType: "json",
+					cache: false,
+					data: {
+						q: request.term,
+					},
+					success: function (data) {
+						response(data)
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						console.log(textStatus + " " + errorThrown)
+					},
+				})
+			},
+			select: function(event, ui) {
+				// Set the input field value to the selected item
+				$("#searchBoxWatchlist").val(ui.item.label); // assuming `label` is the property you want to display
+				//$("#imdbID").val(ui.item.imdb_id); // Set the hidden IMDb ID field value
+				$("#movieName").val(ui.item.value);
+				console.log(ui.item.label)
+				console.log(ui.item);
+				return false; // Prevent the default behavior
+			  },
+			// changed the min-length for searching movies from 2 to 1
+			minLength: 1,
+		});
+
+		$("#addButton").off("click").click(function() {
+			//const imdbID = $("#imdbID").val();
+			const movieName= $("#searchBoxWatchlist").val();
+			if (movieName) {
+			  // Send a POST request to the server to add the movie to the watchlist
+			  $.ajax({
+				type: "POST",
+				url: "http://localhost:5000/add_to_watchlist",
+				contentType: "application/json",
+				data: JSON.stringify({ movieName:movieName }),
+				success: function(response) {
+				  alert(response.message); // Display the server's response message
+				  location.reload();
+				},
+				info: function(response) {
+					alert(response.message); // Display the server's response message
+					location.reload();
+				  },
+				error: function(jqXHR, textStatus, errorThrown) {
+				  console.error("Error adding movie:", textStatus, errorThrown);
+				  alert("An error occurred. Please try again.");
+				}
+			  });
+			} else {
+			  alert("Please select a movie from the search suggestions.");
+			}
+		  });
 	})
 
 
-
+	function fetchMovieData(imdbID){
+		return new Promise(function(resolve, reject){
+			$.ajax({
+				type: 'GET',
+				url: 'http://www.omdbapi.com/',
+				dataType: 'json',
+				data: {
+					i: imdbID,
+					apikey: '77da67f1',
+				},
+				success: function(response) {
+					resolve(response);
+				},
+				error: function(error) {
+					reject(error);
+				}
+				});
+			});
+	}
 
 	$("#predict").click(function () {
 		$("#loader").attr("class", "d-flex justify-content-center")
@@ -59,6 +144,7 @@ $(document).ready(function () {
 
 		// Clear the existing recommendations
 		$("#predictedMovies").empty()
+		$("#predictedMovies2").empty()
 
 		// if movies list empty then throw an error box saying select atleast 1 movie!!
 		if (movie_list.length == 0) {
@@ -73,51 +159,111 @@ $(document).ready(function () {
 			traditional: "true",
 			cache: false,
 			data: JSON.stringify(movies),
-			success: function (response) {
+			success: async function (response) {
 				var ulList = $("#predictedMovies")
 				var i = 0
 				var recommendations = response["recommendations"]
 				var imdbIds = response["imdb_id"]
 				for (var i = 0; i < recommendations.length; i++) {
+					if(i>=5){
+					ulList = $("#predictedMovies2")
+					}
+					
 					var element = recommendations[i]
 					var imdbID = imdbIds[i]
-					var diventry = $("<div/>")
+					var diventry = $("<div class=\"listItem\" />")
 					var fieldset = $("<fieldset/>", { id: i }).css("border", "0")
 					var link = $("<a/>")
 						.text("IMDb🔗")
 						.css({ "text-decoration": "none" })
 						.attr("href", "https://www.imdb.com/title/" + imdbID)
-					var li = $("<li/>").text(element)
+					var li = $("<li />").text(element)
+
+					var movieData;
+					try{
+						movieData = await fetchMovieData(imdbID);
+					} catch(error){
+						console.error(error);
+					}
+    				var image = $('<img>', {src: movieData.Poster, alt: 'Image not found', style: 'width:150px; height:220px'})				
 					var radios = $(`
                     <table class='table predictTable'>
-                      <tr>
+                      <tr >
                         <td class='radio-inline'>
                           <section id="pattern1">
-                            <label style="--icon:'😍"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="LIKE"></label><br />
+                            <label style="--icon:'😍'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='3' data-toggle="tooltip" data-placement="top" title="LIKE" >
+              				<span >Like</span>
+							</label>
                           </section>
                         </td>
                         <td class='radio-inline'>
                           <section id="pattern1">
-                            <label style="--icon:'😐'"><input type="radio" name="${i}" value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH"></label><br />
+                            <label style="--icon:'🤔'; display: flex; align-items: center; justify-content: center;"><input type="radio" name="${i}" value='2' data-toggle="tooltip" data-placement="top" title="YET TO WATCH">
+							
+              				<span style="margin-right:40px;">Yet&nbsp;To&nbsp;Watch</span>
+							</label>
                           </section>
                         </td>
                         <td class='radio-inline'>
                           <section id="pattern1">
-                            <label style="--icon:'😤'"><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE"></label><br />
+                            <label style="--icon:'☹️'; display: flex; align-items: center; justify-content: center; "><input type="radio" name="${i}" value='1' data-toggle="tooltip" data-placement="top" title="DISLIKE">
+							
+              			<span >Dislike</span>
+							</label>
                           </section>
                         </td>
                       </tr>
                     </table>
                   `)
 
-					diventry.append(li)
-					diventry.append(link)
-					diventry.append(radios)
+				  var watchlistButton = $("<button/>")
+				  .text("Add to Watchlist")
+				  .attr("data-imdb-id", imdbID)
+				  .addClass("btn btn-secondary btn-sm") // Optional styling for consistency
+				  .click(function (event) {
+					  event.preventDefault();
+					  var imdb_id = $(this).data("imdb-id");
+					  var button = $(this);
+					  $.ajax({
+						  type: "POST",
+						  url: "/add_to_watchlist",
+						  dataType: "json",
+						  contentType: "application/json;charset=UTF-8",
+						  data: JSON.stringify({ imdb_id: imdb_id }),
+						  success: function (response) {
+							  alert(response.message);
+							  button.text("Added").prop("disabled", true);
+						  },
+						  error: function (error) {
+							  console.log("ERROR ->" + error);
+						  }
+					  });
+				  });
+					var tableLayout = $("<table cellspacing='0' cellpadding='0' width='100%' />");
+					var row = $("<tr />");
+					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton); // Radio buttons and Watchlist button in the left column
+					var rightColumn = $("<td width='20%' />").append(image); // Image in the right column
+
+					row.append(leftColumn).append(rightColumn);
+					tableLayout.append(row);
+
+					// diventry.append(li)
+					// diventry.append(link)
+					diventry.append(tableLayout)
+					// diventry.append(image)
+					// diventry.append(watchlistButton)
 					fieldset.append(diventry)
 					ulList.append(fieldset)
 				}
 
+				$("#recommendedMoviesSection").removeClass("d-none");
+				$(".feedbackDiv").removeClass("d-none");
 				$("#loader").attr("class", "d-none")
+
+				
+				$("html, body").animate({
+					scrollTop: $("#recommendedMoviesSection").offset().top-60
+				}, 800) // duration of 1 second (1000 ms)
 			},
 			error: function (error) {
 				console.log("ERROR ->" + error)
@@ -172,7 +318,7 @@ $(document).ready(function () {
 		login($("#User").val(), $("#Password").val())
 	})
 
-	function createAcouunt() {
+	function createAccount() {
 		$("#createAccountForm").attr("class", "d-flex justify-content-center")
 		$("#centralDivLogin").hide()
 		$("#loginTopNav").hide()
@@ -180,7 +326,7 @@ $(document).ready(function () {
 
 	// Bind the login function to the login button click
 	$("#createAccountButton").click(function () {
-		createAcouunt()
+		createAccount()
 	})
 
 	
@@ -324,6 +470,11 @@ $(document).ready(function () {
 	}
 
     	// Bind the getStarted function to the Get Started button click
+	$("#getStartedNav").click(function () {
+		getStarted();
+		// getRecentMovies();
+	});
+
 	$("#getStartedButton").click(function () {
 		getStarted();
 		// getRecentMovies();
@@ -341,6 +492,9 @@ $(document).ready(function () {
 	}
 
     // Bind the getStarted function to the Get Started button click
+	$("#goToWallNav").click(function () {
+		goToWall();
+	});
 	$("#goToWallButton").click(function () {
 		goToWall();
 	});
@@ -357,6 +511,9 @@ $(document).ready(function () {
 	}
 
     // Bind the review function to the Review button click
+	$("#goToReviewNav").click(function () {
+		goToReview();
+	});
 	$("#goToReviewButton").click(function () {
 		goToReview();
 	});
@@ -373,8 +530,23 @@ $(document).ready(function () {
 	}
 
     // Bind the getStarted function to the Get Started button click
-	$("#goToProfileButton").click(function () {
+	
+	$("#goToProfileNav").click(function () {
 		goToProfile();
+	});
+
+	function goToWatchlist(){
+		// Navigate to the search page
+		$("#loaderLanding").attr("class", "d-flex justify-content-center")
+		$("#centralDivLanding").hide()
+		$("#landingTopNav").hide()
+		setTimeout(function () {
+			window.location.href = "/watchlist" // Replace with the actual URL of your search page
+		}, 2000)
+
+	}
+	$("#goToWatchlist").click(function () {
+		goToWatchlist();
 	});
 
 	// Function to handle Get Started button click
@@ -389,6 +561,9 @@ $(document).ready(function () {
 	}
 
 	// Bind the getStarted function to the Get Started button click
+	$("#backToLandingNav").click(function () {
+		backToLandingPage();
+	});
 	$("#backToLanding").click(function () {
 		backToLandingPage();
 	});
