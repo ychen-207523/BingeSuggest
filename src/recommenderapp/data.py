@@ -32,8 +32,8 @@ def update_csv_with_rating(file_path):
     if "imdb_id" not in df.columns:
         print("Error: 'imdb_id' column not found in the CSV file.")
         return
-    
-    df = df.drop_duplicates(subset='title', keep='first')
+
+    df = df.drop_duplicates(subset="title", keep="first")
 
     # Check if 'rating' column exist; if not, add it
     if "rating" not in df.columns:
