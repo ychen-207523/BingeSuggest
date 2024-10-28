@@ -13,7 +13,7 @@ code_dir = os.path.dirname(app_dir)
 project_dir = os.path.dirname(code_dir)
 
 
-def recommend_for_new_user(user_rating):
+def recommend_for_new_user(user_rating,gw,dw,aw):
     """
     Generates a list of recommended movie titles for a new user based on their ratings.
     """
@@ -39,7 +39,7 @@ def recommend_for_new_user(user_rating):
         movies_genre_filled.movieId.isin(user_ratings.movieId)
     ]
     user_genre.drop(
-        ["movieId", "title", "genres", "imdb_id", "overview", "poster_path", "runtime"],
+        ["movieId", "title", "genres", "imdb_id", "overview", "poster_path", "runtime","director","actors","imdb_ratings","awards"],
         axis=1,
         inplace=True,
     )
@@ -47,7 +47,7 @@ def recommend_for_new_user(user_rating):
 
     movies_genre_filled.set_index(movies_genre_filled.movieId)
     movies_genre_filled.drop(
-        ["movieId", "title", "genres", "imdb_id", "overview", "poster_path", "runtime"],
+        ["movieId", "title", "genres", "imdb_id", "overview", "poster_path", "runtime","director","actors","imdb_ratings","awards"],
         axis=1,
         inplace=True,
     )
@@ -59,9 +59,56 @@ def recommend_for_new_user(user_rating):
     join_movies_and_recommendations.sort_values(
         by="recommended", ascending=False, inplace=True
     )
+    
+    top_recommendations = join_movies_and_recommendations.head(40000)
+
+    # Calculate director and actor matching scores for top recommendations
+    user_directors = set(
+        director for movie in user_movie_id["director"] for director in movie.split(",")
+    )
+    user_actors = set(
+        actor for movie in user_movie_id["actors"] for actor in movie.split(",")
+    )
+
+    # Score based on overlap with user's favorite directors and actors
+    top_recommendations["director_match_score"] = top_recommendations["director"].apply(
+        lambda directors: len(set(directors.split(",")).intersection(user_directors))
+    )
+    top_recommendations["actor_match_score"] = top_recommendations["actors"].apply(
+        lambda actors: len(set(actors.split(",")).intersection(user_actors))
+    )
+    
+    # Normalize IMDb rating and add it as a score component
+    top_recommendations["imdb_ratings"] = top_recommendations["imdb_ratings"].replace("Error","1.0")
+    top_recommendations["imdb_ratings"] = top_recommendations["imdb_ratings"].replace("No Rating Found","1.0")
+    
+    max_imdb_rating = top_recommendations["imdb_ratings"].astype(float).max()
+    top_recommendations["normalized_imdb_rating"] = top_recommendations["imdb_ratings"].astype(float) / max_imdb_rating
+
+    # Increase weights for director, actor scores, and IMDb rating in the final recommendation score
+    top_recommendations["final_score"] = (
+        gw * top_recommendations["recommended"] + dw * top_recommendations["director_match_score"]
+        + aw * top_recommendations["actor_match_score"] + 0.4 * top_recommendations["normalized_imdb_rating"]
+    )
+    
+    top_recommendations.sort_values(by="final_score", ascending=False, inplace=True)
+    print(user["title"])
+    top_recommendations = top_recommendations[~top_recommendations["title"].isin(user["title"])]
 
     return (
-        list(join_movies_and_recommendations["title"][:201]),
-        list(join_movies_and_recommendations["genres"][:201]),
-        list(join_movies_and_recommendations["imdb_id"][:201]),
+        list(top_recommendations["title"][:201]),
+        list(top_recommendations["genres"][:201]),
+        list(top_recommendations["imdb_id"][:201]),
     )
+    
+def recommend_for_new_user_g(user_rating):
+    return recommend_for_new_user(user_rating, 1,0,0)
+
+def recommend_for_new_user_d(user_rating):
+    return recommend_for_new_user(user_rating, 0.1,1,0.1)
+
+def recommend_for_new_user_a(user_rating):
+    return recommend_for_new_user(user_rating, 0.1,0.1,1)
+
+def recommend_for_new_user_all(user_rating):
+    return recommend_for_new_user(user_rating, 0.5,0.3,0.3)
