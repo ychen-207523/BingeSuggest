@@ -28,7 +28,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: "3.11"  # Use desired Python version
+        python-version: "3.11"
 
     - name: Install dependencies
       run: |
@@ -56,7 +56,7 @@ jobs:
         git add reports/coverage/coverage.xml reports/badge/coverage-badge.svg
         git pull --rebase
         git commit -m "Update coverage report and badge"
-        git push origin main
+        git push origin refs/heads/v6.0
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
