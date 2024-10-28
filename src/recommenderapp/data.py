@@ -32,6 +32,8 @@ def update_csv_with_rating(file_path):
     if "imdb_id" not in df.columns:
         print("Error: 'imdb_id' column not found in the CSV file.")
         return
+    
+    df = df.drop_duplicates(subset='title', keep='first')
 
     # Check if 'rating' column exist; if not, add it
     if "rating" not in df.columns:
@@ -44,9 +46,7 @@ def update_csv_with_rating(file_path):
     with ThreadPoolExecutor(max_workers=4) as executor:
         results = list(executor.map(get_imdb_rating, imdb_ids_to_fetch))
 
-    # Split the results into rating column
-    ratings, awards = zip(*results)
-    df.loc[df["rating"].isnull(), "rating"] = ratings
+    df.loc[df["rating"].isnull(), "rating"] = results
 
     # Save the updated DataFrame back to the CSV
     df.to_csv(file_path, index=False)
