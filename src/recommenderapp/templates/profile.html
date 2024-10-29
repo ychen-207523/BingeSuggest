@@ -99,7 +99,8 @@ This code is licensed under MIT license (see LICENSE for details)
 </head>
 
 <body>
-    <h1 id="userNameBanner"></h1>
+    {% include 'navbar.html' %}
+    <h1 id="userNameBanner" class=""></h1>
 
     <div class="container">
         <div class="section">
@@ -124,7 +125,7 @@ This code is licensed under MIT license (see LICENSE for details)
                 
         <button id="friendButton" onclick="friend()" class="btn btn-primary mx-auto">Add Friend</button></div>
 
-    <button id="backToLanding" onclick="backToLandingPage()" class="btn btn-primary mx-auto">Return home.</button>
+    <!-- <button id="backToLanding" onclick="backToLandingPage()" class="btn btn-primary mx-auto">Return home.</button> -->
 
     <script>
 
