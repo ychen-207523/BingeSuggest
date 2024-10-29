@@ -27,6 +27,7 @@ from utils import (
     get_friends,
     get_recent_friend_movies,
     add_to_watchlist,
+    get_imdb_id_by_name
 )
 from search import Search
 
@@ -320,9 +321,12 @@ def add_movie_to_watchlist():
     Adds a movie to the user's watchlist.
     """
     data = request.get_json()
-    imdb_id = data["imdb_id"]
+    movie_name = data.get("movie_name")
+    imdb_id = get_imdb_id_by_name(g.db, movie_name) if movie_name else data.get("imdb_id")
+    
+    if not imdb_id:
+        return jsonify({"status": "error", "message": "Movie not found"}), 404
 
-    # Fetch movie_id using the IMDb ID
     cursor = g.db.cursor()
     cursor.execute("SELECT idMovies FROM Movies WHERE imdb_id = %s", [imdb_id])
     movie_id_result = cursor.fetchone()
@@ -331,14 +335,24 @@ def add_movie_to_watchlist():
         movie_id = movie_id_result[0]
         user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
 
-        # Add movie to the watchlist
-        add_to_watchlist(g.db, user_id, movie_id)
-        return (
-            jsonify({"status": "success", "message": "Movie added to watchlist"}),
-            200,
-        )
+        # Add to watchlist and check if it was added successfully
+        was_added = add_to_watchlist(g.db, user_id, movie_id)
+        if(was_added):
+            return jsonify({"status": "success", "message": "Movie added to watchlist"}), 200
+        else:
+            return jsonify({"status": "info", "message": "Movie already in watchlist"}), 200
     else:
-        return jsonify({"status": "error", "message": "Movie not found"}), 404
+        return jsonify({"status": "error", "message": "Movie not found"}), 404
+
+
+@app.route("/watchlist", methods=["GET"])
+def watchlist_page():
+    """
+    Renders the watchlist page.
+    """
+    if user[1] is not None or user[1] == "guest":
+        return render_template("watchlist.html")
+    return render_template("login.html")
 
 
 @app.route("/watchlist", methods=["GET"])

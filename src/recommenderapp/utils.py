@@ -350,11 +350,35 @@ def get_friends(db, user):
 def add_to_watchlist(db, user_id, movie_id):
     """
     Utility function to add a movie to the user's watchlist.
+    Only inserts the movie if it is not already in the user's watchlist.
     """
-    executor = db.cursor()
-    timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
-    executor.execute(
-        "INSERT INTO Watchlist (user_id, movie_id, time) VALUES (%s, %s, %s);",
-        (int(user_id), int(movie_id), timestamp),
+    cursor = db.cursor()
+
+    # Check if the movie is already in the user's watchlist
+    cursor.execute(
+        "SELECT 1 FROM Watchlist WHERE user_id = %s AND movie_id = %s",
+        (int(user_id), int(movie_id))
     )
-    db.commit()
+    existing_entry = cursor.fetchone()
+
+    # If the movie is not already in the watchlist, add it
+    if not existing_entry:
+        timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+        cursor.execute(
+            "INSERT INTO Watchlist (user_id, movie_id, time) VALUES (%s, %s, %s);",
+            (int(user_id), int(movie_id), timestamp),
+        )
+        db.commit()
+        return True  # Indicate that the movie was added
+    else:
+        return False  # Indicate that the movie was already in the watchlist
+
+
+def get_imdb_id_by_name(db, movie_name):
+    """
+    Fetches the imdb_id for a movie based on its name.
+    """
+    cursor = db.cursor()
+    cursor.execute("SELECT imdb_id FROM Movies WHERE name = %s LIMIT 1", (movie_name,))
+    result = cursor.fetchone()
+    return result[0] if result else None
