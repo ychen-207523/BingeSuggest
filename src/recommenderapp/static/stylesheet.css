@@ -1,3 +1,7 @@
+#profileList {
+  margin-right: 70px; /* Adjust the value as needed */
+}
+
 .landing-page {
   background-image: url("image.jpg");
   background-size: cover;
