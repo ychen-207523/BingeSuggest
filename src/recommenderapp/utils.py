@@ -357,7 +357,7 @@ def add_to_watchlist(db, user_id, movie_id):
     # Check if the movie is already in the user's watchlist
     cursor.execute(
         "SELECT 1 FROM Watchlist WHERE user_id = %s AND movie_id = %s",
-        (int(user_id), int(movie_id))
+        (int(user_id), int(movie_id)),
     )
     existing_entry = cursor.fetchone()
 

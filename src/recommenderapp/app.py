@@ -27,7 +27,7 @@ from utils import (
     get_friends,
     get_recent_friend_movies,
     add_to_watchlist,
-    get_imdb_id_by_name
+    get_imdb_id_by_name,
 )
 from search import Search
 
@@ -322,8 +322,10 @@ def add_movie_to_watchlist():
     """
     data = request.get_json()
     movie_name = data.get("movie_name")
-    imdb_id = get_imdb_id_by_name(g.db, movie_name) if movie_name else data.get("imdb_id")
-    
+    imdb_id = (
+        get_imdb_id_by_name(g.db, movie_name) if movie_name else data.get("imdb_id")
+    )
+
     if not imdb_id:
         return jsonify({"status": "error", "message": "Movie not found"}), 404
 
@@ -337,10 +339,16 @@ def add_movie_to_watchlist():
 
         # Add to watchlist and check if it was added successfully
         was_added = add_to_watchlist(g.db, user_id, movie_id)
-        if(was_added):
-            return jsonify({"status": "success", "message": "Movie added to watchlist"}), 200
+        if was_added:
+            return (
+                jsonify({"status": "success", "message": "Movie added to watchlist"}),
+                200,
+            )
         else:
-            return jsonify({"status": "info", "message": "Movie already in watchlist"}), 200
+            return (
+                jsonify({"status": "info", "message": "Movie already in watchlist"}),
+                200,
+            )
     else:
         return jsonify({"status": "error", "message": "Movie not found"}), 404
 
