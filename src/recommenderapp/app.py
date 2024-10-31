@@ -333,7 +333,7 @@ def add_movie_to_watchlist():
     if not imdb_id:
         return jsonify({"status": "error", "message": "Movie not found"}), 404
     print("imdb id is present")
-    
+
     cursor = g.db.cursor()
     cursor.execute("SELECT idMovies FROM Movies WHERE imdb_id = %s", [imdb_id])
     movie_id_result = cursor.fetchone()
