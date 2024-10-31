@@ -52,7 +52,6 @@ class Tests(unittest.TestCase):
         """
         ts = [
             {"title": "Iron Man (2008)", "rating": 5.0},
-            
         ]
         recommendations, _, _ = recommend_for_new_user(ts)
         self.assertTrue(("Star Wars (1977)" in recommendations))
