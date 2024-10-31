@@ -177,6 +177,7 @@ def predict_all():
     recommendations, genres, imdb_id = recommend_for_new_user_all(training_data)
     recommendations, genres, imdb_id = recommendations[:10], genres[:10], imdb_id[:10]
     resp = {"recommendations": recommendations, "genres": genres, "imdb_id": imdb_id}
+    return resp
 
 
 @app.route("/search", methods=["POST"])
@@ -320,25 +321,30 @@ def add_movie_to_watchlist():
     """
     Adds a movie to the user's watchlist.
     """
+    print("Entered func")
     data = request.get_json()
-    movie_name = data.get("movie_name")
+    print(data)
+    movie_name = data.get("movieName")
+    print(movie_name)
     imdb_id = (
         get_imdb_id_by_name(g.db, movie_name) if movie_name else data.get("imdb_id")
     )
-
+    print("Got imdb id")
     if not imdb_id:
         return jsonify({"status": "error", "message": "Movie not found"}), 404
-
+    print("imdb id is present")
+    
     cursor = g.db.cursor()
     cursor.execute("SELECT idMovies FROM Movies WHERE imdb_id = %s", [imdb_id])
     movie_id_result = cursor.fetchone()
-
+    print("Selected movie.")
     if movie_id_result:
         movie_id = movie_id_result[0]
         user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
-
+        print("Before was added.")
         # Add to watchlist and check if it was added successfully
         was_added = add_to_watchlist(g.db, user_id, movie_id)
+        print(was_added)
         if was_added:
             return (
                 jsonify({"status": "success", "message": "Movie added to watchlist"}),
@@ -363,7 +369,7 @@ def watchlist_page():
     return render_template("login.html")
 
 
-@app.route("/watchlist", methods=["GET"])
+@app.route("/getWatchlistData", methods=["GET"])
 def get_watchlist():
     """
     Retrieves the current user's watchlist.
