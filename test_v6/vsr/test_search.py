@@ -47,7 +47,6 @@ class Tests(unittest.TestCase):
         ]
         self.assertTrue(filtered_dict == expected_resp)
 
-   
     def test_search_night(self):
         """
         Test case 4
