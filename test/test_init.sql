@@ -68,6 +68,23 @@ CREATE TABLE IF NOT EXISTS Friends (
     ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS Watchlist (
+  idWatchlist INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  movie_id INT NOT NULL,
+  time DATETIME NOT NULL,
+  PRIMARY KEY (idWatchlist),
+  CONSTRAINT fk_user_id
+    FOREIGN KEY (user_id)
+    REFERENCES Users (idUsers)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_movie_id
+    FOREIGN KEY (movie_id)
+    REFERENCES Movies (idMovies)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+);
 
 INSERT INTO Movies (idMovies, name, imdb_id) VALUES (2, 'Ariel (1988)', 'tt0094675');
 INSERT INTO Movies (idMovies, name, imdb_id) VALUES (3, 'Shadows in Paradise (1986)', 'tt0092149');
