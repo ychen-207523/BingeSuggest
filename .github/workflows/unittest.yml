@@ -17,7 +17,7 @@ jobs:
           # so we can create and migrate the test database.
           # See: https://hub.docker.com/_/mysql
           MYSQL_DATABASE: testdb
-          MYSQL_ROOT_PASSWORD: testrootpass
+          MYSQL_ROOT_PASSWORD: root
           DB_HOST: 127.0.0.1
         ports:
           # Opens port 3306 on service container and host
@@ -27,7 +27,7 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.*"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -41,18 +41,25 @@ jobs:
     - name: Create env file
       run: |
         cat << EOF > .env
-        DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-        SALT=${{ secrets.SALT }}
+        DB_PASSWORD='root'
+        SALT='$2b$12$3CGhNGVfUNXrjZL4rtPxaO54ey4FL5Z/AB7hE3dRLJOP5NKG7ibnO'
         EOF
     - name: Set up DB
       run: |
         mysql -h 127.0.0.1 --port 3306 -u root -ptestrootpass < test/test_init.sql
-    - name: Running test cases for util
-      run: python test/test_util.py
+    - name: Running test cases for watchlist
+      run: python test_v6/test_watchlist.py
     - name: Running test cases for predicting
-      run: python test/test_predict.py
+      run: python test_v6/test_predict_actor.py
+          python test_v6/test_predict_genre.py
+          python test_v6/test_predict_director.py
+          python test_v6/test_predict_all.py
     - name: Running test cases for searching
-      run: python test/test_search.py
+      run: python test_v6/test_search.py
+    - name: Running test cases for DB
+      run: python test_v6/test_DB.py
+    - name: Running test cases for email
+      run: python test_v6/test_email_content.py
     
     
     
