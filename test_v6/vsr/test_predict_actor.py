@@ -28,7 +28,7 @@ class Tests(unittest.TestCase):
         recommendations, _, _ = recommend_for_new_user_a(ts)
         self.assertTrue("The Wolf of Wall Street (2013)" in recommendations)
 
-    def test_leonardo(self):
+    def test_tom(self):
         """
         Test case 2
         """
@@ -36,7 +36,7 @@ class Tests(unittest.TestCase):
             {"title": "Mission: Impossible (1996)", "rating": 5.0},
         ]
         recommendations, _, _ = recommend_for_new_user_a(ts)
-        self.assertTrue("The Exorcist (1973)" in recommendations)
+        self.assertTrue("Mission: Impossible - Ghost Protocol (2011)" in recommendations)
 
     def test_chris(self):
         """

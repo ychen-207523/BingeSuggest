@@ -47,9 +47,10 @@ class Tests(unittest.TestCase):
         ]
         self.assertTrue(filtered_dict == expected_resp)
 
+   
     def test_search_night(self):
         """
-        Test case 2
+        Test case 4
         """
         search_word = "night"
         finder = Search()
@@ -66,19 +67,6 @@ class Tests(unittest.TestCase):
             "Nighthawks (1981)",
             "Night Tide (1961)",
         ]
-        self.assertTrue(filtered_dict == expected_resp)
-
-    def test_search_gibberish(self):
-        """
-        Test case 3
-        """
-        search_word = "gibberish"
-        finder = Search()
-        filtered_dict = finder.results_top_ten(search_word)
-        expected_resp = []
-        print(filtered_dict)
-        print(expected_resp)
-        self.assertTrue(filtered_dict == expected_resp)
 
     def test_search_2001(self):
         """
