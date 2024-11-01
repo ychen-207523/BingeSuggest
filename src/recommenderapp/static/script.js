@@ -25,25 +25,37 @@ $(document).ready(function () {
 				})
 			},
 			select: function (event, ui) {
-				console.log(ui.item)
-				var ulList = $("#selectedMovies")
-				// Check if the value already exists in the list
+				console.log(ui.item);
+			
+				var ulList = $("#selectedMovies");
+			
+				// Check if the movie is already in the list
 				if (ulList.find('li:contains("' + ui.item.value + '")').length > 0) {
-					$("#searchBox").val("")
-					return false
+					$("#searchBox").val("");
+					return false;
 				}
-
+			
+				// Store the selected movie details in hidden fields
+				$("#movieName").val(ui.item.value);    // Movie name
+				$("#imdbID").val(ui.item.imdb_id);     // IMDb ID (assuming ui.item has an imdb_id property)
+			
+				// Create list item for the selected movie with a close button
 				var li = $("<li class='list-group-item d-flex justify-content-between align-items-center'/>")
 					.text(ui.item.value)
 					.append(
-                        $("<button class='btn-close' aria-label='Close'></button>")
-                            .on("click", function () {
-                                $(this).parent().remove(); // Remove the movie from the list
-                            })
-                    )
-					.appendTo(ulList)
-				$("#searchBox").val("")
-				return false
+						$("<button class='btn-close' aria-label='Close'></button>")
+							.on("click", function () {
+								$(this).parent().remove(); // Remove the movie from the list
+								// Clear the hidden fields when the movie is removed
+								$("#movieName").val("");
+								$("#imdbID").val("");
+							})
+					)
+					.appendTo(ulList);
+			
+				// Clear the search box after selection
+				$("#searchBox").val("");
+				return false;
 			},
 			// changed the min-length for searching movies from 2 to 1
 			minLength: 1,

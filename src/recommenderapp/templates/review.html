@@ -128,6 +128,8 @@ This code is licensed under MIT license (see LICENSE for details)
         <div id="search-bar">
             <label for="movie-search">Search for a movie:</label>
             <input class="form-control mr-sm-2" type="search" placeholder="Search for a Movie" aria-label="Search" id="searchBox" onchange="setMovie()" />
+            <input type="hidden" id="imdbID" />
+            <input type="hidden" id="movieName" />
             <ul class="list-group" id="selectedMovies"></ul>
         </div>
     
@@ -229,40 +231,35 @@ This code is licensed under MIT license (see LICENSE for details)
         }
 
         function submitReview() {
-
-            //MAKE POST CALL TO DB TO ADD MOVIE REVIEW TO TABLE
-
+            // Make POST call to add movie review to the database
             var comments = document.getElementById('comments').value;
-
+            var movieName = $("#movieName").val();  // Gets the stored movie name
+            var imdbID = $("#imdbID").val();        // Gets the stored IMDb ID
             data = {
-                movie: selectedMovie,
+                movie: movieName,
+                imdb_id: imdbID,  // Adds IMDb ID to the data
                 score: rating,
                 review: comments,
-            }
-
+            };
+        
             $.ajax({
                 type: "POST",
                 url: "/review",
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
-                traditional: "true",
-                cache: false,
                 data: JSON.stringify(data),
                 success: function() {
-                    alert("Review submitted for " + selectedMovie + ". Rating: " + rating + "/10");
+                    alert("Review submitted for " + movieName + ". Rating: " + rating + "/10");
                     $("#selectedMovies").empty();
                     $("#searchBox").val("");
                     $("#comments").val("");
-                    $("#searchBox").val("");
                     setRating(0);
                     highlightStars();
                 },
                 error: function() {
                     alert("Error submitting review.");
                 }
-            })
-
-            
+            });
         }
     
         // Initial highlighting

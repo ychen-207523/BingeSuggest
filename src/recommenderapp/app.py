@@ -250,8 +250,10 @@ def review():
     """
     Handles the submission of a movie review
     """
-    data = json.loads(request.data)
-    submit_review(g.db, user[1], data["movie"], data["score"], data["review"])
+    data = request.get_json()
+    movie_name = data.get("movie")
+    data["imdb_id"] = get_imdb_id_by_name(g.db, movie_name)
+    submit_review(g.db, user[1], movie_name, data.get("score"), data.get("review"))
     return request.data
 
 
