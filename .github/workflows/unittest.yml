@@ -47,19 +47,18 @@ jobs:
     - name: Set up DB
       run: |
         mysql -h 127.0.0.1 --port 3306 -u root -proot < test/test_init.sql
+    # sap test cases
     - name: Running test cases for watchlist
-      run: python test_v6/test_watchlist.py
+      run: python test_v6/sap/test_watchlist.py
     - name: Running test cases for predicting
-      run: python test_v6/test_predict_actor.py
-          python test_v6/test_predict_genre.py
-          python test_v6/test_predict_director.py
-          python test_v6/test_predict_all.py
+      run: python test_v6/sap/test_predict_actor.py
+          python test_v6/sap/test_predict_genre.py
+          python test_v6/sap/test_predict_director.py
+          python test_v6/sap/test_predict_all.py
     - name: Running test cases for searching
-      run: python test_v6/test_search.py
+      run: python test_v6/sap/test_search.py
     - name: Running test cases for DB
-      run: python test_v6/test_DB.py
+      run: python test_v6/sap/test_DB.py
     - name: Running test cases for email
-      run: python test_v6/test_email_content.py
-    
-    
-    
+      run: python test_v6/sap/test_email_content.py
+
