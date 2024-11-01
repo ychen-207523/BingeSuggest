@@ -37,13 +37,11 @@ class Tests(unittest.TestCase):
     """
     Test cases for DB
     """
-    
+
     def setUp(self):
         print("\nrunning setup method")
         load_dotenv()
-        db = mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1"
-        )
+        db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
         executor = db.cursor()
         executor.execute("USE testDB;")
         executor.execute("SET FOREIGN_KEY_CHECKS=0;")
@@ -51,15 +49,13 @@ class Tests(unittest.TestCase):
         executor.execute("DELETE FROM Ratings")
         executor.execute("DELETE FROM Friends")
         db.commit()
-    
+
     def test_accounts(self):
         """
         Test case 1
         """
         load_dotenv()
-        db = mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1"
-        )
+        db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
         executor = db.cursor()
         executor.execute("USE testDB;")
         create_account(db, "abc@test.com", "someUser", "Pass")
@@ -77,15 +73,13 @@ class Tests(unittest.TestCase):
         fail = login_to_account(db, "someUser", "wrong")
         self.assertIsNone(fail)
         db.close()
-   
+
     def test_get_wall_posts(self):
         """
         Test case 2
         """
         load_dotenv()
-        db = mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1"
-        )
+        db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
         executor = db.cursor()
         executor.execute("USE testDB;")
         executor.execute("SET FOREIGN_KEY_CHECKS=0;")
@@ -113,9 +107,7 @@ class Tests(unittest.TestCase):
         Test case 3
         """
         load_dotenv()
-        db = mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1"
-        )
+        db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
         executor = db.cursor()
         executor.execute("USE testDB;")
         create_account(db, "abc@test.com", "someUser", "Pass")
@@ -131,9 +123,7 @@ class Tests(unittest.TestCase):
         Test case 4
         """
         load_dotenv()
-        db = mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1"
-        )
+        db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
         executor = db.cursor()
         executor.execute("USE testDB;")
         create_account(db, "abc@test.com", "someUser", "Pass")
@@ -173,9 +163,7 @@ class Tests(unittest.TestCase):
         Test case 5
         """
         load_dotenv()
-        db = mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1"
-        )
+        db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
         executor = db.cursor()
         executor.execute("USE testDB;")
         create_account(db, "abc@test.com", "someUser", "Pass")
@@ -240,9 +228,7 @@ class Tests(unittest.TestCase):
         Test case 6
         """
         load_dotenv()
-        db = mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1"
-        )
+        db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
         executor = db.cursor()
         executor.execute("USE testDB;")
         create_account(db, "abc@test.com", "someUser", "Pass")
@@ -251,12 +237,15 @@ class Tests(unittest.TestCase):
 
         result = ""
         with app.test_request_context("/"):
-            submit_review(db, user, "Forrest Gump (1994)", 9, "One of the best there is!!")
+            submit_review(
+                db, user, "Forrest Gump (1994)", 9, "One of the best there is!!"
+            )
             db.commit()
 
             executor.execute("SELECT score FROM Ratings WHERE movie_id = 13")
             result = executor.fetchall()[0][0]
             self.assertEqual(9, int(result))
+
 
 if __name__ == "__main__":
     unittest.main()

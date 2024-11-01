@@ -29,9 +29,7 @@ class Tests(unittest.TestCase):
     def setUp(self):
         print("\nrunning setup method")
         load_dotenv()
-        db = mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1"
-        )
+        db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
         executor = db.cursor()
         executor.execute("USE testDB;")
         executor.execute("SET FOREIGN_KEY_CHECKS=0;")
@@ -120,6 +118,7 @@ class Tests(unittest.TestCase):
         }
         with self.assertRaises(Exception):
             send_email_to_user("wrong_email", beautify_feedback_data(data))
+
 
 if __name__ == "__main__":
     unittest.main()

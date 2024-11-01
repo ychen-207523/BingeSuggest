@@ -9,6 +9,7 @@ from src.prediction_scripts.item_based import recommend_for_new_user_g
 
 warnings.filterwarnings("ignore")
 
+
 class Tests(unittest.TestCase):
     """
     Test cases for genre based recommender system
@@ -51,7 +52,6 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "WALL·E (2008)", "rating": 5.0},
             {"title": "Spirited Away (2001)", "rating": 5.0},
-            
         ]
         recommendations, _, _ = recommend_for_new_user_g(ts)
         self.assertTrue(("Aladdin (1992)" in recommendations))

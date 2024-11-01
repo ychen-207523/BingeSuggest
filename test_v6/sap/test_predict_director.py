@@ -44,7 +44,10 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Dracula (1992)", "rating": 5.0},
             {"title": "The Rainmaker (1997)", "rating": 5.0},
-            {"title": "Hearts of Darkness: A Filmmaker's Apocalypse (1991)", "rating": 5.0},
+            {
+                "title": "Hearts of Darkness: A Filmmaker's Apocalypse (1991)",
+                "rating": 5.0,
+            },
         ]
         recommendations, _, _ = recommend_for_new_user_d(ts)
         self.assertTrue(("The Godfather: Part III (1990)" in recommendations))
@@ -55,7 +58,6 @@ class Tests(unittest.TestCase):
         """
         ts = [
             {"title": "Se7en (1995)", "rating": 5.0},
-            
         ]
         recommendations, _, _ = recommend_for_new_user_d(ts)
         self.assertTrue(("Fight Club (1999)" in recommendations))
@@ -69,7 +71,10 @@ class Tests(unittest.TestCase):
             {"title": "Aliens (1986)", "rating": 5.0},
         ]
         recommendations, _, _ = recommend_for_new_user_d(ts)
-        self.assertTrue(("Avatar (2009)" in recommendations) and ("Titanic (1997)" in recommendations))
+        self.assertTrue(
+            ("Avatar (2009)" in recommendations)
+            and ("Titanic (1997)" in recommendations)
+        )
 
 
 if __name__ == "__main__":

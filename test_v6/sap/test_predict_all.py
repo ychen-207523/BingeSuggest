@@ -26,7 +26,10 @@ class Tests(unittest.TestCase):
             {"title": "Captain America: The First Avenger (2011)", "rating": 5.0},
         ]
         recommendations, _, _ = recommend_for_new_user_all(ts)
-        self.assertTrue("The Avengers (2012)" in recommendations and "Captain America: Civil War (2016)" in recommendations)
+        self.assertTrue(
+            "The Avengers (2012)" in recommendations
+            and "Captain America: Civil War (2016)" in recommendations
+        )
 
     def test_2(self):
         """
@@ -48,7 +51,6 @@ class Tests(unittest.TestCase):
             {"title": "Interstellar (2014)", "rating": 5.0},
             {"title": "Now You See Me (2013)", "rating": 5.0},
             {"title": "The Pursuit of Happyness (2006)", "rating": 5.0},
-            
         ]
         recommendations, _, _ = recommend_for_new_user_all(ts)
         self.assertTrue(("No Country for Old Men (2007)" in recommendations))
@@ -59,10 +61,9 @@ class Tests(unittest.TestCase):
         """
         ts = [
             {"title": "The Maze Runner (2014)", "rating": 5.0},
-            
         ]
         recommendations, _, _ = recommend_for_new_user_all(ts)
-        self.assertTrue(("The Arrival (1996)" in recommendations) )
+        self.assertTrue(("The Arrival (1996)" in recommendations))
 
     def test_5(self):
         """

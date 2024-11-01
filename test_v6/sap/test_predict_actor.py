@@ -50,7 +50,10 @@ class Tests(unittest.TestCase):
             {"title": "Keeping Up with the Joneses (2016)", "rating": 5.0},
         ]
         recommendations, _, _ = recommend_for_new_user_a(ts)
-        self.assertTrue(("Man of Steel (2013)" in recommendations) and ("RED (2010)" in recommendations))
+        self.assertTrue(
+            ("Man of Steel (2013)" in recommendations)
+            and ("RED (2010)" in recommendations)
+        )
 
     def test_de_niro(self):
         """
@@ -59,10 +62,12 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Limitless (2011)", "rating": 5.0},
             {"title": "1900 (1976)", "rating": 5.0},
-            
         ]
         recommendations, _, _ = recommend_for_new_user_a(ts)
-        self.assertTrue(("The Godfather: Part II (1974)" in recommendations) and ("Raging Bull (1980)") in recommendations)
+        self.assertTrue(
+            ("The Godfather: Part II (1974)" in recommendations)
+            and ("Raging Bull (1980)") in recommendations
+        )
 
     def test_al_pacino(self):
         """
