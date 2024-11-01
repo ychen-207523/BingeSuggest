@@ -41,7 +41,7 @@ jobs:
 
     - name: Run tests and generate coverage report
       run: |
-        pytest --cov-report=xml:reports/coverage/coverage.xml --cov=. test.py
+        pytest --cov-report=xml:reports/coverage/coverage.xml --cov=. $(git ls-files 'test_*.py')
 
     - name: Generate Coverage Badge
       run: |

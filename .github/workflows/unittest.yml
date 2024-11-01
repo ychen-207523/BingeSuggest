@@ -46,7 +46,7 @@ jobs:
         EOF
     - name: Set up DB
       run: |
-        mysql -h 127.0.0.1 --port 3306 -u root -ptestrootpass < test/test_init.sql
+        mysql -h 127.0.0.1 --port 3306 -u root -proot < test/test_init.sql
     - name: Running test cases for watchlist
       run: python test_v6/test_watchlist.py
     - name: Running test cases for predicting
