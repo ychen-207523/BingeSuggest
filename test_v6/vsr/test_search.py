@@ -97,9 +97,9 @@ class Tests(unittest.TestCase):
             "Save the Last Dance (2001)",
             "The Pledge (2001)",
             "The Amati Girls (2001)",
-            "Sugar & Spice (2001)"
+            "Sugar & Spice (2001)",
         ]
-       
+
         self.assertTrue(filtered_dict == expected_resp)
 
 

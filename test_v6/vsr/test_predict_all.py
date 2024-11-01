@@ -26,8 +26,6 @@ class Tests(unittest.TestCase):
         recommendations, _, _ = recommend_for_new_user_all(ts)
         self.assertTrue("Space Jam (1996)" in recommendations)
 
-    
-
     def test_hindi_movie(self):
         """
         Test case 2
@@ -47,8 +45,6 @@ class Tests(unittest.TestCase):
         ]
         recommendations, _, _ = recommend_for_new_user_all(ts)
         self.assertTrue("Zootopia (2016)" in recommendations)
-
-    
 
     def test_robo_cop(self):
         """
@@ -70,7 +66,6 @@ class Tests(unittest.TestCase):
         recommendations, _, _ = recommend_for_new_user_all(ts)
         self.assertTrue(("Green Lantern: Emerald Knights (2011)" in recommendations))
 
-  
 
 if __name__ == "__main__":
     unittest.main()

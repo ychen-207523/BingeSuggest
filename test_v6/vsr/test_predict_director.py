@@ -34,7 +34,6 @@ class Tests(unittest.TestCase):
         """
         ts = [
             {"title": "Now You See Me (2013)", "rating": 5.0},
-                        
         ]
         recommendations, _, _ = recommend_for_new_user_d(ts)
         self.assertTrue("Now You See Me 2 (2016)" in recommendations)
@@ -45,10 +44,13 @@ class Tests(unittest.TestCase):
         """
         ts = [
             {"title": "Interstellar (2014)", "rating": 5.0},
-             {"title": "Iron Man (2008)", "rating": 5.0},
+            {"title": "Iron Man (2008)", "rating": 5.0},
         ]
         recommendations, _, _ = recommend_for_new_user_d(ts)
-        self.assertTrue(("The Prestige (2006)" in recommendations) and ("Iron Man 2 (2010)" in recommendations) )
+        self.assertTrue(
+            ("The Prestige (2006)" in recommendations)
+            and ("Iron Man 2 (2010)" in recommendations)
+        )
 
     def test_marvel(self):
         """
@@ -56,10 +58,12 @@ class Tests(unittest.TestCase):
         """
         ts = [
             {"title": "Captain America: The First Avenger (2011)", "rating": 5.0},
-            
         ]
         recommendations, _, _ = recommend_for_new_user_d(ts)
-        self.assertTrue(("Captain America: The Winter Soldier (2014)" in recommendations) and ("Captain America: Civil War (2016)" in recommendations))
+        self.assertTrue(
+            ("Captain America: The Winter Soldier (2014)" in recommendations)
+            and ("Captain America: Civil War (2016)" in recommendations)
+        )
 
     def test_francis(self):
         """
@@ -67,7 +71,6 @@ class Tests(unittest.TestCase):
         """
         ts = [
             {"title": "The Godfather (1972)", "rating": 5.0},
-            
         ]
         recommendations, _, _ = recommend_for_new_user_d(ts)
         self.assertTrue(("Apocalypse Now (1979)" in recommendations))

@@ -55,10 +55,12 @@ class Tests(unittest.TestCase):
         """
         ts = [
             {"title": "Avengers: Age of Ultron (2015)", "rating": 5.0},
-            
         ]
         recommendations, _, _ = recommend_for_new_user_a(ts)
-        self.assertTrue(("Captain America: The Winter Soldier (2014)" in recommendations) and ("Iron Man 2 (2010)" in recommendations))
+        self.assertTrue(
+            ("Captain America: The Winter Soldier (2014)" in recommendations)
+            and ("Iron Man 2 (2010)" in recommendations)
+        )
 
     def test_thriller(self):
         """
