@@ -3,9 +3,11 @@ import unittest
 import warnings
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parents[1]))
+sys.path.append(str(Path(__file__).resolve().parents[2]))
 # pylint: disable=wrong-import-position
-from src.prediction_scripts.item_based import recommend_for_new_user
+
+
+from src.prediction_scripts.item_based import recommend_for_new_user_g
 
 # pylint: enable=wrong-import-position
 warnings.filterwarnings("ignore")
@@ -23,7 +25,7 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "La La Land (2016)", "rating": 5.0},
         ]
-        recommendations, _, _ = recommend_for_new_user(ts)
+        recommendations, _, _ = recommend_for_new_user_g(ts)
         self.assertTrue("Shall We Dance? (1996)" in recommendations)
 
     def test_horror(self):
@@ -33,7 +35,7 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Insidious (2010)", "rating": 5.0},
         ]
-        recommendations, _, _ = recommend_for_new_user(ts)
+        recommendations, _, _ = recommend_for_new_user_g(ts)
         self.assertTrue("The Exorcist (1973)" in recommendations)
 
     def test_sciFi(self):
@@ -43,8 +45,8 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Interstellar (2014)", "rating": 5.0},
         ]
-        recommendations, _, _ = recommend_for_new_user(ts)
-        self.assertTrue(("The Martian (2015)" in recommendations) is False)
+        recommendations, _, _ = recommend_for_new_user_g(ts)
+        self.assertTrue(("The Martian (2015)" in recommendations))
 
     def test_sciFi_action(self):
         """
@@ -53,7 +55,7 @@ class Tests(unittest.TestCase):
         ts = [
             {"title": "Iron Man (2008)", "rating": 5.0},
         ]
-        recommendations, _, _ = recommend_for_new_user(ts)
+        recommendations, _, _ = recommend_for_new_user_g(ts)
         self.assertTrue(("Star Wars (1977)" in recommendations))
 
     def test_thriller(self):
@@ -64,7 +66,7 @@ class Tests(unittest.TestCase):
             {"title": "Now You See Me (2013)", "rating": 5.0},
             {"title": "Ocean's Eleven (2001)", "rating": 5.0},
         ]
-        recommendations, _, _ = recommend_for_new_user(ts)
+        recommendations, _, _ = recommend_for_new_user_g(ts)
         self.assertTrue(("The Dark Knight (2008)" in recommendations))
 
 
