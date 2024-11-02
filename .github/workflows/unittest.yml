@@ -53,7 +53,7 @@ jobs:
     - name: Running test cases for predicting actor
       run: python test_v6/sap/test_predict_actor.py 
     - name: Running test cases for predicting genre
-      run: pythontest_v6/sap/test_predict_genre.py
+      run: python test_v6/sap/test_predict_genre.py
     - name: Running test cases for predicting director
       run: python test_v6/sap/test_predict_director.py
     - name: Running test cases for predicting all
