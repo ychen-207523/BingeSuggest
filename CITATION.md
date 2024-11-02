@@ -1,15 +1,15 @@
 Cite as
 
-Brandon Walia, Nicholas Foster, Robert Kenney, Nathan Kohen. (2023, November 27). brwali/PopcornPicks (Version v5).
-Zenodo. https://zenodo.org/doi/10.5281/zenodo.10210915
+Shail Patel, Vrushali Ranadive, Devanshu Shah. (2024, November 1). svd-ncsu/BingeSuggest (Version v6).
+Zenodo. https://zenodo.org/doi/10.5281/zenodo.14026740
 
 ```
 @software{nfoster1492/ClassMateBot-1,
-  title     = {brwali/PopcornPicks (Version v2)},
-  DOI       = {10.5281/zenodo.10210915}, 
-  author    = {Brandon Walia, Nicholas Foster, Robert Kenney, Nathan Kohen}, 
+  title     = {svd-ncsu/BingeSuggest (Version v3)},
+  DOI       = {10.5281/zenodo.14026740}, 
+  author    = {Shail Patel, Vrushali Ranadive, Devanshu Shah}, 
   publisher = {Zenodo}, 
-  year      = {2023}, 
+  year      = {2024}, 
   month     = {November}
 }
 ```
