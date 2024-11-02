@@ -239,9 +239,7 @@ class Tests(unittest.TestCase):
 
         result = ""
         with app.test_request_context("/"):
-            submit_review(
-                db, user, "Citizen Kane (1941)", 15, "Good old movie!"
-            )
+            submit_review(db, user, "Citizen Kane (1941)", 15, "Good old movie!")
             db.commit()
 
             executor.execute("SELECT score FROM Ratings WHERE movie_id = 15")

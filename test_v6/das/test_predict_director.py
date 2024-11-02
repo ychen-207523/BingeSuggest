@@ -33,7 +33,7 @@ class Tests(unittest.TestCase):
             and ("The Prestige (2006)" in recommendations)
             and ("Batman Begins (2005)" in recommendations)
         )
-    
+
     def test_james_wan(self):
         """
         Test case 2
@@ -63,6 +63,7 @@ class Tests(unittest.TestCase):
             and ("Armageddon (1998)" in recommendations)
             and ("Bad Boys (1995)" in recommendations)
         )
+
 
 if __name__ == "__main__":
     unittest.main()

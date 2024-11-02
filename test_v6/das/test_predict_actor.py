@@ -50,5 +50,6 @@ class Tests(unittest.TestCase):
         recommendations, _, _ = recommend_for_new_user_a(ts)
         self.assertTrue("Zombieland (2009)" in recommendations)
 
+
 if __name__ == "__main__":
     unittest.main()
