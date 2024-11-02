@@ -52,8 +52,6 @@
     - test_predict.py  
     - test_search.py  
     - test_util.py
-- test_v6
-
 - test_v6 
   - das    
      - test_DB.py
