@@ -1,6 +1,6 @@
 ## Contributing:
 
-* If you would like to contribute and collaborate with this repository, then please inform us through email at popcornpicks777@gmail.com.
+* If you would like to contribute and collaborate with this repository, then please inform us through email at dashytisbest@gmail.com.
 
 ## Purpose of Contributing:
 
@@ -30,15 +30,19 @@
       - script.js
       - stylesheet.css
       - wall.js
+      - watchlist.js
     - templates
       - landing_page.html
       - login.html
+      - navbar.html
       - profile.html
       - review.html
       - search_page.html
       - success.html
       - wall.html
+      - watchlist.html
     - app.py
+    - data.py
     - search.py
     - utils.py
   - init.sql
@@ -47,7 +51,34 @@
 - test  
     - test_predict.py  
     - test_search.py  
-    - test_util.py  
+    - test_util.py
+- test_v6
+
+- test_v6 
+  - das    
+     - test_DB.py
+     - test_predict_actor.py
+     - test_predict_all.py
+     - test_predict_director.py
+     - test_predict_genre.py
+     - test_search.py
+     - test_watchlist.py
+  - sap    
+     - test_DB.py
+     - test_email_content.py
+     - test_predict_actor.py
+     - test_predict_all.py
+     - test_predict_director.py
+     - test_predict_genre.py
+     - test_search.py
+     - test_watchlist.py
+  - vsr    
+     - test_DB.py
+     - test_predict_actor.py
+     - test_predict_all.py
+     - test_predict_director.py
+     - test_predict_genre.py
+     - test_search.py
   
 - .gitignore
 
@@ -104,7 +135,7 @@ Any suggested enhancements like adding new features or improving existing functi
 
 ## Code of Conduct:
 
-* Please go through the [Code of Conduct](https://github.com/brwali/PopcornPicks/blob/master/CODE_OF_CONDUCT.md) before you begin contributing. This project and everyone participating in it is governed by the Code of Conduct. By participating, you are expected to uphold this code. Please report unacceptable behavior to popcornpicks777@gmail.com.
+* Please go through the [Code of Conduct](https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/CODE_OF_CONDUCT.md`) before you begin contributing. This project and everyone participating in it is governed by the Code of Conduct. By participating, you are expected to uphold this code. Please report unacceptable behavior to dashytisbest@gmail.com.
 
 ## Pull Request Submission Guidelines
 
