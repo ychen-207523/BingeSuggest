@@ -109,7 +109,7 @@ def send_email_to_user(recipient_email, categorized_data):
                         <html>
                         <head></head>
                         <body>
-                            <h1 style="color: #333333;">Movie Recommendations from PopcornPicks</h1>
+                            <h1 style="color: #333333;">Movie Recommendations from BingeSuggest</h1>
                             <p style="color: #555555;">Dear Movie Enthusiast,</p>
                             <p style="color: #555555;">We hope you're having a fantastic day!</p>
                             <div style="padding: 10px; border: 1px solid #cccccc; border-radius: 5px; background-color: #f9f9f9;">
@@ -127,8 +127,8 @@ def send_email_to_user(recipient_email, categorized_data):
                                 {}
                             </ul>
                             </div>
-                            <p style="color: #555555;">Enjoy your movie time with PopcornPicks!</p>
-                            <p style="color: #555555;">Best regards,<br>PopcornPicks Team 🍿</p>
+                            <p style="color: #555555;">Enjoy your movie time with BingeSuggest!</p>
+                            <p style="color: #555555;">Best regards,<br>BingeSuggest Team 🍿</p>
                         </body>
                         </html>
                         """
@@ -141,7 +141,7 @@ def send_email_to_user(recipient_email, categorized_data):
 
     # Use an app password since 2-factor authentication is enabled
     sender_password = "peuehggqasvdbwmr"
-    subject = "Your movie recommendation from PopcornPicks"
+    subject = "Your movie recommendation from BingeSuggest"
 
     # Create the email message
     message = MIMEMultipart("alternative")
