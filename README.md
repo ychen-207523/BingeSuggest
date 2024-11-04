@@ -16,7 +16,7 @@
 [![GitHub closed issues by-label](https://img.shields.io/github/issues-closed-raw/svd-ncsu/BingeSuggest/bug?color=green&label=Squished%20bugs)](https://github.com/svd-ncsu/BingeSuggest/issues?q=is%3Aissue+label%3Abug+is%3Aclosed)
 [![DOI](https://zenodo.org/badge/865641050.svg)](https://doi.org/10.5281/zenodo.14026739)
   
-<img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/header_display.png" alt="drawing" style="width:1000px;"/>
+<img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/header_display.png" alt="BingeSuggest" style="width:1000px;"/>
 <b>BingeSuggest is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, BingeSuggest is here to transform the way you discover, enjoy, and connect with movies.</b>
 
 # Contents  
@@ -65,7 +65,9 @@ Checkout for project documentation [here](https://github.com/svd-ncsu/BingeSugge
 
 ## Project Presentation Videos
 ### New Features 2 minute demo
-[![why contribute video](https://img.youtube.com/vi/QHju8EzQUQ4/0.jpg)](https://www.youtube.com/watch?v=QHju8EzQUQ4)
+<a href="https://drive.google.com/file/d/1pseyiv3LH8WVDdrsXG83KLGzl-cYJ67d/view?usp=sharing" target="_blank">
+  <img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/landing_page.png" alt="BingeSuggest" style="width:600px;"/>
+</a>
 
 ### Why contribute?
 [![why contribute video](https://img.youtube.com/vi/aQ1cryH4B7A/0.jpg)](https://www.youtube.com/watch?v=aQ1cryH4B7A)
@@ -130,12 +132,6 @@ Our grading scorecard can be found [here](https://github.com/svd-ncsu/BingeSugge
 <code><a href="https://www.jquery.com//" target="_blank"><img height="35" src="https://www.vectorlogo.zone/logos/jquery/jquery-horizontal.svg"></a></code>
 <code><a href="https://getbootstrap.com/" target="_blank"><img height="35" src="https://www.vectorlogo.zone/logos/getbootstrap/getbootstrap-ar21.svg"></a></code>
 <code><a href="https://flask.palletsprojects.com/en/1.1.x/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-ar21.svg"></a></code>
-<!--<code><a href="https://github.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/github/github-ar21.svg"></a></code>
- <code><a href="https://git-scm.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg"></a></code>
-<code><a href="https://github.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/github/github-ar21.svg"></a></code> -->
-<!-- <code><a href="https://code.visualstudio.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/visualstudio_code/visualstudio_code-ar21.svg"></a></code>
-<code><a href="https://www.python.org/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/python/python-ar21.svg"></a></code>-->
-<!-- <code><a href="https://www.python.org/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/python/python-horizontal.svg"></a></code>-->
 <code><a href="https://www.mysql.com" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/mysql/mysql-ar21.svg"></a></code>
 
 
