@@ -767,6 +767,22 @@ $(document).ready(function () {
 		createAccount()
 	})
 
+
+	function backToLogin(){
+		
+		$("#loaderLanding").attr("class", "d-flex justify-content-center")
+		$("#centralDivLanding").hide()
+		$("#landingTopNav").hide()
+		setTimeout(function () {
+			window.location.href = "/" // Replace with the actual URL of your search page
+		}, 2000)
+		
+
+	}
+	$("#backToLogin").click(function () {
+		backToLogin()
+	})
+
 	
 	function signOut() {
 		data = {
