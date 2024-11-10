@@ -104,7 +104,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+src/recommenderapp/.env
 .venv
 env/
 venv/
@@ -131,6 +131,8 @@ dmypy.json
 .pyre/
 .DS_Store
 .vscode
+
+.idea
 
 
 
