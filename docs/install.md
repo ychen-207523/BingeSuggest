@@ -2,11 +2,11 @@
 
 ## Step 1: Git Clone the Repository
   
-    git clone https://github.com/brwali/PopcornPicks.git
+    git clone https://github.com/ychen-207523/PopcornPicks.git
     
   (OR) Download the .zip file on your local machine from the following link
   
-    https://github.com/brwali/PopcornPicks/
+    https://github.com/ychen-207523/PopcornPicks/
 
 ## Step 2: Install the required packages by running the following command in the terminal
    
@@ -29,6 +29,16 @@
  3. Select the discovered Local instance and enter your password if created in server setup.
  4. Click `File` > `Open SQL Script` then select `init.sql` in the `PopcornPicks/src` directory. This will create the tables required for the application's persistence.
  5. Repeat above step for `movies.sql` file located in the `PopcornPicks/src` directory. This may take a few minutes.
+ 6. Create .env file in the `PopcornPicks/src/recommenderapp` directory and add the following lines:
+ 
+    ```
+    DB_USER = 'root'
+    DB_PASSWORD = 'your_password'
+    DB_HOST = 'localhost'
+    DB_NAME = 'PopcornPicksDB'
+    ```
+    
+    Replace `your_password` with the password you created during MySQL Server setup. 
    
     
 ## Step 6: Python Packages
