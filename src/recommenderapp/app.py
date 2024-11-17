@@ -424,23 +424,34 @@ def add_movie_to_watched_history():
         # Check if this movie is already in the user's watched history
         cursor.execute(
             "SELECT idWatchedHistory FROM WatchedHistory WHERE user_id = %s AND movie_id = %s",
-            [user_id, movie_id]
+            [user_id, movie_id],
         )
         if cursor.fetchone():
-            return jsonify({"status": "info", "message": "Movie already in watched history"}), 200
+            return (
+                jsonify(
+                    {"status": "info", "message": "Movie already in watched history"}
+                ),
+                200,
+            )
 
         # Insert the movie into the user's watched history
-        watched_date = data.get("watched_date") or datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        watched_date = data.get("watched_date") or datetime.now().strftime(
+            "%Y-%m-%d %H:%M:%S"
+        )
         cursor.execute(
             "INSERT INTO WatchedHistory (user_id, movie_id, watched_date) VALUES (%s, %s, %s)",
-            [user_id, movie_id, watched_date]
+            [user_id, movie_id, watched_date],
         )
         g.db.commit()
         print("Movie added to watched history")
 
-        return jsonify({"status": "success", "message": "Movie added to watched history"}), 200
+        return (
+            jsonify({"status": "success", "message": "Movie added to watched history"}),
+            200,
+        )
 
     return jsonify({"status": "error", "message": "Movie not found"}), 404
+
 
 @app.route("/get_api_key", methods=["GET"])
 def get_api_key():
@@ -451,6 +462,7 @@ def get_api_key():
         return jsonify({"apikey": os.getenv("OMDB_API_KEY")})
     return jsonify({"error": "Unauthorized"}), 403
 
+
 @app.route("/watched_history", methods=["GET"])
 def watched_history_page():
     """
@@ -459,6 +471,7 @@ def watched_history_page():
     if user[1] is not None or user[1] == "guest":
         return render_template("watched_history.html")
     return render_template("login.html")
+
 
 @app.route("/getWatchedHistoryData", methods=["GET"])
 def get_watched_history():
@@ -480,6 +493,7 @@ def get_watched_history():
     watched_history = cursor.fetchall()
     return jsonify(watched_history), 200
 
+
 @app.route("/removeFromWatchedHistory", methods=["POST"])
 def remove_from_watched_history():
     """
@@ -498,7 +512,7 @@ def remove_from_watched_history():
         """
         SELECT idMovies FROM Movies WHERE imdb_id = %s
         """,
-        [imdb_id]
+        [imdb_id],
     )
     movie_result = cursor.fetchone()
 
@@ -513,24 +527,30 @@ def remove_from_watched_history():
         """
         SELECT idWatchedHistory FROM WatchedHistory WHERE user_id = %s AND movie_id = %s
         """,
-        [user_id, movie_id]
+        [user_id, movie_id],
     )
     history_entry = cursor.fetchone()
 
     if not history_entry:
-        return jsonify({"status": "error", "message": "Movie not in watched history"}), 404
+        return (
+            jsonify({"status": "error", "message": "Movie not in watched history"}),
+            404,
+        )
 
     # Delete the movie from watched history
     cursor.execute(
         """
         DELETE FROM WatchedHistory WHERE user_id = %s AND movie_id = %s
         """,
-        [user_id, movie_id]
+        [user_id, movie_id],
     )
     g.db.commit()
     print("Movie removed from watched history")
 
-    return jsonify({"status": "success", "message": "Movie removed from watched history"}), 200
+    return (
+        jsonify({"status": "success", "message": "Movie removed from watched history"}),
+        200,
+    )
 
 
 @app.route("/success")
