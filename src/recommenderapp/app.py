@@ -442,6 +442,15 @@ def add_movie_to_watched_history():
 
     return jsonify({"status": "error", "message": "Movie not found"}), 404
 
+@app.route("/get_api_key", methods=["GET"])
+def get_api_key():
+    """
+    Provides the OMDB API key securely to the frontend.
+    """
+    if user[1] is not None and user[1] != "guest":
+        return jsonify({"apikey": os.getenv("OMDB_API_KEY")})
+    return jsonify({"error": "Unauthorized"}), 403
+
 @app.route("/watched_history", methods=["GET"])
 def watched_history_page():
     """
@@ -476,20 +485,53 @@ def remove_from_watched_history():
     """
     Removes a movie from the user's watched history.
     """
+    print("Entered remove_from_watched_history function")
     data = request.get_json()
-    user_id = user[1]
-    movie_id = data.get("movie_id")
+    print("Request data:", data)
 
-    if not movie_id:
-        return jsonify({"status": "error", "message": "Movie ID missing"}), 400
+    imdb_id = data.get("imdb_id")
+    if not imdb_id:
+        return jsonify({"status": "error", "message": "IMDb ID not provided"}), 400
 
     cursor = g.db.cursor()
     cursor.execute(
-        "DELETE FROM WatchedHistory WHERE user_id = %s AND movie_id = %s",
+        """
+        SELECT idMovies FROM Movies WHERE imdb_id = %s
+        """,
+        [imdb_id]
+    )
+    movie_result = cursor.fetchone()
+
+    if not movie_result:
+        return jsonify({"status": "error", "message": "Movie not found"}), 404
+
+    movie_id = movie_result[0]
+    user_id = user[1]
+
+    # Check if the movie exists in the user's watched history
+    cursor.execute(
+        """
+        SELECT idWatchedHistory FROM WatchedHistory WHERE user_id = %s AND movie_id = %s
+        """,
+        [user_id, movie_id]
+    )
+    history_entry = cursor.fetchone()
+
+    if not history_entry:
+        return jsonify({"status": "error", "message": "Movie not in watched history"}), 404
+
+    # Delete the movie from watched history
+    cursor.execute(
+        """
+        DELETE FROM WatchedHistory WHERE user_id = %s AND movie_id = %s
+        """,
         [user_id, movie_id]
     )
     g.db.commit()
+    print("Movie removed from watched history")
+
     return jsonify({"status": "success", "message": "Movie removed from watched history"}), 200
+
 
 @app.route("/success")
 def success():

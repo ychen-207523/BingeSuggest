@@ -37,7 +37,7 @@ function loadWatchedHistory() {
 async function renderWatchedHistory(watchedMovies) {
     const container = $("#watchedHistoryContainer");
 
-    watchedMovies.forEach(async (movie) => {
+    for (const movie of watchedMovies) {
         const movieDiv = $("<div>").addClass("movie-entry row mb-3 p-2 border-bottom");
 
         // Fetch metadata from OMDb API
@@ -58,26 +58,67 @@ async function renderWatchedHistory(watchedMovies) {
         posterDiv.append(posterImg);
 
         // Movie Details
-        const detailsDiv = $("<div>").addClass("col-md-8");
+        const detailsDiv = $("<div>").addClass("col-md-6");
         const title = $("<h5>").text(movieData.Title || movie.movie_name);
         const watchedOn = $("<p>").text(`Watched on: ${movie.watched_date}`);
         const genres = $("<p>").text(`Genres: ${movieData.Genre || "N/A"}`);
         detailsDiv.append(title, watchedOn, genres);
 
-        // IMDb Link
-        const imdbDiv = $("<div>").addClass("col-md-2 text-right");
+        // Action Buttons (IMDb and Delete)
+        const actionDiv = $("<div>").addClass("col-md-4 text-right");
         const imdbLink = $("<a>", {
             href: `https://www.imdb.com/title/${movie.imdb_id}`,
             target: "_blank",
-            class: "btn btn-info btn-sm",
+            class: "btn btn-info btn-sm mr-2",
         }).text("IMDb");
-        imdbDiv.append(imdbLink);
+        const deleteButton = $("<button>")
+            .addClass("btn btn-danger btn-sm")
+            .text("Delete")
+            .click(async function () {
+                const confirmed = confirm(
+                    `Are you sure you want to remove "${movieData.Title || movie.movie_name}" from your watched history?`
+                );
+                if (confirmed) {
+                    try {
+                        const response = await $.ajax({
+                            type: "POST",
+                            url: "/removeFromWatchedHistory",
+                            contentType: "application/json;charset=UTF-8",
+                            data: JSON.stringify({ imdb_id: movie.imdb_id }),
+                        });
+                        alert(response.message);
+                        movieDiv.remove(); // Remove the entry from the DOM
+                    } catch (error) {
+                        console.error("Error deleting movie:", error);
+                        alert("Failed to delete the movie. Please try again.");
+                    }
+                }
+            });
+        actionDiv.append(imdbLink, deleteButton);
 
         // Append all components to the movie entry
-        movieDiv.append(posterDiv, detailsDiv, imdbDiv);
+        movieDiv.append(posterDiv, detailsDiv, actionDiv);
         container.append(movieDiv);
-    });
+    }
 }
+
+let apiKey = "";
+
+async function fetchApiKey() {
+    try {
+        const response = await fetch("/get_api_key");
+        const data = await response.json();
+        if (data.apikey) {
+            apiKey = data.apikey; // Assign the API key
+        } else {
+            console.error("Failed to fetch API key:", data.error);
+        }
+    } catch (error) {
+        console.error("Error fetching API key:", error);
+    }
+}
+
+fetchApiKey();
 
 // Fetch movie metadata from OMDb API
 function fetchMovieData(imdbID) {
@@ -88,7 +129,7 @@ function fetchMovieData(imdbID) {
             dataType: "json",
             data: {
                 i: imdbID,
-                apikey: "77da67f1", // Replace with your OMDb API key
+                apikey: apiKey,
             },
             success: function (response) {
                 resolve(response);
