@@ -30,6 +30,7 @@ from utils import (
     get_imdb_id_by_name,
 )
 from search import Search
+from datetime import datetime
 
 sys.path.append("../../")
 from src.prediction_scripts.item_based import (
@@ -392,6 +393,104 @@ def get_watchlist():
     return jsonify(watchlist), 200
 
 
+@app.route("/add_to_watched_history", methods=["POST"])
+def add_movie_to_watched_history():
+    """
+    Adds a movie to the user's watched history.
+    """
+    print("Entered add_to_watched_history function")
+    data = request.get_json()
+    print("Request data:", data)
+
+    movie_name = data.get("movieName")
+    imdb_id = (
+        get_imdb_id_by_name(g.db, movie_name) if movie_name else data.get("imdb_id")
+    )
+
+    if not imdb_id:
+        return jsonify({"status": "error", "message": "Movie not found"}), 404
+    print("IMDb ID obtained:", imdb_id)
+
+    # Use the IMDb ID to fetch the movie_id from the Movies table
+    cursor = g.db.cursor()
+    cursor.execute("SELECT idMovies FROM Movies WHERE imdb_id = %s", [imdb_id])
+    movie_id_result = cursor.fetchone()
+
+    # Verify if the movie exists in the Movies table
+    if movie_id_result:
+        movie_id = movie_id_result[0]
+        user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
+
+        # Check if this movie is already in the user's watched history
+        cursor.execute(
+            "SELECT idWatchedHistory FROM WatchedHistory WHERE user_id = %s AND movie_id = %s",
+            [user_id, movie_id]
+        )
+        if cursor.fetchone():
+            return jsonify({"status": "info", "message": "Movie already in watched history"}), 200
+
+        # Insert the movie into the user's watched history
+        watched_date = data.get("watched_date") or datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        cursor.execute(
+            "INSERT INTO WatchedHistory (user_id, movie_id, watched_date) VALUES (%s, %s, %s)",
+            [user_id, movie_id, watched_date]
+        )
+        g.db.commit()
+        print("Movie added to watched history")
+
+        return jsonify({"status": "success", "message": "Movie added to watched history"}), 200
+
+    return jsonify({"status": "error", "message": "Movie not found"}), 404
+
+@app.route("/watched_history", methods=["GET"])
+def watched_history_page():
+    """
+    Renders the watched history page.
+    """
+    if user[1] is not None or user[1] == "guest":
+        return render_template("watched_history.html")
+    return render_template("login.html")
+
+@app.route("/getWatchedHistoryData", methods=["GET"])
+def get_watched_history():
+    """
+    Retrieves the current user's watched history.
+    """
+    user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
+    cursor = g.db.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT m.name AS movie_name, m.imdb_id, wh.watched_date
+        FROM WatchedHistory wh
+        JOIN Movies m ON wh.movie_id = m.idMovies
+        WHERE wh.user_id = %s
+        ORDER BY wh.watched_date DESC;
+        """,
+        [user_id],
+    )
+    watched_history = cursor.fetchall()
+    return jsonify(watched_history), 200
+
+@app.route("/removeFromWatchedHistory", methods=["POST"])
+def remove_from_watched_history():
+    """
+    Removes a movie from the user's watched history.
+    """
+    data = request.get_json()
+    user_id = user[1]
+    movie_id = data.get("movie_id")
+
+    if not movie_id:
+        return jsonify({"status": "error", "message": "Movie ID missing"}), 400
+
+    cursor = g.db.cursor()
+    cursor.execute(
+        "DELETE FROM WatchedHistory WHERE user_id = %s AND movie_id = %s",
+        [user_id, movie_id]
+    )
+    g.db.commit()
+    return jsonify({"status": "success", "message": "Movie removed from watched history"}), 200
+
 @app.route("/success")
 def success():
     """
@@ -410,6 +509,7 @@ def before_request():
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD"),
         host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT", 3306),
         database=os.getenv("DB_NAME"),
     )
 
