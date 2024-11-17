@@ -251,9 +251,34 @@ $(document).ready(function () {
 						  }
 					  });
 				  });
+
+					var watchedHistoryButton = $("<button/>")
+    				.text("Add to Watched History")
+    				.attr("data-imdb-id", imdbID)
+    				.addClass("btn btn-primary btn-sm") // Optional styling for consistency
+    				.click(function (event) {
+        				event.preventDefault();
+        				var imdb_id = $(this).data("imdb-id");
+        				var button = $(this);
+        				$.ajax({
+            				type: "POST",
+            				url: "/add_to_watched_history",
+            				dataType: "json",
+            				contentType: "application/json;charset=UTF-8",
+            				data: JSON.stringify({ imdb_id: imdb_id }),
+            				success: function (response) {
+                				alert(response.message);
+                				button.text("Added to History").prop("disabled", true);
+            				},
+            					error: function (error) {
+                				console.error("Error adding to watched history:", error);
+                				alert("An error occurred. Please try again.");
+            				}
+        				});
+    				});
 					var tableLayout = $("<table cellspacing='0' cellpadding='0' width='100%' />");
 					var row = $("<tr />");
-					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton); // Radio buttons and Watchlist button in the left column
+					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton).append(watchedHistoryButton);// Radio buttons and Watchlist button in the left column
 					var rightColumn = $("<td width='20%' />").append(image); // Image in the right column
 
 					row.append(leftColumn).append(rightColumn);
@@ -393,9 +418,33 @@ $(document).ready(function () {
 						  }
 					  });
 				  });
+                    var watchedHistoryButton = $("<button/>")
+    				.text("Add to Watched History")
+    				.attr("data-imdb-id", imdbID)
+    				.addClass("btn btn-primary btn-sm") // Optional styling for consistency
+    				.click(function (event) {
+        				event.preventDefault();
+        				var imdb_id = $(this).data("imdb-id");
+        				var button = $(this);
+        				$.ajax({
+            				type: "POST",
+            				url: "/add_to_watched_history",
+            				dataType: "json",
+            				contentType: "application/json;charset=UTF-8",
+            				data: JSON.stringify({ imdb_id: imdb_id }),
+            				success: function (response) {
+                				alert(response.message);
+                				button.text("Added to History").prop("disabled", true);
+            				},
+            					error: function (error) {
+                				console.error("Error adding to watched history:", error);
+                				alert("An error occurred. Please try again.");
+            				}
+        				});
+    				});
 					var tableLayout = $("<table cellspacing='0' cellpadding='0' width='100%' />");
 					var row = $("<tr />");
-					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton); // Radio buttons and Watchlist button in the left column
+					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton).append(watchedHistoryButton); // Radio buttons and Watchlist button in the left column
 					var rightColumn = $("<td width='20%' />").append(image); // Image in the right column
 
 					row.append(leftColumn).append(rightColumn);
@@ -535,9 +584,33 @@ $(document).ready(function () {
 						  }
 					  });
 				  });
+                    var watchedHistoryButton = $("<button/>")
+    				.text("Add to Watched History")
+    				.attr("data-imdb-id", imdbID)
+    				.addClass("btn btn-primary btn-sm") // Optional styling for consistency
+    				.click(function (event) {
+        				event.preventDefault();
+        				var imdb_id = $(this).data("imdb-id");
+        				var button = $(this);
+        				$.ajax({
+            				type: "POST",
+            				url: "/add_to_watched_history",
+            				dataType: "json",
+            				contentType: "application/json;charset=UTF-8",
+            				data: JSON.stringify({ imdb_id: imdb_id }),
+            				success: function (response) {
+                				alert(response.message);
+                				button.text("Added to History").prop("disabled", true);
+            				},
+            					error: function (error) {
+                				console.error("Error adding to watched history:", error);
+                				alert("An error occurred. Please try again.");
+            				}
+        				});
+    				});
 					var tableLayout = $("<table cellspacing='0' cellpadding='0' width='100%' />");
 					var row = $("<tr />");
-					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton); // Radio buttons and Watchlist button in the left column
+					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton).append(watchedHistoryButton); // Radio buttons and Watchlist button in the left column
 					var rightColumn = $("<td width='20%' />").append(image); // Image in the right column
 
 					row.append(leftColumn).append(rightColumn);
@@ -676,9 +749,33 @@ $(document).ready(function () {
 						  }
 					  });
 				  });
+                    var watchedHistoryButton = $("<button/>")
+    				.text("Add to Watched History")
+    				.attr("data-imdb-id", imdbID)
+    				.addClass("btn btn-primary btn-sm") // Optional styling for consistency
+    				.click(function (event) {
+        				event.preventDefault();
+        				var imdb_id = $(this).data("imdb-id");
+        				var button = $(this);
+        				$.ajax({
+            				type: "POST",
+            				url: "/add_to_watched_history",
+            				dataType: "json",
+            				contentType: "application/json;charset=UTF-8",
+            				data: JSON.stringify({ imdb_id: imdb_id }),
+            				success: function (response) {
+                				alert(response.message);
+                				button.text("Added to History").prop("disabled", true);
+            				},
+            					error: function (error) {
+                				console.error("Error adding to watched history:", error);
+                				alert("An error occurred. Please try again.");
+            				}
+        				});
+    				});
 					var tableLayout = $("<table cellspacing='0' cellpadding='0' width='100%' />");
 					var row = $("<tr />");
-					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton); // Radio buttons and Watchlist button in the left column
+					var leftColumn = $("<td width='80%' />").append(li).append(link).append(radios).append(watchlistButton).append(watchedHistoryButton); // Radio buttons and Watchlist button in the left column
 					var rightColumn = $("<td width='20%' />").append(image); // Image in the right column
 
 					row.append(leftColumn).append(rightColumn);
@@ -1001,6 +1098,19 @@ $(document).ready(function () {
 	}
 	$("#goToWatchlist").click(function () {
 		goToWatchlist();
+	});
+
+	function goToWatchedHistory(){
+		// Navigate to the search page
+		$("#loaderLanding").attr("class", "d-flex justify-content-center")
+		$("#centralDivLanding").hide()
+		$("#landingTopNav").hide()
+		setTimeout(function () {
+			window.location.href = "/watched_history" // Replace with the actual URL of your search page
+		}, 2000)
+	}
+	$("#goToWatchedHistory").click(function () {
+		goToWatchedHistory();
 	});
 
 	// Function to handle Get Started button click
