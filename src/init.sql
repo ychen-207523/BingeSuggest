@@ -85,3 +85,21 @@ CREATE TABLE IF NOT EXISTS Watchlist (
     ON DELETE CASCADE
     ON UPDATE NO ACTION
 );
+
+CREATE TABLE IF NOT EXISTS WatchedHistory (
+  idWatchedHistory INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  movie_id INT NOT NULL,
+  watched_date DATETIME NOT NULL,
+  PRIMARY KEY (idWatchedHistory),
+  CONSTRAINT fk_watched_user_id
+    FOREIGN KEY (user_id)
+    REFERENCES Users (idUsers)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_watched_movie_id
+    FOREIGN KEY (movie_id)
+    REFERENCES Movies (idMovies)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+);
