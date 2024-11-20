@@ -94,3 +94,7 @@ jobs:
       run: python test_v7/das/test_search.py
     - name: Running test cases for DB
       run: python test_v7/das/test_DB.py
+
+    # test cases for v7
+    - name: Running test cases for watchlist
+      run: python test_v7/test_watchlist.py
