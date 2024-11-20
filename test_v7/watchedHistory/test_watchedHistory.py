@@ -11,10 +11,12 @@ from pathlib import Path
 import mysql.connector
 from dotenv import load_dotenv
 
+
 class TestWatchedHistory(unittest.TestCase):
     """
     Test cases for actor based recommender system
     """
+
     def setUp(self):
         print("\nRunning Setup Method")
         load_dotenv()
@@ -32,6 +34,6 @@ class TestWatchedHistory(unittest.TestCase):
         """
         Test fetching watched history when it's empty.
         """
-        response = self.client.get('/getWatchedHistoryData')
+        response = self.client.get("/getWatchedHistoryData")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json, [])
