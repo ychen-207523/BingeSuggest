@@ -96,5 +96,5 @@ jobs:
       run: python test_v7/das/test_DB.py
 
     # test cases for v7
-    - name: Running test cases for watchlist
-      run: python test_v7/test_watchlist.py
+    - name: Running test cases for watched history
+      run: python test_v7/watchedHistory/test_watched_history.py
