@@ -260,3 +260,120 @@ class TestWatchedHistory(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.json["status"], "error")
+
+    def test_prevent_duplicate_entries(self):
+        """
+        Test preventing duplicate entries in watched history.
+        """
+        data = {
+            "imdb_id": "tt0076759",
+            "movie_name": "Star Wars: Episode IV - A New Hope",
+            "watched_date": "2024-11-16 14:44:31"
+        }
+        self.client.post('/add_to_watched_history', data=json.dumps(data), content_type='application/json')
+        response = self.client.post('/add_to_watched_history', data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json['status'], 'info')  # Duplicate entry
+
+    def test_watched_history_format(self):
+        """
+        Test the structure of the response for watched history.
+        """
+        response = self.client.get('/getWatchedHistoryData')
+        if response.json:
+            for movie in response.json:
+                self.assertIn('movie_name', movie)
+                self.assertIn('imdb_id', movie)
+                self.assertIn('watched_date', movie)
+
+    def test_invalid_add_request(self):
+        """
+        Test sending an invalid POST request to add a movie.
+        """
+        response = self.client.post('/add_to_watched_history', data="Invalid Data", content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
+    def test_invalid_delete_request(self):
+        """
+        Test sending an invalid POST request to delete a movie.
+        """
+        response = self.client.post('/delete_from_watched_history', data="Invalid Data",
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
+    def test_watched_history_limit(self):
+        """
+        Test fetching a limited number of entries from watched history.
+        """
+        for i in range(15):
+            self.client.post('/add_to_watched_history', data=json.dumps({
+                "imdb_id": f"tt007675{i}",
+                "movie_name": f"Movie {i}",
+                "watched_date": "2024-11-16 14:44:31"
+            }), content_type='application/json')
+        response = self.client.get('/getWatchedHistoryData?limit=10')
+        self.assertEqual(len(response.json), 10)
+
+    def test_delete_all_entries(self):
+        """
+        Test deleting all entries from watched history.
+        """
+        # Add entries
+        for i in range(5):
+            self.client.post('/add_to_watched_history', data=json.dumps({
+                "imdb_id": f"tt007675{i}",
+                "movie_name": f"Movie {i}",
+                "watched_date": "2024-11-16 14:44:31"
+            }), content_type='application/json')
+
+        # Delete all entries
+        response = self.client.post('/delete_all_watched_history', content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json['status'], 'success')
+
+    def test_empty_after_deletion(self):
+        """
+        Test watched history is empty after deleting all entries.
+        """
+        self.client.post('/delete_all_watched_history', content_type='application/json')
+        response = self.client.get('/getWatchedHistoryData')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json, [])
+
+    def test_add_movie_without_imdb_id(self):
+        """
+        Test adding a movie to watched history without an IMDb ID.
+        """
+        data = {
+            "movie_name": "Unknown Movie",
+            "watched_date": "2024-11-16 14:44:31"
+        }
+        response = self.client.post('/add_to_watched_history', data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json['status'], 'error')
+        self.assertIn('IMDb ID is required', response.json['message'])
+
+    def test_add_movie_without_movie_name(self):
+        """
+        Test adding a movie to watched history without a movie name.
+        """
+        data = {
+            "imdb_id": "tt0076759",
+            "watched_date": "2024-11-16 14:44:31"
+        }
+        response = self.client.post('/add_to_watched_history', data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json['status'], 'error')
+        self.assertIn('Movie name is required', response.json['message'])
+
+    def test_add_movie_without_watched_date(self):
+        """
+        Test adding a movie to watched history without a watched date.
+        """
+        data = {
+            "imdb_id": "tt0076759",
+            "movie_name": "Star Wars: Episode IV - A New Hope"
+        }
+        response = self.client.post('/add_to_watched_history', data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json['status'], 'success')
