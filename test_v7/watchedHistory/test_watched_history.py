@@ -34,6 +34,7 @@ class TestWatchedHistory(unittest.TestCase):
         )
         self.client = app.test_client()
 
+        self.db = app.config["DATABASE_CONNECTION"]
         self.executor = self.db.cursor()
 
         # Clear relevant tables to ensure a clean state
