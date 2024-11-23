@@ -108,7 +108,9 @@ class TestWatchedHistoryAPI(unittest.TestCase):
 
         # Use a fresh cursor to fetch the user_id
         with self.db.cursor() as cursor:
-            cursor.execute("SELECT idUsers FROM Users WHERE username = %s;", ("tester2",))
+            cursor.execute(
+                "SELECT idUsers FROM Users WHERE username = %s;", ("tester2",)
+            )
             db_result = cursor.fetchall()
             user_id = db_result[0][0]
 
