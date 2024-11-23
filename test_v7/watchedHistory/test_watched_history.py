@@ -38,7 +38,6 @@ class TestWatchedHistory(unittest.TestCase):
         self.executor.execute("DELETE FROM WatchedHistory;")
         self.executor.execute("DELETE FROM Users;")
         self.executor.execute("DELETE FROM Movies;")
-        self.executor.execute("SET FOREIGN_KEY_CHECKS=1;")
         self.db.commit()
 
         # Create a new account for each test
@@ -66,7 +65,8 @@ class TestWatchedHistory(unittest.TestCase):
         Close the database connection after each test.
         """
         print("\nRunning TearDown Method")
-        self.db.close()
+        if self.db.is_connected():
+            self.db.close()
 
     def test_add_to_watched_history(self):
         """
