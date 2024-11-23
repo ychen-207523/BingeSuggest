@@ -11,6 +11,7 @@ sys.path.append(str(Path(__file__).resolve().parents[2]))
 # pylint: disable=wrong-import-position
 from src.recommenderapp.utils import create_account
 from src.recommenderapp.app import app
+
 # pylint: enable=wrong-import-position
 
 warnings.filterwarnings("ignore")
@@ -28,22 +29,18 @@ class TestWatchedHistory(unittest.TestCase):
         print("\nRunning Setup Method for a Test")
         load_dotenv()
 
-
-        sql_file_path = Path(__file__).resolve().parents[2] / 'test_initial.sql'
+        sql_file_path = Path(__file__).resolve().parents[2] / "test_initial.sql"
 
         try:
             self.db = mysql.connector.connect(
-                user="root",
-                password="root",
-                host="127.0.0.1"
+                user="root", password="root", host="127.0.0.1"
             )
             self.executor = self.db.cursor()
         except mysql.connector.Error as err:
             self.fail(f"Error connecting to MySQL: {err}")
 
-
         try:
-            with open(sql_file_path, 'r') as f:
+            with open(sql_file_path, "r") as f:
                 sql_commands = f.read()
 
             for result in self.executor.execute(sql_commands, multi=True):
@@ -59,10 +56,7 @@ class TestWatchedHistory(unittest.TestCase):
         try:
             self.db.close()
             self.db = mysql.connector.connect(
-                user="root",
-                password="root",
-                host="127.0.0.1",
-                database="testDB"
+                user="root", password="root", host="127.0.0.1", database="testDB"
             )
             self.executor = self.db.cursor()
         except mysql.connector.Error as err:
@@ -86,7 +80,9 @@ class TestWatchedHistory(unittest.TestCase):
         self.test_username = "testuser"
         self.test_password = "password123"
         try:
-            create_account(self.db, self.test_email, self.test_username, self.test_password)
+            create_account(
+                self.db, self.test_email, self.test_username, self.test_password
+            )
             print("Test user created successfully.")
         except Exception as err:
             self.fail(f"Error creating test account: {err}")
@@ -104,10 +100,8 @@ class TestWatchedHistory(unittest.TestCase):
         except mysql.connector.Error as err:
             self.fail(f"Error fetching user ID: {err}")
 
-
         app.config["TESTING"] = True
         self.client = app.test_client()
-
 
         global user
         user = (self.test_username, self.user_id)
@@ -203,5 +197,5 @@ class TestWatchedHistory(unittest.TestCase):
         print("Get watched history response:", response.json)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
