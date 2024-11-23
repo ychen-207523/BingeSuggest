@@ -32,6 +32,8 @@ class TestWatchedHistory(unittest.TestCase):
         self.db = mysql.connector.connect(
             user="root", password="root", host="127.0.0.1", database="testDB"
         )
+        self.client = app.test_client()
+
         self.executor = self.db.cursor()
 
         # Clear relevant tables to ensure a clean state
