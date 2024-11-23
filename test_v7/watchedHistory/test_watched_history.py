@@ -39,7 +39,8 @@ class TestWatchedHistory(unittest.TestCase):
         cls.executor.execute("DROP TABLE IF EXISTS Movies;")
         cls.executor.execute("SET FOREIGN_KEY_CHECKS=1;")
 
-        cls.executor.execute("""
+        cls.executor.execute(
+            """
             CREATE TABLE Users (
                 idUsers INT NOT NULL AUTO_INCREMENT,
                 username VARCHAR(45) NOT NULL,
@@ -49,8 +50,10 @@ class TestWatchedHistory(unittest.TestCase):
                 UNIQUE INDEX username_UNIQUE (username ASC),
                 UNIQUE INDEX email_UNIQUE (email ASC)
             );
-        """)
-        cls.executor.execute("""
+        """
+        )
+        cls.executor.execute(
+            """
             CREATE TABLE Movies (
                 idMovies INT NOT NULL AUTO_INCREMENT,
                 name VARCHAR(128) NOT NULL,
@@ -58,8 +61,10 @@ class TestWatchedHistory(unittest.TestCase):
                 PRIMARY KEY (idMovies),
                 UNIQUE INDEX imdb_id_UNIQUE (imdb_id ASC)
             );
-        """)
-        cls.executor.execute("""
+        """
+        )
+        cls.executor.execute(
+            """
             CREATE TABLE WatchedHistory (
                 idWatchedHistory INT NOT NULL AUTO_INCREMENT,
                 user_id INT NOT NULL,
@@ -69,11 +74,13 @@ class TestWatchedHistory(unittest.TestCase):
                 FOREIGN KEY (user_id) REFERENCES Users (idUsers) ON DELETE CASCADE,
                 FOREIGN KEY (movie_id) REFERENCES Movies (idMovies) ON DELETE CASCADE
             );
-        """)
+        """
+        )
         cls.db.commit()
 
         # Insert movies into the Movies table
-        cls.executor.execute("""
+        cls.executor.execute(
+            """
             INSERT INTO Movies (idMovies, name, imdb_id) VALUES 
             (2, 'Ariel (1988)', 'tt0094675'),
             (3, 'Shadows in Paradise (1986)', 'tt0092149'),
@@ -85,7 +92,8 @@ class TestWatchedHistory(unittest.TestCase):
             (14, 'American Beauty (1999)', 'tt0169547'),
             (15, 'Citizen Kane (1941)', 'tt0033467'),
             (16, 'Dancer in the Dark (2000)', 'tt0168629');
-        """)
+        """
+        )
         cls.db.commit()
 
         app.config["TESTING"] = True
@@ -119,7 +127,9 @@ class TestWatchedHistory(unittest.TestCase):
         """Add a single movie to the watched history."""
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
@@ -129,12 +139,16 @@ class TestWatchedHistory(unittest.TestCase):
         """Ensure adding duplicate movie is handled correctly."""
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.json["status"], "info")
@@ -143,7 +157,9 @@ class TestWatchedHistory(unittest.TestCase):
         """Retrieve watched history."""
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         response = self.client.get("/getWatchedHistoryData")
@@ -156,7 +172,9 @@ class TestWatchedHistory(unittest.TestCase):
         for imdb_id in movie_ids:
             self.client.post(
                 "/add_to_watched_history",
-                data=json.dumps({"imdb_id": imdb_id, "watched_date": "2024-11-23 10:00:00"}),
+                data=json.dumps(
+                    {"imdb_id": imdb_id, "watched_date": "2024-11-23 10:00:00"}
+                ),
                 content_type="application/json",
             )
         response = self.client.get("/getWatchedHistoryData")
@@ -171,7 +189,9 @@ class TestWatchedHistory(unittest.TestCase):
         """Test adding a movie that doesn't exist in the Movies table."""
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt9999999", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt9999999", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.json["status"], "error")
@@ -180,18 +200,26 @@ class TestWatchedHistory(unittest.TestCase):
         """Ensure different users' watched histories are handled separately."""
         create_account(self.db, "user1@test.com", "user1", "pass1")
         create_account(self.db, "user2@test.com", "user2", "pass2")
-        self.executor.execute("SELECT idUsers FROM Users WHERE username = %s;", ("user1",))
+        self.executor.execute(
+            "SELECT idUsers FROM Users WHERE username = %s;", ("user1",)
+        )
         user1_id = self.executor.fetchone()[0]
-        self.executor.execute("SELECT idUsers FROM Users WHERE username = %s;", ("user2",))
+        self.executor.execute(
+            "SELECT idUsers FROM Users WHERE username = %s;", ("user2",)
+        )
         user2_id = self.executor.fetchone()[0]
 
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0094675", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0094675", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
