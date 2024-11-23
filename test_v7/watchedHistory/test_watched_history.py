@@ -16,6 +16,7 @@ from src.recommenderapp.utils import create_account
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 from src.recommenderapp.app import app
 
+
 class TestWatchedHistory(unittest.TestCase):
     """
     Test cases for Watched History functionality.
@@ -91,6 +92,7 @@ class TestWatchedHistory(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertGreater(len(response.json), 0)
         self.assertEqual(response.json[0]["movie_name"], "Star Wars (1977)")
+
 
 if __name__ == "__main__":
     unittest.main()
