@@ -129,7 +129,9 @@ class TestWatchedHistory(unittest.TestCase):
 
         # Validate user_id
         if not self.user_id:
-            raise ValueError(f"Failed to create or fetch user_id for {self.test_username}")
+            raise ValueError(
+                f"Failed to create or fetch user_id for {self.test_username}"
+            )
 
         global user
         user = (self.test_username, self.user_id)
