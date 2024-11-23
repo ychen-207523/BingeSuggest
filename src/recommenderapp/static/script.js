@@ -131,7 +131,7 @@ $(document).ready(function () {
 				dataType: 'json',
 				data: {
 					i: imdbID,
-					apikey: '77da67f1',
+					apikey: '70b2508f',
 				},
 				success: function(response) {
 					resolve(response);
@@ -189,11 +189,15 @@ $(document).ready(function () {
 						.text("IMDb🔗")
 						.css({ "text-decoration": "none" })
 						.attr("href", "https://www.imdb.com/title/" + imdbID)
-					var li = $("<li />").text(element)
-
+					var li = $("<li/>")
+					var a = $("<a />").text(element)
 					var movieData;
 					try{
 						movieData = await fetchMovieData(imdbID);
+						a
+						.attr("href", 'http://localhost:5000/movie/' + movieData.imdbID)
+						.css({ "text-decoration": "none" })	
+						li.append(a)
 					} catch(error){
 						console.error(error);
 					}

@@ -34,5 +34,5 @@ jobs:
           git config --global user.email "action@github.com"
           git add .
           git diff-index --quiet HEAD || git commit -m "Automatically format code with Black"
-          git pull --rebase origin refs/heads/v6.0
-          git push origin refs/heads/v6.0:refs/heads/v6.0
+          git pull --rebase origin ${{ github.ref_name }}
+          git push origin HEAD:${{ github.ref_name }}
