@@ -22,7 +22,9 @@ class TestWatchedHistory(unittest.TestCase):
         """
         print("\nRunning Setup Method")
         load_dotenv()
-        self.db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
+        self.db = mysql.connector.connect(
+            user="root", password="root", host="127.0.0.1"
+        )
         self.executor = self.db.cursor()
         self.executor.execute("USE testDB;")
         self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
@@ -232,9 +234,7 @@ class TestWatchedHistory(unittest.TestCase):
         self.assertEqual(response.json, [])
 
     def test_empty_after_deletion(self):
-        self.client.post(
-            "/delete_all_watched_history", content_type="application/json"
-        )
+        self.client.post("/delete_all_watched_history", content_type="application/json")
         response = self.client.get("/getWatchedHistoryData")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json, [])
