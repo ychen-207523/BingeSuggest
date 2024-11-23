@@ -154,6 +154,7 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         # Assert the duplicate entry is handled correctly
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["status"], "info")
+
     def test_get_watched_history(self):
         """
         Test retrieving watched history.
@@ -209,4 +210,3 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["status"], "success")
-
