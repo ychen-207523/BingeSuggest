@@ -105,8 +105,8 @@ class TestWatchedHistory(unittest.TestCase):
         Create a unique user for each test.
         """
         print("\nRunning Setup Method")
-        self.test_email = f"testuser{self._testMethodName}@test.com"
-        self.test_username = f"testuser{self._testMethodName}"
+        self.test_email = f"user{self._testMethodName[:30]}@test.com"
+        self.test_username = f"u{self._testMethodName[:35]}"
         self.test_password = "password123"
         create_account(self.db, self.test_email, self.test_username, self.test_password)
 
