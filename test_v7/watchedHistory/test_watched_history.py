@@ -37,11 +37,52 @@ class TestWatchedHistory(unittest.TestCase):
         current_db = self.executor.fetchone()[0]
         print(f"Connected to database: {current_db}")
 
+        # Drop and recreate tables to ensure isolation
         self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
         self.executor.execute("DROP TABLE IF EXISTS WatchedHistory;")
         self.executor.execute("DROP TABLE IF EXISTS Users;")
         self.executor.execute("DROP TABLE IF EXISTS Movies;")
         self.executor.execute("SET FOREIGN_KEY_CHECKS=1;")
+
+        self.executor.execute("""
+            CREATE TABLE Users (
+                idUsers INT NOT NULL AUTO_INCREMENT,
+                username VARCHAR(45) NOT NULL,
+                email VARCHAR(45) NOT NULL,
+                password VARCHAR(64) NOT NULL,
+                PRIMARY KEY (idUsers),
+                UNIQUE INDEX username_UNIQUE (username ASC),
+                UNIQUE INDEX email_UNIQUE (email ASC)
+            );
+        """)
+        self.executor.execute("""
+            CREATE TABLE Movies (
+                idMovies INT NOT NULL AUTO_INCREMENT,
+                name VARCHAR(128) NOT NULL,
+                imdb_id VARCHAR(45) NOT NULL,
+                PRIMARY KEY (idMovies),
+                UNIQUE INDEX imdb_id_UNIQUE (imdb_id ASC)
+            );
+        """)
+        self.executor.execute("""
+            CREATE TABLE WatchedHistory (
+                idWatchedHistory INT NOT NULL AUTO_INCREMENT,
+                user_id INT NOT NULL,
+                movie_id INT NOT NULL,
+                watched_date DATETIME NOT NULL,
+                PRIMARY KEY (idWatchedHistory),
+                FOREIGN KEY (user_id) REFERENCES Users (idUsers) ON DELETE CASCADE,
+                FOREIGN KEY (movie_id) REFERENCES Movies (idMovies) ON DELETE CASCADE
+            );
+        """)
+        self.db.commit()
+
+        # Populate Movies table
+        self.executor.execute("""
+            INSERT INTO Movies (idMovies, name, imdb_id) VALUES
+            (11, 'Star Wars (1977)', 'tt0076759');
+        """)
+        self.db.commit()
 
         # Create a new user account
         self.test_email = "testuser@test.com"
