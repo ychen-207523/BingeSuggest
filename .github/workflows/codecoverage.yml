@@ -55,7 +55,7 @@ jobs:
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           git add -f reports/coverage/coverage.xml reports/badge/coverage-badge.svg
-          git pull origin HEAD:${{ github.ref_name }}
+          git pull --rebase origin ${{ github.ref_name }}
           git commit -m "Update coverage report and badge"
           git push origin HEAD:${{ github.ref_name }}
 
