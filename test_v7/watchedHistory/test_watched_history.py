@@ -34,9 +34,8 @@ class TestWatchedHistory(unittest.TestCase):
 
     def _get_test_db(self):
         import mysql.connector
-        return mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1"
-        )
+
+        return mysql.connector.connect(user="root", password="root", host="127.0.0.1")
 
     def tearDown(self):
         g.db.close()
@@ -59,11 +58,13 @@ class TestWatchedHistory(unittest.TestCase):
         self.create_test_user()
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({
-                "movieName": "Star Wars (1977)",
-                "imdb_id": "tt0076759",
-                "watched_date": "2024-11-16 14:44:31",
-            }),
+            data=json.dumps(
+                {
+                    "movieName": "Star Wars (1977)",
+                    "imdb_id": "tt0076759",
+                    "watched_date": "2024-11-16 14:44:31",
+                }
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
@@ -76,10 +77,12 @@ class TestWatchedHistory(unittest.TestCase):
         self.create_test_user()
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({
-                "movieName": "Star Wars (1977)",
-                "imdb_id": "tt0076759",
-            }),
+            data=json.dumps(
+                {
+                    "movieName": "Star Wars (1977)",
+                    "imdb_id": "tt0076759",
+                }
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
@@ -101,18 +104,22 @@ class TestWatchedHistory(unittest.TestCase):
         self.create_test_user()
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({
-                "movieName": "Star Wars (1977)",
-                "imdb_id": "tt0076759",
-            }),
+            data=json.dumps(
+                {
+                    "movieName": "Star Wars (1977)",
+                    "imdb_id": "tt0076759",
+                }
+            ),
             content_type="application/json",
         )
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({
-                "movieName": "Star Wars (1977)",
-                "imdb_id": "tt0076759",
-            }),
+            data=json.dumps(
+                {
+                    "movieName": "Star Wars (1977)",
+                    "imdb_id": "tt0076759",
+                }
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
@@ -125,17 +132,21 @@ class TestWatchedHistory(unittest.TestCase):
         self.create_test_user()
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({
-                "movieName": "Star Wars (1977)",
-                "imdb_id": "tt0076759",
-            }),
+            data=json.dumps(
+                {
+                    "movieName": "Star Wars (1977)",
+                    "imdb_id": "tt0076759",
+                }
+            ),
             content_type="application/json",
         )
         response = self.client.post(
             "/removeFromWatchedHistory",
-            data=json.dumps({
-                "imdb_id": "tt0076759",
-            }),
+            data=json.dumps(
+                {
+                    "imdb_id": "tt0076759",
+                }
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
@@ -148,9 +159,11 @@ class TestWatchedHistory(unittest.TestCase):
         self.create_test_user()
         response = self.client.post(
             "/removeFromWatchedHistory",
-            data=json.dumps({
-                "imdb_id": "tt0000000",
-            }),
+            data=json.dumps(
+                {
+                    "imdb_id": "tt0000000",
+                }
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 404)
@@ -163,11 +176,13 @@ class TestWatchedHistory(unittest.TestCase):
         self.create_test_user()
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({
-                "movieName": "Star Wars (1977)",
-                "imdb_id": "tt0076759",
-                "watched_date": "2024-11-16 14:44:31",
-            }),
+            data=json.dumps(
+                {
+                    "movieName": "Star Wars (1977)",
+                    "imdb_id": "tt0076759",
+                    "watched_date": "2024-11-16 14:44:31",
+                }
+            ),
             content_type="application/json",
         )
         response = self.client.get("/getWatchedHistoryData")
