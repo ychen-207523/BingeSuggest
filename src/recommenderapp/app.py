@@ -14,7 +14,7 @@ from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 import mysql.connector
 from dotenv import load_dotenv
-from utils import (
+from src.recommenderapp.utils import (
     beautify_feedback_data,
     send_email_to_user,
     create_account,
