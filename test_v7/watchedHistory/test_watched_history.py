@@ -14,6 +14,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 from src.recommenderapp.app import app
 
+
 class TestWatchedHistory(unittest.TestCase):
     """
     Test cases for watched history functionality
