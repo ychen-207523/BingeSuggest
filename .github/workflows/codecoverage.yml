@@ -47,7 +47,7 @@ jobs:
         DB_HOST=127.0.0.1
         DB_USER=root
         DB_PASSWORD=root
-        DB_NAME=testdb
+        DB_NAME=testDB
         EOF
 
     - name: Set up Database Schema
