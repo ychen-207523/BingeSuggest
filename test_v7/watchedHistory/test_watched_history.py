@@ -139,12 +139,13 @@ class TestWatchedHistory(unittest.TestCase):
         create_account(self.db, "debug@test.com", "debug_user", "password123")
         self.db.commit()
 
-
         self.executor.execute("SELECT * FROM Users WHERE username = 'debug_user';")
         print("Users Table:", self.executor.fetchall())
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
 
