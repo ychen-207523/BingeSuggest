@@ -38,7 +38,7 @@ from src.recommenderapp.utils import (
     get_recent_friend_movies,
     create_or_update_discussion,
     get_discussion,
-    get_username_data
+    get_username_data,
 )
 
 # pylint: enable=wrong-import-position
@@ -143,21 +143,16 @@ class Tests(unittest.TestCase):
         """
         load_dotenv()
         self.cursor_mock.fetchone.return_value = None
-        fail = login_to_account(self.db_mock , "testUser", "wrongPassword")
+        fail = login_to_account(self.db_mock, "testUser", "wrongPassword")
         self.assertIsNone(fail)
 
     def test_get_wall_posts(self):
         """
         Test case 6
         """
-        self.cursor_mock.description = [
-            ["imdb_id"],
-            ["name"],
-            ["review"],
-            ["score"]
-        ]
+        self.cursor_mock.description = [["imdb_id"], ["name"], ["review"], ["score"]]
         self.cursor_mock.fetchall.return_value = [
-            ("tt0076759","Star Wars (1977)", "this is a great movie", 4)
+            ("tt0076759", "Star Wars (1977)", "this is a great movie", 4)
         ]
         app = flask.Flask(__name__)
         a = ""
@@ -174,9 +169,7 @@ class Tests(unittest.TestCase):
         """
         app = flask.Flask(__name__)
         username = ""
-        self.cursor_mock.fetchall.return_value = [
-            ["testUser"]
-        ]
+        self.cursor_mock.fetchall.return_value = [["testUser"]]
         with app.test_request_context("/"):
             username = get_username(self.db_mock, 1).json
         self.assertEqual("testUser", username)
@@ -185,12 +178,8 @@ class Tests(unittest.TestCase):
         """
         Test case 8
         """
-        self.cursor_mock.description = [
-            ["id"],
-            ["score"],
-            ["year"]
-        ]
-       
+        self.cursor_mock.description = [["id"], ["score"], ["year"]]
+
         movies_to_review = [
             (2, 3, "1970-01-06"),
             (3, 4, "1970-01-05"),
@@ -222,11 +211,7 @@ class Tests(unittest.TestCase):
             (11, 1, "1970-01-02"),
             (12, 3, "1970-01-01"),
         ]
-        self.cursor_mock.description = [
-            ["id"],
-            ["score"],
-            ["year"]
-        ]
+        self.cursor_mock.description = [["id"], ["score"], ["year"]]
         self.cursor_mock.fetchall.return_value = movies_to_review
         app = flask.Flask(__name__)
         result = []
@@ -241,9 +226,9 @@ class Tests(unittest.TestCase):
         data = {
             "imdb_id": "tt0111161",  # Example IMDB ID
             "user": "user1",
-            "comment": "Amazing movie, a must-watch!"
+            "comment": "Amazing movie, a must-watch!",
         }
-        
+
         # Mock the cursor to return None for no existing discussion
         self.cursor_mock.fetchone.return_value = None
         app = flask.Flask(__name__)
@@ -252,65 +237,73 @@ class Tests(unittest.TestCase):
         status_code = 404
         with app.test_request_context("/"):
             response, status_code = create_or_update_discussion(self.db_mock, data)
-        
+
         # Check if the cursor's execute method was called to insert a new discussion
         self.cursor_mock.execute.assert_called_with(
-            "Insert INTO Discussion (imdb_id, comments) values(%s,%s)", 
-            (data['imdb_id'], json.dumps([{"user": data['user'], "comment": data['comment']}]))
+            "Insert INTO Discussion (imdb_id, comments) values(%s,%s)",
+            (
+                data["imdb_id"],
+                json.dumps([{"user": data["user"], "comment": data["comment"]}]),
+            ),
         )
-        
+
         # Check the returned response
         self.assertEqual(status_code, 200)
-        self.assertIn(data['comment'], response.data.decode())
-        self.assertIn(data['user'], response.data.decode())
+        self.assertIn(data["comment"], response.data.decode())
+        self.assertIn(data["user"], response.data.decode())
 
     def test_update_discussion_existing_movie(self):
         # Define test input
         data = {
             "imdb_id": "tt0111161",  # Example IMDB ID
             "user": "user1",
-            "comment": "Amazing movie, a must-watch!"
+            "comment": "Amazing movie, a must-watch!",
         }
-        
+
         # Mock the cursor to return an existing discussion
         existing_comments = json.dumps([{"user": "user0", "comment": "Great movie!"}])
-        self.cursor_mock.fetchone.return_value = ("id","tt0111161", existing_comments)
-        
+        self.cursor_mock.fetchone.return_value = ("id", "tt0111161", existing_comments)
+
         app = flask.Flask(__name__)
         # Call the function
         response = ""
         status_code = 404
         with app.test_request_context("/"):
             response, status_code = create_or_update_discussion(self.db_mock, data)
-        
+
         # Check if the cursor's execute method was called to update the discussion
         self.cursor_mock.execute.assert_called_with(
-            "Update Discussion set comments = %s where imdb_id = %s", 
-            (json.dumps([
-                {"user": "user0", "comment": "Great movie!"},
-                {"user": "user1", "comment": "Amazing movie, a must-watch!"}
-            ]), data['imdb_id'])
+            "Update Discussion set comments = %s where imdb_id = %s",
+            (
+                json.dumps(
+                    [
+                        {"user": "user0", "comment": "Great movie!"},
+                        {"user": "user1", "comment": "Amazing movie, a must-watch!"},
+                    ]
+                ),
+                data["imdb_id"],
+            ),
         )
-        
+
         # Check the returned response
         self.assertEqual(status_code, 200)
-        self.assertIn(data['comment'], response.data.decode())
-        self.assertIn(data['user'], response.data.decode())
+        self.assertIn(data["comment"], response.data.decode())
+        self.assertIn(data["user"], response.data.decode())
 
     def test_get_discussion_no_comments(self):
         # Define test input
         imdb_id = "tt0111161"  # Example IMDB ID
-        
+
         # Mock the cursor to return None for no existing comments
         self.cursor_mock.fetchone.return_value = [json.dumps([])]
-        
+
         app = flask.Flask(__name__)
         # Call the function
         response = ""
         status_code = 404
         with app.test_request_context("/"):
             response, status_code = get_discussion(self.db_mock, imdb_id)
-        
+
         # Check if the response status is OK and data is an empty list
         self.assertEqual(status_code, 200)
         self.assertEqual(response.json, [])
@@ -318,16 +311,18 @@ class Tests(unittest.TestCase):
     def test_get_discussion_existing_comments(self):
         # Define test input
         imdb_id = "tt0111161"  # Example IMDB ID
-        
+
         # Mock the cursor to return existing comments
         existing_comments = json.dumps([{"user": "user1", "comment": "Amazing movie!"}])
-        self.cursor_mock.fetchone.return_value = [json.dumps([imdb_id, existing_comments])]
+        self.cursor_mock.fetchone.return_value = [
+            json.dumps([imdb_id, existing_comments])
+        ]
         app = flask.Flask(__name__)
         response = ""
         status_code = 404
         with app.test_request_context("/"):
             response, status_code = get_discussion(self.db_mock, imdb_id)
-        
+
         # Check if the response contains the existing comments
         self.assertEqual(status_code, 200)
         self.assertIn("Amazing movie!", response.data.decode())
@@ -336,18 +331,20 @@ class Tests(unittest.TestCase):
         # Define test input
         user_id = 1  # Example user ID
         expected_username = "john_doe"  # Expected username for the given user ID
-        
+
         # Mock the cursor to return a result with a username
-        self.cursor_mock.fetchall.return_value = [(expected_username,)]  # Return a tuple with the username
-        
+        self.cursor_mock.fetchall.return_value = [
+            (expected_username,)
+        ]  # Return a tuple with the username
+
         app = flask.Flask(__name__)
         response = ""
         status_code = 404
         result = get_username_data(self.db_mock, user_id)
-        
+
         # Verify that the result is the correct username
         self.assertEqual(result, expected_username)
-        
+
         # Verify that the cursor's execute method was called with the correct query and parameters
         self.cursor_mock.execute.assert_called_with(
             "SELECT username FROM Users WHERE idUsers = %s;", [user_id]
@@ -356,16 +353,16 @@ class Tests(unittest.TestCase):
     def test_get_username_data_user_not_found(self):
         # Define test input
         user_id = 9999  # A non-existent user ID
-        
+
         # Mock the cursor to return an empty list for no results
         self.cursor_mock.fetchall.return_value = []
-        
+
         app = flask.Flask(__name__)
         response = ""
         status_code = 404
         with self.assertRaises(IndexError):
             get_username_data(self.db_mock, user_id)
-        
+
         # Ensure the cursor's execute method was called
         self.cursor_mock.execute.assert_called_with(
             "SELECT username FROM Users WHERE idUsers = %s;", [user_id]
@@ -374,7 +371,7 @@ class Tests(unittest.TestCase):
     def test_get_username_data_invalid_user_id(self):
         # Define test input with an invalid user ID (non-integer)
         user_id = "invalid_id"  # Non-integer ID
-        
+
         # Call the function and expect a TypeError or ValueError
         with self.assertRaises(ValueError):
             get_username_data(self.db_mock, user_id)
@@ -382,46 +379,49 @@ class Tests(unittest.TestCase):
     def test_get_username_data_db_failure(self):
         # Define test input
         user_id = 1  # Example user ID
-        
+
         # Simulate a database failure by raising an exception when executing the query
         self.cursor_mock.execute.side_effect = Exception("Database error")
-        
+
         # Call the function and expect it to raise an exception
         with self.assertRaises(Exception):
             get_username_data(self.db_mock, user_id)
-        
+
         # Ensure that the cursor's execute method was called
         self.cursor_mock.execute.assert_called_with(
             "SELECT username FROM Users WHERE idUsers = %s;", [user_id]
         )
-    
+
     def test_get_username_data_multiple_rows(self):
         # Define test input
         user_id = 1  # Example user ID
-        
+
         # Mock the cursor to return multiple rows (this is an unexpected scenario)
-        self.cursor_mock.fetchall.return_value = [("john_doe",), ("jane_doe",)]  # Multiple rows
-        
+        self.cursor_mock.fetchall.return_value = [
+            ("john_doe",),
+            ("jane_doe",),
+        ]  # Multiple rows
+
         # Call the function and expect an exception to be raised
-        
+
         result = get_username_data(self.db_mock, user_id)
         # Ensure the cursor's execute method was called
         self.cursor_mock.execute.assert_called_with(
             "SELECT username FROM Users WHERE idUsers = %s;", [user_id]
         )
-        self.assertEqual("john_doe",result)
-    
+        self.assertEqual("john_doe", result)
+
     def test_get_username_data_none_result(self):
         # Define test input
         user_id = 1  # Example user ID
-        
+
         # Mock the cursor to return None (which is not a typical behavior of fetchall, but we test it here)
         self.cursor_mock.fetchall.return_value = None
-        
+
         # Call the function and expect it to handle the None result gracefully
         with self.assertRaises(TypeError):  # Expecting a TypeError due to None result
             get_username_data(self.db_mock, user_id)
-        
+
         # Ensure the cursor's execute method was called
         self.cursor_mock.execute.assert_called_with(
             "SELECT username FROM Users WHERE idUsers = %s;", [user_id]
@@ -431,19 +431,25 @@ class Tests(unittest.TestCase):
         # Define test input
         user_id = 1  # Example user ID
         empty_username = ""  # Username with only spaces
-        
+
         # Mock the cursor to return an empty username (with spaces)
-        self.cursor_mock.fetchall.return_value = [(empty_username,)]  # Return a tuple with spaces as username
-        
+        self.cursor_mock.fetchall.return_value = [
+            (empty_username,)
+        ]  # Return a tuple with spaces as username
+
         # Call the function
         result = get_username_data(self.db_mock, user_id)
-        
+
         # Verify that the result is the empty username
-        self.assertEqual(result, empty_username.strip())  # The result should be an empty string after stripping spaces
-        
+        self.assertEqual(
+            result, empty_username.strip()
+        )  # The result should be an empty string after stripping spaces
+
         # Ensure the cursor's execute method was called
         self.cursor_mock.execute.assert_called_with(
             "SELECT username FROM Users WHERE idUsers = %s;", [user_id]
         )
+
+
 if __name__ == "__main__":
     unittest.main()

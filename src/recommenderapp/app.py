@@ -31,7 +31,7 @@ from utils import (
     get_imdb_id_by_name,
     create_or_update_discussion,
     get_discussion,
-    get_username_data
+    get_username_data,
 )
 from search import Search
 
@@ -52,6 +52,8 @@ app.secret_key = "secret key"
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 user = {1: None}
 comments: []
+
+
 @app.route("/")
 def login_page():
     """
@@ -402,6 +404,7 @@ def success():
     """
     return render_template("success.html")
 
+
 @app.route("/movie/<id>")
 def moviePage(id):
     """
@@ -412,20 +415,21 @@ def moviePage(id):
     if user_id is None or user_id == "guest":
         us = "Anonymous"
     else:
-        us = get_username_data(g.db,user_id)
-    r = requests.get("http://www.omdbapi.com/", params = {"i":id,"apikey":os.getenv("OMDB_API_KEY")})
-    data = {
-        "movieData": r.json(),
-        "user": us
-    }
-    return render_template("movie.html", data = data)
+        us = get_username_data(g.db, user_id)
+    r = requests.get(
+        "http://www.omdbapi.com/", params={"i": id, "apikey": os.getenv("OMDB_API_KEY")}
+    )
+    data = {"movieData": r.json(), "user": us}
+    return render_template("movie.html", data=data)
+
 
 @app.route("/movieDiscussion/<id>", methods=["GET"])
 def getMovieDisccusion(id):
     """
     Returns the discussion store for the corresponding imdbId
     """
-    return(get_discussion(g.db,id))
+    return get_discussion(g.db, id)
+
 
 @app.route("/movieDiscussion/<id>", methods=["POST"])
 def postCommentOnMovieDisccusion(id):
@@ -433,8 +437,10 @@ def postCommentOnMovieDisccusion(id):
     Returns the discussion store for the corresponding imdbId
     """
     data = request.get_json()
-    data['imdb_id'] = id
-    return(create_or_update_discussion(g.db,data))
+    data["imdb_id"] = id
+    return create_or_update_discussion(g.db, data)
+
+
 @app.before_request
 def before_request():
     """
