@@ -123,7 +123,6 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         """
         create_account(self.db, "tester2@test.com", "tester2", "password123")
         self.executor.execute("SELECT idUsers FROM Users WHERE username = 'tester2';")
-        user_id = self.executor.fetchone()[0]
 
         self.client.post(
             "/add_to_watched_history",
@@ -147,7 +146,6 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         """
         create_account(self.db, "tester3@test.com", "tester3", "password123")
         self.executor.execute("SELECT idUsers FROM Users WHERE username = 'tester3';")
-        user_id = self.executor.fetchone()[0]
 
         self.client.post(
             "/add_to_watched_history",
@@ -166,7 +164,6 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         """
         create_account(self.db, "tester4@test.com", "tester4", "password123")
         self.executor.execute("SELECT idUsers FROM Users WHERE username = 'tester4';")
-        user_id = self.executor.fetchone()[0]
 
         response = self.client.post(
             "/add_to_watched_history",
@@ -183,7 +180,6 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         """
         create_account(self.db, "tester5@test.com", "tester5", "password123")
         self.executor.execute("SELECT idUsers FROM Users WHERE username = 'tester5';")
-        user_id = self.executor.fetchone()[0]
 
         self.client.post(
             "/add_to_watched_history",
@@ -199,3 +195,8 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["status"], "success")
+
+    def test_remove_movie_not_in_watched_history(self):
+        """
+        Test removing a movie that is not in watched history.
+        """
