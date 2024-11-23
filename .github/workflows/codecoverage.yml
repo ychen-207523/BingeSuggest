@@ -17,7 +17,9 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5 --lower_case_table_names=1
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+        volumes:
+          - ./test/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
 
     steps:
     - name: Checkout code
