@@ -121,9 +121,19 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         """
         Test adding the same movie twice to watched history.
         """
+        # Create a new user and get their user_id
         create_account(self.db, "tester2@test.com", "tester2", "password123")
         self.executor.execute("SELECT idUsers FROM Users WHERE username = 'tester2';")
+        executor = self.db.cursor()
+        executor.execute("SELECT * FROM Users;")
+        db_result = executor.fetchall()
+        user_id = db_result[0][0]
 
+        # Set the user context for the test
+        global user
+        user = ("tester2", user_id)
+
+        # Add the movie to watched history
         self.client.post(
             "/add_to_watched_history",
             data=json.dumps(
@@ -131,6 +141,8 @@ class TestWatchedHistoryAPI(unittest.TestCase):
             ),
             content_type="application/json",
         )
+
+        # Attempt to add the same movie again
         response = self.client.post(
             "/add_to_watched_history",
             data=json.dumps(
@@ -138,8 +150,10 @@ class TestWatchedHistoryAPI(unittest.TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.json["status"], "info")
 
+        # Assert the duplicate entry is handled correctly
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json["status"], "info")
     def test_get_watched_history(self):
         """
         Test retrieving watched history.
@@ -196,7 +210,3 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["status"], "success")
 
-    def test_remove_movie_not_in_watched_history(self):
-        """
-        Test removing a movie that is not in watched history.
-        """
