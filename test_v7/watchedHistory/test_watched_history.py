@@ -1,5 +1,6 @@
 import sys
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 import mysql.connector
 from dotenv import load_dotenv
@@ -99,28 +100,13 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         if self.db.is_connected():
             self.db.close()
 
+    @patch("src.recommenderapp.app.user", new=("tester2", 1))
     def test_add_duplicate_to_watched_history(self):
         """
         Test adding the same movie twice to watched history.
         """
-        # Create a new user and get their user_id
+        # Create a new user
         create_account(self.db, "tester2@test.com", "tester2", "password123")
-
-        # Use a fresh cursor to fetch the user_id
-        with self.db.cursor() as cursor:
-            cursor.execute(
-                "SELECT idUsers FROM Users WHERE username = %s;", ("tester2",)
-            )
-            db_result = cursor.fetchall()
-            user_id = db_result[0][0]
-
-        # Ensure the user_id was retrieved correctly
-        if not user_id:
-            raise ValueError("Failed to create or fetch user_id for tester2")
-
-        # Set the user context for the test
-        global user
-        user = ("tester2", user_id)
 
         # Add the movie to watched history
         response1 = self.client.post(
@@ -141,7 +127,68 @@ class TestWatchedHistoryAPI(unittest.TestCase):
             ),
             content_type="application/json",
         )
-
-        # Assert the duplicate entry is handled correctly
         self.assertEqual(response2.status_code, 200)
         self.assertEqual(response2.json["status"], "info")
+
+    @patch("src.recommenderapp.app.user", new=("tester3", 2))
+    def test_add_to_watched_history(self):
+        """
+        Test adding a single movie to watched history.
+        """
+        create_account(self.db, "tester3@test.com", "tester3", "password123")
+
+        response = self.client.post(
+            "/add_to_watched_history",
+            data=json.dumps(
+                {"imdb_id": "tt0266543", "watched_date": "2024-11-23 12:00:00"}
+            ),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json["status"], "success")
+
+    @patch("src.recommenderapp.app.user", new=("tester4", 3))
+    def test_get_watched_history(self):
+        """
+        Test retrieving watched history.
+        """
+        create_account(self.db, "tester4@test.com", "tester4", "password123")
+
+        # Add a movie to watched history
+        self.client.post(
+            "/add_to_watched_history",
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
+            content_type="application/json",
+        )
+
+        response = self.client.get("/getWatchedHistoryData")
+        self.assertEqual(response.status_code, 200)
+        self.assertGreater(len(response.json), 0)
+        self.assertEqual(response.json[0]["movie_name"], "Star Wars (1977)")
+
+    @patch("src.recommenderapp.app.user", new=("tester5", 4))
+    def test_remove_from_watched_history(self):
+        """
+        Test removing a movie from watched history.
+        """
+        create_account(self.db, "tester5@test.com", "tester5", "password123")
+
+        # Add a movie to watched history
+        self.client.post(
+            "/add_to_watched_history",
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
+            content_type="application/json",
+        )
+
+        # Remove the movie
+        response = self.client.post(
+            "/removeFromWatchedHistory",
+            data=json.dumps({"imdb_id": "tt0076759"}),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json["status"], "success")
