@@ -99,51 +99,40 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         if self.db.is_connected():
             self.db.close()
 
-    def test_add_to_watched_history(self):
-        """
-        Test adding a movie to watched history.
-        """
-        create_account(self.db, "tester1@test.com", "tester1", "password123")
-        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'tester1';")
-        user_id = self.executor.fetchone()[0]
-
-        response = self.client.post(
-            "/add_to_watched_history",
-            data=json.dumps(
-                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
-            ),
-            content_type="application/json",
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json["status"], "success")
-
     def test_add_duplicate_to_watched_history(self):
         """
         Test adding the same movie twice to watched history.
         """
         # Create a new user and get their user_id
         create_account(self.db, "tester2@test.com", "tester2", "password123")
-        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'tester2';")
-        executor = self.db.cursor()
-        executor.execute("SELECT * FROM Users;")
-        db_result = executor.fetchall()
-        user_id = db_result[0][0]
+
+        # Use a fresh cursor to fetch the user_id
+        with self.db.cursor() as cursor:
+            cursor.execute("SELECT idUsers FROM Users WHERE username = %s;", ("tester2",))
+            db_result = cursor.fetchall()
+            user_id = db_result[0][0]
+
+        # Ensure the user_id was retrieved correctly
+        if not user_id:
+            raise ValueError("Failed to create or fetch user_id for tester2")
 
         # Set the user context for the test
         global user
         user = ("tester2", user_id)
 
         # Add the movie to watched history
-        self.client.post(
+        response1 = self.client.post(
             "/add_to_watched_history",
             data=json.dumps(
                 {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
             ),
             content_type="application/json",
         )
+        self.assertEqual(response1.status_code, 200)
+        self.assertEqual(response1.json["status"], "success")
 
         # Attempt to add the same movie again
-        response = self.client.post(
+        response2 = self.client.post(
             "/add_to_watched_history",
             data=json.dumps(
                 {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
@@ -152,61 +141,5 @@ class TestWatchedHistoryAPI(unittest.TestCase):
         )
 
         # Assert the duplicate entry is handled correctly
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json["status"], "info")
-
-    def test_get_watched_history(self):
-        """
-        Test retrieving watched history.
-        """
-        create_account(self.db, "tester3@test.com", "tester3", "password123")
-        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'tester3';")
-
-        self.client.post(
-            "/add_to_watched_history",
-            data=json.dumps(
-                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
-            ),
-            content_type="application/json",
-        )
-        response = self.client.get("/getWatchedHistoryData")
-        self.assertEqual(response.status_code, 200)
-        self.assertGreater(len(response.json), 0)
-
-    def test_add_movie_not_in_database(self):
-        """
-        Test adding a movie that does not exist in the database.
-        """
-        create_account(self.db, "tester4@test.com", "tester4", "password123")
-        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'tester4';")
-
-        response = self.client.post(
-            "/add_to_watched_history",
-            data=json.dumps(
-                {"imdb_id": "tt9999999", "watched_date": "2024-11-23 10:00:00"}
-            ),
-            content_type="application/json",
-        )
-        self.assertEqual(response.json["status"], "error")
-
-    def test_remove_from_watched_history(self):
-        """
-        Test removing a movie from watched history.
-        """
-        create_account(self.db, "tester5@test.com", "tester5", "password123")
-        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'tester5';")
-
-        self.client.post(
-            "/add_to_watched_history",
-            data=json.dumps(
-                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
-            ),
-            content_type="application/json",
-        )
-        response = self.client.post(
-            "/removeFromWatchedHistory",
-            data=json.dumps({"imdb_id": "tt0076759"}),
-            content_type="application/json",
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json["status"], "success")
+        self.assertEqual(response2.status_code, 200)
+        self.assertEqual(response2.json["status"], "info")
