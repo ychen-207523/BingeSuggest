@@ -44,7 +44,8 @@ class TestWatchedHistory(unittest.TestCase):
         self.executor.execute("DROP TABLE IF EXISTS Movies;")
         self.executor.execute("SET FOREIGN_KEY_CHECKS=1;")
 
-        self.executor.execute("""
+        self.executor.execute(
+            """
             CREATE TABLE Users (
                 idUsers INT NOT NULL AUTO_INCREMENT,
                 username VARCHAR(45) NOT NULL,
@@ -54,8 +55,10 @@ class TestWatchedHistory(unittest.TestCase):
                 UNIQUE INDEX username_UNIQUE (username ASC),
                 UNIQUE INDEX email_UNIQUE (email ASC)
             );
-        """)
-        self.executor.execute("""
+        """
+        )
+        self.executor.execute(
+            """
             CREATE TABLE Movies (
                 idMovies INT NOT NULL AUTO_INCREMENT,
                 name VARCHAR(128) NOT NULL,
@@ -63,8 +66,10 @@ class TestWatchedHistory(unittest.TestCase):
                 PRIMARY KEY (idMovies),
                 UNIQUE INDEX imdb_id_UNIQUE (imdb_id ASC)
             );
-        """)
-        self.executor.execute("""
+        """
+        )
+        self.executor.execute(
+            """
             CREATE TABLE WatchedHistory (
                 idWatchedHistory INT NOT NULL AUTO_INCREMENT,
                 user_id INT NOT NULL,
@@ -74,14 +79,17 @@ class TestWatchedHistory(unittest.TestCase):
                 FOREIGN KEY (user_id) REFERENCES Users (idUsers) ON DELETE CASCADE,
                 FOREIGN KEY (movie_id) REFERENCES Movies (idMovies) ON DELETE CASCADE
             );
-        """)
+        """
+        )
         self.db.commit()
 
         # Populate Movies table
-        self.executor.execute("""
+        self.executor.execute(
+            """
             INSERT INTO Movies (idMovies, name, imdb_id) VALUES
             (11, 'Star Wars (1977)', 'tt0076759');
-        """)
+        """
+        )
         self.db.commit()
 
         # Create a new user account
