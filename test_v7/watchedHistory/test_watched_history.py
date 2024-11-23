@@ -14,28 +14,23 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 from src.recommenderapp.app import app
 
-
 class TestWatchedHistory(unittest.TestCase):
     """
     Test cases for watched history functionality
     """
 
     def setUp(self):
-        """
-        Setup method to prepare the test database and Flask test client.
-        """
         print("\nRunning Setup Method")
         load_dotenv()
-        self.db = mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1"
-        )
-        self.executor = self.db.cursor()
-        self.executor.execute("USE testDB;")
-        self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
-        self.executor.execute("DELETE FROM WatchedHistory")
-        self.executor.execute("DELETE FROM Users")
-        self.executor.execute("DELETE FROM Movies")
-        self.db.commit()
+        db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
+        executor = db.cursor()
+        executor.execute("USE testDB;")
+        executor.execute("SET FOREIGN_KEY_CHECKS=0;")
+        executor.execute("DELETE FROM Users")
+        executor.execute("DELETE FROM Ratings")
+        executor.execute("DELETE FROM Friends")
+        executor.execute("DELETE FROM WatchedHistory")
+        db.commit()
 
         # Set up Flask test client
         app.config["TESTING"] = True
