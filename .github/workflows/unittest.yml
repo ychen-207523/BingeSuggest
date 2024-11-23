@@ -50,7 +50,7 @@ jobs:
 
       #utils test cases
       - name: Running test cases for utils.py
-        run: python text/test_util.py
+        run: python test/test_util.py
       # sap test cases
       - name: Running test cases for watchlist
         run: python test_v6/sap/test_watchlist.py
