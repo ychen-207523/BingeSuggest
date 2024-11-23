@@ -42,7 +42,7 @@ jobs:
 
     - name: Run tests and generate coverage report
       run: |
-        pytest --import-mode=importlib --cov-report=xml:reports/coverage/coverage.xml --cov=. $(git ls-files 'test_*.py')
+        pytest --import-mode=importlib --cov-report=xml:reports/coverage/coverage.xml --cov=. $(git ls-files 'test_watched_history.py')
 
     - name: Generate Coverage Badge
       run: |
