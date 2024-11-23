@@ -18,23 +18,22 @@ jobs:
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
-        volumes:
-          - ./test/mysql/my.cnf:/etc/mysql/conf.d/my.cnf:ro
 
     steps:
-    - name: Fix Permissions for Mounted Files
-      run: |
-        sudo chmod -R u+rw ./test/mysql || true
-
     - name: Checkout code
       uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.11"
+    - name: Fix file permissions
+      run: |
+        sudo chmod -R u+rwX,g+rwX,o+rX ./test/mysql
+        sudo chown -R $USER:$GROUPS ./test/mysql
+
+    - name: Setup temporary directory for MySQL config
+      run: |
+        mkdir -p $RUNNER_TEMP/mysql
+        cp ./test/mysql/my.cnf $RUNNER_TEMP/mysql/my.cnf
 
     - name: Install dependencies
       run: |
@@ -61,7 +60,7 @@ jobs:
 
     - name: Generate Coverage Badge
       run: |
-        mkdir -p reports/badge  # Ensure directory for badge output
+        mkdir -p reports/badge
         genbadge coverage -i reports/coverage/coverage.xml -o reports/badge/coverage-badge.svg
 
     - name: Commit and push coverage report and badge
