@@ -23,7 +23,9 @@ class TestWatchedHistory(unittest.TestCase):
     def setUp(self):
         print("\nRunning Setup Method")
         load_dotenv()
-        self.db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
+        self.db = mysql.connector.connect(
+            user="root", password="root", host="127.0.0.1"
+        )
         self.executor = self.db.cursor()
         self.executor.execute("USE testDB;")
         self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
@@ -36,13 +38,18 @@ class TestWatchedHistory(unittest.TestCase):
         self.db.close()
 
     def create_test_user(self, email="test@example.com"):
-        self.executor.execute("INSERT INTO Users (email, username, password) VALUES (%s, %s, %s);", (email, "testuser", "password"))
+        self.executor.execute(
+            "INSERT INTO Users (email, username, password) VALUES (%s, %s, %s);",
+            (email, "testuser", "password"),
+        )
         self.db.commit()
         self.executor.execute("SELECT LAST_INSERT_ID();")
         return self.executor.fetchone()[0]
 
     def create_test_movie(self, imdb_id, name="Some Movie"):
-        self.executor.execute("INSERT INTO Movies (imdb_id, name) VALUES (%s, %s);", (imdb_id, name))
+        self.executor.execute(
+            "INSERT INTO Movies (imdb_id, name) VALUES (%s, %s);", (imdb_id, name)
+        )
         self.db.commit()
         self.executor.execute("SELECT LAST_INSERT_ID();")
         return self.executor.fetchone()[0]
@@ -50,13 +57,21 @@ class TestWatchedHistory(unittest.TestCase):
     def test_add_movie_valid_data(self):
         user_id = self.create_test_user()
         movie_id = self.create_test_movie("tt0076759")
-        result = add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars: A New Hope", "2024-11-16 14:44:31")
+        result = add_movie_to_watched_history(
+            self.db,
+            user_id,
+            "tt0076759",
+            "Star Wars: A New Hope",
+            "2024-11-16 14:44:31",
+        )
         self.assertTrue(result)
 
     def test_add_movie_without_date(self):
         user_id = self.create_test_user()
         movie_id = self.create_test_movie("tt0076759")
-        result = add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars: A New Hope")
+        result = add_movie_to_watched_history(
+            self.db, user_id, "tt0076759", "Star Wars: A New Hope"
+        )
         self.assertTrue(result)
 
     def test_get_empty_watched_history(self):
@@ -67,14 +82,20 @@ class TestWatchedHistory(unittest.TestCase):
     def test_add_duplicate_movie(self):
         user_id = self.create_test_user()
         movie_id = self.create_test_movie("tt0076759")
-        add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars: A New Hope")
-        result = add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars: A New Hope")
+        add_movie_to_watched_history(
+            self.db, user_id, "tt0076759", "Star Wars: A New Hope"
+        )
+        result = add_movie_to_watched_history(
+            self.db, user_id, "tt0076759", "Star Wars: A New Hope"
+        )
         self.assertFalse(result)
 
     def test_remove_movie_from_watched_history(self):
         user_id = self.create_test_user()
         movie_id = self.create_test_movie("tt0076759")
-        add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars: A New Hope")
+        add_movie_to_watched_history(
+            self.db, user_id, "tt0076759", "Star Wars: A New Hope"
+        )
         result = remove_from_watched_history(self.db, user_id, "tt0076759")
         self.assertTrue(result)
 
@@ -86,7 +107,9 @@ class TestWatchedHistory(unittest.TestCase):
     def test_get_watched_history_with_entries(self):
         user_id = self.create_test_user()
         self.create_test_movie("tt0076759", "Star Wars")
-        add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars", "2024-11-16 14:44:31")
+        add_movie_to_watched_history(
+            self.db, user_id, "tt0076759", "Star Wars", "2024-11-16 14:44:31"
+        )
         watched_history = get_watched_history(self.db, user_id)
         self.assertEqual(len(watched_history), 1)
 
@@ -109,8 +132,16 @@ class TestWatchedHistory(unittest.TestCase):
         user_id = self.create_test_user()
         self.create_test_movie("tt0076759", "Star Wars")
         self.create_test_movie("tt0080684", "The Empire Strikes Back")
-        add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars", "2024-11-16 14:00:00")
-        add_movie_to_watched_history(self.db, user_id, "tt0080684", "The Empire Strikes Back", "2024-11-17 14:00:00")
+        add_movie_to_watched_history(
+            self.db, user_id, "tt0076759", "Star Wars", "2024-11-16 14:00:00"
+        )
+        add_movie_to_watched_history(
+            self.db,
+            user_id,
+            "tt0080684",
+            "The Empire Strikes Back",
+            "2024-11-17 14:00:00",
+        )
         watched_history = get_watched_history(self.db, user_id)
         self.assertEqual(len(watched_history), 2)
 
@@ -127,7 +158,9 @@ class TestWatchedHistory(unittest.TestCase):
         movie_id = self.create_test_movie("tt0076759")
         add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars")
         remove_from_watched_history(self.db, user_id, "tt0076759")
-        result = add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars")
+        result = add_movie_to_watched_history(
+            self.db, user_id, "tt0076759", "Star Wars"
+        )
         self.assertTrue(result)
 
     def test_get_watched_history_format(self):
@@ -148,7 +181,9 @@ class TestWatchedHistory(unittest.TestCase):
     def test_add_movie_with_future_date(self):
         user_id = self.create_test_user()
         self.create_test_movie("tt0076759", "Star Wars")
-        result = add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars", "2025-01-01 00:00:00")
+        result = add_movie_to_watched_history(
+            self.db, user_id, "tt0076759", "Star Wars", "2025-01-01 00:00:00"
+        )
         self.assertFalse(result)
 
     def test_add_movie_without_movie_name(self):
@@ -181,11 +216,14 @@ class TestWatchedHistory(unittest.TestCase):
         self.create_test_movie("tt0076759", "Star Wars")
         self.create_test_movie("tt0080684", "The Empire Strikes Back")
         add_movie_to_watched_history(self.db, user_id_1, "tt0076759", "Star Wars")
-        add_movie_to_watched_history(self.db, user_id_2, "tt0080684", "The Empire Strikes Back")
+        add_movie_to_watched_history(
+            self.db, user_id_2, "tt0080684", "The Empire Strikes Back"
+        )
         history_user_1 = get_watched_history(self.db, user_id_1)
         history_user_2 = get_watched_history(self.db, user_id_2)
         self.assertEqual(len(history_user_1), 1)
         self.assertEqual(len(history_user_2), 1)
+
 
 if __name__ == "__main__":
     unittest.main()
