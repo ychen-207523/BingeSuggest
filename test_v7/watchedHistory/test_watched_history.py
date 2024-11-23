@@ -33,12 +33,12 @@ class TestWatchedHistory(unittest.TestCase):
         )
         self.executor = self.db.cursor()
 
-        # Reset the tables for a clean state
-        self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
-        self.executor.execute("DELETE FROM WatchedHistory;")
-        self.executor.execute("DELETE FROM Users;")
-        self.executor.execute("DELETE FROM Movies;")
-        self.db.commit()
+        # # Reset the tables for a clean state
+        # self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
+        # self.executor.execute("DELETE FROM WatchedHistory;")
+        # self.executor.execute("DELETE FROM Users;")
+        # self.executor.execute("DELETE FROM Movies;")
+        # self.db.commit()
 
         # Create a new account for each test
         self.test_email = "testuser@test.com"
