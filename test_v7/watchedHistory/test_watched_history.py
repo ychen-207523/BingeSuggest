@@ -119,12 +119,21 @@ class TestWatchedHistory(unittest.TestCase):
         self.test_password = "password123"
 
         create_account(self.db, self.test_email, self.test_username, self.test_password)
-        self.db.commit()
 
+        # Fetch user_id
         self.executor.execute(
             "SELECT idUsers FROM Users WHERE username = %s;", (self.test_username,)
         )
-        self.user_id = self.executor.fetchone()[0]
+        user_id_row = self.executor.fetchone()
+        self.user_id = user_id_row[0] if user_id_row else None
+
+        # Validate user_id
+        if not self.user_id:
+            raise ValueError(f"Failed to create or fetch user_id for {self.test_username}")
+
+        global user
+        user = (self.test_username, self.user_id)
+        print(f"Set user context: {user}")
 
     def test_user_creation_and_watched_history(self):
         create_account(self.db, "debug@test.com", "debug_user", "password123")
