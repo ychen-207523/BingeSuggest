@@ -43,7 +43,6 @@ class TestWatchedHistory(unittest.TestCase):
         self.executor.execute("DROP TABLE IF EXISTS Movies;")
         self.executor.execute("SET FOREIGN_KEY_CHECKS=1;")
 
-
         # Create a new user account
         self.test_email = "testuser@test.com"
         self.test_username = "testuser"
