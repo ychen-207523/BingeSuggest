@@ -29,7 +29,7 @@ from src.recommenderapp.utils import (
     add_to_watchlist,
     get_imdb_id_by_name,
 )
-from search import Search
+from src.recommenderapp.search import Search
 from datetime import datetime
 
 sys.path.append("../../")
