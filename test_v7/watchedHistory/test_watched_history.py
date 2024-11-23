@@ -97,7 +97,9 @@ class TestWatchedHistory(unittest.TestCase):
         self.assertFalse(result)
 
     def test_add_movie_invalid_user(self):
-        result = add_movie_to_watched_history(self.db, -1, "tt0076759", "Star Wars (1977)")
+        result = add_movie_to_watched_history(
+            self.db, -1, "tt0076759", "Star Wars (1977)"
+        )
         self.assertFalse(result)
 
     def test_remove_movie_invalid_imdb_id(self):
@@ -111,7 +113,11 @@ class TestWatchedHistory(unittest.TestCase):
             self.db, user_id, "tt0076759", "Star Wars (1977)", "2024-11-16 14:00:00"
         )
         add_movie_to_watched_history(
-            self.db, user_id, "tt0092149", "Shadows in Paradise (1986)", "2024-11-17 14:00:00"
+            self.db,
+            user_id,
+            "tt0092149",
+            "Shadows in Paradise (1986)",
+            "2024-11-17 14:00:00",
         )
         watched_history = get_watched_history(self.db, user_id)
         self.assertEqual(len(watched_history), 2)
@@ -128,7 +134,9 @@ class TestWatchedHistory(unittest.TestCase):
         user_id = self.create_test_user()
         add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars (1977)")
         remove_from_watched_history(self.db, user_id, "tt0076759")
-        result = add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars (1977)")
+        result = add_movie_to_watched_history(
+            self.db, user_id, "tt0076759", "Star Wars (1977)"
+        )
         self.assertTrue(result)
 
     def test_get_watched_history_format(self):
@@ -159,14 +167,18 @@ class TestWatchedHistory(unittest.TestCase):
     def test_remove_movie_different_user(self):
         user_id_1 = self.create_test_user("user1@example.com")
         user_id_2 = self.create_test_user("user2@example.com")
-        add_movie_to_watched_history(self.db, user_id_1, "tt0076759", "Star Wars (1977)")
+        add_movie_to_watched_history(
+            self.db, user_id_1, "tt0076759", "Star Wars (1977)"
+        )
         result = remove_from_watched_history(self.db, user_id_2, "tt0076759")
         self.assertFalse(result)
 
     def test_get_history_after_deleting_some_movies(self):
         user_id = self.create_test_user()
         add_movie_to_watched_history(self.db, user_id, "tt0076759", "Star Wars (1977)")
-        add_movie_to_watched_history(self.db, user_id, "tt0092149", "Shadows in Paradise (1986)")
+        add_movie_to_watched_history(
+            self.db, user_id, "tt0092149", "Shadows in Paradise (1986)"
+        )
         remove_from_watched_history(self.db, user_id, "tt0076759")
         watched_history = get_watched_history(self.db, user_id)
         self.assertEqual(len(watched_history), 1)
@@ -174,7 +186,9 @@ class TestWatchedHistory(unittest.TestCase):
     def test_add_multiple_movies_for_different_users(self):
         user_id_1 = self.create_test_user("user1@example.com")
         user_id_2 = self.create_test_user("user2@example.com")
-        add_movie_to_watched_history(self.db, user_id_1, "tt0076759", "Star Wars (1977)")
+        add_movie_to_watched_history(
+            self.db, user_id_1, "tt0076759", "Star Wars (1977)"
+        )
         add_movie_to_watched_history(self.db, user_id_2, "tt0094675", "Ariel (1988)")
         history_user_1 = get_watched_history(self.db, user_id_1)
         history_user_2 = get_watched_history(self.db, user_id_2)
