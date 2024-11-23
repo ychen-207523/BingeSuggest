@@ -11,11 +11,9 @@ from dotenv import load_dotenv
 import sys
 from pathlib import Path
 
-from src.recommenderapp.utils import create_account
-
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 from src.recommenderapp.app import app
-
+from src.recommenderapp.utils import create_account
 
 class TestWatchedHistory(unittest.TestCase):
     """
