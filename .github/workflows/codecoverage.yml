@@ -54,6 +54,10 @@ jobs:
       run: |
         mysql -h 127.0.0.1 --port 3306 -u root -proot < test/test_init.sql
 
+    - name: Verify database schema
+      run: |
+        mysql -h 127.0.0.1 --port 3306 -u root -proot -e "USE testDB; SHOW TABLES;"
+
     - name: Run tests and generate coverage report
       run: |
         pytest --import-mode=importlib --cov-report=xml:reports/coverage/coverage.xml --cov=. test_v7/watchedHistory/test_watched_history.py
