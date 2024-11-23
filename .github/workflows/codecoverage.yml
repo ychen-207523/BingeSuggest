@@ -19,9 +19,13 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
         volumes:
-          - ./test/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+          - ./test/mysql/my.cnf:/etc/mysql/conf.d/my.cnf:ro
 
     steps:
+    - name: Fix Permissions for Mounted Files
+      run: |
+        sudo chmod -R u+rw ./test/mysql || true
+
     - name: Checkout code
       uses: actions/checkout@v4
       with:
