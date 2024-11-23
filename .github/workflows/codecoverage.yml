@@ -13,7 +13,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_DATABASE: root
+          MYSQL_DATABASE: testdb
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
@@ -36,13 +36,22 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install pytest pytest-cov genbadge defusedxml
 
+    - name: Create env file
+      run: |
+        cat << EOF > .env
+        DB_HOST=127.0.0.1
+        DB_USER=root
+        DB_PASSWORD=root
+        DB_NAME=testdb
+        EOF
+
     - name: Set up Database Schema
       run: |
         mysql -h 127.0.0.1 --port 3306 -u root -proot < test/test_init.sql
 
     - name: Run tests and generate coverage report
       run: |
-        pytest --import-mode=importlib --cov-report=xml:reports/coverage/coverage.xml --cov=. $(git ls-files 'test_watched_history.py')
+        pytest --import-mode=importlib --cov-report=xml:reports/coverage/coverage.xml --cov=. $(git ls-files 'test_*.py')
 
     - name: Generate Coverage Badge
       run: |
@@ -58,6 +67,3 @@ jobs:
         git pull origin refs/heads/v6.0
         git commit -m "Update coverage report and badge"
         git push origin refs/heads/v6.0
-
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
