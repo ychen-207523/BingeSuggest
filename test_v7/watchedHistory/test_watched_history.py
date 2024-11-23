@@ -60,14 +60,6 @@ class TestWatchedHistory(unittest.TestCase):
         global user
         user = (self.test_username, self.user_id)
 
-    def tearDown(self):
-        """
-        Close the database connection after each test.
-        """
-        print("\nRunning TearDown Method")
-        if self.db.is_connected():
-            self.db.close()
-
     def test_add_to_watched_history(self):
         """
         Test adding a movie to the watched history.
