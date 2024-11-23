@@ -48,7 +48,9 @@ class TestWatchedHistory(unittest.TestCase):
         create_account(self.db, self.test_email, self.test_username, self.test_password)
 
         # Fetch the created user's ID
-        self.executor.execute("SELECT idUsers FROM Users WHERE username = %s;", (self.test_username,))
+        self.executor.execute(
+            "SELECT idUsers FROM Users WHERE username = %s;", (self.test_username,)
+        )
         self.user_id = self.executor.fetchone()[0]
 
         # Set up the Flask test client
@@ -72,14 +74,19 @@ class TestWatchedHistory(unittest.TestCase):
         """
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["status"], "success")
 
         # Verify the database entry
-        self.executor.execute("SELECT * FROM WatchedHistory WHERE user_id = %s AND movie_id = %s;", (self.user_id, 11))
+        self.executor.execute(
+            "SELECT * FROM WatchedHistory WHERE user_id = %s AND movie_id = %s;",
+            (self.user_id, 11),
+        )
         result = self.executor.fetchone()
         self.assertIsNotNone(result, "Movie was not added to watched history.")
 
@@ -90,7 +97,9 @@ class TestWatchedHistory(unittest.TestCase):
         # Add the movie once
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
 
@@ -110,7 +119,9 @@ class TestWatchedHistory(unittest.TestCase):
         # Add a movie to watched history
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
 
