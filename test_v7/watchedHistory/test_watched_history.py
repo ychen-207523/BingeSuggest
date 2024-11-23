@@ -27,14 +27,15 @@ class TestWatchedHistory(unittest.TestCase):
         """
         print("\nRunning Setup Method")
         load_dotenv()
+        app.config["TESTING"] = True
 
-        # Connect to the test database
         self.db = mysql.connector.connect(
             user="root", password="root", host="127.0.0.1", database="testDB"
         )
+
+        app.config["DATABASE_CONNECTION"] = self.db
         self.client = app.test_client()
 
-        self.db = app.config["DATABASE_CONNECTION"]
         self.executor = self.db.cursor()
 
         # Clear relevant tables to ensure a clean state
