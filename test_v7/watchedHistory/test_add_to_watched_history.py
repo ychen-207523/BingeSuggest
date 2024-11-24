@@ -24,7 +24,9 @@ class TestAddToWatchedHistory(unittest.TestCase):
         """
         print("\nrunning setup method")
         load_dotenv()
-        self.db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
+        self.db = mysql.connector.connect(
+            user="root", password="root", host="127.0.0.1"
+        )
         self.executor = self.db.cursor()
         self.executor.execute("USE testDB;")
         self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
@@ -116,7 +118,9 @@ class TestAddToWatchedHistory(unittest.TestCase):
         create_account(self.db, "user6@test.com", "user6", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = add_to_watched_history(self.db, user_id, "tt0076759", "2024-11-23 10:00:00")
+        result = add_to_watched_history(
+            self.db, user_id, "tt0076759", "2024-11-23 10:00:00"
+        )
         self.assertEqual(result, (True, "Movie added to watched history"))
 
     def test_add_movie_no_timestamp(self):
