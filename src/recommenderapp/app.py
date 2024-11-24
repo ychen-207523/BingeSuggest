@@ -14,6 +14,7 @@ from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 import mysql.connector
 from dotenv import load_dotenv
+sys.path.append("../../")
 from src.recommenderapp.utils import (
     beautify_feedback_data,
     send_email_to_user,
@@ -28,11 +29,11 @@ from src.recommenderapp.utils import (
     get_recent_friend_movies,
     add_to_watchlist,
     get_imdb_id_by_name,
+    add_to_watched_history,
+    remove_from_watched_history_util
 )
 from src.recommenderapp.search import Search
 from datetime import datetime
-
-sys.path.append("../../")
 from src.prediction_scripts.item_based import (
     recommend_for_new_user_g,
     recommend_for_new_user_d,
@@ -393,65 +394,6 @@ def get_watchlist():
     return jsonify(watchlist), 200
 
 
-@app.route("/add_to_watched_history", methods=["POST"])
-def add_movie_to_watched_history():
-    """
-    Adds a movie to the user's watched history.
-    """
-    print("Entered add_to_watched_history function")
-    data = request.get_json()
-    print("Request data:", data)
-
-    movie_name = data.get("movieName")
-    imdb_id = (
-        get_imdb_id_by_name(g.db, movie_name) if movie_name else data.get("imdb_id")
-    )
-
-    if not imdb_id:
-        return jsonify({"status": "error", "message": "Movie not found"}), 404
-    print("IMDb ID obtained:", imdb_id)
-
-    # Use the IMDb ID to fetch the movie_id from the Movies table
-    cursor = g.db.cursor()
-    cursor.execute("SELECT idMovies FROM Movies WHERE imdb_id = %s", [imdb_id])
-    movie_id_result = cursor.fetchone()
-
-    # Verify if the movie exists in the Movies table
-    if movie_id_result:
-        movie_id = movie_id_result[0]
-        user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
-
-        # Check if this movie is already in the user's watched history
-        cursor.execute(
-            "SELECT idWatchedHistory FROM WatchedHistory WHERE user_id = %s AND movie_id = %s",
-            [user_id, movie_id],
-        )
-        if cursor.fetchone():
-            return (
-                jsonify(
-                    {"status": "info", "message": "Movie already in watched history"}
-                ),
-                200,
-            )
-
-        # Insert the movie into the user's watched history
-        watched_date = data.get("watched_date") or datetime.now().strftime(
-            "%Y-%m-%d %H:%M:%S"
-        )
-        cursor.execute(
-            "INSERT INTO WatchedHistory (user_id, movie_id, watched_date) VALUES (%s, %s, %s)",
-            [user_id, movie_id, watched_date],
-        )
-        g.db.commit()
-        print("Movie added to watched history")
-
-        return (
-            jsonify({"status": "success", "message": "Movie added to watched history"}),
-            200,
-        )
-
-    return jsonify({"status": "error", "message": "Movie not found"}), 404
-
 
 @app.route("/get_api_key", methods=["GET"])
 def get_api_key():
@@ -461,6 +403,35 @@ def get_api_key():
     if user[1] is not None and user[1] != "guest":
         return jsonify({"apikey": os.getenv("OMDB_API_KEY")})
     return jsonify({"error": "Unauthorized"}), 403
+
+
+@app.route("/add_to_watched_history", methods=["POST"])
+def add_movie_to_watched_history():
+    """
+    Adds a movie to the user's watched history.
+    """
+    print("Entered add_to_watched_history function")
+    data = request.get_json()
+    print("Request data:", data)
+
+    # Get IMDb ID or movie name
+    imdb_id = data.get("imdb_id")
+    if not imdb_id:
+        movie_name = data.get("movieName")
+        imdb_id = get_imdb_id_by_name(g.db, movie_name) if movie_name else None
+
+    if not imdb_id:
+        return jsonify({"status": "error", "message": "Movie not found"}), 404
+
+    print("IMDb ID obtained:", imdb_id)
+    user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
+
+    # Call utility function to add the movie
+    was_added, message = add_to_watched_history(g.db, user_id, imdb_id, data.get("watched_date"))
+    status = "success" if was_added else "info"
+    return jsonify({"status": status, "message": message}), 200
+
+
 
 
 @app.route("/watched_history", methods=["GET"])
@@ -507,51 +478,12 @@ def remove_from_watched_history():
     if not imdb_id:
         return jsonify({"status": "error", "message": "IMDb ID not provided"}), 400
 
-    cursor = g.db.cursor()
-    cursor.execute(
-        """
-        SELECT idMovies FROM Movies WHERE imdb_id = %s
-        """,
-        [imdb_id],
-    )
-    movie_result = cursor.fetchone()
+    user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
 
-    if not movie_result:
-        return jsonify({"status": "error", "message": "Movie not found"}), 404
-
-    movie_id = movie_result[0]
-    user_id = user[1]
-
-    # Check if the movie exists in the user's watched history
-    cursor.execute(
-        """
-        SELECT idWatchedHistory FROM WatchedHistory WHERE user_id = %s AND movie_id = %s
-        """,
-        [user_id, movie_id],
-    )
-    history_entry = cursor.fetchone()
-
-    if not history_entry:
-        return (
-            jsonify({"status": "error", "message": "Movie not in watched history"}),
-            404,
-        )
-
-    # Delete the movie from watched history
-    cursor.execute(
-        """
-        DELETE FROM WatchedHistory WHERE user_id = %s AND movie_id = %s
-        """,
-        [user_id, movie_id],
-    )
-    g.db.commit()
-    print("Movie removed from watched history")
-
-    return (
-        jsonify({"status": "success", "message": "Movie removed from watched history"}),
-        200,
-    )
-
+    # Call utility function to remove the movie
+    was_removed, message = remove_from_watched_history_util(g.db, user_id, imdb_id)
+    status = "success" if was_removed else "error"
+    return jsonify({"status": status, "message": message}), 200
 
 @app.route("/success")
 def success():

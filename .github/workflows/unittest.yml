@@ -96,5 +96,7 @@ jobs:
 #      run: python test_v7/das/test_DB.py
 
     # test cases for v7
-    - name: Running test cases for watched history
-      run: python test_v7/watchedHistory/test_watched_history.py
+    - name: Running test cases for adding to watched history
+      run: python test_v7/watchedHistory/test_add_to_watched_history.py
+    - name: Running test cases for removing from watched history
+      run: python test_v7/watchedHistory/test_remove_from_watched_history.py

@@ -16,99 +16,36 @@ class TestWatchedHistory(unittest.TestCase):
     Test cases for WatchedHistory functionality.
     """
 
-    @classmethod
-    def setUpClass(cls):
-        """
-        Set up the database and tables before any tests are run.
-        """
-        load_dotenv()
-        cls.db = mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1", database="testDB"
-        )
-        cls.executor = cls.db.cursor()
-        cls.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
-        cls.executor.execute("DROP TABLE IF EXISTS WatchedHistory;")
-        cls.executor.execute("DROP TABLE IF EXISTS Users;")
-        cls.executor.execute("DROP TABLE IF EXISTS Movies;")
-        cls.executor.execute("SET FOREIGN_KEY_CHECKS=1;")
-
-        cls.executor.execute(
-            """
-            CREATE TABLE Users (
-                idUsers INT NOT NULL AUTO_INCREMENT,
-                username VARCHAR(45) NOT NULL,
-                email VARCHAR(45) NOT NULL,
-                password VARCHAR(64) NOT NULL,
-                PRIMARY KEY (idUsers),
-                UNIQUE INDEX username_UNIQUE (username ASC),
-                UNIQUE INDEX email_UNIQUE (email ASC)
-            );
-        """
-        )
-        cls.executor.execute(
-            """
-            CREATE TABLE Movies (
-                idMovies INT NOT NULL AUTO_INCREMENT,
-                name VARCHAR(128) NOT NULL,
-                imdb_id VARCHAR(45) NOT NULL,
-                PRIMARY KEY (idMovies),
-                UNIQUE INDEX imdb_id_UNIQUE (imdb_id ASC)
-            );
-        """
-        )
-        cls.executor.execute(
-            """
-            CREATE TABLE WatchedHistory (
-                idWatchedHistory INT NOT NULL AUTO_INCREMENT,
-                user_id INT NOT NULL,
-                movie_id INT NOT NULL,
-                watched_date DATETIME NOT NULL,
-                PRIMARY KEY (idWatchedHistory),
-                FOREIGN KEY (user_id) REFERENCES Users (idUsers) ON DELETE CASCADE,
-                FOREIGN KEY (movie_id) REFERENCES Movies (idMovies) ON DELETE CASCADE
-            );
-        """
-        )
-        cls.db.commit()
-
-        cls.executor.execute(
-            """
-            INSERT INTO Movies (idMovies, name, imdb_id) VALUES 
-            (11, 'Star Wars (1977)', 'tt0076759'),
-            (12, 'Finding Nemo (2003)', 'tt0266543'),
-            (13, 'Forrest Gump (1994)', 'tt0109830'),
-            (14, 'American Beauty (1999)', 'tt0169547'),
-            (15, 'Citizen Kane (1941)', 'tt0033467'),
-            (16, 'Dancer in the Dark (2000)', 'tt0168629');
-        """
-        )
-        cls.db.commit()
-
-        app.config["TESTING"] = True
-        cls.client = app.test_client()
+    def __init__(self, methodName: str = "runTest"):
+        super().__init__(methodName)
+        self.client = None
 
     def setUp(self):
-        """
-        Set up the database connection before each test.
-        """
-        self.db = mysql.connector.connect(
-            user="root", password="root", host="127.0.0.1", database="testDB"
-        )
-        self.executor = self.db.cursor()
+        print("\nRunning Setup Method")
+        load_dotenv()
+        db = mysql.connector.connect(user="root", password="CHENyunfei@207523", host="127.0.0.1", port="3307")
+        executor = db.cursor()
+        executor.execute("USE testDB;")
+        executor.execute("SET FOREIGN_KEY_CHECKS=0;")
+        executor.execute("DELETE FROM Users")
+        executor.execute("DELETE FROM Ratings")
+        executor.execute("DELETE FROM Friends")
+        executor.execute("DELETE FROM WatchedHistory")
+        db.commit()
 
-    def tearDown(self):
-        """
-        Close the database connection after each test.
-        """
-        if self.db.is_connected():
-            self.db.close()
-
-    @patch("src.recommenderapp.app.user", new=("user1", 1))
     def test_add_to_watched_history(self):
         """
         Test that a user can add a movie to their watched history.
         """
-        create_account(self.db, "user1@test.com", "user1", "password123")
+        load_dotenv()
+        db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
+        executor = db.cursor()
+        executor.execute("USE testDB;")
+        create_account(db, "placeholder@test.com", "newUser", "newPass")
+        executor = db.cursor()
+        executor.execute("SELECT * FROM Users;")
+        db_result = executor.fetchall()
+        user_id = db_result[0][0]
         response = self.client.post(
             "/add_to_watched_history",
             data=json.dumps(
