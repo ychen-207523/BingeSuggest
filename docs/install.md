@@ -36,9 +36,12 @@
     DB_PASSWORD = 'your_password'
     DB_HOST = 'localhost'
     DB_NAME = 'PopcornPicksDB'
+    
+    OMDB_API_KEY = <your_omdb_api_key>
     ```
     
     Replace `your_password` with the password you created during MySQL Server setup. 
+    Replace `<your_omdb_api_key>` with your own API key from [OMDb API](http://www.omdbapi.com/).
    
     
 ## Step 6: Python Packages

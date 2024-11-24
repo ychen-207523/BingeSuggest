@@ -395,6 +395,71 @@ def get_imdb_id_by_name(db, movie_name):
     return result[0] if result else None
 
 
+def add_to_watched_history(db, user_id, imdb_id, watched_date=None):
+    """
+    Utility function to add a movie to the user's watched history.
+    """
+    cursor = db.cursor()
+
+    # Check if the movie exists in the database
+    cursor.execute("SELECT idMovies FROM Movies WHERE imdb_id = %s", [imdb_id])
+    movie_result = cursor.fetchone()
+    if not movie_result:
+        return False, "Movie not found"
+
+    movie_id = movie_result[0]
+
+    # Check if the movie is already in the user's watched history
+    cursor.execute(
+        "SELECT 1 FROM WatchedHistory WHERE user_id = %s AND movie_id = %s",
+        [user_id, movie_id],
+    )
+    if cursor.fetchone():
+        return False, "Movie already in watched history"
+
+    # Insert the movie into the user's watched history
+    watched_date = watched_date or datetime.datetime.utcnow().strftime(
+        "%Y-%m-%d %H:%M:%S"
+    )
+    cursor.execute(
+        "INSERT INTO WatchedHistory (user_id, movie_id, watched_date) VALUES (%s, %s, %s)",
+        [user_id, movie_id, watched_date],
+    )
+    db.commit()
+    return True, "Movie added to watched history"
+
+
+def remove_from_watched_history_util(db, user_id, imdb_id):
+    """
+    Utility function to remove a movie from the user's watched history.
+    """
+    cursor = db.cursor()
+
+    # Check if the movie exists in the database
+    cursor.execute("SELECT idMovies FROM Movies WHERE imdb_id = %s", [imdb_id])
+    movie_result = cursor.fetchone()
+    if not movie_result:
+        return False, "Movie not found"
+
+    movie_id = movie_result[0]
+
+    # Check if the movie exists in the user's watched history
+    cursor.execute(
+        "SELECT 1 FROM WatchedHistory WHERE user_id = %s AND movie_id = %s",
+        [user_id, movie_id],
+    )
+    if not cursor.fetchone():
+        return False, "Movie not in watched history"
+
+    # Delete the movie from watched history
+    cursor.execute(
+        "DELETE FROM WatchedHistory WHERE user_id = %s AND movie_id = %s",
+        [user_id, movie_id],
+    )
+    db.commit()
+    return True, "Movie removed from watched history"
+
+
 def create_or_update_discussion(db, data):
     """
     create or update comments on a discussion in DB

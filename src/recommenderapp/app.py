@@ -15,7 +15,9 @@ from flask_cors import CORS
 import mysql.connector
 import requests
 from dotenv import load_dotenv
-from utils import (
+
+sys.path.append("../../")
+from src.recommenderapp.utils import (
     beautify_feedback_data,
     send_email_to_user,
     create_account,
@@ -29,13 +31,14 @@ from utils import (
     get_recent_friend_movies,
     add_to_watchlist,
     get_imdb_id_by_name,
+    add_to_watched_history,
+    remove_from_watched_history_util,
     create_or_update_discussion,
     get_discussion,
     get_username_data,
 )
-from search import Search
-
-sys.path.append("../../")
+from src.recommenderapp.search import Search
+from datetime import datetime
 from src.prediction_scripts.item_based import (
     recommend_for_new_user_g,
     recommend_for_new_user_d,
@@ -397,6 +400,97 @@ def get_watchlist():
     return jsonify(watchlist), 200
 
 
+@app.route("/get_api_key", methods=["GET"])
+def get_api_key():
+    """
+    Provides the OMDB API key securely to the frontend.
+    """
+    if user[1] is not None and user[1] != "guest":
+        return jsonify({"apikey": os.getenv("OMDB_API_KEY")})
+    return jsonify({"error": "Unauthorized"}), 403
+
+
+@app.route("/add_to_watched_history", methods=["POST"])
+def add_movie_to_watched_history():
+    """
+    Adds a movie to the user's watched history.
+    """
+    print("Entered add_to_watched_history function")
+    data = request.get_json()
+    print("Request data:", data)
+
+    # Get IMDb ID or movie name
+    imdb_id = data.get("imdb_id")
+    if not imdb_id:
+        movie_name = data.get("movieName")
+        imdb_id = get_imdb_id_by_name(g.db, movie_name) if movie_name else None
+
+    if not imdb_id:
+        return jsonify({"status": "error", "message": "Movie not found"}), 404
+
+    print("IMDb ID obtained:", imdb_id)
+    user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
+
+    # Call utility function to add the movie
+    was_added, message = add_to_watched_history(
+        g.db, user_id, imdb_id, data.get("watched_date")
+    )
+    status = "success" if was_added else "info"
+    return jsonify({"status": status, "message": message}), 200
+
+
+@app.route("/watched_history", methods=["GET"])
+def watched_history_page():
+    """
+    Renders the watched history page.
+    """
+    if user[1] is not None or user[1] == "guest":
+        return render_template("watched_history.html")
+    return render_template("login.html")
+
+
+@app.route("/getWatchedHistoryData", methods=["GET"])
+def get_watched_history():
+    """
+    Retrieves the current user's watched history.
+    """
+    user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
+    cursor = g.db.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT m.name AS movie_name, m.imdb_id, wh.watched_date
+        FROM WatchedHistory wh
+        JOIN Movies m ON wh.movie_id = m.idMovies
+        WHERE wh.user_id = %s
+        ORDER BY wh.watched_date DESC;
+        """,
+        [user_id],
+    )
+    watched_history = cursor.fetchall()
+    return jsonify(watched_history), 200
+
+
+@app.route("/removeFromWatchedHistory", methods=["POST"])
+def remove_from_watched_history():
+    """
+    Removes a movie from the user's watched history.
+    """
+    print("Entered remove_from_watched_history function")
+    data = request.get_json()
+    print("Request data:", data)
+
+    imdb_id = data.get("imdb_id")
+    if not imdb_id:
+        return jsonify({"status": "error", "message": "IMDb ID not provided"}), 400
+
+    user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
+
+    # Call utility function to remove the movie
+    was_removed, message = remove_from_watched_history_util(g.db, user_id, imdb_id)
+    status = "success" if was_removed else "error"
+    return jsonify({"status": status, "message": message}), 200
+
+
 @app.route("/success")
 def success():
     """
@@ -451,6 +545,7 @@ def before_request():
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD"),
         host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT", 3306),
         database=os.getenv("DB_NAME"),
     )
 
