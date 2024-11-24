@@ -14,6 +14,7 @@ from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 import mysql.connector
 from dotenv import load_dotenv
+
 sys.path.append("../../")
 from src.recommenderapp.utils import (
     beautify_feedback_data,
@@ -30,7 +31,7 @@ from src.recommenderapp.utils import (
     add_to_watchlist,
     get_imdb_id_by_name,
     add_to_watched_history,
-    remove_from_watched_history_util
+    remove_from_watched_history_util,
 )
 from src.recommenderapp.search import Search
 from datetime import datetime
@@ -394,7 +395,6 @@ def get_watchlist():
     return jsonify(watchlist), 200
 
 
-
 @app.route("/get_api_key", methods=["GET"])
 def get_api_key():
     """
@@ -427,11 +427,11 @@ def add_movie_to_watched_history():
     user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
 
     # Call utility function to add the movie
-    was_added, message = add_to_watched_history(g.db, user_id, imdb_id, data.get("watched_date"))
+    was_added, message = add_to_watched_history(
+        g.db, user_id, imdb_id, data.get("watched_date")
+    )
     status = "success" if was_added else "info"
     return jsonify({"status": status, "message": message}), 200
-
-
 
 
 @app.route("/watched_history", methods=["GET"])
@@ -484,6 +484,7 @@ def remove_from_watched_history():
     was_removed, message = remove_from_watched_history_util(g.db, user_id, imdb_id)
     status = "success" if was_removed else "error"
     return jsonify({"status": status, "message": message}), 200
+
 
 @app.route("/success")
 def success():

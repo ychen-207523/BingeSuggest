@@ -23,7 +23,9 @@ class TestWatchedHistory(unittest.TestCase):
     def setUp(self):
         print("\nRunning Setup Method")
         load_dotenv()
-        db = mysql.connector.connect(user="root", password="CHENyunfei@207523", host="127.0.0.1", port="3307")
+        db = mysql.connector.connect(
+            user="root", password="CHENyunfei@207523", host="127.0.0.1", port="3307"
+        )
         executor = db.cursor()
         executor.execute("USE testDB;")
         executor.execute("SET FOREIGN_KEY_CHECKS=0;")

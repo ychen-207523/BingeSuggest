@@ -1,14 +1,20 @@
 import unittest
 import mysql.connector
 from dotenv import load_dotenv
-from src.recommenderapp.utils import create_account, add_to_watched_history, remove_from_watched_history_util
+from src.recommenderapp.utils import (
+    create_account,
+    add_to_watched_history,
+    remove_from_watched_history_util,
+)
 
 
 class TestRemoveFromWatchedHistory(unittest.TestCase):
     def setUp(self):
         print("\nRunning setup method")
         load_dotenv()
-        self.db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
+        self.db = mysql.connector.connect(
+            user="root", password="root", host="127.0.0.1"
+        )
         self.executor = self.db.cursor()
         self.executor.execute("USE testDB;")
         self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
@@ -37,14 +43,18 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         create_account(self.db, "abc@test.com", "user2", "password123")
         self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user2';")
         user_id = self.executor.fetchone()[0]
-        self.assertFalse(remove_from_watched_history_util(self.db, user_id, "tt0076759"))
+        self.assertFalse(
+            remove_from_watched_history_util(self.db, user_id, "tt0076759")
+        )
 
     def test_remove_movie_not_in_database(self):
         """Test removing a movie that is not in the database."""
         create_account(self.db, "abc@test.com", "user3", "password123")
         self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user3';")
         user_id = self.executor.fetchone()[0]
-        self.assertFalse(remove_from_watched_history_util(self.db, user_id, "tt9999999"))
+        self.assertFalse(
+            remove_from_watched_history_util(self.db, user_id, "tt9999999")
+        )
 
     def test_remove_movie_invalid_user(self):
         """Test removing a movie with an invalid user ID."""
@@ -72,7 +82,9 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         create_account(self.db, "abc@test.com", "user6", "password123")
         self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user6';")
         user_id = self.executor.fetchone()[0]
-        self.assertFalse(remove_from_watched_history_util(self.db, user_id, "invalid_id"))
+        self.assertFalse(
+            remove_from_watched_history_util(self.db, user_id, "invalid_id")
+        )
 
     def test_remove_movie_no_user_provided(self):
         """Test removing a movie without providing a user ID."""
@@ -83,7 +95,9 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         create_account(self.db, "abc@test.com", "user7", "password123")
         self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user7';")
         user_id = self.executor.fetchone()[0]
-        self.assertFalse(remove_from_watched_history_util(self.db, user_id, "tt0266543"))
+        self.assertFalse(
+            remove_from_watched_history_util(self.db, user_id, "tt0266543")
+        )
 
     def test_remove_movie_with_future_date(self):
         """Test removing a movie with a future watched date."""

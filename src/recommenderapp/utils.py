@@ -407,7 +407,9 @@ def add_to_watched_history(db, user_id, imdb_id, watched_date=None):
         return False, "Movie already in watched history"
 
     # Insert the movie into the user's watched history
-    watched_date = watched_date or datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+    watched_date = watched_date or datetime.datetime.utcnow().strftime(
+        "%Y-%m-%d %H:%M:%S"
+    )
     cursor.execute(
         "INSERT INTO WatchedHistory (user_id, movie_id, watched_date) VALUES (%s, %s, %s)",
         [user_id, movie_id, watched_date],
