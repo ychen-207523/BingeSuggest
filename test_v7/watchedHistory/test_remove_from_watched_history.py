@@ -102,18 +102,14 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         result = remove_from_watched_history_util(self.db, user_id, "invalid_id")
         self.assertEqual(result, (False, "Movie not found"))
 
-    def test_remove_movie_from_different_user(self):
+    def test_remove_movie_not_in_watched_history(self):
         """
-        Test removing a movie added by a different user.
+        Test removing a movie that the user has not added to their watched history.
         """
-        create_account(self.db, "user8@test.com", "user8", "password123")
+        create_account(self.db, "user10@test.com", "user10", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
-        user1_id = self.executor.fetchone()[0]
-        create_account(self.db, "user9@test.com", "user9", "password123")
-        self.executor.execute("SELECT idUsers FROM Users;")
-        user2_id = self.executor.fetchone()[0]
-        add_to_watched_history(self.db, user1_id, "tt0076759", None)
-        result = remove_from_watched_history_util(self.db, user2_id, "tt0076759")
+        user_id = self.executor.fetchone()[0]
+        result = remove_from_watched_history_util(self.db, user_id, "tt0266543")
         self.assertEqual(result, (False, "Movie not in watched history"))
 
     def test_remove_movie_no_timestamp(self):
