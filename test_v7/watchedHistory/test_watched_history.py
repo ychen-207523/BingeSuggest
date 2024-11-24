@@ -189,4 +189,3 @@ class TestWatchedHistory(unittest.TestCase):
         response = self.client.get("/getWatchedHistoryData")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json), 0)
-
