@@ -86,6 +86,7 @@ class TestWatchedHistory(unittest.TestCase):
             """
         )
         cls.db.commit()
+
     def setUp(self):
         """
         Clear data before each test.
