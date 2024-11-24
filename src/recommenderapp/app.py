@@ -36,7 +36,6 @@ from src.recommenderapp.utils import (
     create_or_update_discussion,
     get_discussion,
     get_username_data,
-
 )
 from src.recommenderapp.search import Search
 from datetime import datetime

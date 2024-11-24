@@ -395,7 +395,6 @@ def get_imdb_id_by_name(db, movie_name):
     return result[0] if result else None
 
 
-
 def add_to_watched_history(db, user_id, imdb_id, watched_date=None):
     """
     Utility function to add a movie to the user's watched history.
@@ -460,6 +459,7 @@ def remove_from_watched_history_util(db, user_id, imdb_id):
     db.commit()
     return True, "Movie removed from watched history"
 
+
 def create_or_update_discussion(db, data):
     """
     create or update comments on a discussion in DB
@@ -505,4 +505,3 @@ def get_discussion(db, imdb_id):
     cursor.execute("SELECT comments from Discussion where imdb_id = %s", (imdb_id,))
     result = cursor.fetchone()
     return (jsonify(json.loads(result[0])), 200)
-
