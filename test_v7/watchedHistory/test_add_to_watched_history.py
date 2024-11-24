@@ -115,7 +115,7 @@ class TestAddToWatchedHistory(unittest.TestCase):
         Test adding a movie to watched history with an invalid user ID.
         """
         result = add_to_watched_history(self.db, 999, "tt0168629", None)
-        self.assertEqual(result, (True, 'Movie added to watched history'))
+        self.assertEqual(result, (True, "Movie added to watched history"))
 
     def test_add_movie_not_found_in_watched_history(self):
         """
