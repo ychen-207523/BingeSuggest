@@ -59,5 +59,10 @@ jobs:
           git pull --rebase origin ${{ github.ref_name }}
           git push origin HEAD:${{ github.ref_name }}
 
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
