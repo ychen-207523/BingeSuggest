@@ -32,94 +32,60 @@ class TestAddToWatchedHistory(unittest.TestCase):
         self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
         self.executor.execute("DELETE FROM Users;")
         self.executor.execute("DELETE FROM WatchedHistory;")
-        self.executor.execute("DELETE FROM Movies;")
-        self.executor.execute("SET FOREIGN_KEY_CHECKS=1;")
         self.db.commit()
 
-        # Populate Movies table
-        self.executor.execute(
-            """
-            INSERT INTO Movies (idMovies, name, imdb_id) VALUES
-            (1, 'Star Wars (1977)', 'tt0076759'),
-            (2, 'Finding Nemo (2003)', 'tt0266543');
-            """
-        )
-        self.db.commit()
-
-    def test_add_movie_success(self):
+    def test_add_movie_success_different_movie(self):
         """
-        Test adding a movie successfully.
-        """
-        create_account(self.db, "user1@test.com", "user1", "password123")
-        self.executor.execute("SELECT idUsers FROM Users;")
-        user_id = self.executor.fetchone()[0]
-        result = add_to_watched_history(self.db, user_id, "tt0076759", None)
-        self.assertEqual(result, (True, "Movie added to watched history"))
-
-    def test_add_movie_already_exists(self):
-        """
-        Test adding a movie that already exists in watched history.
-        """
-        create_account(self.db, "user2@test.com", "user2", "password123")
-        self.executor.execute("SELECT idUsers FROM Users;")
-        user_id = self.executor.fetchone()[0]
-        add_to_watched_history(self.db, user_id, "tt0076759", None)
-        result = add_to_watched_history(self.db, user_id, "tt0076759", None)
-        self.assertEqual(result, (False, "Movie already in watched history"))
-
-    def test_add_movie_not_in_database(self):
-        """
-        Test adding a movie that is not in the database.
-        """
-        create_account(self.db, "user3@test.com", "user3", "password123")
-        self.executor.execute("SELECT idUsers FROM Users;")
-        user_id = self.executor.fetchone()[0]
-        result = add_to_watched_history(self.db, user_id, "tt9999999", None)
-        self.assertEqual(result, (False, "Movie not found"))
-
-    def test_add_movie_invalid_user(self):
-        """
-        Test adding a movie with an invalid user ID.
-        """
-        result = add_to_watched_history(self.db, 999, "tt0076759", None)
-        self.assertEqual(result, (False, "User not found"))
-
-    def test_add_movie_empty_imdb_id(self):
-        """
-        Test adding a movie with an empty IMDb ID.
+        Test adding a different movie successfully.
         """
         create_account(self.db, "user4@test.com", "user4", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = add_to_watched_history(self.db, user_id, "", None)
-        self.assertEqual(result, (False, "Movie not found"))
+        result = add_to_watched_history(self.db, user_id, "tt0266543", None)
+        self.assertEqual(result, (True, "Movie added to watched history"))
 
-    def test_add_movie_no_user_provided(self):
+    def test_add_movie_already_exists_different_movie(self):
         """
-        Test adding a movie without providing a user ID.
-        """
-        result = add_to_watched_history(self.db, None, "tt0076759", None)
-        self.assertEqual(result, (False, "User not found"))
-
-    def test_add_movie_invalid_imdb_id(self):
-        """
-        Test adding a movie with an invalid IMDb ID.
+        Test adding a movie that already exists in watched history with a different movie.
         """
         create_account(self.db, "user5@test.com", "user5", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = add_to_watched_history(self.db, user_id, "invalid_id", None)
-        self.assertEqual(result, (False, "Movie not found"))
+        add_to_watched_history(self.db, user_id, "tt0266543", None)
+        result = add_to_watched_history(self.db, user_id, "tt0266543", None)
+        self.assertEqual(result, (False, "Movie already in watched history"))
 
-    def test_add_movie_with_timestamp(self):
+    def test_add_movie_not_in_database_different_movie(self):
         """
-        Test adding a movie with a provided timestamp.
+        Test adding a movie that is not in the database with a different movie.
         """
         create_account(self.db, "user6@test.com", "user6", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
+        result = add_to_watched_history(self.db, user_id, "tt0000000", None)
+        self.assertEqual(result, (False, "Movie not found"))
+
+    def test_add_multiple_movies_success(self):
+        """
+        Test adding multiple movies successfully.
+        """
+        create_account(self.db, "user7@test.com", "user7", "password123")
+        self.executor.execute("SELECT idUsers FROM Users;")
+        user_id = self.executor.fetchone()[0]
+        movies = ["tt0109830", "tt0169547"]
+        for movie in movies:
+            result = add_to_watched_history(self.db, user_id, movie, None)
+            self.assertEqual(result, (True, "Movie added to watched history"))
+
+    def test_add_movie_with_provided_timestamp(self):
+        """
+        Test adding a movie with a provided timestamp.
+        """
+        create_account(self.db, "user8@test.com", "user8", "password123")
+        self.executor.execute("SELECT idUsers FROM Users;")
+        user_id = self.executor.fetchone()[0]
         result = add_to_watched_history(
-            self.db, user_id, "tt0076759", "2024-11-23 10:00:00"
+            self.db, user_id, "tt0033467", "2024-11-23 12:00:00"
         )
         self.assertEqual(result, (True, "Movie added to watched history"))
 
@@ -127,22 +93,50 @@ class TestAddToWatchedHistory(unittest.TestCase):
         """
         Test adding a movie without a timestamp.
         """
-        create_account(self.db, "user7@test.com", "user7", "password123")
+        create_account(self.db, "user9@test.com", "user9", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = add_to_watched_history(self.db, user_id, "tt0076759", None)
+        result = add_to_watched_history(self.db, user_id, "tt0168629", None)
         self.assertEqual(result, (True, "Movie added to watched history"))
 
-    def test_add_multiple_movies(self):
+    def test_add_movie_to_watched_history_duplicate_user(self):
         """
-        Test adding multiple movies to watched history.
+        Test adding a movie to watched history for the same user multiple times.
         """
-        create_account(self.db, "user8@test.com", "user8", "password123")
+        create_account(self.db, "user10@test.com", "user10", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        movie_ids = ["tt0076759", "tt0266543"]
-        for imdb_id in movie_ids:
-            result = add_to_watched_history(self.db, user_id, imdb_id, None)
+        add_to_watched_history(self.db, user_id, "tt0168629", None)
+        result = add_to_watched_history(self.db, user_id, "tt0168629", None)
+        self.assertEqual(result, (False, "Movie already in watched history"))
+
+    def test_add_movie_to_watched_history_invalid_user(self):
+        """
+        Test adding a movie to watched history with an invalid user ID.
+        """
+        result = add_to_watched_history(self.db, 999, "tt0168629", None)
+        self.assertEqual(result, (False, "User not found"))
+
+    def test_add_movie_not_found_in_watched_history(self):
+        """
+        Test trying to add a movie that doesn't exist in the database.
+        """
+        create_account(self.db, "user11@test.com", "user11", "password123")
+        self.executor.execute("SELECT idUsers FROM Users;")
+        user_id = self.executor.fetchone()[0]
+        result = add_to_watched_history(self.db, user_id, "tt9999999", None)
+        self.assertEqual(result, (False, "Movie not found"))
+
+    def test_add_movie_different_movies(self):
+        """
+        Test adding multiple different movies to the watched history for the same user.
+        """
+        create_account(self.db, "user12@test.com", "user12", "password123")
+        self.executor.execute("SELECT idUsers FROM Users;")
+        user_id = self.executor.fetchone()[0]
+        movies = ["tt0109830", "tt0113101", "tt0094675"]
+        for movie in movies:
+            result = add_to_watched_history(self.db, user_id, movie, None)
             self.assertEqual(result, (True, "Movie added to watched history"))
 
 
