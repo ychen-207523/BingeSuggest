@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 import mysql.connector
 from dotenv import load_dotenv
+
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 from src.recommenderapp.utils import (
     create_account,

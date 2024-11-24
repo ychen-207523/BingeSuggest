@@ -3,17 +3,21 @@ import unittest
 from pathlib import Path
 import mysql.connector
 from dotenv import load_dotenv
+
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 from src.recommenderapp.utils import (
     create_account,
     add_to_watched_history,
 )
 
+
 class TestAddToWatchedHistory(unittest.TestCase):
     def setUp(self):
         print("\nRunning setup method")
         load_dotenv()
-        self.db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
+        self.db = mysql.connector.connect(
+            user="root", password="root", host="127.0.0.1"
+        )
         self.executor = self.db.cursor()
         self.executor.execute("USE testDB;")
         self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
@@ -82,7 +86,9 @@ class TestAddToWatchedHistory(unittest.TestCase):
         create_account(self.db, "abc@test.com", "user7", "password123")
         self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user7';")
         user_id = self.executor.fetchone()[0]
-        self.assertTrue(add_to_watched_history(self.db, user_id, "tt0076759", "2025-11-23 10:00:00"))
+        self.assertTrue(
+            add_to_watched_history(self.db, user_id, "tt0076759", "2025-11-23 10:00:00")
+        )
 
     def test_add_movie_empty_imdb_id(self):
         """Test adding a movie with an empty IMDb ID."""
