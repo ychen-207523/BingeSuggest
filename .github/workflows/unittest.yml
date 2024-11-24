@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - '**'
+
   schedule:
-    - cron: '00 23 * * *'
+    - cron: "00 23 * * *"
 
 jobs:
   build:
@@ -48,6 +49,10 @@ jobs:
     - name: Set up DB
       run: |
         mysql -h 127.0.0.1 --port 3306 -u root -proot < test/test_init.sql
+    
+    #utils test cases
+    - name: Running test cases for utils.py
+      run: python test/test_util.py
     
     # sap test cases
     - name: Running test cases for watchlist

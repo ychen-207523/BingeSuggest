@@ -16,6 +16,7 @@ from smtplib import SMTPException
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask import jsonify
+import json
 
 import pandas as pd
 
@@ -309,6 +310,16 @@ def get_username(db, user):
     return jsonify(result[0][0])
 
 
+def get_username_data(db, user):
+    """
+    Utility function for getting the current users username
+    """
+    executor = db.cursor()
+    executor.execute("SELECT username FROM Users WHERE idUsers = %s;", [int(user)])
+    result = executor.fetchall()
+    return result[0][0]
+
+
 def get_recent_friend_movies(db, user):
     """
     Utility function for getting a certain friends recent movies
@@ -384,6 +395,7 @@ def get_imdb_id_by_name(db, movie_name):
     return result[0] if result else None
 
 
+
 def add_to_watched_history(db, user_id, imdb_id, watched_date=None):
     """
     Utility function to add a movie to the user's watched history.
@@ -447,3 +459,50 @@ def remove_from_watched_history_util(db, user_id, imdb_id):
     )
     db.commit()
     return True, "Movie removed from watched history"
+
+def create_or_update_discussion(db, data):
+    """
+    create or update comments on a discussion in DB
+    """
+    cursor = db.cursor()
+    cursor.execute(
+        "SELECT * from Discussion where imdb_id = %s LIMIT 1", (data["imdb_id"],)
+    )
+    result = cursor.fetchone()
+    if result == None:
+        comments = [{"user": data["user"], "comment": data["comment"]}]
+        cursor.execute(
+            "Insert INTO Discussion (imdb_id, comments) values(%s,%s)",
+            (data["imdb_id"], json.dumps(comments)),
+        )
+        db.commit()
+    else:
+        comments = json.loads(result[2])
+        comments.append({"user": data["user"], "comment": data["comment"]})
+        cursor.execute(
+            "Update Discussion set comments = %s where imdb_id = %s",
+            (
+                json.dumps(comments),
+                data["imdb_id"],
+            ),
+        )
+        db.commit()
+    return (
+        jsonify(
+            [
+                {"user": data["user"], "comment": data["comment"]},
+            ]
+        ),
+        200,
+    )
+
+
+def get_discussion(db, imdb_id):
+    """
+    Get the discussion on the movie with imdb_id
+    """
+    cursor = db.cursor()
+    cursor.execute("SELECT comments from Discussion where imdb_id = %s", (imdb_id,))
+    result = cursor.fetchone()
+    return (jsonify(json.loads(result[0])), 200)
+

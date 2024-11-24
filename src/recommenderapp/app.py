@@ -13,6 +13,7 @@ import os
 from flask import Flask, jsonify, render_template, request, g
 from flask_cors import CORS
 import mysql.connector
+import requests
 from dotenv import load_dotenv
 
 sys.path.append("../../")
@@ -32,6 +33,10 @@ from src.recommenderapp.utils import (
     get_imdb_id_by_name,
     add_to_watched_history,
     remove_from_watched_history_util,
+    create_or_update_discussion,
+    get_discussion,
+    get_username_data,
+
 )
 from src.recommenderapp.search import Search
 from datetime import datetime
@@ -50,6 +55,7 @@ app.secret_key = "secret key"
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 user = {1: None}
+comments: []
 
 
 @app.route("/")
@@ -492,6 +498,42 @@ def success():
     Renders the success page.
     """
     return render_template("success.html")
+
+
+@app.route("/movie/<id>")
+def moviePage(id):
+    """
+    Renders the movie page with description and details and discussion forum
+    """
+    user_id = user[1]
+    us = ""
+    if user_id is None or user_id == "guest":
+        us = "Anonymous"
+    else:
+        us = get_username_data(g.db, user_id)
+    r = requests.get(
+        "http://www.omdbapi.com/", params={"i": id, "apikey": os.getenv("OMDB_API_KEY")}
+    )
+    data = {"movieData": r.json(), "user": us}
+    return render_template("movie.html", data=data)
+
+
+@app.route("/movieDiscussion/<id>", methods=["GET"])
+def getMovieDisccusion(id):
+    """
+    Returns the discussion store for the corresponding imdbId
+    """
+    return get_discussion(g.db, id)
+
+
+@app.route("/movieDiscussion/<id>", methods=["POST"])
+def postCommentOnMovieDisccusion(id):
+    """
+    Returns the discussion store for the corresponding imdbId
+    """
+    data = request.get_json()
+    data["imdb_id"] = id
+    return create_or_update_discussion(g.db, data)
 
 
 @app.before_request
