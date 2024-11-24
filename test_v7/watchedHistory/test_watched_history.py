@@ -26,20 +26,12 @@ class TestWatchedHistory(unittest.TestCase):
             user="root", password="root", host="127.0.0.1", database="testDB"
         )
         cls.executor = cls.db.cursor()
-        cls.reset_database()
-        app.config["TESTING"] = True
-        cls.client = app.test_client()
-
-    @classmethod
-    def reset_database(cls):
-        """
-        Resets the database by dropping and recreating necessary tables.
-        """
         cls.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
         cls.executor.execute("DROP TABLE IF EXISTS WatchedHistory;")
         cls.executor.execute("DROP TABLE IF EXISTS Users;")
         cls.executor.execute("DROP TABLE IF EXISTS Movies;")
         cls.executor.execute("SET FOREIGN_KEY_CHECKS=1;")
+
         cls.executor.execute(
             """
             CREATE TABLE Users (
@@ -51,7 +43,7 @@ class TestWatchedHistory(unittest.TestCase):
                 UNIQUE INDEX username_UNIQUE (username ASC),
                 UNIQUE INDEX email_UNIQUE (email ASC)
             );
-            """
+        """
         )
         cls.executor.execute(
             """
@@ -62,7 +54,7 @@ class TestWatchedHistory(unittest.TestCase):
                 PRIMARY KEY (idMovies),
                 UNIQUE INDEX imdb_id_UNIQUE (imdb_id ASC)
             );
-            """
+        """
         )
         cls.executor.execute(
             """
@@ -75,25 +67,34 @@ class TestWatchedHistory(unittest.TestCase):
                 FOREIGN KEY (user_id) REFERENCES Users (idUsers) ON DELETE CASCADE,
                 FOREIGN KEY (movie_id) REFERENCES Movies (idMovies) ON DELETE CASCADE
             );
-            """
-        )
-        cls.db.commit()
-        cls.executor.execute(
-            """
-            INSERT INTO Movies (idMovies, name, imdb_id) VALUES 
-            (1, 'Star Wars (1977)', 'tt0076759'),
-            (2, 'Finding Nemo (2003)', 'tt0266543');
-            """
+        """
         )
         cls.db.commit()
 
+        cls.executor.execute(
+            """
+            INSERT INTO Movies (idMovies, name, imdb_id) VALUES 
+            (11, 'Star Wars (1977)', 'tt0076759'),
+            (12, 'Finding Nemo (2003)', 'tt0266543'),
+            (13, 'Forrest Gump (1994)', 'tt0109830'),
+            (14, 'American Beauty (1999)', 'tt0169547'),
+            (15, 'Citizen Kane (1941)', 'tt0033467'),
+            (16, 'Dancer in the Dark (2000)', 'tt0168629');
+        """
+        )
+        cls.db.commit()
+
+        app.config["TESTING"] = True
+        cls.client = app.test_client()
+
     def setUp(self):
         """
-        Clear data before each test.
+        Set up the database connection before each test.
         """
-        self.executor.execute("DELETE FROM WatchedHistory;")
-        self.executor.execute("DELETE FROM Users;")
-        self.db.commit()
+        self.db = mysql.connector.connect(
+            user="root", password="root", host="127.0.0.1", database="testDB"
+        )
+        self.executor = self.db.cursor()
 
     def tearDown(self):
         """
