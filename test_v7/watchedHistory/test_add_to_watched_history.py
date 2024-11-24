@@ -1,130 +1,100 @@
 import sys
 import unittest
-from unittest.mock import patch
 from pathlib import Path
 import mysql.connector
 from dotenv import load_dotenv
-import json
-
 sys.path.append(str(Path(__file__).resolve().parents[2]))
-from src.recommenderapp.utils import create_account
-from src.recommenderapp.app import app
+from src.recommenderapp.utils import (
+    create_account,
+    add_to_watched_history,
+)
 
-
-class TestWatchedHistory(unittest.TestCase):
-    """
-    Test cases for WatchedHistory functionality.
-    """
-
-    def __init__(self, methodName: str = "runTest"):
-        super().__init__(methodName)
-        self.client = None
-
+class TestAddToWatchedHistory(unittest.TestCase):
     def setUp(self):
-        print("\nRunning Setup Method")
+        print("\nRunning setup method")
         load_dotenv()
-        db = mysql.connector.connect(
-            user="root", password="CHENyunfei@207523", host="127.0.0.1", port="3307"
+        self.db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
+        self.executor = self.db.cursor()
+        self.executor.execute("USE testDB;")
+        self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
+        self.executor.execute("DELETE FROM Users")
+        self.executor.execute("DELETE FROM WatchedHistory")
+        self.executor.execute("DELETE FROM Movies")
+        self.executor.execute(
+            """
+            INSERT INTO Movies (idMovies, name, imdb_id) VALUES 
+            (11, 'Star Wars (1977)', 'tt0076759'),
+            (12, 'Finding Nemo (2003)', 'tt0266543');
+            """
         )
-        executor = db.cursor()
-        executor.execute("USE testDB;")
-        executor.execute("SET FOREIGN_KEY_CHECKS=0;")
-        executor.execute("DELETE FROM Users")
-        executor.execute("DELETE FROM Ratings")
-        executor.execute("DELETE FROM Friends")
-        executor.execute("DELETE FROM WatchedHistory")
-        db.commit()
+        self.db.commit()
 
-    def test_add_to_watched_history(self):
-        """
-        Test that a user can add a movie to their watched history.
-        """
-        load_dotenv()
-        db = mysql.connector.connect(user="root", password="root", host="127.0.0.1")
-        executor = db.cursor()
-        executor.execute("USE testDB;")
-        create_account(db, "placeholder@test.com", "newUser", "newPass")
-        executor = db.cursor()
-        executor.execute("SELECT * FROM Users;")
-        db_result = executor.fetchall()
-        user_id = db_result[0][0]
-        response = self.client.post(
-            "/add_to_watched_history",
-            data=json.dumps(
-                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
-            ),
-            content_type="application/json",
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json["status"], "success")
+    def test_add_movie_success(self):
+        """Test successfully adding a movie to watched history."""
+        create_account(self.db, "abc@test.com", "user1", "password123")
+        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user1';")
+        user_id = self.executor.fetchone()[0]
+        self.assertTrue(add_to_watched_history(self.db, user_id, "tt0076759", None))
 
-    @patch("src.recommenderapp.app.user", new=("user2", 2))
-    def test_add_duplicate_to_watched_history(self):
-        """
-        Test that a user cannot add the same movie to their watched history more
-        """
-        create_account(self.db, "user2@test.com", "user2", "password123")
-        self.client.post(
-            "/add_to_watched_history",
-            data=json.dumps(
-                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
-            ),
-            content_type="application/json",
-        )
-        response = self.client.post(
-            "/add_to_watched_history",
-            data=json.dumps(
-                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
-            ),
-            content_type="application/json",
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json["status"], "info")
+    def test_add_movie_already_exists(self):
+        """Test adding a movie that already exists in watched history."""
+        create_account(self.db, "abc@test.com", "user2", "password123")
+        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user2';")
+        user_id = self.executor.fetchone()[0]
+        add_to_watched_history(self.db, user_id, "tt0076759", None)
+        self.assertFalse(add_to_watched_history(self.db, user_id, "tt0076759", None))
 
-    @patch("src.recommenderapp.app.user", new=("user3", 3))
-    def test_get_watched_history(self):
-        """
-        Test that a user can get their watched history.
-        """
-        create_account(self.db, "user3@test.com", "user3", "password123")
-        self.client.post(
-            "/add_to_watched_history",
-            data=json.dumps(
-                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
-            ),
-            content_type="application/json",
-        )
-        response = self.client.get("/getWatchedHistoryData")
-        self.assertEqual(response.status_code, 200)
-        self.assertGreater(len(response.json), 0)
+    def test_add_movie_not_in_database(self):
+        """Test adding a movie that is not in the database."""
+        create_account(self.db, "abc@test.com", "user3", "password123")
+        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user3';")
+        user_id = self.executor.fetchone()[0]
+        self.assertFalse(add_to_watched_history(self.db, user_id, "tt9999999", None))
 
-    @patch("src.recommenderapp.app.user", new=("user4", 4))
-    def test_remove_from_watched_history(self):
-        """
-        Test that a user can remove a movie from their watched
-        """
-        create_account(self.db, "user4@test.com", "user4", "password123")
-        self.client.post(
-            "/add_to_watched_history",
-            data=json.dumps(
-                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
-            ),
-            content_type="application/json",
-        )
-        response = self.client.post(
-            "/removeFromWatchedHistory",
-            data=json.dumps({"imdb_id": "tt0076759"}),
-            content_type="application/json",
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json["status"], "success")
+    def test_add_movie_no_date_provided(self):
+        """Test adding a movie without providing a watched date."""
+        create_account(self.db, "abc@test.com", "user4", "password123")
+        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user4';")
+        user_id = self.executor.fetchone()[0]
+        self.assertTrue(add_to_watched_history(self.db, user_id, "tt0076759", None))
 
-    @patch("src.recommenderapp.app.user", new=("user5", 5))
-    def test_empty_watched_history(self):
-        """
-        Test that a user can get their watched history even if they have not added any movies.
-        """
-        create_account(self.db, "user5@test.com", "user5", "password123")
-        response = self.client.get("/getWatchedHistoryData")
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.json), 0)
+    def test_add_multiple_movies(self):
+        """Test adding multiple movies to watched history."""
+        create_account(self.db, "abc@test.com", "user5", "password123")
+        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user5';")
+        user_id = self.executor.fetchone()[0]
+        self.assertTrue(add_to_watched_history(self.db, user_id, "tt0076759", None))
+        self.assertTrue(add_to_watched_history(self.db, user_id, "tt0266543", None))
+
+    def test_add_movie_invalid_user(self):
+        """Test adding a movie with an invalid user ID."""
+        self.assertFalse(add_to_watched_history(self.db, 999, "tt0076759", None))
+
+    def test_add_movie_invalid_imdb_id(self):
+        """Test adding a movie with an invalid IMDb ID."""
+        create_account(self.db, "abc@test.com", "user6", "password123")
+        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user6';")
+        user_id = self.executor.fetchone()[0]
+        self.assertFalse(add_to_watched_history(self.db, user_id, "invalid_id", None))
+
+    def test_add_movie_with_future_date(self):
+        """Test adding a movie with a future watched date."""
+        create_account(self.db, "abc@test.com", "user7", "password123")
+        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user7';")
+        user_id = self.executor.fetchone()[0]
+        self.assertTrue(add_to_watched_history(self.db, user_id, "tt0076759", "2025-11-23 10:00:00"))
+
+    def test_add_movie_empty_imdb_id(self):
+        """Test adding a movie with an empty IMDb ID."""
+        create_account(self.db, "abc@test.com", "user8", "password123")
+        self.executor.execute("SELECT idUsers FROM Users WHERE username = 'user8';")
+        user_id = self.executor.fetchone()[0]
+        self.assertFalse(add_to_watched_history(self.db, user_id, "", None))
+
+    def test_add_movie_no_user_provided(self):
+        """Test adding a movie without providing a user ID."""
+        self.assertFalse(add_to_watched_history(self.db, None, "tt0076759", None))
+
+
+if __name__ == "__main__":
+    unittest.main()
