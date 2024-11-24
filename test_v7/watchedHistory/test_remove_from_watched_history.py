@@ -14,7 +14,10 @@ from src.recommenderapp.utils import (
 
 class TestRemoveFromWatchedHistory(unittest.TestCase):
     def setUp(self):
-        print("\nRunning setup method")
+        """
+        Set up test database before each test.
+        """
+        print("\nrunning setup method")
         load_dotenv()
         self.db = mysql.connector.connect(
             user="root", password="root", host="127.0.0.1"
@@ -22,16 +25,8 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         self.executor = self.db.cursor()
         self.executor.execute("USE testDB;")
         self.executor.execute("SET FOREIGN_KEY_CHECKS=0;")
-        self.executor.execute("DELETE FROM Users")
-        self.executor.execute("DELETE FROM WatchedHistory")
-        self.executor.execute("DELETE FROM Movies")
-        self.executor.execute(
-            """
-            INSERT INTO Movies (idMovies, name, imdb_id) VALUES 
-            (11, 'Star Wars (1977)', 'tt0076759'),
-            (12, 'Finding Nemo (2003)', 'tt0266543');
-            """
-        )
+        self.executor.execute("DELETE FROM Users;")
+        self.executor.execute("DELETE FROM WatchedHistory;")
         self.db.commit()
 
     def test_remove_existing_movie(self):
