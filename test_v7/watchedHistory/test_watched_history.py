@@ -111,7 +111,9 @@ class TestWatchedHistory(unittest.TestCase):
         create_account(self.db, "user1@test.com", "user1", "password123")
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
@@ -125,12 +127,16 @@ class TestWatchedHistory(unittest.TestCase):
         create_account(self.db, "user2@test.com", "user2", "password123")
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
@@ -144,7 +150,9 @@ class TestWatchedHistory(unittest.TestCase):
         create_account(self.db, "user3@test.com", "user3", "password123")
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         response = self.client.get("/getWatchedHistoryData")
@@ -159,7 +167,9 @@ class TestWatchedHistory(unittest.TestCase):
         create_account(self.db, "user4@test.com", "user4", "password123")
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         response = self.client.post(
@@ -188,12 +198,13 @@ class TestWatchedHistory(unittest.TestCase):
         create_account(self.db, "user6@test.com", "user6", "password123")
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt9999999", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt9999999", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.json["status"], "error")
-
 
     @patch("src.recommenderapp.app.user", new=("user7", 7))
     def test_add_multiple_movies(self):
@@ -205,12 +216,13 @@ class TestWatchedHistory(unittest.TestCase):
         for imdb_id in movie_ids:
             response = self.client.post(
                 "/add_to_watched_history",
-                data=json.dumps({"imdb_id": imdb_id, "watched_date": "2024-11-23 10:00:00"}),
+                data=json.dumps(
+                    {"imdb_id": imdb_id, "watched_date": "2024-11-23 10:00:00"}
+                ),
                 content_type="application/json",
             )
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.json["status"], "success")
-
 
     @patch("src.recommenderapp.app.user", new=("user8", 8))
     def test_remove_nonexistent_movie(self):
@@ -225,7 +237,6 @@ class TestWatchedHistory(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.json["status"], "error")
-
 
     @patch("src.recommenderapp.app.user", new=("user9", 9))
     def test_watched_history_sorting(self):
@@ -248,7 +259,6 @@ class TestWatchedHistory(unittest.TestCase):
         self.assertEqual(len(response.json), 2)
         self.assertEqual(response.json[0]["movie_name"], "Finding Nemo (2003)")
 
-
     @patch("src.recommenderapp.app.user", new=("user10", 10))
     def test_remove_all_movies(self):
         """
@@ -259,7 +269,9 @@ class TestWatchedHistory(unittest.TestCase):
         for imdb_id in movie_ids:
             self.client.post(
                 "/add_to_watched_history",
-                data=json.dumps({"imdb_id": imdb_id, "watched_date": "2024-11-23 10:00:00"}),
+                data=json.dumps(
+                    {"imdb_id": imdb_id, "watched_date": "2024-11-23 10:00:00"}
+                ),
                 content_type="application/json",
             )
         for imdb_id in movie_ids:
@@ -272,7 +284,6 @@ class TestWatchedHistory(unittest.TestCase):
             self.assertEqual(response.json["status"], "success")
         response = self.client.get("/getWatchedHistoryData")
         self.assertEqual(len(response.json), 0)
-
 
     @patch("src.recommenderapp.app.user", new=("user11", 11))
     def test_add_movie_without_date(self):
@@ -288,7 +299,6 @@ class TestWatchedHistory(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["status"], "success")
 
-
     @patch("src.recommenderapp.app.user", new=("user12", 12))
     def test_add_movie_case_insensitive(self):
         """
@@ -297,12 +307,13 @@ class TestWatchedHistory(unittest.TestCase):
         create_account(self.db, "user12@test.com", "user12", "password123")
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "TT0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "TT0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["status"], "success")
-
 
     @patch("src.recommenderapp.app.user", new=("user13", 13))
     def test_duplicate_user_movie_pair(self):
@@ -312,17 +323,20 @@ class TestWatchedHistory(unittest.TestCase):
         create_account(self.db, "user13@test.com", "user13", "password123")
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["status"], "info")
-
 
     @patch("src.recommenderapp.app.user", new=("user14", 14))
     def test_get_history_no_movies(self):
@@ -333,7 +347,6 @@ class TestWatchedHistory(unittest.TestCase):
         response = self.client.get("/getWatchedHistoryData")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json), 0)
-
 
     @patch("src.recommenderapp.app.user", new=("user15", 15))
     def test_remove_movie_not_in_history(self):
@@ -349,7 +362,6 @@ class TestWatchedHistory(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.json["status"], "error")
 
-
     @patch("src.recommenderapp.app.user", new=("user16", 16))
     def test_add_invalid_movie(self):
         """
@@ -358,12 +370,13 @@ class TestWatchedHistory(unittest.TestCase):
         create_account(self.db, "user16@test.com", "user16", "password123")
         response = self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "invalid", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "invalid", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.json["status"], "error")
-
 
     @patch("src.recommenderapp.app.user", new=("user17", 17))
     def test_multiple_users_same_movie(self):
@@ -374,13 +387,17 @@ class TestWatchedHistory(unittest.TestCase):
         create_account(self.db, "user18@test.com", "user18", "password123")
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
         with patch("src.recommenderapp.app.user", new=("user18", 18)):
             response = self.client.post(
                 "/add_to_watched_history",
-                data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 11:00:00"}),
+                data=json.dumps(
+                    {"imdb_id": "tt0076759", "watched_date": "2024-11-23 11:00:00"}
+                ),
                 content_type="application/json",
             )
             self.assertEqual(response.status_code, 200)
@@ -397,7 +414,9 @@ class TestWatchedHistory(unittest.TestCase):
         # User18 adds a movie
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
 
@@ -436,7 +455,9 @@ class TestWatchedHistory(unittest.TestCase):
         # User20 adds a movie
         self.client.post(
             "/add_to_watched_history",
-            data=json.dumps({"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}),
+            data=json.dumps(
+                {"imdb_id": "tt0076759", "watched_date": "2024-11-23 10:00:00"}
+            ),
             content_type="application/json",
         )
 
@@ -444,7 +465,9 @@ class TestWatchedHistory(unittest.TestCase):
         with patch("src.recommenderapp.app.user", new=("user21", 21)):
             self.client.post(
                 "/add_to_watched_history",
-                data=json.dumps({"imdb_id": "tt0266543", "watched_date": "2024-11-23 11:00:00"}),
+                data=json.dumps(
+                    {"imdb_id": "tt0266543", "watched_date": "2024-11-23 11:00:00"}
+                ),
                 content_type="application/json",
             )
 
@@ -459,4 +482,6 @@ class TestWatchedHistory(unittest.TestCase):
             response_user21 = self.client.get("/getWatchedHistoryData")
             self.assertEqual(response_user21.status_code, 200)
             self.assertEqual(len(response_user21.json), 1)
-            self.assertEqual(response_user21.json[0]["movie_name"], "Finding Nemo (2003)")
+            self.assertEqual(
+                response_user21.json[0]["movie_name"], "Finding Nemo (2003)"
+            )
