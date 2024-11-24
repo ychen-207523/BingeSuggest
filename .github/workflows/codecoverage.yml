@@ -13,69 +13,51 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_DATABASE: testdb
+          MYSQL_DATABASE: root
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Fix file permissions
-      run: |
-        sudo chmod -R u+rwX,g+rwX,o+rX ./test/mysql
-        sudo chown -R $USER:$GROUPS ./test/mysql
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.11"
 
-    - name: Setup temporary directory for MySQL config
-      run: |
-        mkdir -p $RUNNER_TEMP/mysql
-        cp ./test/mysql/my.cnf $RUNNER_TEMP/mysql/my.cnf
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install pytest pytest-cov genbadge defusedxml
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        pip install pytest pytest-cov genbadge defusedxml
+      - name: Set up Database Schema
+        run: |
+          mysql -h 127.0.0.1 --port 3306 -u root -proot < test/test_init.sql
 
-    - name: Create env file
-      run: |
-        cat << EOF > .env
-        DB_HOST=127.0.0.1
-        DB_USER=root
-        DB_PASSWORD=root
-        DB_NAME=testDB
-        EOF
+      - name: Run tests and generate coverage report
+        run: |
+          pytest --import-mode=importlib --cov-report=xml:reports/coverage/coverage.xml --cov=. $(git ls-files 'test_*.py')
 
-    - name: Set up Database Schema
-      run: |
-        mysql -h 127.0.0.1 --port 3306 -u root -proot < test/test_init.sql
+      - name: Generate Coverage Badge
+        run: |
+          mkdir -p reports/badge  # Ensure directory for badge output
+          genbadge coverage -i reports/coverage/coverage.xml -o reports/badge/coverage-badge.svg
 
-    - name: Verify database schema
-      run: |
-        mysql -h 127.0.0.1 --port 3306 -u root -proot -e "USE testDB; SHOW TABLES;"
+      - name: Commit and push coverage report and badge
+        if: success()
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add -f reports/coverage/coverage.xml reports/badge/coverage-badge.svg
+          git diff-index --quiet HEAD || git commit -m "Update coverage report and badge"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push origin HEAD:${{ github.ref_name }}
 
-    - name: Run tests and generate coverage report
-      run: |
-        pytest --import-mode=importlib --cov-report=xml:reports/coverage/coverage.xml --cov=. \
-        test_v7/watchedHistory/test_add_to_watched_history.py \
-        test_v7/watchedHistory/test_remove_from_watched_history.py
-
-
-    - name: Generate Coverage Badge
-      run: |
-        mkdir -p reports/badge
-        genbadge coverage -i reports/coverage/coverage.xml -o reports/badge/coverage-badge.svg
-
-    - name: Commit and push coverage report and badge
-      if: success()
-      run: |
-        git config --global user.name "GitHub Action"
-        git config --global user.email "action@github.com"
-        git add -f reports/coverage/coverage.xml reports/badge/coverage-badge.svg
-        git pull origin refs/heads/v6.0
-        git commit -m "Update coverage report and badge"
-        git push origin refs/heads/v6.0
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
