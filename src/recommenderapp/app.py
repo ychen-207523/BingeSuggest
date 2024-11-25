@@ -400,6 +400,46 @@ def get_watchlist():
     return jsonify(watchlist), 200
 
 
+@app.route("/deleteWatchlistData", methods=["POST"])
+def delete_watchlist_data():
+    """
+    Retrieves the current user
+    """
+    user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
+    cursor = g.db.cursor(dictionary=True)
+    imdbID = json.loads(request.data)
+    
+    cursor.execute(
+        """
+        SELECT DISTINCT idMovies FROM Movies 
+        WHERE imdb_id = %s;
+        """,
+        [imdbID],
+    )
+    watchlist = cursor.fetchall()
+    idMovies = None
+    if len(watchlist) > 0:
+        idMovies = watchlist[0]['idMovies']
+    cursor.execute(
+        """
+        DELETE FROM Watchlist WHERE movie_id = %s AND user_id = %s;
+        """,
+        [idMovies, user_id],
+    )
+    g.db.commit()
+    
+    if idMovies:
+        return (
+            jsonify({"status": "success", "message": "Movie deleted from watchlist"}),
+            200,
+        )
+    else:
+        return (
+            jsonify({"status": "info", "message": "Failed to delete movie from watchlist"}),
+            200,
+        )
+
+
 @app.route("/get_api_key", methods=["GET"])
 def get_api_key():
     """
