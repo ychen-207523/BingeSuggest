@@ -41,8 +41,48 @@ function loadPosts(){
         });
 }
 
-function deleteMovie(imdbID) {
+if (!window.hasOwnProperty('apiKey')) {
+    window.apiKey = "";
+}
 
+async function fetchApiKey() {
+    try {
+        const response = await fetch("/get_api_key");
+        const data = await response.json();
+        if (data.apikey) {
+            apiKey = data.apikey; // Assign the API key
+        } else {
+            console.error("Failed to fetch API key:", data.error);
+        }
+    } catch (error) {
+        console.error("Error fetching API key:", error);
+    }
+}
+
+// Fetch the API key when the page loads
+fetchApiKey();
+
+function fetchMovieData(imdbID){
+    return new Promise(function(resolve, reject){
+        $.ajax({
+            type: 'GET',
+            url: 'http://www.omdbapi.com/',
+            dataType: 'json',
+            data: {
+                i: imdbID,
+                apikey: apiKey,
+            },
+            success: function(response) {
+                resolve(response);
+            },
+            error: function(error) {
+                reject(error);
+            }
+            });
+        });
+}
+
+function deleteMovie(imdbID) {
     new Promise(function(resolve, reject){
         $.ajax({
             type: 'POST',
@@ -61,26 +101,6 @@ function deleteMovie(imdbID) {
     });
 }
 
-function fetchMovieData(imdbID){
-    return new Promise(function(resolve, reject){
-        $.ajax({
-            type: 'GET',
-            url: 'http://www.omdbapi.com/',
-            dataType: 'json',
-            data: {
-                i: imdbID,
-                apikey: apiKey,
-            },
-            success: function(response) {
-                resolve(response);
-            },
-            error: function(error) {
-                reject(error);
-            }
-        });
-    });
-}
-
 async function renderPosts() {
     const postContainer = $('#post-container');
 
@@ -88,12 +108,12 @@ async function renderPosts() {
 }
 
 async function buildPost(post, postContainer){
+
     var postDiv = $('<div>').addClass('post');
 
     var imageDiv = $('<div>');
     var userDiv = $('<div>');
     var deleteDiv = $('<div>').addClass('delete-data');
-
     var movieData;
     try{
         movieData = await fetchMovieData(post.imdb_id);
@@ -102,8 +122,8 @@ async function buildPost(post, postContainer){
     }
     
     var image = $('<img>', {src: movieData.Poster, alt: 'Image not found', style: 'width:100px;'})
-
-    var deleteImage = $('<img>', {id:movieData.Title, src: '/static/delete_button.png', alt: 'Image not found', style: 'width:100px;'}).addClass('deleteBtn').on('click', function() {
+    
+    var deleteImage = $('<img>', {id:movieData.Title, src: '/static/delete_button.png', alt: 'Image not found', style: 'width:100px;'}).on('click', function() {
         deleteMovie(movieData.imdbID);
         setTimeout(function() {
             location.reload();
