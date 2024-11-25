@@ -67,6 +67,7 @@
   float: right;
   text-align: right;
   padding: 20px;
+  cursor: pointer;
 }
 
 body {
@@ -377,8 +378,4 @@ body {
 .notifyDivs {
   display: flex;
   justify-content: center;
-}
-
-.deleteBtn {
-  cursor: pointer;
 }

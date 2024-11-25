@@ -69,7 +69,7 @@ function fetchMovieData(imdbID){
             dataType: 'json',
             data: {
                 i: imdbID,
-                apikey: '77da67f1',
+                apikey: apiKey,
             },
             success: function(response) {
                 resolve(response);
