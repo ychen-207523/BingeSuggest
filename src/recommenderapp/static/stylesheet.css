@@ -61,7 +61,12 @@
     float: right;
     text-align: right;
     padding: 20px;
+}
 
+.delete-data{
+  float: right;
+  text-align: right;
+  padding: 20px;
 }
 
 body {
@@ -372,4 +377,8 @@ body {
 .notifyDivs {
   display: flex;
   justify-content: center;
+}
+
+.deleteBtn {
+  cursor: pointer;
 }
