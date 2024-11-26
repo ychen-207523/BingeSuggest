@@ -61,7 +61,13 @@
     float: right;
     text-align: right;
     padding: 20px;
+}
 
+.delete-data{
+  float: right;
+  text-align: right;
+  padding: 20px;
+  cursor: pointer;
 }
 
 body {

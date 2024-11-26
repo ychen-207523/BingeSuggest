@@ -41,7 +41,9 @@ function loadPosts(){
         });
 }
 
-let apiKey = "";
+if (!window.hasOwnProperty('apiKey')) {
+    window.apiKey = "";
+}
 
 async function fetchApiKey() {
     try {
@@ -80,6 +82,25 @@ function fetchMovieData(imdbID){
         });
 }
 
+function deleteMovie(imdbID) {
+    new Promise(function(resolve, reject){
+        $.ajax({
+            type: 'POST',
+            url: '/deleteWatchlistData',
+            contentType: "application/json;charset=UTF-8",
+            dataType: 'json',
+            data: JSON.stringify(imdbID),
+            success: function(response) {
+                alert(response.message)
+                resolve(response)
+            },
+            error: function(error) {
+                reject(error);
+            }
+        });
+    });
+}
+
 async function renderPosts() {
     const postContainer = $('#post-container');
 
@@ -92,7 +113,7 @@ async function buildPost(post, postContainer){
 
     var imageDiv = $('<div>');
     var userDiv = $('<div>');
-    
+    var deleteDiv = $('<div>').addClass('delete-data');
     var movieData;
     try{
         movieData = await fetchMovieData(post.imdb_id);
@@ -101,6 +122,13 @@ async function buildPost(post, postContainer){
     }
     
     var image = $('<img>', {src: movieData.Poster, alt: 'Image not found', style: 'width:100px;'})
+    
+    var deleteImage = $('<img>', {id:movieData.Title, src: '/static/delete_button.png', alt: 'Image not found', style: 'width:100px;'}).on('click', function() {
+        deleteMovie(movieData.imdbID);
+        setTimeout(function() {
+            location.reload();
+        }, 2000);
+      });
 
     var titleDiv = $('<div>').addClass('postTitle');
 
@@ -135,8 +163,9 @@ async function buildPost(post, postContainer){
     dataDiv.append(ratedDiv, yearDiv, genreDiv, runtimeDiv);
 
     imageDiv.append(image);
+    deleteDiv.append(deleteImage);
     userDiv.append(titleDiv, reviewDiv, commentDiv);
-    postDiv.append(imageDiv, userDiv, dataDiv);
+    postDiv.append(imageDiv, userDiv, deleteDiv, dataDiv);
     postContainer.append(postDiv);
 }
 
