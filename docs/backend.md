@@ -1,6 +1,6 @@
 # Functions Description of the backend
 
-## [app.py](https://github.com/brwali/PopcornPicks/blob/master/src/recommenderapp/app.py)
+## [app.py](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/src/recommenderapp/app.py)
 
 ### login_page()
 
@@ -110,7 +110,23 @@
 
 **Closes the db connection.**
 
-## [utils.py](https://github.com/brwali/PopcornPicks/blob/master/src/recommenderapp/utils.py)
+### get_api_key()
+
+**Gets the api key from the .env file**
+
+## add_movie_to_watched_history()
+**Adds a movie to the watched history of the user**
+
+## watched_history_page()
+**Renders the watched history page of the user**
+
+## get_watched_history()
+**Gets the watched history of the user**
+
+## remove_from_watched_history()
+**Removes a movie from the watched history of the user**
+
+## [utils.py](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/src/recommenderapp/utils.py)
 
 ### create_colored_tags(genres)
 
@@ -191,6 +207,18 @@
 **Input: database handle, user_id of the user logged in**<br/>
 **Output: returns the userName of the provided User Id**<br/>
 
+### def add_to_watched_history(db, user, movie, watched_date)
+
+**Utility function to add a movie to the watched history of a user**<br/>
+**Input: database handle, user_id of the user logged in, movie_id of the movie to be added, date on which the movie was watched**<br/>
+**Output: returns true for the movie has been successfully added, false for failed**<br/>
+
+### def remove_from_watched_history_util(db, user_id, imdb_id)
+
+**Utility function to remove a movie from the watched history of a user**<br/>
+**Input: database handle, user_id of the user logged in, imdb_id of the movie to be removed**<br/>
+**Output: returns true for the movie has been successfully removed, false for failed**<br/>
+
 ### def create_or_update_discussion(db, data)
 
 **Utility function to add a comment to a new discussion or create a new discussion for a movie**<br/>
@@ -203,7 +231,7 @@
 **Input: database handle, imdb_id of the movie whose discussion is required**<br/>
 **Output: returns the discussion forum already present or empty array incase it doesnt exist**<br/>
 
-## [search.py](https://github.com/brwali/PopcornPicks/blob/master/src/recommenderapp/search.py)
+## [search.py](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/src/recommenderapp/search.py)
 
 **Class that handles the search feature of the landing page.**
 
@@ -225,7 +253,7 @@
 ### results_top_ten(word)
 
 **Function to get top 10 results**
-**Input : A word/initial character(s);<br/> Output : Top 10 titles starting with the given prompt (taken from [results](https://github.com/brwali/PopcornPicks/blob/master/docs/backend.md#resultsword))**<br/>
+**Input : A word/initial character(s);<br/> Output : Top 10 titles starting with the given prompt (taken from [results](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/docs/backend.md#resultsword))**<br/>
 
 ## Item_based.py
 
