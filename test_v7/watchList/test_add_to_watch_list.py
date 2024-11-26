@@ -77,7 +77,6 @@ class TestAddToWatchedHistory(unittest.TestCase):
             result = add_to_watchlist(self.db, user_id, movie)
             self.assertTrue(result)
 
-
     def test_add_movie_with_provided_timestamp(self):
         """
         Test adding a movie with a provided timestamp.
@@ -85,9 +84,7 @@ class TestAddToWatchedHistory(unittest.TestCase):
         create_account(self.db, "user8@test.com", "user8", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = add_to_watchlist(
-            self.db, user_id, "tt0033467", "2024-11-23 12:00:00"
-        )
+        result = add_to_watchlist(self.db, user_id, "tt0033467", "2024-11-23 12:00:00")
         self.assertTrue(result)
 
     def test_add_movie_no_timestamp(self):
