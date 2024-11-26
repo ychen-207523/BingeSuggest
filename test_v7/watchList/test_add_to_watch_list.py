@@ -13,7 +13,7 @@ from src.recommenderapp.utils import add_to_watchlist, create_account
 warnings.filterwarnings("ignore")
 
 
-class TestAddToWatchedHistory(unittest.TestCase):
+class TestAddToWatchList(unittest.TestCase):
     """
     Test cases for adding movies to watched history.
     """
@@ -41,7 +41,7 @@ class TestAddToWatchedHistory(unittest.TestCase):
         create_account(self.db, "user4@test.com", "user4", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = add_to_watchlist(self.db, user_id, "tt0266543")
+        result = add_to_watchlist(self.db, user_id, "0266543")
         self.assertTrue(result)
 
     def test_add_movie_already_exists_different_movie(self):
@@ -51,8 +51,8 @@ class TestAddToWatchedHistory(unittest.TestCase):
         create_account(self.db, "user5@test.com", "user5", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        add_to_watchlist(self.db, user_id, "tt0266543")
-        result = add_to_watchlist(self.db, user_id, "tt0266543")
+        add_to_watchlist(self.db, user_id, "0266543")
+        result = add_to_watchlist(self.db, user_id, "0266543")
         self.assertFalse(result)
 
     def test_add_movie_not_in_database_different_movie(self):
@@ -62,7 +62,7 @@ class TestAddToWatchedHistory(unittest.TestCase):
         create_account(self.db, "user6@test.com", "user6", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = add_to_watchlist(self.db, user_id, "tt0000000", None)
+        result = add_to_watchlist(self.db, user_id, "0000000", None)
         self.assertTrue(result)
 
     def test_add_multiple_movies_success(self):
@@ -72,7 +72,7 @@ class TestAddToWatchedHistory(unittest.TestCase):
         create_account(self.db, "user7@test.com", "user7", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        movies = ["tt0109830", "tt0169547"]
+        movies = ["0109830", "0169547"]
         for movie in movies:
             result = add_to_watchlist(self.db, user_id, movie)
             self.assertTrue(result)
@@ -86,7 +86,7 @@ class TestAddToWatchedHistory(unittest.TestCase):
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
         result = add_to_watchlist(
-            self.db, user_id, "tt0033467", "2024-11-23 12:00:00"
+            self.db, user_id, "0033467", "2024-11-23 12:00:00"
         )
         self.assertTrue(result)
 
@@ -97,7 +97,7 @@ class TestAddToWatchedHistory(unittest.TestCase):
         create_account(self.db, "user9@test.com", "user9", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = add_to_watchlist(self.db, user_id, "tt0168629", None)
+        result = add_to_watchlist(self.db, user_id, "0168629", None)
         self.assertTrue(result)
 
     def test_add_movie_to_watchlist_duplicate_user(self):
@@ -107,15 +107,15 @@ class TestAddToWatchedHistory(unittest.TestCase):
         create_account(self.db, "user10@test.com", "user10", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        add_to_watchlist(self.db, user_id, "tt0168629", None)
-        result = add_to_watchlist(self.db, user_id, "tt0168629", None)
+        add_to_watchlist(self.db, user_id, "0168629", None)
+        result = add_to_watchlist(self.db, user_id, "0168629", None)
         self.assertFalse(result)
 
     def test_add_movie_to_watchlist_invalid_user(self):
         """
         Test adding a movie to watchlist with an invalid user ID.
         """
-        result = add_to_watchlist(self.db, 999, "tt0168629", None)
+        result = add_to_watchlist(self.db, 999, "0168629", None)
         self.assertTrue(result)
 
     def test_add_movie_not_found_in_watchlist(self):
@@ -125,7 +125,7 @@ class TestAddToWatchedHistory(unittest.TestCase):
         create_account(self.db, "user11@test.com", "user11", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = add_to_watchlist(self.db, user_id, "tt9999999", None)
+        result = add_to_watchlist(self.db, user_id, "9999999", None)
         self.assertTrue(result)
 
     def test_add_movie_different_movies(self):
@@ -135,7 +135,7 @@ class TestAddToWatchedHistory(unittest.TestCase):
         create_account(self.db, "user12@test.com", "user12", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        movies = ["tt0109830", "tt0113101", "tt0094675"]
+        movies = ["0109830", "0113101", "0094675"]
         for movie in movies:
             result = add_to_watchlist(self.db, user_id, movie, None)
             self.assertTrue(result)

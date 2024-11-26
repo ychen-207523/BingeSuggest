@@ -12,7 +12,7 @@ from src.recommenderapp.utils import (
 )
 
 
-class TestRemoveFromWatchedHistory(unittest.TestCase):
+class TestRemoveFromWatchList(unittest.TestCase):
     def setUp(self):
         """
         Set up test database before each test.
@@ -36,9 +36,9 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         create_account(self.db, "user1@test.com", "user1", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        add_to_watchlist(self.db, user_id, "tt0076759", None)
-        result = remove_from_watchlist(self.db, user_id, "tt0076759")
-        self.assertEqual(result, ("tt0076759", "Movie removed from watchlist"))
+        add_to_watchlist(self.db, user_id, "0076759", None)
+        result = remove_from_watchlist(self.db, user_id, "0076759")
+        self.assertEqual(result, ("0076759", "Movie removed from watchlist"))
 
     def test_remove_nonexistent_movie(self):
         """
@@ -47,7 +47,7 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         create_account(self.db, "user2@test.com", "user2", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = remove_from_watchlist(self.db, user_id, "tt0266543")
+        result = remove_from_watchlist(self.db, user_id, "0266543")
         self.assertEqual(result, (None, "Movie not in watchlist"))
 
     def test_remove_movie_not_in_database(self):
@@ -57,7 +57,7 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         create_account(self.db, "user3@test.com", "user3", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = remove_from_watchlist(self.db, user_id, "tt0000000")
+        result = remove_from_watchlist(self.db, user_id, "0000000")
         self.assertEqual(result, (None, "Movie not in watchlist"))
 
     def test_remove_movie_invalid_user(self):
@@ -67,8 +67,8 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         create_account(self.db, "user4@test.com", "user4", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        add_to_watchlist(self.db, user_id, "tt0076759", None)
-        result = remove_from_watchlist(self.db, 999, "tt0076759")
+        add_to_watchlist(self.db, user_id, "0076759", None)
+        result = remove_from_watchlist(self.db, 999, "0076759")
         self.assertEqual(result, (None, "Movie not in watchlist"))
 
     def test_remove_movie_no_user_provided(self):
@@ -78,8 +78,8 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         create_account(self.db, "user5@test.com", "user5", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        add_to_watchlist(self.db, user_id, "tt0076759", None)
-        result = remove_from_watchlist(self.db, None, "tt0076759")
+        add_to_watchlist(self.db, user_id, "0076759", None)
+        result = remove_from_watchlist(self.db, None, "0076759")
         self.assertEqual(result, (None, "Movie not in watchlist"))
 
     def test_remove_movie_empty_imdb_id(self):
@@ -109,7 +109,7 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         create_account(self.db, "user10@test.com", "user10", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        result = remove_from_watchlist(self.db, user_id, "tt0266543")
+        result = remove_from_watchlist(self.db, user_id, "0266543")
         self.assertEqual(result, (None, "Movie not in watchlist"))
 
     def test_remove_movie_no_timestamp(self):
@@ -119,9 +119,9 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         create_account(self.db, "user10@test.com", "user10", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        add_to_watchlist(self.db, user_id, "tt0168629", None)
-        result = remove_from_watchlist(self.db, user_id, "tt0168629")
-        self.assertEqual(result, ("tt0168629", "Movie removed from watchlist"))
+        add_to_watchlist(self.db, user_id, "0168629", None)
+        result = remove_from_watchlist(self.db, user_id, "0168629")
+        self.assertEqual(result, ("0168629", "Movie removed from watchlist"))
 
     def test_remove_movie_with_multiple_movies(self):
         """
@@ -130,10 +130,12 @@ class TestRemoveFromWatchedHistory(unittest.TestCase):
         create_account(self.db, "user11@test.com", "user11", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        add_to_watchlist(self.db, user_id, "tt0076759", None)
-        add_to_watchlist(self.db, user_id, "tt0266543", None)
-        result = remove_from_watchlist(self.db, user_id, "tt0076759")
-        self.assertEqual(result, ("tt0076759", "Movie removed from watchlist"))
+        add_to_watchlist(self.db, user_id, "0076759", None)
+        add_to_watchlist(self.db, user_id, "0266543", None)
+        result = remove_from_watchlist(self.db, user_id, "0076759")
+        self.assertEqual(result, ("0076759", "Movie removed from watchlist"))
+        result = remove_from_watchlist(self.db, user_id, "0266543")
+        self.assertEqual(result, ("0266543", "Movie removed from watchlist"))
 
 
 if __name__ == "__main__":
