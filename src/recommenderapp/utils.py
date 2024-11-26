@@ -479,10 +479,10 @@ def remove_from_watchlist(db, user_id, imdb_id):
     idMovies = None
     if len(watchlist) > 0:
         idMovies = watchlist["idMovies"]
-    
+
     if idMovies is None:
         return idMovies, "Movie not in watchlist"
-    
+
     # Delete the movie from watched history
     cursor.execute(
         """
