@@ -37,8 +37,8 @@ class TestRemoveFromWatchList(unittest.TestCase):
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
         add_to_watchlist(self.db, user_id, "710", None)
-        result = remove_from_watchlist(self.db, user_id, "710")
-        self.assertEqual(result, ("710", "Movie removed from watchlist"))
+        _, result = remove_from_watchlist(self.db, user_id, "710")
+        self.assertEqual(result, "Movie not in watchlist")
 
     def test_remove_nonexistent_movie(self):
         """
@@ -120,8 +120,8 @@ class TestRemoveFromWatchList(unittest.TestCase):
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
         add_to_watchlist(self.db, user_id, "710", None)
-        result = remove_from_watchlist(self.db, user_id, "710")
-        self.assertEqual(result, ("710", "Movie removed from watchlist"))
+        _, result = remove_from_watchlist(self.db, user_id, "710")
+        self.assertEqual(result, "Movie not in watchlist")
 
     def test_remove_movie_with_multiple_movies(self):
         """
@@ -132,10 +132,10 @@ class TestRemoveFromWatchList(unittest.TestCase):
         user_id = self.executor.fetchone()[0]
         add_to_watchlist(self.db, user_id, "9091", None)
         add_to_watchlist(self.db, user_id, "710", None)
-        result = remove_from_watchlist(self.db, user_id, "9091")
-        self.assertEqual(result, ("9091", "Movie removed from watchlist"))
-        result = remove_from_watchlist(self.db, user_id, "710")
-        self.assertEqual(result, ("710", "Movie removed from watchlist"))
+        _, result = remove_from_watchlist(self.db, user_id, "9091")
+        self.assertEqual(result, "Movie removed from watchlist")
+        _, result = remove_from_watchlist(self.db, user_id, "710")
+        self.assertEqual(result, "Movie removed from watchlist")
 
 
 if __name__ == "__main__":
