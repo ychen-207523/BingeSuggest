@@ -1,6 +1,8 @@
 name: Code Coverage
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
 
 permissions:
   contents: write

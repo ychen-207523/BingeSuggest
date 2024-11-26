@@ -2,7 +2,7 @@ name: Pylint
 
 on:
   push:
-    branches: [ v6.0 ]
+    branches: [ main ]
 
 jobs:
   build:
