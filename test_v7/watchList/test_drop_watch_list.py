@@ -36,7 +36,7 @@ class TestRemoveFromWatchList(unittest.TestCase):
         create_account(self.db, "user1@test.com", "user1", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        add_to_watchlist(self.db, user_id, "tt0113189", None)
+        add_to_watchlist(self.db, user_id, "710", None)
         result = remove_from_watchlist(self.db, user_id, "710")
         self.assertEqual(result, ("710", "Movie removed from watchlist"))
 
@@ -119,7 +119,7 @@ class TestRemoveFromWatchList(unittest.TestCase):
         create_account(self.db, "user10@test.com", "user10", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        add_to_watchlist(self.db, user_id, "tt0113189", None)
+        add_to_watchlist(self.db, user_id, "710", None)
         result = remove_from_watchlist(self.db, user_id, "710")
         self.assertEqual(result, ("710", "Movie removed from watchlist"))
 
@@ -130,8 +130,8 @@ class TestRemoveFromWatchList(unittest.TestCase):
         create_account(self.db, "user11@test.com", "user11", "password123")
         self.executor.execute("SELECT idUsers FROM Users;")
         user_id = self.executor.fetchone()[0]
-        add_to_watchlist(self.db, user_id, "tt0114576", None)
-        add_to_watchlist(self.db, user_id, "tt0113189", None)
+        add_to_watchlist(self.db, user_id, "9091", None)
+        add_to_watchlist(self.db, user_id, "710", None)
         result = remove_from_watchlist(self.db, user_id, "9091")
         self.assertEqual(result, ("9091", "Movie removed from watchlist"))
         result = remove_from_watchlist(self.db, user_id, "710")
