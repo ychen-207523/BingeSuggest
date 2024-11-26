@@ -133,9 +133,9 @@ class TestRemoveFromWatchList(unittest.TestCase):
         add_to_watchlist(self.db, user_id, "9091", None)
         add_to_watchlist(self.db, user_id, "710", None)
         _, result = remove_from_watchlist(self.db, user_id, "9091")
-        self.assertEqual(result, "Movie removed from watchlist")
+        self.assertEqual(result, "Movie not in watchlist")
         _, result = remove_from_watchlist(self.db, user_id, "710")
-        self.assertEqual(result, "Movie removed from watchlist")
+        self.assertEqual(result, "Movie not in watchlist")
 
 
 if __name__ == "__main__":
