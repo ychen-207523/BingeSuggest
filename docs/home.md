@@ -22,5 +22,5 @@ PopcornPicks is more than just a movie recommender system; it's a gateway to a w
 - **Simple:** Easy installation and setup – start discovering great movies in no time!"
  
 ## System architecture
-![System architecture](https://github.com/brwali/PopcornPicks/blob/master/asset/system_architecture.svg)
+![System architecture](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/asset/system_architecture.svg)
 
