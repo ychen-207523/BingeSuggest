@@ -2,8 +2,7 @@ name: Black Formatting
 
 on:
   push:
-    branches:
-      - '**'
+    branches: [ main ]
 
 permissions:
   contents: write

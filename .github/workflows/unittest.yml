@@ -2,8 +2,7 @@ name: Unittest
 
 on:
   push:
-    branches:
-      - '**'
+    branches: [ main ]
 
   schedule:
     - cron: "00 23 * * *"
