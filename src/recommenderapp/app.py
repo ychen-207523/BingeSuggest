@@ -36,6 +36,7 @@ from src.recommenderapp.utils import (
     create_or_update_discussion,
     get_discussion,
     get_username_data,
+    remove_from_watchlist,
 )
 from src.recommenderapp.search import Search
 from datetime import datetime
@@ -406,27 +407,8 @@ def delete_watchlist_data():
     Retrieves the current user
     """
     user_id = user[1]  # Assuming 'user' holds the currently logged-in user's ID
-    cursor = g.db.cursor(dictionary=True)
-    imdbID = json.loads(request.data)
-
-    cursor.execute(
-        """
-        SELECT DISTINCT idMovies FROM Movies 
-        WHERE imdb_id = %s;
-        """,
-        [imdbID],
-    )
-    watchlist = cursor.fetchall()
-    idMovies = None
-    if len(watchlist) > 0:
-        idMovies = watchlist[0]["idMovies"]
-    cursor.execute(
-        """
-        DELETE FROM Watchlist WHERE movie_id = %s AND user_id = %s;
-        """,
-        [idMovies, user_id],
-    )
-    g.db.commit()
+    imdb_id = json.loads(request.data)
+    idMovies, _ = remove_from_watchlist(g.db, user_id, imdb_id)
 
     if idMovies:
         return (
