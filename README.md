@@ -64,13 +64,13 @@ BingeSuggest: Your movie recommender! Input movies, get tailored suggestions, an
 Checkout for project documentation [here](https://github.com/ychen-207523/BingeSuggest/tree/main/docs)
 
 ## Project Presentation Videos
-### New Features 2 minute demo
-<a href="https://drive.google.com/file/d/1pseyiv3LH8WVDdrsXG83KLGzl-cYJ67d/view?usp=sharing" target="_blank">
-  <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/landing_page.png" alt="BingeSuggest" style="width:600px;"/>
+### New Features 3 minute demo
+<a href="https://www.youtube.com/watch?v=xm4wda7rA_s" target="_blank">
+  <img src="https://img.youtube.com/vi/xm4wda7rA_s/hqdefault.jpg" alt="BingeSuggest" style="width:600px;"/>
 </a>
 
 ### Why contribute?
-[![why contribute video](https://img.youtube.com/vi/aQ1cryH4B7A/0.jpg)](https://www.youtube.com/watch?v=aQ1cryH4B7A)
+[![why contribute video](https://img.youtube.com/vi/uwJiHxyr-GY/hqdefault.jpg)](https://www.youtube.com/watch?v=uwJiHxyr-GY)
 
 
 ## Project Description
