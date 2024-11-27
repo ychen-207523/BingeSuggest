@@ -126,6 +126,9 @@
 ## remove_from_watched_history()
 **Removes a movie from the watched history of the user**
 
+## delete_watchlist_data()
+**Removes a movie from the watched list of the user**
+
 ## [utils.py](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/src/recommenderapp/utils.py)
 
 ### create_colored_tags(genres)
@@ -230,6 +233,12 @@
 **Utility function to get the discussion forum for a movie**<br/>
 **Input: database handle, imdb_id of the movie whose discussion is required**<br/>
 **Output: returns the discussion forum already present or empty array incase it doesnt exist**<br/>
+
+### def remove_from_watchlist(db, user_id, imdb_id)
+
+**Utility function to delete the movie from the watch list**<br/>
+**Input: database handle, user_id of the user logged in, imdb_id of the movie whose discussion is required**<br/>
+**Output: returns the deleted idMovies and success message if present or None and doesnt exist message**<br/>
 
 ## [search.py](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/src/recommenderapp/search.py)
 

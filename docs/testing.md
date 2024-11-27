@@ -22,3 +22,12 @@ These unit tests cover a range of scenarios for adding movies to a user's watche
 
 These unit tests validate the functionality of removing movies from the user's watched history, covering scenarios such as successfully removing existing entries, handling movies that are not in the watched history, attempting to remove movies not present in the database, testing with invalid user IDs or IMDb IDs, and ensuring correct behavior when dealing with multiple movies. <br/>
 Each test helps maintain the robustness of the removal process for a consistent user experience.
+
+# [test_add_to_watch_list.py](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/test_v7/watchedHistory/test_add_to_watch_list.py)
+
+These unit tests cover a range of scenarios for adding movies to a user's watch list, including successfully adding movies, handling duplicate entries, managing movies not found in the database, adding multiple different movies, and testing with or without timestamps. Each test ensures the functionality behaves as expected in diverse conditions, maintaining robustness and reliability.
+
+# [test_drop_watch_list.py](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/test_v7/watchedHistory/test_drop_watch_list.py)
+
+These unit tests validate the functionality of removing movies from the user's watch list, covering scenarios such as successfully removing existing entries, handling movies that are not in the Movies table, attempting to remove movies not present in the database, testing with invalid user IDs or IMDb IDs, and ensuring correct behavior when dealing with multiple movies. <br/>
+Each test helps maintain the robustness of the removal process for a consistent user experience.

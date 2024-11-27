@@ -178,14 +178,11 @@ Our grading scorecard can be found [here](https://github.com/ychen-207523/BingeS
 ## Future Scope
 BingeSuggest is a dynamic project with endless possibilities for expansion and enhancement. Here are some exciting avenues for future development:
 
-
-1. **User Profiles and Preferences**: Continue to improve user profiles. More features could be added with friend interaction, such as ability to send messages. More data on the users could be persisted such as preferences and watch history for a more personalized movie discovery experience.
-
-2. **Integration with Streaming Services**: Integrate with popular streaming services to provide real-time availability information and seamless access to recommended movies.
+1. **Integration with Streaming Services**: Integrate with popular streaming services to provide real-time availability information and seamless access to recommended movies.
   
-3. **Improved Recommendation Algorithm**: Enhance the recommendation engine with more advanced machine learning models and collaborative filtering techniques to provide even more accurate and personalized movie suggestions.
+2. **Improved Recommendation Algorithm**: Enhance the recommendation engine with more advanced machine learning models and collaborative filtering techniques to provide even more accurate and personalized movie suggestions.
  
-4. **Frontend rework**: Currently the frontend uses jquery, which is a bit dated. As the program becomes more complex, it may be nice to use a component based architecture such as React, Angular, or Blazor.
+3. **Frontend rework**: Currently the frontend uses jquery, which is a bit dated. As the program becomes more complex, it may be nice to use a component based architecture such as React, Angular, or Blazor.
 
 The future of BingeSuggest is full of potential, and we invite developers, movie lovers, and anyone passionate about cinema to join us in making this platform the ultimate movie companion. 
 

@@ -71,3 +71,9 @@ Stylesheet.css, the fashion designer for your website! This file makes sure your
 It's where colors, fonts, and layouts are chosen to give your website its unique look and feel. Whether it's classic black and white or a colorful extravaganza, this file sets the tone.
 
 So, there you have it! Your templates and static files are the behind-the-scenes stars of PopcornPicks, working together to create a blockbuster website experience. 🎬🍿
+
+---
+
+## [watchlist.js](https://github.com/ychen-207523/BingeSuggest/blob/v7.0/src/recommenderapp/static/watchlist.js)
+
+watchlist.js includes the functions that make the watch list work, including rendering the Watch List page, fetching the api key from the .env, and ajax calls to the app getting the watch list from the users, and to omdb to get movie data.
