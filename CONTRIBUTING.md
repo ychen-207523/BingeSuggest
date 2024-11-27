@@ -52,7 +52,7 @@
     - test_predict.py  
     - test_search.py  
     - test_util.py
-- test_v6 
+- test_v7 
   - das    
      - test_DB.py
      - test_predict_actor.py
@@ -77,6 +77,12 @@
      - test_predict_director.py
      - test_predict_genre.py
      - test_search.py
+  - watchedHistory
+     - test_add_to_watched_history.py
+     - test_remove_from_watched_history.py
+  - watchList
+     - test_add_to_watch_list.py
+     - test_drop_watch_list.py
   
 - .gitignore
 
