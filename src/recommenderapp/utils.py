@@ -358,7 +358,7 @@ def get_friends(db, user):
     return jsonify(result)
 
 
-def add_to_watchlist(db, user_id, movie_id):
+def add_to_watchlist(db, user_id, movie_id, timestamp=None):
     """
     Utility function to add a movie to the user's watchlist.
     Only inserts the movie if it is not already in the user's watchlist.
@@ -374,7 +374,8 @@ def add_to_watchlist(db, user_id, movie_id):
 
     # If the movie is not already in the watchlist, add it
     if not existing_entry:
-        timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+        if timestamp is None:
+            timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
         cursor.execute(
             "INSERT INTO Watchlist (user_id, movie_id, time) VALUES (%s, %s, %s);",
             (int(user_id), int(movie_id), timestamp),
@@ -458,6 +459,39 @@ def remove_from_watched_history_util(db, user_id, imdb_id):
     )
     db.commit()
     return True, "Movie removed from watched history"
+
+
+def remove_from_watchlist(db, user_id, imdb_id):
+    """
+    Utility function to remove a movie from the user's watchlist.
+    """
+    cursor = db.cursor(dictionary=True)
+
+    cursor.execute(
+        """
+        SELECT DISTINCT idMovies FROM Movies 
+        WHERE imdb_id = %s;
+        """,
+        [imdb_id],
+    )
+
+    watchlist = cursor.fetchone()
+    idMovies = None
+    if watchlist is not None:
+        idMovies = watchlist["idMovies"]
+
+    if idMovies is None:
+        return None, "Movie not in watchlist"
+
+    # Delete the movie from watched history
+    cursor.execute(
+        """
+        DELETE FROM Watchlist WHERE movie_id = %s AND user_id = %s;
+        """,
+        [idMovies, user_id],
+    )
+    db.commit()
+    return idMovies, "Movie removed from watchlist"
 
 
 def create_or_update_discussion(db, data):
