@@ -1,22 +1,22 @@
 # <i> BingeSuggest🍿: Your Destination for Movie Recommendations </i>
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://gitHub.com/svd-ncsu/BingeSuggest/graphs/commit-activity)
-[![Contributors Activity](https://img.shields.io/github/commit-activity/m/svd-ncsu/BingeSuggest)](https://github.com/svd-ncsu/BingeSuggest/pulse)
-[![GitHub issues](https://img.shields.io/github/issues/svd-ncsu/BingeSuggest.svg)](https://github.com/svd-ncsu/BingeSuggest/issues?q=is%3Aopen+is%3Aissue)
-[![GitHub issues-closed](https://img.shields.io/github/issues-closed/svd-ncsu/BingeSuggest.svg)](https://github.com/svd-ncsu/BingeSuggest/issues?q=is%3Aissue+is%3Aclosed)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/ychen-207523/BingeSuggest/graphs/commit-activity)
+[![Contributors Activity](https://img.shields.io/github/commit-activity/m/ychen-207523/BingeSuggest)](https://github.com/ychen-207523/BingeSuggest/pulse)
+[![GitHub issues](https://img.shields.io/github/issues/ychen-207523/BingeSuggest.svg)](https://github.com/ychen-207523/BingeSuggest/issues?q=is%3Aopen+is%3Aissue)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/ychen-207523/BingeSuggest.svg)](https://github.com/ychen-207523/BingeSuggest/issues?q=is%3Aissue+is%3Aclosed)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/LICENSE)
-[![Unittest](https://github.com/svd-ncsu/BingeSuggest/actions/workflows/unittest.yml/badge.svg?branch=v6.0&event=push)](https://github.com/svd-ncsu/BingeSuggest/actions/workflows/unittest.yml)
-[![Coverage Status](./reports/badge/coverage-badge.svg)](https://github.com/svd-ncsu/BingeSuggest/actions/workflows/codecoverage.yml)
-[![GitHub release](https://img.shields.io/github/release/svd-ncsu/BingeSuggest.svg)](https://github.com/svd-ncsu/BingeSuggest/releases)
-[![StyleCheck: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
-![GitHub contributors](https://img.shields.io/github/contributors/svd-ncsu/BingeSuggest)
-![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/svd-ncsu/BingeSuggest)
-![GitHub repo size](https://img.shields.io/github/repo-size/svd-ncsu/BingeSuggest)
-[![Black](https://github.com/svd-ncsu/BingeSuggest/actions/workflows/black.yml/badge.svg)](https://github.com/svd-ncsu/BingeSuggest/actions/workflows/black.yml)
-[![GitHub closed issues by-label](https://img.shields.io/github/issues-closed-raw/svd-ncsu/BingeSuggest/bug?color=green&label=Squished%20bugs)](https://github.com/svd-ncsu/BingeSuggest/issues?q=is%3Aissue+label%3Abug+is%3Aclosed)
-[![DOI](https://zenodo.org/badge/865641050.svg)](https://doi.org/10.5281/zenodo.14026739)
+[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://github.com/ychen-207523/BingeSuggest/blob/main/LICENSE)
+[![Unittest](https://github.com/ychen-207523/BingeSuggest/actions/workflows/unittest.yml/badge.svg?branch=main&event=push)](https://github.com/ychen-207523/BingeSuggest/actions/workflows/unittest.yml)
+[![codecov](https://codecov.io/gh/ychen-207523/BingeSuggest/graph/badge.svg?token=8YwugvrJ0K)](https://codecov.io/gh/ychen-207523/BingeSuggest) 
+[![GitHub release](https://img.shields.io/github/release/ychen-207523/BingeSuggest.svg)](https://github.com/ychen-207523/BingeSuggest/releases)
+[![StyleCheck: Pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/ychen-207523/BingeSuggest/actions/workflows/pylint.yml)
+![GitHub contributors](https://img.shields.io/github/contributors/ychen-207523/BingeSuggest)
+![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/ychen-207523/BingeSuggest)
+![GitHub repo size](https://img.shields.io/github/repo-size/ychen-207523/BingeSuggest)
+[![Black](https://github.com/ychen-207523/BingeSuggest/actions/workflows/black.yml/badge.svg)](https://github.com/ychen-207523/BingeSuggest/actions/workflows/black.yml)
+[![GitHub closed issues by-label](https://img.shields.io/github/issues-closed-raw/ychen-207523/BingeSuggest/bug?color=green&label=Squished%20bugs)](https://github.com/ychen-207523/BingeSuggest/issues?q=is%3Aissue+label%3Abug+is%3Aclosed)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14219839.svg)](https://doi.org/10.5281/zenodo.14219839)
   
-<img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/header_display.png" alt="BingeSuggest" style="width:1000px;"/>
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/header_display.png" alt="BingeSuggest" style="width:1000px;"/>
 <b>BingeSuggest is more than just a movie recommender system; it's a gateway to a world of cinematic adventures. With an ever-expanding library of films and a powerful recommendation algorithm, BingeSuggest is here to transform the way you discover, enjoy, and connect with movies.</b>
 
 # Contents  
@@ -61,12 +61,12 @@ BingeSuggest: Your movie recommender! Input movies, get tailored suggestions, an
 - **Simple:** Easy installation and setup – start discovering great movies in no time!"
 
 ## Documentation
-Checkout for project documentation [here](https://github.com/svd-ncsu/BingeSuggest/tree/v6.0/docs)
+Checkout for project documentation [here](https://github.com/ychen-207523/BingeSuggest/tree/main/docs)
 
 ## Project Presentation Videos
 ### New Features 2 minute demo
 <a href="https://drive.google.com/file/d/1pseyiv3LH8WVDdrsXG83KLGzl-cYJ67d/view?usp=sharing" target="_blank">
-  <img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/landing_page.png" alt="BingeSuggest" style="width:600px;"/>
+  <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/landing_page.png" alt="BingeSuggest" style="width:600px;"/>
 </a>
 
 ### Why contribute?
@@ -74,15 +74,15 @@ Checkout for project documentation [here](https://github.com/svd-ncsu/BingeSugge
 
 
 ## Project Description
-BingeSuggest is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, BingeSuggest offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our documentation [here](https://github.com/svd-ncsu/BingeSuggest/tree/v6.0/docs)
+BingeSuggest is a user-friendly movie recommender that curates a tailored list of 10 movie predictions based on user-provided movie preferences. Users can input their favorite movies, and our algorithm refines recommendations based on feedback—Liked, Disliked, or Yet To Watch. Additionally, BingeSuggest offers the convenience of emailing the recommended movies, enhancing the movie-watching experience. For the system architecture and other details, please refer to our documentation [here](https://github.com/ychen-207523/BingeSuggest/tree/main/docs)
 
 ## What docs
 View our documentation outlining each class and function of BingeSuggest here
-- [Backend](https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/docs/backend.md)
-- [Frontend](https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/docs/frontend.md)
-- [Testing](https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/docs/testing.md)
+- [Backend](https://github.com/ychen-207523/BingeSuggest/blob/main/docs/backend.md)
+- [Frontend](https://github.com/ychen-207523/BingeSuggest/blob/main/docs/frontend.md)
+- [Testing](https://github.com/ychen-207523/BingeSuggest/blob/main/docs/testing.md)
 
-View our autogenerated doco here [Doco](https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/docs/generated_docs/)
+View our autogenerated doco here [Doco](https://github.com/ychen-207523/BingeSuggest/blob/main/docs/generated_docs/)
 
 ## How docs
 
@@ -90,42 +90,42 @@ View our autogenerated doco here [Doco](https://github.com/svd-ncsu/BingeSuggest
 #### (Modified in version 6)
 **The user selects upto 5 movies to get relevant recommendations based on genre, director, actor, and all combined. User can also provide feedback for the same!**
   
-<img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/recommend_mechanism.gif" width="600" height="375">
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/recommend_mechanism.gif" width="600" height="375">
 
 ### Watchlist
 #### (New in version 6)
 **The user can add movies to watchlist**
 
-<img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/watchlist.gif" width="600" height="375">
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/watchlist.gif" width="600" height="375">
 
 ### Email Notifier
 **The user sends his/her movies feedback via an email (Notify Me button)**
   
 <div style="display: flex; justify-content: space-between;">
-    <img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/email_notifier.gif" alt="Email Notifier" width="600" height="375">
-    <img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/email.png" alt="Email" width="400" height="400">
+    <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/email_notifier.gif" alt="Email Notifier" width="600" height="375">
+    <img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/email.png" alt="Email" width="400" height="400">
 </div>
 
 ### Create an Account
 **Users can now create accounts, persisting data including their movie reviews and recommendations**
-<img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/create_account.gif" width="600" height="375">
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/create_account.gif" width="600" height="375">
 
 ### Login to account
 **The user can log in to their account securly with encrypted passwords stored in our database**
-<img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/login.gif" width="600" height="375">
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/login.gif" width="600" height="375">
 
 ### Profile and Friends
 **The user can add friends, view the movies reviewed by the friends, and see their reviewed movies in their profile**
-<img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/profile.gif" width="600" height="375">
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/profile.gif" width="600" height="375">
 
 ### Wall
 **The user can interact with other users, by viewing a community sourced wall of recent moview reviews**
-<img src="https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/asset/wall.gif" width="600" height="375">
+<img src="https://github.com/ychen-207523/BingeSuggest/blob/main/asset/wall.gif" width="600" height="375">
 
 ## Project 3 Delta
-Check out the significant changes that we made for Project 3 [here](https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/proj3/Proj3Changes.md)
+Check out the significant changes that we made for Project 3 [here](https://github.com/ychen-207523/BingeSuggest/blob/main/proj3/Proj3Changes.md)
 
-Our grading scorecard can be found [here](https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/proj3/README.md)
+Our grading scorecard can be found [here](https://github.com/ychen-207523/BingeSuggest/blob/main/proj3/README.md)
 
 ## Tech stack Used👨‍💻:
 
@@ -150,16 +150,16 @@ Our grading scorecard can be found [here](https://github.com/svd-ncsu/BingeSugge
  Step 1: 
   Git Clone the Repository 
   
-    git clone https://github.com/svd-ncsu/BingeSuggest.git
+    git clone https://github.com/ychen-207523/BingeSuggest.git
     
   (OR) Download the .zip file on your local machine from the following link
   
-    https://github.com/svd-ncsu/BingeSuggest
+    https://github.com/ychen-207523/BingeSuggest
   
  Step 2:
    Follow the setup instructions in the installation documentation
    
-    https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/docs/install.md
+    https://github.com/ychen-207523/BingeSuggest/blob/main/docs/install.md
     
     
 <b>Finally, start enjoying personalized movie recommendations!</b>
@@ -180,9 +180,18 @@ The future of BingeSuggest is full of potential, and we invite developers, movie
 
 ## Contribute to the Project!
 
-Please refer to the [CONTRIBUTING.md](https://github.com/svd-ncsu/BingeSuggest/blob/v6.0/CONTRIBUTING.md) if you want to contribute to the BingeSuggest source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️!
+Please refer to the [CONTRIBUTING.md](https://github.com/ychen-207523/BingeSuggest/blob/main/CONTRIBUTING.md) if you want to contribute to the BingeSuggest source code. Follow all the guidelines mentioned in the same and raise a pull request, we would love to look at it ❤️!
 
 ## Contributors
+<table>
+  <tr>
+    <td><a href="https://github.com/svd-ncsu/BingeSuggest">Version 7</a></td>
+    <td align="center"><a href="https://github.com/ShubhamTidke/"><img src=https://avatars.githubusercontent.com/u/42945527?v=4" width="75px;" alt=""/><br /><sub><b>Shubham Tidke</b></sub></a></td>
+    <td align="center"><a href="https://github.com/tanuj12/"><img src="https://avatars.githubusercontent.com/u/43450384?v=4" width="75px;" alt=""/><br /><sub><b>Tanuj Kulkarni</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/ychen-207523/"><img src="https://avatars.githubusercontent.com/u/125923497?v=4" width="75px;" alt=""/><br /><sub><b>Yunfei Chen</b></sub></a><br /></td>
+  </tr>
+</table>
+
 <table>
   <tr>
     <td><a href="https://github.com/svd-ncsu/BingeSuggest">Version 6</a></td>
@@ -213,7 +222,7 @@ Please refer to the [CONTRIBUTING.md](https://github.com/svd-ncsu/BingeSuggest/b
 </table>
 
 ## Contact
-In case of any issues, please e-mail your queries to dashytisbest@gmail.com or raise an issue on this repository.<br>
+In case of any issues, please e-mail your queries to svijaytidke@gmail.com or raise an issue on this repository.<br>
 Our team of developers monitors this e-mail address and would be happy to answer any and all questions you have about setup or use of this project!
 
 ## Join the BingeSuggest Community:
